@@ -27,7 +27,11 @@ int main()
     replaceBySum(&nb1, &nb2, &nb3);
     std::cout << "Résultat : " << nb1 << ", " << nb2 << " et " << nb3 << std::endl;
 
-    int arraySize = 10;
+    std::cout << "Entrez la taille du tableau que vous souhaitez générer : ";
+
+    int arraySize;
+    std::cin >> arraySize;
+
     std::cout << "Génération d'un tableau de " << arraySize << " éléments" << std::endl;
 
     int array[arraySize];
@@ -37,9 +41,16 @@ int main()
 
     printArray(array, arraySize);
 
+    bool isAscSort;
+    std::cout << "Dans quel ordre souhaitez vous trier le tableau ?" << std::endl;
+    std::cout << "0 : Décroissant" << std::endl;
+    std::cout << "1 : Croissant" << std::endl;
+
+    std::cin >> isAscSort;
+
     std::cout << "Tri du tableau ..." << std::endl;
 
-    sortArray(array, arraySize);
+    sortArray(array, arraySize, isAscSort);
 
     printArray(array, arraySize);
 

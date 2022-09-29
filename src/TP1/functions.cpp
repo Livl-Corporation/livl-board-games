@@ -39,13 +39,14 @@ void printArray(int array[], int size)
     }
 }
 
-void sortArray(int array[], int size)
+void sortArray(int array[], int size, bool isAsc)
 {
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size - 1; i++)
     {
-        for (int j = 0; j < size; j++)
+        for (int j = 0; j < size - 1; j++)
         {
-            if (array[j] > array[j + 1])
+            if (
+                (isAsc && array[j] > array[j + 1]) || (!isAsc && array[j] < array[j + 1]))
             {
                 inverser(array[j], array[j + 1]);
             }
