@@ -54,5 +54,11 @@ int main()
 
     printArray(array, arraySize);
 
+    std::cout << "Réalisation du tri inverse ..." << std::endl;
+
+    sortArray(array, arraySize, !isAscSort);
+
+    printArray(array, arraySize);
+
     return 0;
 }
