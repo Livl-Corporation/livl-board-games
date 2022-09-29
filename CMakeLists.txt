@@ -16,3 +16,8 @@ add_executable(tp1-ex3
     src/TP1-ex3/main.cpp
     src/TP1-ex3/functions.cpp
 )
+
+add_executable(tp1-ex3_2
+    src/TP1-ex3_2/main.cpp
+    src/TP1-ex3_2/functions.cpp
+)
