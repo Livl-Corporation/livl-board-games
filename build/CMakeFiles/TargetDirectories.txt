@@ -1,3 +1,0 @@
-/home/fgutmann/cplusplus/build/CMakeFiles/tp1.dir
-/home/fgutmann/cplusplus/build/CMakeFiles/edit_cache.dir
-/home/fgutmann/cplusplus/build/CMakeFiles/rebuild_cache.dir
