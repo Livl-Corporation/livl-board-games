@@ -38,3 +38,17 @@ void printArray(int array[], int size)
         std::cout << array[i] << std::endl;
     }
 }
+
+void sortArray(int array[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            if (array[j] > array[j + 1])
+            {
+                inverser(array[j], array[j + 1]);
+            }
+        }
+    }
+}

@@ -37,5 +37,11 @@ int main()
 
     printArray(array, arraySize);
 
+    std::cout << "Tri du tableau ..." << std::endl;
+
+    sortArray(array, arraySize);
+
+    printArray(array, arraySize);
+
     return 0;
 }

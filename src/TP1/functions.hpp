@@ -4,3 +4,4 @@ void replaceBySum(int &a, int &b, int &result);
 void replaceBySum(int *a, int *b, int *result);
 void fillArrayWithInt(int *array, int size);
 void printArray(int array[], int size);
+void sortArray(int array[], int size);
