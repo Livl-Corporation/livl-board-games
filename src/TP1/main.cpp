@@ -27,5 +27,15 @@ int main()
     replaceBySum(&nb1, &nb2, &nb3);
     std::cout << "Résultat : " << nb1 << ", " << nb2 << " et " << nb3 << std::endl;
 
+    int arraySize = 10;
+    std::cout << "Génération d'un tableau de " << arraySize << " éléments" << std::endl;
+
+    int array[arraySize];
+    fillArrayWithInt(array, arraySize);
+
+    std::cout << "Affichage du tableau :" << std::endl;
+
+    printArray(array, arraySize);
+
     return 0;
 }

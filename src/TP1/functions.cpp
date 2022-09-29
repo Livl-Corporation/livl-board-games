@@ -1,3 +1,6 @@
+#include <cstdlib>
+#include <iostream>
+
 int somme(int nombre1, int nombre2)
 {
     return nombre1 + nombre2;
@@ -18,4 +21,20 @@ void replaceBySum(int &a, int &b, int &result)
 void replaceBySum(int *a, int *b, int *result)
 {
     *result = *a + *b;
+}
+
+void fillArrayWithInt(int *array, int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        array[i] = rand();
+    }
+}
+
+void printArray(int array[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << array[i] << std::endl;
+    }
 }
