@@ -9,7 +9,6 @@ add_executable(tp1-ex1
 
 add_executable(tp1-tenis
     src/TP1-tenis/main.cpp
-    src/TP1-tenis/functions.cpp
 )
 
 add_executable(tp1-ex3
@@ -19,5 +18,4 @@ add_executable(tp1-ex3
 
 add_executable(tp1-ex3_2
     src/TP1-ex3_2/main.cpp
-    src/TP1-ex3_2/functions.cpp
 )
