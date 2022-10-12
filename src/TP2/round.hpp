@@ -26,14 +26,28 @@ public:
      *
      * @param origin
      */
-    void setOrigin(const Point &origin) { this->origin = origin }
+    void setOrigin(const Point &origin) { this->origin = origin; }
 
     /**
      * @brief Set the Diameter object
      *
      * @param diameter
      */
-    inline void setDiameter(int diameter) { this->diameter = diameter }
+    inline void setDiameter(int diameter) { this->diameter = diameter; }
+
+    /**
+     * @brief Get round perimeter
+     *
+     * @return float
+     */
+    inline float perimeter() const;
+
+    /**
+     * @brief Get round surface
+     *
+     * @return float
+     */
+    inline float surface() const;
 
     /**
      * @brief Return true if given point is on circle
