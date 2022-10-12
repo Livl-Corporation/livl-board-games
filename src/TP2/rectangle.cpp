@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
 
-inline void Rectangle::setOrigin(const Point &point)
+void Rectangle::setOrigin(const Point &point)
 {
     this->origin = point;
 }

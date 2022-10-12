@@ -23,4 +23,5 @@ add_executable(tp1-ex3_2
 add_executable(tp2
     src/TP2/main.cpp
     src/TP2/rectangle.cpp
+    src/TP2/round.cpp
 )

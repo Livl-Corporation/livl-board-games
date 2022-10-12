@@ -47,7 +47,7 @@ public:
      *
      * @param point
      */
-    inline void setOrigin(const Point &point);
+    void setOrigin(const Point &point);
 
     /**
      * @brief Get the Perimeter object
