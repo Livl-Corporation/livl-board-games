@@ -19,3 +19,8 @@ add_executable(tp1-ex3
 add_executable(tp1-ex3_2
     src/TP1-ex3_2/main.cpp
 )
+
+add_executable(tp2
+    src/TP2/main.cpp
+    src/TP2/rectangle.cpp
+)
