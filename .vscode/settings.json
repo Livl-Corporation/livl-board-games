@@ -72,5 +72,6 @@
         "mutex": "cpp",
         "ratio": "cpp",
         "variant": "cpp"
-    }
+    },
+    "cmake.configureOnOpen": true
 }

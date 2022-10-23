@@ -25,4 +25,5 @@ add_executable(tp2
     src/TP2/rectangle.cpp
     src/TP2/round.cpp
     src/TP2/triangle.cpp
+    src/TP2/functions.cpp
 )
