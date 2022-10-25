@@ -71,6 +71,6 @@ private:
     Point origin;
     int diameter;
     double distanceFromOrigin(const Point &point) const;
-}
+};
 
 #endif

@@ -46,6 +46,12 @@ inline bool Triangle::isIsoceles() const
 
 inline bool Triangle::isRectangle() const
 {
+    std::array<float, 3> lengths = this->getLengths();
+    return (
+        std::pow(lengths[0], 2) == (std::pow(lengths[1], 2) + std::pow(lengths[2], 2)) 
+        || std::pow(lengths[1], 2) == (std::pow(lengths[0], 2) + std::pow(lengths[2], 2)) 
+        || std::pow(lengths[2], 2) == (std::pow(lengths[1], 2) + std::pow(lengths[0], 2))
+    );
 }
 
 inline bool Triangle::isEquilateral() const
