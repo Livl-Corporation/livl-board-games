@@ -81,6 +81,12 @@ public:
      */
     bool hasBiggerSurface(const Rectangle &rectangle) const;
 
+    /**
+     * @brief Display rectangle informormations
+     *
+     */
+    void afficher() const;
+
 private:
     int height,
         width;

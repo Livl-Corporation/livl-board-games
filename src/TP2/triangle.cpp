@@ -1,6 +1,7 @@
 #include "triangle.hpp"
 #include <array>
 #include "functions.hpp"
+#include <iostream>
 
 inline float Triangle::base() const
 {
@@ -48,14 +49,29 @@ inline bool Triangle::isRectangle() const
 {
     std::array<float, 3> lengths = this->getLengths();
     return (
-        std::pow(lengths[0], 2) == (std::pow(lengths[1], 2) + std::pow(lengths[2], 2)) 
-        || std::pow(lengths[1], 2) == (std::pow(lengths[0], 2) + std::pow(lengths[2], 2)) 
-        || std::pow(lengths[2], 2) == (std::pow(lengths[1], 2) + std::pow(lengths[0], 2))
-    );
+        std::pow(lengths[0], 2) == (std::pow(lengths[1], 2) + std::pow(lengths[2], 2)) || std::pow(lengths[1], 2) == (std::pow(lengths[0], 2) + std::pow(lengths[2], 2)) || std::pow(lengths[2], 2) == (std::pow(lengths[1], 2) + std::pow(lengths[0], 2)));
 }
 
 inline bool Triangle::isEquilateral() const
 {
     std::array<float, 3> lengths = this->getLengths();
     return (lengths[0] == lengths[1] && lengths[1] == lengths[2]);
+}
+
+void Triangle::afficher() const
+{
+    std::array<float, 3> lengths = this->getLengths();
+    std::cout << "--- Triangle ---" << std::endl;
+    std::cout << "Point 1 : (" << this->getPoint1().x << ", " << this->getPoint1().y << ")" << std::endl;
+    std::cout << "Point 2 : (" << this->getPoint2().x << ", " << this->getPoint2().y << ")" << std::endl;
+    std::cout << "Point 3 : (" << this->getPoint3().x << ", " << this->getPoint3().y << ")" << std::endl;
+    std::cout << "Longueur 1 : " << lengths[0] << std::endl;
+    std::cout << "Longueur 2 : " << lengths[1] << std::endl;
+    std::cout << "Longueur 3 : " << lengths[2] << std::endl;
+    std::cout << "Base : " << this->base() << std::endl;
+    std::cout << "Hauteur : " << this->height() << std::endl;
+    std::cout << "Surface : " << this->surface() << std::endl;
+    std::cout << "Isocèle : " << this->isIsoceles() << std::endl;
+    std::cout << "Triangle rectangle : " << this->isRectangle() << std::endl;
+    std::cout << "Equilateral : " << this->isEquilateral() << std::endl;
 }

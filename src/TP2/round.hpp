@@ -67,6 +67,12 @@ public:
      */
     bool isInCircle(const Point &point) const;
 
+    /**
+     * @brief Display round informations
+     *
+     */
+    void afficher() const;
+
 private:
     Point origin;
     int diameter;

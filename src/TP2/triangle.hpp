@@ -99,6 +99,12 @@ public:
      */
     inline bool isEquilateral() const;
 
+    /**
+     * @brief Display triangle informations
+     *
+     */
+    void afficher() const;
+
 private:
     Point point1, point2, point3;
 };
