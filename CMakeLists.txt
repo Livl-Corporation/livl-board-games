@@ -27,3 +27,7 @@ add_executable(tp2
     src/TP2/triangle.cpp
     src/TP2/functions.cpp
 )
+
+add_executable(tp3
+    src/TP3/main.cpp
+)
