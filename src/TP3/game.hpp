@@ -11,9 +11,7 @@ public:
      * @brief Start playing the next game round
      *
      */
-    void nextRound()
-    {
-    }
+    void nextRound();
 
     /**
      * @brief Returns true if provided player has won
@@ -24,10 +22,31 @@ public:
      */
     bool hasWon(Symbol symbol) const;
 
-private:
+    /**
+     * @brief Get the Round object
+     *
+     * @return unsigned int
+     */
+    inline unsigned int getRound() const { return this->round; };
+
+    /**
+     * @brief Get the Player Count object
+     *
+     * @return unsigned int
+     */
+    inline unsigned int getPlayerCount() const { return this->playerCount; };
+
+protected:
     unsigned int round = 0;
-    Symbol currentRound;
+    unsigned int playerCount = 0;
     std::vector<Symbol> players;
     Grid grid;
-    unsigned int symbolsToWin;
+    unsigned int consecutiveSymbolsToWin;
+
+    /**
+     * @brief Ask the player to enter a cell
+     *
+     * @return Cell
+     */
+    Cell askForCell() const;
 };

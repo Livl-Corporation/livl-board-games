@@ -1,0 +1,5 @@
+#include <exception>
+
+class OccupiedCellException : std::exception
+{
+};

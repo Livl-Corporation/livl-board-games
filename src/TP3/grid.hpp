@@ -3,7 +3,6 @@
 #include "cell.hpp"
 #include "symbol.hpp"
 #include <vector>
-#include <optional>
 
 class Grid
 {
@@ -13,14 +12,21 @@ public:
      *
      * @param size
      */
-    Grid(unsigned int size) { this->size = size; };
+    Grid(unsigned int x, unsigned int y);
 
     /**
-     * @brief Get the Size object
+     * @brief Get grid X size
      *
      * @return unsigned int
      */
-    inline unsigned int getSize() const { this->size; };
+    inline unsigned int getXSize() const { this->xSize; };
+
+    /**
+     * @brief Get grid Y size
+     *
+     * @return unsigned int
+     */
+    inline unsigned int getYSize() const { this->ySize; };
 
     /**
      * @brief Return true if requested cell is empty;
@@ -56,7 +62,7 @@ public:
      * @param cell
      * @return Symbol
      */
-    std::optional<Symbol> getCell(Cell cell) const;
+    Symbol getCell(Cell cell) const;
 
     /**
      * @brief Get all the free cells remainings
@@ -66,12 +72,21 @@ public:
     std::vector<Cell> getFreeCells() const;
 
     /**
+     * @brief Get the Max Consecutive Symbols object
+     *
+     * @param symbol
+     * @return unsigned int
+     */
+    unsigned int getMaxConsecutiveSymbols(Symbol symbol) const;
+
+    /**
      * @brief Display grid in the console
      *
      */
     void displayGrid() const;
 
 private:
-    unsigned int size;
-    std::vector<std::vector<std::optional<Symbol>>> grid;
+    unsigned int xSize;
+    unsigned int ySize;
+    std::vector<std::vector<Symbol>> grid;
 };

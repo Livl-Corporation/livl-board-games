@@ -29,6 +29,8 @@ public:
      */
     inline bool getIsComputer() const { return this->isComputer; };
 
+    static const Symbol empty;
+
 private:
     char symbol;
     bool isComputer;
