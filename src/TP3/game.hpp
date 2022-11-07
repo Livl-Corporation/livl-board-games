@@ -36,7 +36,8 @@ public:
      */
     inline unsigned int getPlayerCount() const { return this->playerCount; };
 
-protected:
+private:
+
     unsigned int round = 0;
     unsigned int playerCount = 0;
     std::vector<Player> players;
@@ -44,9 +45,23 @@ protected:
     unsigned int consecutiveSymbolsToWin;
 
     /**
+     * @brief End a game with a winner
+     * 
+     * @param playerId 
+     */
+    void win(int playerId);
+
+    /**
+     * @brief End a game on a tie
+     * 
+     */
+    void tie();
+
+    /**
      * @brief Ask the player to enter a cell
      *
      * @return Cell
      */
-    Cell askForCell() const;
+    Cell askForCell();
+    
 };

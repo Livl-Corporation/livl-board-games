@@ -46,6 +46,14 @@ public:
     bool isCellInBounds(Cell cell) const;
 
     /**
+     * @brief Return true if there is no free cells left
+     * 
+     * @return true 
+     * @return false 
+     */
+    bool isGridFull() const;
+
+    /**
      * @brief Place id on cell
      * 
      * @param cell 

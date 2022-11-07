@@ -45,6 +45,10 @@ bool Grid::isCellInBounds(Cell cell) const
     return (cell.x >= 0 && cell.x < this->xSize) && (cell.y >= 0 && cell.y < this->ySize);
 }
 
+bool Grid::isGridFull() const {
+    return getFreeCells().size() == 0;
+}
+
 bool Grid::place(Cell cell, int id)
 {
     if (!this->isCellInBounds(cell))
@@ -82,6 +86,19 @@ std::vector<Cell> Grid::getFreeCells() const
 
 unsigned int Grid::getMaxConsecutiveIds(int id) const
 {
+    unsigned int maxConsecutive = 0;
+
+    // TODO : Implement method
+
+    // Horizontals
+
+    // Verticals
+
+    // Diagonals going up
+
+    // Diagonals going down
+
+    return maxConsecutive;
 
 }
 
