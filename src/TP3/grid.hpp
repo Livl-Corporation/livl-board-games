@@ -1,7 +1,6 @@
 #pragma once
 
 #include "cell.hpp"
-#include "symbol.hpp"
 #include <vector>
 
 class Grid
@@ -19,14 +18,14 @@ public:
      *
      * @return unsigned int
      */
-    inline unsigned int getXSize() const { this->xSize; };
+    inline unsigned int getXSize() const { return this->xSize; };
 
     /**
      * @brief Get grid Y size
      *
      * @return unsigned int
      */
-    inline unsigned int getYSize() const { this->ySize; };
+    inline unsigned int getYSize() const { return this->ySize; };
 
     /**
      * @brief Return true if requested cell is empty;
@@ -47,14 +46,14 @@ public:
     bool isCellInBounds(Cell cell) const;
 
     /**
-     * @brief Place provided symbol on requested cell
-     *
-     * @param cell
-     * @param Symbol
-     * @return true
-     * @return false
+     * @brief Place id on cell
+     * 
+     * @param cell 
+     * @param id 
+     * @return true 
+     * @return false 
      */
-    bool placeSymbol(Cell cell, Symbol Symbol);
+    bool place(Cell cell, int id);
 
     /**
      * @brief Get the symbol placed on provided cell
@@ -62,7 +61,7 @@ public:
      * @param cell
      * @return Symbol
      */
-    Symbol getCell(Cell cell) const;
+    int getCell(Cell cell) const;
 
     /**
      * @brief Get all the free cells remainings
@@ -77,7 +76,7 @@ public:
      * @param symbol
      * @return unsigned int
      */
-    unsigned int getMaxConsecutiveSymbols(Symbol symbol) const;
+    unsigned int getMaxConsecutiveIds(int id) const;
 
     /**
      * @brief Display grid in the console
@@ -88,5 +87,5 @@ public:
 private:
     unsigned int xSize;
     unsigned int ySize;
-    std::vector<std::vector<Symbol>> grid;
+    std::vector<std::vector<int>> grid;
 };

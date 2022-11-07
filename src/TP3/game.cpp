@@ -17,7 +17,7 @@ void Game::nextRound()
     // Otherwhise, next round.
 }
 
-bool Game::hasWon(Symbol symbol) const
+bool Game::hasWon(int id) const
 {
     // if max consecutive player symbols > consecutiveSymbolsToWin, he has won !
 }

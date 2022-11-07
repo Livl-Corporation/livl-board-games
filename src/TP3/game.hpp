@@ -1,7 +1,7 @@
 #pragma once
 
 #include "grid.hpp"
-#include "symbol.hpp"
+#include "player.hpp"
 #include <vector>
 
 class Game
@@ -20,7 +20,7 @@ public:
      * @return true
      * @return false
      */
-    bool hasWon(Symbol symbol) const;
+    bool hasWon(int id) const;
 
     /**
      * @brief Get the Round object
@@ -39,7 +39,7 @@ public:
 protected:
     unsigned int round = 0;
     unsigned int playerCount = 0;
-    std::vector<Symbol> players;
+    std::vector<Player> players;
     Grid grid;
     unsigned int consecutiveSymbolsToWin;
 
