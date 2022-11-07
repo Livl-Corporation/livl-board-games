@@ -7,6 +7,13 @@
 class Game
 {
 public:
+
+    /**
+     * @brief Start the game
+     * 
+     */
+    void play();
+
     /**
      * @brief Start playing the next game round
      *

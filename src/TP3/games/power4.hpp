@@ -4,4 +4,6 @@
 
 class Power4 : Game
 {
+public: 
+    Power4();
 };

@@ -1,4 +1,7 @@
 #include <iostream>
+#include "game.hpp"
+#include "games/tictactoe.hpp"
+#include "games/power4.hpp"
 
 int main()
 {
@@ -15,17 +18,26 @@ int main()
         std::cout << "Faites votre choix :" << std::endl;
 
         unsigned int selectedGame;
-
         std::cin >> selectedGame;
 
-        if (selectedGame == 1) {
-            // Launch TicTacToe
-        } else if (selectedGame == 2) {
-            // Launch Power4
-        } else {
+        if (selectedGame > 2) {
             // Exit
             return EXIT_SUCCESS;
         }
+
+        Game* game;
+        if (selectedGame == 1) {
+            // Create a TicTacToe
+            game = new TicTacToe();
+        } else if (selectedGame == 2) {
+            // Create a Power4
+            game = new Power4();
+        } 
+
+        // Lauch game 
+        game->play();
+
+        std::cout << "*** GAME FINISHED ***" << std::endl;
 
     }
 

@@ -4,4 +4,6 @@
 
 class TicTacToe : Game
 {
+public: 
+    TicTacToe();
 };

@@ -5,6 +5,10 @@
 #include <iostream>
 #include <cstdio>
 
+void Game::play() {
+    
+}
+
 void Game::nextRound()
 {
     round++;
