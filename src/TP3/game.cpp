@@ -9,7 +9,8 @@
 #include <iostream>
 #include <cstdio>
 #include <vector>
-#include <stdlib.h>
+#include <sstream>
+#include <string>
 
 Game::Game(
     std::string name,
@@ -24,10 +25,8 @@ Game::Game(
 
 void Game::play()
 {
-    std::cout << std::endl
-              << "*----------------------*" << std::endl;
-    std::cout << "     STARTING GAME     " << std::endl;
-    std::cout << "*----------------------*" << std::endl;
+
+    printTitle("Starting game");
 
     std::cout << "***** " << this->getName() << " *****" << std::endl;
 
@@ -40,9 +39,9 @@ void Game::play()
 void Game::nextRound()
 {
     round++;
-    std::cout << "----------" << std::endl;
-    std::cout << std::endl
-              << "Tour N° " << this->getRound() << std::endl;
+    std::ostringstream status;
+    status << "Tour N° " << this->getRound();
+    printHeader(status.str());
 
     // Determines who is playing this round
     unsigned int playerIndex = (round - 1) % playerCount;
@@ -113,11 +112,9 @@ Cell Game::playAsComputer(int playerId)
 
 void Game::win(int playerId)
 {
-    std::cout << std::endl
-              << "*------------*" << std::endl;
-    std::cout << "     Victoire du joueur " << playerId << " (" << getPlayerChar(playerId) << ")     ";
-    std::cout << std::endl
-              << "*------------*" << std::endl;
+    std::ostringstream msg;
+    msg << "Victoire du joueur " << playerId << " (" << getPlayerChar(playerId) << ")";
+    printTitle(msg.str());
 
     this->getGrid().displayGrid();
 
@@ -126,11 +123,7 @@ void Game::win(int playerId)
 
 void Game::tie()
 {
-    std::cout << std::endl
-              << "*------------*" << std::endl;
-    std::cout << "     Match nul     ";
-    std::cout << std::endl
-              << "*------------*" << std::endl;
+    printTitle(std::string("Match nul"));
 
     this->getGrid().displayGrid();
 

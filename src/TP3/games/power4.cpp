@@ -3,6 +3,7 @@
 #include "../functions.hpp"
 
 #include "../exceptions/column-full-exception.hpp"
+#include "../exceptions/out-of-bounds-exception.hpp"
 
 #include <iostream>
 #include <vector>
@@ -29,21 +30,23 @@ Cell Power4::askForCell(const char playerChar)
 
             std::cout << "Dans quelle colonne souhaitez vous jouer ? (1-" << this->getGrid().getXSize() << ")" << std::endl;
 
-            std::cin >> col;
-            col--;
+            col = readInt();
             alreadyAsked = true;
 
-        } while (col < 1 && col > this->getGrid().getXSize());
+        } while (col < 1 || col > this->getGrid().getXSize());
+
+        col--;
 
         // Get first y position available in this col
         try
         {
+
             row = this->firstRowAvailableInCol(col);
 
             // if the previous functions has not thrown any error, we have a valid cell
             validCell = true;
         }
-        catch (const ColumnFullException &e)
+        catch (const std::exception &e)
         {
             std::cout << e.what() << std::endl;
         }
@@ -82,8 +85,6 @@ Cell Power4::playAsComputer(int playerId)
     do
     {
         col = randomInt(0, this->getGrid().getXSize() - 1);
-
-        std::cout << "random int " << col << std::endl;
 
         try
         {

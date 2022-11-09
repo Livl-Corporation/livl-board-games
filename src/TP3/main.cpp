@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "game.hpp"
+#include "functions.hpp"
 #include "player.hpp"
 #include "games/tictactoe.hpp"
 #include "games/power4.hpp"
@@ -29,8 +30,7 @@ int main()
         std::cout << std::endl
                   << "Entrez n'importe quel autre chiffre pour quitter." << std::endl;
 
-        unsigned int playerSelection;
-        std::cin >> playerSelection;
+        unsigned int playerSelection = readInt();
 
         if (playerSelection > 2)
         {
@@ -60,8 +60,7 @@ int main()
 
         std::cout << "Faites votre choix :" << std::endl;
 
-        unsigned int gameSelection;
-        std::cin >> gameSelection;
+        unsigned int gameSelection = readInt();
 
         if (gameSelection > 2)
         {
