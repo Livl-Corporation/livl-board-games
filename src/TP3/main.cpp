@@ -6,26 +6,32 @@
 
 // TODO : Check destructors & deletes
 // TODO : Check consts
-// TODO : Improve grid display
+// TODO : Display utils
+// TODO : Infinite loop when asking cell when replay
+// TODO : Power 4 ask only column
 
 int main()
 {
 
-    while(true) {
+    while (true)
+    {
 
         // Ask for player selection
 
-        std::cout << "*** Joueurs ***" << std::endl << std::endl;
+        std::cout << "*** Joueurs ***" << std::endl
+                  << std::endl;
 
         std::cout << "1. Contre l'ordinateur" << std::endl;
         std::cout << "2. 2 joueurs" << std::endl;
 
-        std::cout << std::endl << "Entrez n'importe quel autre chiffre pour quitter." << std::endl;
+        std::cout << std::endl
+                  << "Entrez n'importe quel autre chiffre pour quitter." << std::endl;
 
         unsigned int playerSelection;
         std::cin >> playerSelection;
 
-        if (playerSelection > 2) {
+        if (playerSelection > 2)
+        {
             // Exit
             return EXIT_SUCCESS;
         }
@@ -41,10 +47,12 @@ int main()
         // Ask for game selection
 
         std::cout << std::endl;
-        std::cout << "*** Choix du jeu ***" << std::endl << std::endl;
+        std::cout << "*** Choix du jeu ***" << std::endl
+                  << std::endl;
 
         std::cout << "1. Morpion" << std::endl;
-        std::cout << "2. Puissance 4" << std::endl << std::endl;
+        std::cout << "2. Puissance 4" << std::endl
+                  << std::endl;
 
         std::cout << "Entrez n'importe quel autre chiffre pour quitter." << std::endl;
 
@@ -53,26 +61,30 @@ int main()
         unsigned int gameSelection;
         std::cin >> gameSelection;
 
-        if (gameSelection > 2) {
+        if (gameSelection > 2)
+        {
             // Exit
             return EXIT_SUCCESS;
         }
 
         // Create requested game
-        Game* game;
-        if (gameSelection == 1) {
+        Game *game;
+        if (gameSelection == 1)
+        {
             // Create a TicTacToe
             game = new TicTacToe(players);
-        } else if (gameSelection == 2) {
+        }
+        else if (gameSelection == 2)
+        {
             // Create a Power4
             game = new Power4(players);
-        } 
+        }
 
-        // Lauch game 
+        // Lauch game
         game->play();
 
-        std::cout << std::endl << "*** GAME FINISHED ***" << std::endl << std::endl;
-
+        std::cout << std::endl
+                  << "*** GAME FINISHED ***" << std::endl
+                  << std::endl;
     }
-
 }

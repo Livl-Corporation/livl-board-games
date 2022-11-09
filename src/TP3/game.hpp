@@ -109,6 +109,6 @@ private:
      * 
      * @param playerId 
      */
-    void playAsComputer(int playerId);
+    Cell playAsComputer(int playerId);
     
 };
