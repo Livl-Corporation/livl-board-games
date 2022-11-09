@@ -41,26 +41,34 @@ void Game::play() {
 void Game::nextRound()
 {
     round++;
+    std::cout << "----------" << std::endl;
     std::cout << std::endl << "Tour N° " << this->getRound() << std::endl;
 
     // Determines who is playing this round
     unsigned int playerIndex = (round-1) % playerCount;
     Player player = players[playerIndex];
     int playerId = player.getId();
+    
 
-    std::cout << "Joueur " << playerId << ", c'est à toi !" << std::endl;
+    if (player.getIsComputer()) {
+        // Player is computer
+        this->playAsComputer(playerId);
+        std::cout << "Joué par l'ordinateur" << std::endl;
 
-    // Ask him in which cell he wants to place his cell and place it in the grid
-    Cell cell;
-    do {
+    } else {
+        // Player is a real person
+        std::cout << "Joueur " << playerId << ", c'est à toi !" << std::endl;
 
-        this->grid.displayGrid();
+        // Ask him in which cell he wants to place his cell and place it in the grid
+        Cell cell;
+        do {
 
-        cell = askForCell(getPlayerChar(playerId));
+            this->grid.displayGrid();
 
-    } while (!grid.place(cell, playerId));
+            cell = askForCell(getPlayerChar(playerId));
 
-    // TODO : Handle computer
+        } while (!grid.place(cell, playerId));
+    }
 
     // Verify if player has won
     if (hasWon(playerId)) 
@@ -81,7 +89,7 @@ bool Game::hasWon(int id) const
     return grid.getMaxConsecutiveIds(id) >= consecutiveSymbolsToWin;
 }
 
-Cell Game::askForCell(const char playerChar) 
+Cell Game::askForCell(const char playerChar) const
 {
     std::cout << "Où voulez vous placer votre pion (" << playerChar << ") ? (x,y)" << std::endl;
     unsigned int x, y;
@@ -89,12 +97,29 @@ Cell Game::askForCell(const char playerChar)
     return {x: x, y: y};
 }
 
+void Game::playAsComputer(int playerId) {
+    std::vector<Cell> freeCells = this->grid.getFreeCells();
+
+    srand(time(NULL));
+    int cellSelected = rand()%(freeCells.size()+1); 
+
+    grid.place(freeCells[cellSelected], playerId);
+}
+
 void Game::win(int playerId) {
-    std::cout << "it's a win for " << playerId << std::endl;
+    std::cout << std::endl << "*------------*" << std::endl;
+    std::cout << "Victoire du joueur " << playerId << " (" << getPlayerChar(playerId) << ")";
+    std::cout << std::endl << "*------------*" << std::endl;
+
     this->isFinished = true;
 }
 
 void Game::tie() {
-    std::cout << "game ended, nobody won !" << std::endl;
+    std::cout << std::endl << "*------------*" << std::endl;
+    std::cout << "Match nul";
+    std::cout << std::endl << "*------------*" << std::endl;
+
+    this->grid.displayGrid();
+
     this->isFinished = true;
 }

@@ -39,21 +39,6 @@ public:
     void play();
 
     /**
-     * @brief Start playing the next game round
-     *
-     */
-    void nextRound();
-
-    /**
-     * @brief Returns true if provided player has won
-     *
-     * @param symbol
-     * @return true
-     * @return false
-     */
-    bool hasWon(int id) const;
-
-    /**
      * @brief Get the Round object
      *
      * @return unsigned int
@@ -85,6 +70,21 @@ private:
     bool isFinished = false;
 
     /**
+     * @brief Start playing the next game round
+     *
+     */
+    void nextRound();
+
+    /**
+     * @brief Returns true if provided player has won
+     *
+     * @param symbol
+     * @return true
+     * @return false
+     */
+    bool hasWon(int id) const;
+
+    /**
      * @brief End a game with a winner
      * 
      * @param playerId 
@@ -102,6 +102,13 @@ private:
      *
      * @return Cell
      */
-    Cell askForCell(const char playerChar);
+    Cell askForCell(const char playerChar) const;
+
+    /**
+     * @brief Play as computer : place his symbol on a free grid cell
+     * 
+     * @param playerId 
+     */
+    void playAsComputer(int playerId);
     
 };

@@ -20,7 +20,7 @@ int main()
         std::cout << "1. Contre l'ordinateur" << std::endl;
         std::cout << "2. 2 joueurs" << std::endl;
 
-        std::cout << "Entrez n'importe quel autre chiffre pour quitter." << std::endl;
+        std::cout << std::endl << "Entrez n'importe quel autre chiffre pour quitter." << std::endl;
 
         unsigned int playerSelection;
         std::cin >> playerSelection;
