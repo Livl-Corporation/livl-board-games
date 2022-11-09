@@ -1,4 +1,5 @@
-char getPlayerChar(int playerId) {
+char getPlayerChar(int playerId)
+{
     switch (playerId)
     {
 
@@ -7,7 +8,7 @@ char getPlayerChar(int playerId) {
 
     case 2:
         return 'O';
-    
+
     default:
         return ' ';
     }

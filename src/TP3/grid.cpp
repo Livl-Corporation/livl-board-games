@@ -28,7 +28,8 @@ Grid::Grid(unsigned int x, unsigned int y)
     this->grid = rowsVector;
 }
 
-Grid::~Grid() {
+Grid::~Grid()
+{
     delete &this->grid;
 }
 
@@ -52,13 +53,15 @@ bool Grid::isCellInBounds(Cell cell) const
     return (cell.x >= 0 && cell.x < this->xSize) && (cell.y >= 0 && cell.y < this->ySize);
 }
 
-bool Grid::isGridFull() const {
+bool Grid::isGridFull() const
+{
     return getFreeCells().size() == 0;
 }
 
 bool Grid::place(Cell cell, int id)
 {
-    try {
+    try
+    {
         if (!this->isCellInBounds(cell))
         {
             throw OutOfBoundsException();
@@ -71,8 +74,11 @@ bool Grid::place(Cell cell, int id)
 
         this->grid.at(cell.y).at(cell.x) = id;
         return true;
-    } catch (const std::exception& e) {
-        std::cout << std::endl << e.what() << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cout << std::endl
+                  << e.what() << std::endl;
         return false;
     }
 }
@@ -102,84 +108,101 @@ unsigned int Grid::getMaxConsecutiveIds(int id) const
     unsigned int maxConsecutive = 0;
 
     // Horizontals
-    for(unsigned int row = 0; row < this->getYSize(); row++) {
+    for (unsigned int row = 0; row < this->getYSize(); row++)
+    {
 
         unsigned int rowMaxConsecutive = 0;
-        for(unsigned int col = 0; col < this->getXSize(); col++) {
-            if (this->getCell({x: col, y: row}) == id) {
+        for (unsigned int col = 0; col < this->getXSize(); col++)
+        {
+            if (this->getCell({x : col, y : row}) == id)
+            {
                 rowMaxConsecutive++;
-            } else {
+            }
+            else
+            {
                 rowMaxConsecutive = 0;
             }
         }
 
-        if (rowMaxConsecutive > maxConsecutive) {
+        if (rowMaxConsecutive > maxConsecutive)
+        {
             maxConsecutive = rowMaxConsecutive;
         }
-
     }
 
     // Verticals
-    for(unsigned int col = 0; col < this->getXSize(); col++) {
+    for (unsigned int col = 0; col < this->getXSize(); col++)
+    {
 
         unsigned int colMaxConsecutive = 0;
-        for(unsigned int row = 0; row < this->getYSize(); row++) {
-            if (this->getCell({x: col, y: row}) == id) {
+        for (unsigned int row = 0; row < this->getYSize(); row++)
+        {
+            if (this->getCell({x : col, y : row}) == id)
+            {
                 colMaxConsecutive++;
-            } else {
+            }
+            else
+            {
                 colMaxConsecutive = 0;
             }
         }
 
-        if (colMaxConsecutive > maxConsecutive) {
+        if (colMaxConsecutive > maxConsecutive)
+        {
             maxConsecutive = colMaxConsecutive;
         }
-
     }
 
-    // Diagonals 
+    // Diagonals
     unsigned int maxCol = this->getXSize() - this->getYSize();
-    for (unsigned int startCol = 0; startCol <= maxCol; startCol++) {
+    for (unsigned int startCol = 0; startCol <= maxCol; startCol++)
+    {
 
         unsigned int upMaxConsecutive = 0;
         unsigned int downMaxConsecutive = 0;
 
-        for (unsigned int y = 0; y < this->getYSize(); y++) {
+        for (unsigned int y = 0; y < this->getYSize(); y++)
+        {
 
             // Diagonal going down
             if (this->getCell({
-                x: (startCol+y), 
-                y: y
-            }) == id) {
+                    x : (startCol + y),
+                    y : y
+                }) == id)
+            {
                 downMaxConsecutive++;
-            } else {
+            }
+            else
+            {
                 downMaxConsecutive = 0;
             }
 
             // Diagonal going up
             if (this->getCell({
-                x: (startCol+y), 
-                y: (this->getYSize()-1-y)
-            }) == id) {
+                    x : (startCol + y),
+                    y : (this->getYSize() - 1 - y)
+                }) == id)
+            {
                 upMaxConsecutive++;
-            } else {
+            }
+            else
+            {
                 upMaxConsecutive = 0;
             }
-
         }
 
-        if (upMaxConsecutive > maxConsecutive) {
+        if (upMaxConsecutive > maxConsecutive)
+        {
             maxConsecutive = upMaxConsecutive;
         }
 
-        if (downMaxConsecutive > maxConsecutive) {
+        if (downMaxConsecutive > maxConsecutive)
+        {
             maxConsecutive = downMaxConsecutive;
         }
-
     }
 
     return maxConsecutive;
-
 }
 
 void Grid::displayGrid() const
@@ -200,9 +223,7 @@ void Grid::displayGrid() const
         }
 
         std::cout << std::endl;
-
     }
 
     std::cout << std::endl;
 }
-

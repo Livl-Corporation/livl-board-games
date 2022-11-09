@@ -8,33 +8,31 @@
 class Game
 {
 public:
-
     /**
      * @brief Construct a new Game object
-     * 
-     * @param name 
-     * @param xSize 
-     * @param ySize 
-     * @param pointsToWin 
-     * @param players 
+     *
+     * @param name
+     * @param xSize
+     * @param ySize
+     * @param pointsToWin
+     * @param players
      */
     Game(
-        std::string name, 
-        unsigned int xSize, 
-        unsigned int ySize, 
-        unsigned int pointsToWin, 
-        std::vector<Player> players
-    );
+        std::string name,
+        unsigned int xSize,
+        unsigned int ySize,
+        unsigned int pointsToWin,
+        std::vector<Player> players);
 
     /**
      * @brief Destroy the Game object
-     * 
+     *
      */
     ~Game();
 
     /**
      * @brief Start the game
-     * 
+     *
      */
     void play();
 
@@ -54,13 +52,12 @@ public:
 
     /**
      * @brief Get the Name object
-     * 
-     * @return std::string 
+     *
+     * @return std::string
      */
     inline std::string getName() const { return this->name; };
 
 private:
-
     std::string name;
     unsigned int round = 0;
     unsigned int playerCount = 0;
@@ -86,14 +83,14 @@ private:
 
     /**
      * @brief End a game with a winner
-     * 
-     * @param playerId 
+     *
+     * @param playerId
      */
     void win(int playerId);
 
     /**
      * @brief End a game on a tie
-     * 
+     *
      */
     void tie();
 
@@ -106,9 +103,8 @@ private:
 
     /**
      * @brief Play as computer : place his symbol on a free grid cell
-     * 
-     * @param playerId 
+     *
+     * @param playerId
      */
     Cell playAsComputer(int playerId);
-    
 };

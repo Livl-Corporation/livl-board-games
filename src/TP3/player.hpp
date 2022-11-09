@@ -7,9 +7,9 @@ class Player
 public:
     /**
      * @brief Construct a new Player object
-     * 
-     * @param id 
-     * @param isComputer 
+     *
+     * @param id
+     * @param isComputer
      */
     Player(int id, bool isComputer)
     {

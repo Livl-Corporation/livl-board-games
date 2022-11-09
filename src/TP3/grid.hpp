@@ -15,7 +15,7 @@ public:
 
     /**
      * @brief Destroy the Grid object
-     * 
+     *
      */
     ~Grid();
 
@@ -53,19 +53,19 @@ public:
 
     /**
      * @brief Return true if there is no free cells left
-     * 
-     * @return true 
-     * @return false 
+     *
+     * @return true
+     * @return false
      */
     bool isGridFull() const;
 
     /**
      * @brief Place id on cell
-     * 
-     * @param cell 
-     * @param id 
-     * @return true 
-     * @return false 
+     *
+     * @param cell
+     * @param id
+     * @return true
+     * @return false
      */
     bool place(Cell cell, int id);
 

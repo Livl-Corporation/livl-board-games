@@ -6,11 +6,10 @@
 
 class TicTacToe : public Game
 {
-public: 
+public:
     TicTacToe(std::vector<Player> players) : Game(
-        "Morpion",
-        3, 3, 3, players
-    ) {
+                                                 "Morpion",
+                                                 3, 3, 3, players){
 
-    };
+                                             };
 };
