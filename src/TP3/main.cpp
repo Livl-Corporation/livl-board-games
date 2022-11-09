@@ -5,10 +5,6 @@
 #include "games/tictactoe.hpp"
 #include "games/power4.hpp"
 
-// TODO : Check destructors & deletes
-// TODO : Check consts
-// TODO : Display utils
-
 int main()
 {
 
