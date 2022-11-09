@@ -1,8 +1,9 @@
 #include "grid.hpp"
 #include "cell.hpp"
 #include "player.hpp"
+#include "functions.hpp"
 #include "exceptions/out-of-bounds-exception.hpp"
-#include "exceptions/occupied-cell-exception.hp"
+#include "exceptions/occupied-cell-exception.hpp"
 #include <vector>
 #include <iostream>
 
@@ -23,6 +24,12 @@ Grid::Grid(unsigned int x, unsigned int y)
         }
         rowsVector.push_back(colsVector);
     }
+
+    this->grid = rowsVector;
+}
+
+Grid::~Grid() {
+    delete &this->grid;
 }
 
 int Grid::getCell(Cell cell) const
@@ -51,17 +58,23 @@ bool Grid::isGridFull() const {
 
 bool Grid::place(Cell cell, int id)
 {
-    if (!this->isCellInBounds(cell))
-    {
-        throw new OutOfBoundsException();
-    }
+    try {
+        if (!this->isCellInBounds(cell))
+        {
+            throw OutOfBoundsException();
+        }
 
-    if (!this->isCellEmpty(cell))
-    {
-        throw new OccupiedCellException();
-    }
+        if (!this->isCellEmpty(cell))
+        {
+            throw OccupiedCellException();
+        }
 
-    this->grid.at(cell.y).at(cell.x) = id;
+        this->grid.at(cell.y).at(cell.x) = id;
+        return true;
+    } catch (const std::exception& e) {
+        std::cout << std::endl << e.what() << std::endl;
+        return false;
+    }
 }
 
 std::vector<Cell> Grid::getFreeCells() const
@@ -105,13 +118,15 @@ unsigned int Grid::getMaxConsecutiveIds(int id) const
 void Grid::displayGrid() const
 {
 
-    for (unsigned int row = 0; row < this->ySize; row++)
-    {
-        for (unsigned int col = 0; col < this->xSize; col++)
-        {
-            std::cout << this->getCell({x : col, y : row});
+    std::cout << std::endl;
 
-            if (col < this->xSize - 1)
+    for (unsigned int row = 0; row < this->getYSize(); row++)
+    {
+        for (unsigned int col = 0; col < this->getXSize(); col++)
+        {
+            std::cout << getPlayerChar(this->getCell({x : col, y : row}));
+
+            if (col < this->getXSize() - 1)
             {
                 std::cout << "|";
             }
@@ -119,9 +134,8 @@ void Grid::displayGrid() const
 
         std::cout << std::endl;
 
-        if (row < this->ySize - 1)
-        {
-            std::cout << "-----";
-        }
     }
+
+    std::cout << std::endl;
 }
+

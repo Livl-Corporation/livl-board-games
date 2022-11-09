@@ -14,6 +14,12 @@ public:
     Grid(unsigned int x, unsigned int y);
 
     /**
+     * @brief Destroy the Grid object
+     * 
+     */
+    ~Grid();
+
+    /**
      * @brief Get grid X size
      *
      * @return unsigned int

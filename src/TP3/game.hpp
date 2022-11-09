@@ -3,10 +3,34 @@
 #include "grid.hpp"
 #include "player.hpp"
 #include <vector>
+#include <string>
 
 class Game
 {
 public:
+
+    /**
+     * @brief Construct a new Game object
+     * 
+     * @param name 
+     * @param xSize 
+     * @param ySize 
+     * @param pointsToWin 
+     * @param players 
+     */
+    Game(
+        std::string name, 
+        unsigned int xSize, 
+        unsigned int ySize, 
+        unsigned int pointsToWin, 
+        std::vector<Player> players
+    );
+
+    /**
+     * @brief Destroy the Game object
+     * 
+     */
+    ~Game();
 
     /**
      * @brief Start the game
@@ -43,13 +67,22 @@ public:
      */
     inline unsigned int getPlayerCount() const { return this->playerCount; };
 
+    /**
+     * @brief Get the Name object
+     * 
+     * @return std::string 
+     */
+    inline std::string getName() const { return this->name; };
+
 private:
 
+    std::string name;
     unsigned int round = 0;
     unsigned int playerCount = 0;
     std::vector<Player> players;
     Grid grid;
     unsigned int consecutiveSymbolsToWin;
+    bool isFinished = false;
 
     /**
      * @brief End a game with a winner
@@ -69,6 +102,6 @@ private:
      *
      * @return Cell
      */
-    Cell askForCell();
+    Cell askForCell(const char playerChar);
     
 };

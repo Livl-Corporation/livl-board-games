@@ -1,9 +1,16 @@
 #pragma once
 
 #include "../game.hpp"
+#include "../player.hpp"
+#include <vector>
 
-class TicTacToe : Game
+class TicTacToe : public Game
 {
 public: 
-    TicTacToe();
+    TicTacToe(std::vector<Player> players) : Game(
+        "Morpion",
+        3, 3, 3, players
+    ) {
+
+    };
 };
