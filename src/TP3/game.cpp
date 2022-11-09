@@ -26,9 +26,7 @@ Game::Game(
 void Game::play()
 {
 
-    printTitle("Starting game");
-
-    std::cout << "***** " << this->getName() << " *****" << std::endl;
+    printTitle(this->getName());
 
     do
     {

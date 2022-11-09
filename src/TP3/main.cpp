@@ -1,5 +1,3 @@
-#pragma GCC optimize("O2")
-
 #include <iostream>
 #include "game.hpp"
 #include "functions.hpp"
@@ -10,8 +8,6 @@
 // TODO : Check destructors & deletes
 // TODO : Check consts
 // TODO : Display utils
-// TODO : Infinite loop when asking cell when replay
-// TODO : Power 4 ask only column
 
 int main()
 {
@@ -21,10 +17,10 @@ int main()
 
         // Ask for player selection
 
-        std::cout << "*** Joueurs ***" << std::endl
-                  << std::endl;
+        printHeader("Choix des joueurs");
 
-        std::cout << "1. Contre l'ordinateur" << std::endl;
+        std::cout
+            << "1. Contre l'ordinateur" << std::endl;
         std::cout << "2. 2 joueurs" << std::endl;
 
         std::cout << std::endl
@@ -48,9 +44,7 @@ int main()
 
         // Ask for game selection
 
-        std::cout << std::endl;
-        std::cout << "*** Choix du jeu ***" << std::endl
-                  << std::endl;
+        printHeader("Choix du jeu");
 
         std::cout << "1. Morpion" << std::endl;
         std::cout << "2. Puissance 4" << std::endl
@@ -86,8 +80,6 @@ int main()
 
         delete game;
 
-        std::cout << std::endl
-                  << "*** GAME FINISHED ***" << std::endl
-                  << std::endl;
+        printHeader("GAME FINISHED");
     }
 }

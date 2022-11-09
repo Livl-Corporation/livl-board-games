@@ -65,6 +65,7 @@ void printTitle(const std::string &string)
 
 void printHeader(const std::string &string)
 {
-    std::cout << "-----------------------" << std::endl;
-    std::cout << string << std::endl;
+    std::cout << std::endl
+              << "*** " << string << " ***" << std::endl
+              << std::endl;
 }
