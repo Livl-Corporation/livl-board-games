@@ -40,7 +40,6 @@ Cell Power4::askForCell(const char playerChar)
         // Get first y position available in this col
         try
         {
-
             row = this->firstRowAvailableInCol(col);
 
             // if the previous functions has not thrown any error, we have a valid cell

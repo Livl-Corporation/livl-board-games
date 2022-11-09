@@ -13,7 +13,7 @@ public:
      * @param players
      */
     Power4(std::vector<Player> players) : Game(
-                                              "Puissance 4",
+                                              "Power 4",
                                               7, 4, 4, players){
 
                                           };

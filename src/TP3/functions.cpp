@@ -44,7 +44,7 @@ int readInt()
         {
             std::cin.clear();
             std::cin.ignore(256, '\n');
-            std::cout << "Veuillez saisir un chiffre" << std::endl;
+            std::cout << "Veuillez saisir un chiffre." << std::endl;
         }
         else
         {
@@ -58,9 +58,9 @@ int readInt()
 void printTitle(const std::string &string)
 {
     std::cout << std::endl
-              << "*----------------------*" << std::endl;
+              << "*-----------------------------*" << std::endl;
     std::cout << "     " << string << "     " << std::endl;
-    std::cout << "*----------------------*" << std::endl;
+    std::cout << "*-----------------------------*" << std::endl;
 }
 
 void printHeader(const std::string &string)

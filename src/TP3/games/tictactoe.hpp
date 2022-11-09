@@ -13,7 +13,7 @@ public:
      * @param players
      */
     TicTacToe(std::vector<Player> players) : Game(
-                                                 "Morpion",
+                                                 "TicTacToe",
                                                  3, 3, 3, players){
 
                                              };
