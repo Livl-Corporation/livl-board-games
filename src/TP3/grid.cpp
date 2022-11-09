@@ -28,11 +28,6 @@ Grid::Grid(unsigned int x, unsigned int y)
     this->grid = rowsVector;
 }
 
-Grid::~Grid()
-{
-    delete &this->grid;
-}
-
 int Grid::getCell(Cell cell) const
 {
     return this->grid.at(cell.y).at(cell.x);
@@ -72,7 +67,7 @@ bool Grid::place(Cell cell, int id)
             throw OccupiedCellException();
         }
 
-        this->grid.at(cell.y).at(cell.x) = id;
+        this->grid[cell.y][cell.x] = id;
         return true;
     }
     catch (const std::exception &e)

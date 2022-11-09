@@ -9,6 +9,7 @@
 #include <iostream>
 #include <cstdio>
 #include <vector>
+#include <stdlib.h>
 
 Game::Game(
     std::string name,
@@ -19,13 +20,6 @@ Game::Game(
 {
     this->playerCount = players.size();
     this->consecutiveSymbolsToWin = pointsToWin;
-}
-
-Game::~Game()
-{
-    delete &this->name;
-    delete &this->players;
-    delete &this->grid;
 }
 
 void Game::play()
@@ -71,11 +65,11 @@ void Game::nextRound()
         do
         {
 
-            this->grid.displayGrid();
+            this->getGrid().displayGrid();
 
             cell = askForCell(getPlayerChar(playerId));
 
-        } while (!grid.place(cell, playerId));
+        } while (!this->getGrid().place(cell, playerId));
     }
 
     // Verify if player has won
@@ -96,9 +90,9 @@ bool Game::hasWon(int id) const
     return grid.getMaxConsecutiveIds(id) >= consecutiveSymbolsToWin;
 }
 
-Cell Game::askForCell(const char playerChar) const
+Cell Game::askForCell(const char playerChar)
 {
-    std::cout << "Où voulez vous placer votre pion (" << playerChar << ") entre 1,1 et " << this->grid.getXSize() << "," << this->grid.getYSize() << " ?" << std::endl;
+    std::cout << "Où voulez vous placer votre pion (" << playerChar << ") entre 1,1 et " << this->getGrid().getXSize() << "," << this->getGrid().getYSize() << " ?" << std::endl;
 
     unsigned int x, y;
     scanf("%d,%d", &x, &y);
@@ -107,12 +101,12 @@ Cell Game::askForCell(const char playerChar) const
 
 Cell Game::playAsComputer(int playerId)
 {
-    std::vector<Cell> freeCells = this->grid.getFreeCells();
+    std::vector<Cell> freeCells = this->getGrid().getFreeCells();
 
     srand(time(NULL));
-    int cellSelected = rand() % (freeCells.size() + 1);
+    int cellSelected = randomInt(0, freeCells.size());
 
-    grid.place(freeCells[cellSelected], playerId);
+    this->getGrid().place(freeCells[cellSelected], playerId);
 
     return freeCells[cellSelected];
 }
@@ -125,6 +119,8 @@ void Game::win(int playerId)
     std::cout << std::endl
               << "*------------*" << std::endl;
 
+    this->getGrid().displayGrid();
+
     this->isFinished = true;
 }
 
@@ -136,7 +132,13 @@ void Game::tie()
     std::cout << std::endl
               << "*------------*" << std::endl;
 
-    this->grid.displayGrid();
+    this->getGrid().displayGrid();
 
     this->isFinished = true;
+}
+
+std::vector<Player> Game::getPlayers() const
+{
+    std::vector<Player> vect(this->players);
+    return vect;
 }

@@ -33,4 +33,5 @@ add_executable(tp3
     src/TP3/game.cpp
     src/TP3/grid.cpp
     src/TP3/functions.cpp
+    src/TP3/games/power4.cpp
 )

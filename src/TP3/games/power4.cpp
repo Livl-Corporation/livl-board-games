@@ -1,0 +1,99 @@
+#include "power4.hpp"
+#include "../cell.hpp"
+#include "../functions.hpp"
+
+#include "../exceptions/column-full-exception.hpp"
+
+#include <iostream>
+#include <vector>
+#include <stdlib.h>
+
+Cell Power4::askForCell(const char playerChar)
+{
+
+    bool alreadyAsked = false;
+    unsigned int col, row;
+    bool validCell = false;
+
+    do
+    {
+
+        // Ask for a valid column
+        do
+        {
+            if (alreadyAsked)
+            {
+                std::cout << std::endl
+                          << "Veuillez entrer une colonne entre 1 et " << this->getGrid().getXSize() << "." << std::endl;
+            }
+
+            std::cout << "Dans quelle colonne souhaitez vous jouer ? (1-" << this->getGrid().getXSize() << ")" << std::endl;
+
+            std::cin >> col;
+            col--;
+            alreadyAsked = true;
+
+        } while (col < 1 && col > this->getGrid().getXSize());
+
+        // Get first y position available in this col
+        try
+        {
+            row = this->firstRowAvailableInCol(col);
+
+            // if the previous functions has not thrown any error, we have a valid cell
+            validCell = true;
+        }
+        catch (const ColumnFullException &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+
+    } while (!validCell);
+
+    Cell cell{x : col, y : row};
+    return cell;
+}
+
+unsigned int Power4::firstRowAvailableInCol(unsigned int col)
+{
+
+    Cell cell{x : col, y : (this->getGrid().getYSize() - 1)};
+
+    while (!this->getGrid().isCellEmpty(cell))
+    {
+        if (cell.y == 0)
+        {
+            throw ColumnFullException();
+        }
+        else
+        {
+            cell.y--;
+        }
+    }
+
+    return cell.y;
+}
+
+Cell Power4::playAsComputer(int playerId)
+{
+
+    unsigned int col, row = 0;
+
+    do
+    {
+        col = randomInt(0, this->getGrid().getXSize() - 1);
+
+        std::cout << "random int " << col << std::endl;
+
+        try
+        {
+            row = this->firstRowAvailableInCol(col);
+        }
+        catch (...)
+        {
+        }
+
+    } while (!this->getGrid().place({col, row}, playerId));
+
+    return {col, row};
+}

@@ -1,3 +1,5 @@
+#pragma GCC optimize("O2")
+
 #include <iostream>
 #include "game.hpp"
 #include "player.hpp"
@@ -82,6 +84,8 @@ int main()
 
         // Lauch game
         game->play();
+
+        delete game;
 
         std::cout << std::endl
                   << "*** GAME FINISHED ***" << std::endl

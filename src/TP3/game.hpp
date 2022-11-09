@@ -25,12 +25,6 @@ public:
         std::vector<Player> players);
 
     /**
-     * @brief Destroy the Game object
-     *
-     */
-    ~Game();
-
-    /**
      * @brief Start the game
      *
      */
@@ -56,6 +50,20 @@ public:
      * @return std::string
      */
     inline std::string getName() const { return this->name; };
+
+    /**
+     * @brief Get the Grid object
+     *
+     * @return Grid
+     */
+    inline Grid &getGrid() { return this->grid; };
+
+    /**
+     * @brief Get the Players object
+     *
+     * @return std::vector<Player>
+     */
+    std::vector<Player> getPlayers() const;
 
 private:
     std::string name;
@@ -99,12 +107,12 @@ private:
      *
      * @return Cell
      */
-    Cell askForCell(const char playerChar) const;
+    virtual Cell askForCell(const char playerChar);
 
     /**
      * @brief Play as computer : place his symbol on a free grid cell
      *
      * @param playerId
      */
-    Cell playAsComputer(int playerId);
+    virtual Cell playAsComputer(int playerId);
 };

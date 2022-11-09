@@ -72,7 +72,12 @@
         "mutex": "cpp",
         "ratio": "cpp",
         "variant": "cpp",
-        "*.hp": "cpp"
+        "*.hp": "cpp",
+        "condition_variable": "cpp",
+        "queue": "cpp",
+        "semaphore": "cpp",
+        "thread": "cpp",
+        "stop_token": "cpp"
     },
     "cmake.configureOnOpen": true
 }
