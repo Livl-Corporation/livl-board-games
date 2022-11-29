@@ -100,7 +100,6 @@ Cell Game::playAsComputer(int playerId)
 {
     std::vector<Cell> freeCells = this->getGrid().getFreeCells();
 
-    srand(time(NULL));
     int cellSelected = randomInt(0, freeCells.size());
 
     this->getGrid().place(freeCells[cellSelected], playerId);

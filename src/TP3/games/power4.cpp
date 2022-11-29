@@ -2,7 +2,6 @@
 #include "../cell.hpp"
 #include "../functions.hpp"
 
-#include "../exceptions/column-full-exception.hpp"
 #include "../exceptions/out-of-bounds-exception.hpp"
 
 #include <iostream>
@@ -40,7 +39,7 @@ Cell Power4::askForCell(const char playerChar)
         // Get first y position available in this col
         try
         {
-            row = this->firstRowAvailableInCol(col);
+            row = this->getGrid().firstRowAvailableInCol(col);
 
             // if the previous functions has not thrown any error, we have a valid cell
             validCell = true;
@@ -56,26 +55,6 @@ Cell Power4::askForCell(const char playerChar)
     return cell;
 }
 
-unsigned int Power4::firstRowAvailableInCol(unsigned int col)
-{
-
-    Cell cell{x : col, y : (this->getGrid().getYSize() - 1)};
-
-    while (!this->getGrid().isCellEmpty(cell))
-    {
-        if (cell.y == 0)
-        {
-            throw ColumnFullException();
-        }
-        else
-        {
-            cell.y--;
-        }
-    }
-
-    return cell.y;
-}
-
 Cell Power4::playAsComputer(int playerId)
 {
 
@@ -87,7 +66,7 @@ Cell Power4::playAsComputer(int playerId)
 
         try
         {
-            row = this->firstRowAvailableInCol(col);
+            row = this->getGrid().firstRowAvailableInCol(col);
         }
         catch (...)
         {

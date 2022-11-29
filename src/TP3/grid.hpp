@@ -96,4 +96,6 @@ private:
     unsigned int xSize;
     unsigned int ySize;
     std::vector<std::vector<int>> grid;
+
+    unsigned int firstRowAvailableInCol(unsigned int col);
 };

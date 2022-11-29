@@ -4,6 +4,7 @@
 #include "functions.hpp"
 #include "exceptions/out-of-bounds-exception.hpp"
 #include "exceptions/occupied-cell-exception.hpp"
+#include "exceptions/column-full-exception.hpp"
 #include <vector>
 #include <iostream>
 
@@ -221,4 +222,24 @@ void Grid::displayGrid() const
     }
 
     std::cout << std::endl;
+}
+
+unsigned int Grid::firstRowAvailableInCol(unsigned int col)
+{
+
+    Cell cell{x : col, y : (this->getYSize() - 1)};
+
+    while (!this->isCellEmpty(cell))
+    {
+        if (cell.y == 0)
+        {
+            throw ColumnFullException();
+        }
+        else
+        {
+            cell.y--;
+        }
+    }
+
+    return cell.y;
 }

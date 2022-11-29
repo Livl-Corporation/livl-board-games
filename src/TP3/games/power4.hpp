@@ -24,7 +24,7 @@ public:
      * @param playerChar
      * @return Cell
      */
-    Cell askForCell(const char playerChar);
+    Cell askForCell(const char playerChar) override;
 
     /**
      * @brief Place a symbol in a available col
@@ -32,8 +32,5 @@ public:
      * @param playerId
      * @return Cell
      */
-    Cell playAsComputer(int playerId);
-
-private:
-    unsigned int firstRowAvailableInCol(unsigned int col);
+    Cell playAsComputer(int playerId) override;
 };
