@@ -98,7 +98,7 @@ public:
      * @param col
      * @return unsigned int
      */
-    unsigned int firstRowAvailableInCol(unsigned int col);
+    unsigned int firstRowAvailableInCol(unsigned int col) const;
 
 private:
     unsigned int xSize;

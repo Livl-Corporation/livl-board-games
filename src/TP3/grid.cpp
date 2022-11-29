@@ -224,7 +224,7 @@ void Grid::displayGrid() const
     std::cout << std::endl;
 }
 
-unsigned int Grid::firstRowAvailableInCol(unsigned int col)
+unsigned int Grid::firstRowAvailableInCol(unsigned int col) const
 {
 
     Cell cell{x : col, y : (this->getYSize() - 1)};
