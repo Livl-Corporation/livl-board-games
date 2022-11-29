@@ -92,10 +92,16 @@ public:
      */
     void displayGrid() const;
 
+    /**
+     * @brief Get the first row available in a given col
+     *
+     * @param col
+     * @return unsigned int
+     */
+    unsigned int firstRowAvailableInCol(unsigned int col);
+
 private:
     unsigned int xSize;
     unsigned int ySize;
     std::vector<std::vector<int>> grid;
-
-    unsigned int firstRowAvailableInCol(unsigned int col);
 };
