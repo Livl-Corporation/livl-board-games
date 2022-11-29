@@ -1,10 +1,10 @@
 #include "game.hpp"
-#include "player.hpp"
-#include "cell.hpp"
+#include "models/player.hpp"
+#include "models/cell.hpp"
 #include "grid.hpp"
-#include "functions.hpp"
+#include "shared/functions.hpp"
 
-#include "exceptions/out-of-bounds-exception.hpp"
+#include "shared/exceptions/out-of-bounds-exception.hpp"
 
 #include <iostream>
 #include <cstdio>

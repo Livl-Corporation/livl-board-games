@@ -1,7 +1,7 @@
 #include <iostream>
 #include "game.hpp"
-#include "functions.hpp"
-#include "player.hpp"
+#include "shared/functions.hpp"
+#include "models/player.hpp"
 #include "games/tictactoe.hpp"
 #include "games/power4.hpp"
 

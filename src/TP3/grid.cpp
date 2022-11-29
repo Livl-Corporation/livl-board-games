@@ -1,10 +1,10 @@
 #include "grid.hpp"
-#include "cell.hpp"
-#include "player.hpp"
-#include "functions.hpp"
-#include "exceptions/out-of-bounds-exception.hpp"
-#include "exceptions/occupied-cell-exception.hpp"
-#include "exceptions/column-full-exception.hpp"
+#include "models/cell.hpp"
+#include "models/player.hpp"
+#include "shared/functions.hpp"
+#include "shared/exceptions/out-of-bounds-exception.hpp"
+#include "shared/exceptions/occupied-cell-exception.hpp"
+#include "shared/exceptions/column-full-exception.hpp"
 #include <vector>
 #include <iostream>
 

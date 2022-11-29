@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../game.hpp"
-#include "../player.hpp"
+#include "../models/player.hpp"
 #include <vector>
 
 class TicTacToe : public Game

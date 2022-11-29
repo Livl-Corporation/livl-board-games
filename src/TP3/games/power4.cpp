@@ -1,8 +1,8 @@
 #include "power4.hpp"
-#include "../cell.hpp"
-#include "../functions.hpp"
+#include "../models/cell.hpp"
+#include "../shared/functions.hpp"
 
-#include "../exceptions/out-of-bounds-exception.hpp"
+#include "../shared/exceptions/out-of-bounds-exception.hpp"
 
 #include <iostream>
 #include <vector>

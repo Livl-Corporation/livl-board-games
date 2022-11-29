@@ -1,7 +1,7 @@
 #pragma once
 
 #include "grid.hpp"
-#include "player.hpp"
+#include "models/player.hpp"
 #include <vector>
 #include <string>
 
