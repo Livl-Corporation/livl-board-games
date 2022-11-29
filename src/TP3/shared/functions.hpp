@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <random>
+#include <iostream>
 
 /**
  * @brief Get the Player Char object

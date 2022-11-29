@@ -1,26 +1,14 @@
 #include "game.hpp"
-#include "models/player.hpp"
-#include "models/cell.hpp"
-#include "grid.hpp"
-#include "shared/functions.hpp"
-
-#include "shared/exceptions/out-of-bounds-exception.hpp"
-
-#include <iostream>
-#include <cstdio>
-#include <vector>
-#include <sstream>
-#include <string>
 
 Game::Game(
-    std::string name,
-    unsigned int xSize,
-    unsigned int ySize,
-    unsigned int pointsToWin,
-    std::vector<Player> players) : players(players), grid(xSize, ySize), name(name)
+    const std::string name,
+    const unsigned int xSize,
+    const unsigned int ySize,
+    const std::vector<Player> players) : players(players), grid(xSize, ySize), name(name),
+                                         // theses members will be initialized by each games :
+                                         cellRequester(nullptr), gameEvaluator(nullptr)
 {
     this->playerCount = players.size();
-    this->consecutiveSymbolsToWin = pointsToWin;
 }
 
 void Game::play()
@@ -61,42 +49,24 @@ void Game::nextRound()
         Cell cell;
         do
         {
-
             this->getGrid().displayGrid();
-
-            cell = askForCell(getPlayerChar(playerId));
-
+            cell = this->cellRequester->askForCell(getPlayerChar(playerId));
         } while (!this->getGrid().place(cell, playerId));
     }
 
     // Verify if player has won
-    if (hasWon(playerId))
+    if (this->gameEvaluator->hasPlayerWon(playerId, this->getGrid()))
     {
         win(playerId);
     }
-    else if (grid.isGridFull())
+    else if (this->getGrid().isGridFull())
     {
         // If grid is full, tie
         tie();
     }
 }
 
-bool Game::hasWon(int id) const
-{
-    // if max consecutive player symbols > consecutiveSymbolsToWin, he has won !
-    return grid.getMaxConsecutiveIds(id) >= consecutiveSymbolsToWin;
-}
-
-Cell Game::askForCell(const char playerChar)
-{
-    std::cout << "Où voulez vous placer votre pion (" << playerChar << ") entre 1,1 et " << this->getGrid().getXSize() << "," << this->getGrid().getYSize() << " ?" << std::endl;
-
-    unsigned int x, y;
-    scanf("%d,%d", &x, &y);
-    return {x : x - 1, y : y - 1};
-}
-
-Cell Game::playAsComputer(int playerId)
+Cell Game::playAsComputer(const unsigned int playerId)
 {
     std::vector<Cell> freeCells = this->getGrid().getFreeCells();
 

@@ -1,7 +1,15 @@
 #pragma once
 
 #include "models/cell.hpp"
+#include "models/player.hpp"
+
+#include "shared/functions.hpp"
+#include "shared/exceptions/out-of-bounds-exception.hpp"
+#include "shared/exceptions/occupied-cell-exception.hpp"
+#include "shared/exceptions/column-full-exception.hpp"
+
 #include <vector>
+#include <iostream>
 
 class Grid
 {
@@ -34,7 +42,7 @@ public:
      * @return true
      * @return false
      */
-    bool isCellEmpty(Cell cell) const;
+    bool isCellEmpty(const Cell &cell) const;
 
     /**
      * @brief Return true if requested cell is in grid bounds
@@ -43,7 +51,7 @@ public:
      * @return true
      * @return false
      */
-    bool isCellInBounds(Cell cell) const;
+    bool isCellInBounds(const Cell &cell) const;
 
     /**
      * @brief Return true if there is no free cells left
@@ -61,7 +69,7 @@ public:
      * @return true
      * @return false
      */
-    bool place(Cell cell, int id);
+    bool place(const Cell &cell, const unsigned int id);
 
     /**
      * @brief Get the symbol placed on provided cell
@@ -69,7 +77,7 @@ public:
      * @param cell
      * @return Symbol
      */
-    int getCell(Cell cell) const;
+    int getCell(const Cell &cell) const;
 
     /**
      * @brief Get all the free cells remainings
@@ -77,14 +85,6 @@ public:
      * @return std::vector<Cell>
      */
     std::vector<Cell> getFreeCells() const;
-
-    /**
-     * @brief Get the Max Consecutive Symbols object
-     *
-     * @param symbol
-     * @return unsigned int
-     */
-    unsigned int getMaxConsecutiveIds(int id) const;
 
     /**
      * @brief Display grid in the console
@@ -98,7 +98,7 @@ public:
      * @param col
      * @return unsigned int
      */
-    unsigned int firstRowAvailableInCol(unsigned int col) const;
+    unsigned int firstRowAvailableInCol(const unsigned int col) const;
 
 private:
     unsigned int xSize;

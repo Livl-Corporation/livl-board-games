@@ -1,7 +1,19 @@
 #pragma once
 
 #include "grid.hpp"
+
 #include "models/player.hpp"
+#include "models/cell.hpp"
+
+#include "interfaces/gameEvaluator.hpp"
+#include "interfaces/cellRequester.hpp"
+
+#include "shared/functions.hpp"
+#include "shared/exceptions/out-of-bounds-exception.hpp"
+
+#include <iostream>
+#include <cstdio>
+#include <sstream>
 #include <vector>
 #include <string>
 
@@ -14,15 +26,17 @@ public:
      * @param name
      * @param xSize
      * @param ySize
-     * @param pointsToWin
+     * @param gameEvaluator
+     * @param cellRequester
      * @param players
      */
     Game(
-        std::string name,
-        unsigned int xSize,
-        unsigned int ySize,
-        unsigned int pointsToWin,
-        std::vector<Player> players);
+        const std::string name,
+        const unsigned int xSize,
+        const unsigned int ySize,
+        // GameEvaluator &gameEvaluator,
+        // CellRequester &cellRequester,
+        const std::vector<Player> players);
 
     /**
      * @brief Start the game
@@ -65,13 +79,16 @@ public:
      */
     std::vector<Player> getPlayers() const;
 
+protected:
+    GameEvaluator *gameEvaluator;
+    CellRequester *cellRequester;
+
 private:
     std::string name;
     unsigned int round = 0;
     unsigned int playerCount = 0;
     std::vector<Player> players;
     Grid grid;
-    unsigned int consecutiveSymbolsToWin;
     bool isFinished = false;
 
     /**
@@ -79,15 +96,6 @@ private:
      *
      */
     void nextRound();
-
-    /**
-     * @brief Returns true if provided player has won
-     *
-     * @param symbol
-     * @return true
-     * @return false
-     */
-    bool hasWon(int id) const;
 
     /**
      * @brief End a game with a winner
@@ -103,16 +111,9 @@ private:
     void tie();
 
     /**
-     * @brief Ask the player to enter a cell
-     *
-     * @return Cell
-     */
-    virtual Cell askForCell(const char playerChar);
-
-    /**
      * @brief Play as computer : place his symbol on a free grid cell
      *
      * @param playerId
      */
-    virtual Cell playAsComputer(int playerId);
+    virtual Cell playAsComputer(const unsigned int playerId);
 };

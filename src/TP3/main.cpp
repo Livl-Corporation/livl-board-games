@@ -2,8 +2,8 @@
 #include "game.hpp"
 #include "shared/functions.hpp"
 #include "models/player.hpp"
-#include "games/tictactoe.hpp"
-#include "games/power4.hpp"
+#include "games/tictactoe/tictactoe.hpp"
+#include "games/power4/power4.hpp"
 
 int main()
 {

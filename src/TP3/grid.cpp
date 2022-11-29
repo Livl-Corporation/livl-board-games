@@ -1,14 +1,6 @@
 #include "grid.hpp"
-#include "models/cell.hpp"
-#include "models/player.hpp"
-#include "shared/functions.hpp"
-#include "shared/exceptions/out-of-bounds-exception.hpp"
-#include "shared/exceptions/occupied-cell-exception.hpp"
-#include "shared/exceptions/column-full-exception.hpp"
-#include <vector>
-#include <iostream>
 
-Grid::Grid(unsigned int x, unsigned int y)
+Grid::Grid(const unsigned int x, const unsigned int y)
 {
     this->xSize = x;
     this->ySize = y;
@@ -29,13 +21,16 @@ Grid::Grid(unsigned int x, unsigned int y)
     this->grid = rowsVector;
 }
 
-int Grid::getCell(Cell cell) const
+int Grid::getCell(const Cell &cell) const
 {
     return this->grid.at(cell.y).at(cell.x);
 }
 
-bool Grid::isCellEmpty(Cell cell) const
+bool Grid::isCellEmpty(const Cell &cell) const
 {
+
+    std::cout << "checking " << cell.x << " , " << cell.y << " : " << this->getCell(cell) << std::endl;
+
     if (!this->isCellInBounds(cell))
     {
         throw new OutOfBoundsException();
@@ -44,7 +39,7 @@ bool Grid::isCellEmpty(Cell cell) const
     return this->getCell(cell) == NO_PLAYER;
 }
 
-bool Grid::isCellInBounds(Cell cell) const
+bool Grid::isCellInBounds(const Cell &cell) const
 {
     return (cell.x >= 0 && cell.x < this->xSize) && (cell.y >= 0 && cell.y < this->ySize);
 }
@@ -54,7 +49,7 @@ bool Grid::isGridFull() const
     return getFreeCells().size() == 0;
 }
 
-bool Grid::place(Cell cell, int id)
+bool Grid::place(const Cell &cell, const unsigned int id)
 {
     try
     {
@@ -69,6 +64,7 @@ bool Grid::place(Cell cell, int id)
         }
 
         this->grid[cell.y][cell.x] = id;
+
         return true;
     }
     catch (const std::exception &e)
@@ -97,108 +93,6 @@ std::vector<Cell> Grid::getFreeCells() const
     }
 
     return freeCells;
-}
-
-unsigned int Grid::getMaxConsecutiveIds(int id) const
-{
-    unsigned int maxConsecutive = 0;
-
-    // Horizontals
-    for (unsigned int row = 0; row < this->getYSize(); row++)
-    {
-
-        unsigned int rowMaxConsecutive = 0;
-        for (unsigned int col = 0; col < this->getXSize(); col++)
-        {
-            if (this->getCell({x : col, y : row}) == id)
-            {
-                rowMaxConsecutive++;
-            }
-            else
-            {
-                rowMaxConsecutive = 0;
-            }
-        }
-
-        if (rowMaxConsecutive > maxConsecutive)
-        {
-            maxConsecutive = rowMaxConsecutive;
-        }
-    }
-
-    // Verticals
-    for (unsigned int col = 0; col < this->getXSize(); col++)
-    {
-
-        unsigned int colMaxConsecutive = 0;
-        for (unsigned int row = 0; row < this->getYSize(); row++)
-        {
-            if (this->getCell({x : col, y : row}) == id)
-            {
-                colMaxConsecutive++;
-            }
-            else
-            {
-                colMaxConsecutive = 0;
-            }
-        }
-
-        if (colMaxConsecutive > maxConsecutive)
-        {
-            maxConsecutive = colMaxConsecutive;
-        }
-    }
-
-    // Diagonals
-    unsigned int maxCol = this->getXSize() - this->getYSize();
-    for (unsigned int startCol = 0; startCol <= maxCol; startCol++)
-    {
-
-        unsigned int upMaxConsecutive = 0;
-        unsigned int downMaxConsecutive = 0;
-
-        for (unsigned int y = 0; y < this->getYSize(); y++)
-        {
-
-            // Diagonal going down
-            if (this->getCell({
-                    x : (startCol + y),
-                    y : y
-                }) == id)
-            {
-                downMaxConsecutive++;
-            }
-            else
-            {
-                downMaxConsecutive = 0;
-            }
-
-            // Diagonal going up
-            if (this->getCell({
-                    x : (startCol + y),
-                    y : (this->getYSize() - 1 - y)
-                }) == id)
-            {
-                upMaxConsecutive++;
-            }
-            else
-            {
-                upMaxConsecutive = 0;
-            }
-        }
-
-        if (upMaxConsecutive > maxConsecutive)
-        {
-            maxConsecutive = upMaxConsecutive;
-        }
-
-        if (downMaxConsecutive > maxConsecutive)
-        {
-            maxConsecutive = downMaxConsecutive;
-        }
-    }
-
-    return maxConsecutive;
 }
 
 void Grid::displayGrid() const

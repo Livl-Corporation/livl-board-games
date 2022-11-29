@@ -1,9 +1,5 @@
 #include "functions.hpp"
 
-#include <random>
-#include <iostream>
-#include <string>
-
 char getPlayerChar(int playerId)
 {
     switch (playerId)
