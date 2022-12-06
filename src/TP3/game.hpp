@@ -26,8 +26,6 @@ public:
      * @param name
      * @param xSize
      * @param ySize
-     * @param gameEvaluator
-     * @param cellRequester
      * @param players
      */
     Game(
@@ -37,6 +35,12 @@ public:
         // GameEvaluator &gameEvaluator,
         // CellRequester &cellRequester,
         const std::vector<Player> players);
+
+    /**
+     * @brief Destroy the Game object
+     * 
+     */
+    ~Game();
 
     /**
      * @brief Start the game

@@ -11,6 +11,12 @@ Game::Game(
     this->playerCount = players.size();
 }
 
+Game::~Game()
+{
+    delete cellRequester;
+    delete gameEvaluator;
+}
+
 void Game::play()
 {
 
