@@ -7,7 +7,5 @@
 class TicTacToeCellRequester : public CellRequester
 {
 public:
-    TicTacToeCellRequester(const Grid &grid) : CellRequester(grid){};
-
-    Cell askForCell(const char playerChar) override;
+    Cell askForCell(const char playerChar, const Grid &grid) override;
 };

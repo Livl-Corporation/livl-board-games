@@ -20,7 +20,7 @@ public:
                                               7, 4,
                                               players)
     {
-        this->cellRequester = new Power4CellRequester(this->getGrid());
+        this->cellRequester = new Power4CellRequester();
         this->gameEvaluator = new DefaultGameEvaluator(4);
     };
 

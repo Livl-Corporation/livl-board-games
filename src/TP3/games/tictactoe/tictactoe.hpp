@@ -19,7 +19,7 @@ public:
                                                  3, 3,
                                                  players)
     {
-        this->cellRequester = new TicTacToeCellRequester(this->getGrid());
+        this->cellRequester = new TicTacToeCellRequester();
         this->gameEvaluator = new DefaultGameEvaluator(3);
     };
 };

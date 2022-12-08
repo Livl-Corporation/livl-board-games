@@ -29,8 +29,6 @@ int Grid::getCell(const Cell &cell) const
 bool Grid::isCellEmpty(const Cell &cell) const
 {
 
-    std::cout << "checking " << cell.x << " , " << cell.y << " : " << this->getCell(cell) << std::endl;
-
     if (!this->isCellInBounds(cell))
     {
         throw new OutOfBoundsException();
@@ -122,6 +120,7 @@ unsigned int Grid::firstRowAvailableInCol(unsigned int col) const
 {
 
     Cell cell{x : col, y : (this->getYSize() - 1)};
+
     while (!this->isCellEmpty(cell))
     {
 
@@ -129,16 +128,12 @@ unsigned int Grid::firstRowAvailableInCol(unsigned int col) const
         {
             // If there is no row available in this col, throw an exception & exit function
             throw ColumnFullException();
-            return 0;
         }
         else
         {
-            std::cout << "else : " << cell.x << " , " << cell.y << std::endl;
             cell.y--;
         }
     }
-
-    std::cout << "firstRowAvailableInColl finished with result " << cell.y << std::endl;
 
     return cell.y;
 }

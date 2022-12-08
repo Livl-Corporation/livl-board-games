@@ -56,10 +56,8 @@ void Game::nextRound()
         do
         {
             this->getGrid().displayGrid();
-            cell = this->cellRequester->askForCell(Player::getPlayerChar(playerId));
+            cell = this->cellRequester->askForCell(Player::getPlayerChar(playerId), this->getGrid());
         } while (!this->getGrid().place(cell, playerId));
-
-        std::cout << " --- end of round --- " << std::endl;
     }
 
     // Verify if player has won
