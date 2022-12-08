@@ -31,6 +31,7 @@ void Game::play()
 void Game::nextRound()
 {
     round++;
+
     std::ostringstream status;
     status << "Tour N° " << this->getRound();
     printHeader(status.str());
@@ -40,10 +41,12 @@ void Game::nextRound()
     Player player = players[playerIndex];
     int playerId = player.getId();
 
+    Cell cell;
+
     if (player.getIsComputer())
     {
         // Player is computer
-        Cell cell = this->playAsComputer(playerId);
+        cell = this->playAsComputer(playerId);
         std::cout << "Joué par l'ordinateur en " << cell.x << "," << cell.y << "." << std::endl;
     }
     else
@@ -52,7 +55,6 @@ void Game::nextRound()
         std::cout << "Joueur " << playerId << ", c'est à toi !" << std::endl;
 
         // Ask him in which cell he wants to place his cell and place it in the grid
-        Cell cell;
         do
         {
             this->getGrid().displayGrid();

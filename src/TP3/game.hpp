@@ -87,6 +87,13 @@ protected:
     GameEvaluator *gameEvaluator;
     CellRequester *cellRequester;
 
+    /**
+     * @brief Play as computer : place his symbol on a free grid cell
+     *
+     * @param playerId
+     */
+    virtual Cell playAsComputer(const unsigned int playerId);
+
 private:
     std::string name;
     unsigned int round = 0;
@@ -113,11 +120,4 @@ private:
      *
      */
     void tie();
-
-    /**
-     * @brief Play as computer : place his symbol on a free grid cell
-     *
-     * @param playerId
-     */
-    virtual Cell playAsComputer(const unsigned int playerId);
 };
