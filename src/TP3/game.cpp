@@ -56,8 +56,10 @@ void Game::nextRound()
         do
         {
             this->getGrid().displayGrid();
-            cell = this->cellRequester->askForCell(getPlayerChar(playerId));
+            cell = this->cellRequester->askForCell(Player::getPlayerChar(playerId));
         } while (!this->getGrid().place(cell, playerId));
+
+        std::cout << " --- end of round --- " << std::endl;
     }
 
     // Verify if player has won
@@ -86,7 +88,7 @@ Cell Game::playAsComputer(const unsigned int playerId)
 void Game::win(int playerId)
 {
     std::ostringstream msg;
-    msg << "Victoire du joueur " << playerId << " (" << getPlayerChar(playerId) << ")";
+    msg << "Victoire du joueur " << playerId << " (" << Player::getPlayerChar(playerId) << ")";
     printTitle(msg.str());
 
     this->getGrid().displayGrid();

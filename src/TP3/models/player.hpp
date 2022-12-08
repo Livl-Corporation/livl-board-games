@@ -32,6 +32,14 @@ public:
      */
     inline bool getIsComputer() const { return this->isComputer; };
 
+    /**
+     * @brief Get the Player Char object
+     *
+     * @param playerId
+     * @return char
+     */
+    static char getPlayerChar(int playerId);
+
 private:
     int id;
     bool isComputer;

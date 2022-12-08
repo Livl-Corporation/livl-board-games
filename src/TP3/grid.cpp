@@ -104,7 +104,7 @@ void Grid::displayGrid() const
     {
         for (unsigned int col = 0; col < this->getXSize(); col++)
         {
-            std::cout << getPlayerChar(this->getCell({x : col, y : row}));
+            std::cout << Player::getPlayerChar(this->getCell({x : col, y : row}));
 
             if (col < this->getXSize() - 1)
             {
@@ -122,18 +122,23 @@ unsigned int Grid::firstRowAvailableInCol(unsigned int col) const
 {
 
     Cell cell{x : col, y : (this->getYSize() - 1)};
-
     while (!this->isCellEmpty(cell))
     {
+
         if (cell.y == 0)
         {
+            // If there is no row available in this col, throw an exception & exit function
             throw ColumnFullException();
+            return 0;
         }
         else
         {
+            std::cout << "else : " << cell.x << " , " << cell.y << std::endl;
             cell.y--;
         }
     }
+
+    std::cout << "firstRowAvailableInColl finished with result " << cell.y << std::endl;
 
     return cell.y;
 }
