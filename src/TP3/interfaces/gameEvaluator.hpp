@@ -17,7 +17,7 @@ public:
      * @return true
      * @return false
      */
-    virtual bool hasPlayerWon(const unsigned int id, const Grid &grid) = 0;
+    virtual bool hasPlayerWon(const unsigned int id, const Grid &grid) const = 0;
 
 protected:
     unsigned int consecutiveIdsToWin;
