@@ -19,7 +19,10 @@ public:
      *
      * @param size
      */
-    Grid(unsigned int x, unsigned int y);
+    Grid(const unsigned int x, const unsigned int y)
+        : xSize(x), ySize(y), grid(y, std::vector<int>(x, NO_PLAYER))
+    {
+    }
 
     /**
      * @brief Get grid X size

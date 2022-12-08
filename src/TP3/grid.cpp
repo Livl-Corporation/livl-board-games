@@ -1,26 +1,5 @@
 #include "grid.hpp"
 
-Grid::Grid(const unsigned int x, const unsigned int y)
-{
-    this->xSize = x;
-    this->ySize = y;
-
-    // Init empty vectors
-    std::vector<std::vector<int>> rowsVector;
-
-    for (int row = 0; row < y; row++)
-    {
-        std::vector<int> colsVector;
-        for (int col = 0; col < x; col++)
-        {
-            colsVector.push_back(NO_PLAYER);
-        }
-        rowsVector.push_back(colsVector);
-    }
-
-    this->grid = rowsVector;
-}
-
 int Grid::getCell(const Cell &cell) const
 {
     return this->grid.at(cell.y).at(cell.x);
