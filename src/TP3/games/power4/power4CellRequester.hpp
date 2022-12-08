@@ -8,5 +8,5 @@
 class Power4CellRequester : public CellRequester
 {
 public:
-    Cell askForCell(const char playerChar, const Grid &grid) override;
+    Cell askForCell(const char playerChar, const Grid &grid) const override;
 };

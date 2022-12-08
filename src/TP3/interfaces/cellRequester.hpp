@@ -13,7 +13,7 @@ public:
      * @param playerChar
      * @return Cell
      */
-    virtual Cell askForCell(const char playerChar, const Grid &grid) = 0;
+    virtual Cell askForCell(const char playerChar, const Grid &grid) const = 0;
 
 protected:
 };
