@@ -59,7 +59,7 @@ public:
     /**
      * @brief Check if the player has won
      */
-    void checkIfPlayerHasWon(const unsigned int &playerId);
+    void checkIfPlayerHasWon(const PlayerId &playerId);
 
     inline unsigned int getRound() const { return this->round; };
 
@@ -80,7 +80,7 @@ protected:
      *
      * @param playerId  The player id
      */
-    virtual Cell playAsComputer(const unsigned int &playerId);
+    virtual Cell playAsComputer(const PlayerId &playerId);
 
 private:
     /**
@@ -123,7 +123,7 @@ private:
      *
      * @param playerId
      */
-    void win(const int &playerId);
+    void win(const PlayerId &playerId);
 
     /**
      * @brief End a game on a tie

@@ -1,6 +1,6 @@
 #include "player.hpp"
 
-char Player::getPlayerChar(int playerId)
+char Player::getPlayerChar(PlayerId playerId)
 {
     switch (playerId)
     {

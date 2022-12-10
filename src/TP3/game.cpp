@@ -45,7 +45,7 @@ Player Game::nextPlayerToPlay() const
 void Game::dropPlayerOnCell(const Player &player) 
 {
     Cell cell;
-    unsigned int playerId = player.getId();
+    PlayerId playerId = player.getId();
 
     if (player.getIsComputer())
     {
@@ -67,7 +67,7 @@ void Game::dropPlayerOnCell(const Player &player)
     }
 }
 
-void Game::checkIfPlayerHasWon(const unsigned int &playerId)
+void Game::checkIfPlayerHasWon(const PlayerId &playerId)
 {
     if (this->gameEvaluator->hasPlayerWon(playerId, this->getGrid()))
     {
@@ -80,7 +80,7 @@ void Game::checkIfPlayerHasWon(const unsigned int &playerId)
     }
 }
 
-Cell Game::playAsComputer(const unsigned int &playerId)
+Cell Game::playAsComputer(const PlayerId &playerId)
 {
     std::vector<Cell> freeCells = this->getGrid().getFreeCells();
 
@@ -91,7 +91,7 @@ Cell Game::playAsComputer(const unsigned int &playerId)
     return freeCells[cellSelected];
 }
 
-void Game::win(const int &playerId)
+void Game::win(const PlayerId &playerId)
 {
     std::ostringstream msg;
     msg << "Victoire du joueur " << playerId << " (" << Player::getPlayerChar(playerId) << ")";

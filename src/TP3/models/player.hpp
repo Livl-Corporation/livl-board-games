@@ -1,6 +1,7 @@
 #pragma once
 
 const int NO_PLAYER = -1;
+typedef unsigned int PlayerId; // makes the code more readable and self-explanatory. 
 
 class Player
 {
@@ -11,7 +12,7 @@ public:
      * @param id
      * @param isComputer
      */
-    Player(int id, bool isComputer)
+    Player(PlayerId id, bool isComputer)
     {
         this->id = id;
         this->isComputer = isComputer;
@@ -38,9 +39,9 @@ public:
      * @param playerId
      * @return char
      */
-    static char getPlayerChar(int playerId);
+    static char getPlayerChar(PlayerId playerId);
 
 private:
-    int id;
+    PlayerId id;
     bool isComputer;
 };

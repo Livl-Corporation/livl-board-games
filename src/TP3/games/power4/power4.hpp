@@ -33,7 +33,7 @@ public:
      * @param playerId
      * @return Cell
      */
-    Cell playAsComputer(const unsigned int &playerId) override;
+    Cell playAsComputer(const PlayerId &playerId) override;
 private:
     static constexpr unsigned int xSize = 7; // declared as constexpr so that they can be used as compile-time constants.
     static constexpr unsigned int ySize = 4;
