@@ -21,8 +21,11 @@ public:
         std::vector<Player> players,
         std::unique_ptr<CellRequester> cellRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator)
-        : Game("Tic Tac Toe", 3, 3, players, std::move(cellRequester), std::move(gameEvaluator))
+        : Game("Tic Tac Toe", xSize, ySize, players, std::move(cellRequester), std::move(gameEvaluator))
     {
 
     }
+private:
+    static constexpr unsigned int xSize = 3; // declared as constexpr so that they can be used as compile-time constants.
+    static constexpr unsigned int ySize = 3;
 };

@@ -22,7 +22,7 @@ public:
         std::vector<Player> players,
         std::unique_ptr<CellRequester> cellRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator)
-        : Game("Power 4", 7, 4, players, std::move(cellRequester), std::move(gameEvaluator))
+        : Game("Power 4", xSize, ySize, players, std::move(cellRequester), std::move(gameEvaluator))
     {
         // other initializations
     }
@@ -34,4 +34,7 @@ public:
      * @return Cell
      */
     Cell playAsComputer(const unsigned int &playerId) override;
+private:
+    static constexpr unsigned int xSize = 7; // declared as constexpr so that they can be used as compile-time constants.
+    static constexpr unsigned int ySize = 4;
 };
