@@ -9,7 +9,7 @@
 // Function to ask the user for player selection
 unsigned int getPlayerSelection()
 {
-    printHeader("Choix des joueurs");
+    shared::printHeader("Choix des joueurs");
 
     std::cout
         << "1. Contre l'ordinateur" << std::endl;
@@ -18,7 +18,7 @@ unsigned int getPlayerSelection()
     std::cout << std::endl
               << "Entrez n'importe quel autre chiffre pour quitter." << std::endl;
 
-    return readInt();
+    return shared::readInt();
 }
 
 // Function to create players based on the given player selection
@@ -35,7 +35,7 @@ std::vector<Player> createPlayers(unsigned int playerSelection)
 // Function to ask the user for game selection
 unsigned int getGameSelection()
 {
-    printHeader("Choix du jeu");
+    shared::printHeader("Choix du jeu");
 
     std::cout << "1. Morpion" << std::endl;
     std::cout << "2. Puissance 4" << std::endl
@@ -45,7 +45,7 @@ unsigned int getGameSelection()
 
     std::cout << "Faites votre choix :" << std::endl;
 
-    return readInt();
+    return shared::readInt();
 }
 
 // Function to create the requested game based on the given game selection
@@ -71,7 +71,7 @@ std::unique_ptr<Game> createGame(unsigned int gameSelection, std::vector<Player>
 void playGame(std::unique_ptr<Game> game)
 {
     game->play();
-    printHeader("GAME FINISHED");
+    shared::printHeader("GAME FINISHED");
 }
 
 int main()

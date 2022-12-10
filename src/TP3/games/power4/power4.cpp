@@ -7,7 +7,7 @@ Cell Power4::playAsComputer(const unsigned int &playerId)
 
     do
     {
-        col = randomInt(0, this->getGrid().getXSize() - 1);
+        col = shared::randomInt(0, this->getGrid().getXSize() - 1);
 
         try
         {

@@ -1,51 +1,53 @@
 #include "functions.hpp"
 
-int randomInt(int min, int max)
-{
-
-    std::random_device rd;
-    std::mt19937 rng(rd());
-    std::uniform_int_distribution<int> uni(min, max);
-
-    return uni(rng);
-}
-
-int readInt()
-{
-
-    int input;
-    bool valid = false;
-
-    do
+namespace shared {
+    int randomInt(int min, int max)
     {
-        std::cin >> input;
 
-        if (std::cin.fail())
+        std::random_device rd;
+        std::mt19937 rng(rd());
+        std::uniform_int_distribution<int> uni(min, max);
+
+        return uni(rng);
+    }
+
+    int readInt()
+    {
+
+        int input;
+        bool valid = false;
+
+        do
         {
-            std::cin.clear();
-            std::cin.ignore(256, '\n');
-            std::cout << "Veuillez saisir un chiffre." << std::endl;
-        }
-        else
-        {
-            valid = true;
-        }
-    } while (!valid);
+            std::cin >> input;
 
-    return input;
-}
+            if (std::cin.fail())
+            {
+                std::cin.clear();
+                std::cin.ignore(256, '\n');
+                std::cout << "Veuillez saisir un chiffre." << std::endl;
+            }
+            else
+            {
+                valid = true;
+            }
+        } while (!valid);
 
-void printTitle(const std::string &string)
-{
-    std::cout << std::endl
-              << "*-----------------------------*" << std::endl;
-    std::cout << "     " << string << "     " << std::endl;
-    std::cout << "*-----------------------------*" << std::endl;
-}
+        return input;
+    }
 
-void printHeader(const std::string &string)
-{
-    std::cout << std::endl
-              << "*** " << string << " ***" << std::endl
-              << std::endl;
+    void printTitle(const std::string &string)
+    {
+        std::cout << std::endl
+                << "*-----------------------------*" << std::endl;
+        std::cout << "     " << string << "     " << std::endl;
+        std::cout << "*-----------------------------*" << std::endl;
+    }
+
+    void printHeader(const std::string &string)
+    {
+        std::cout << std::endl
+                << "*** " << string << " ***" << std::endl
+                << std::endl;
+    }
 }

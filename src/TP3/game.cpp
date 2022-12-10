@@ -14,7 +14,7 @@ Game::Game(
 
 void Game::play()
 {
-    printTitle(this->getName()); // Print game title
+    shared::printTitle(this->getName()); // Print game title
 
     // Play game until a player has won
     do 
@@ -31,7 +31,7 @@ void Game::nextRound()
     round++;
     std::ostringstream status;
     status << "Tour N° " << this->getRound();
-    printHeader(status.str());
+    shared::printHeader(status.str());
 }
 
 // Determines who is playing this round
@@ -84,7 +84,7 @@ Cell Game::playAsComputer(const unsigned int &playerId)
 {
     std::vector<Cell> freeCells = this->getGrid().getFreeCells();
 
-    int cellSelected = randomInt(0, freeCells.size());
+    int cellSelected = shared::randomInt(0, freeCells.size());
 
     this->getGrid().place(freeCells[cellSelected], playerId);
 
@@ -95,7 +95,7 @@ void Game::win(const int &playerId)
 {
     std::ostringstream msg;
     msg << "Victoire du joueur " << playerId << " (" << Player::getPlayerChar(playerId) << ")";
-    printTitle(msg.str());
+    shared::printTitle(msg.str());
 
     this->getGrid().displayGrid();
 
@@ -104,7 +104,7 @@ void Game::win(const int &playerId)
 
 void Game::tie()
 {
-    printTitle(std::string("Match nul"));
+    shared::printTitle(std::string("Match nul"));
 
     this->getGrid().displayGrid();
 

@@ -9,7 +9,7 @@ Cell Power4CellRequester::askForCell(const char playerChar, const Grid &grid) co
 
         std::cout << "Dans quelle colonne souhaitez vous jouer ? (1-" << grid.getXSize() << ")" << std::endl;
 
-        col = readInt();
+        col = shared::readInt();
 
         // Check if the column is valid
         if (col < 1 || col > grid.getXSize())
