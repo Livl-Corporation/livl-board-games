@@ -12,35 +12,40 @@ Game::Game(
     this->playerCount = players.size();
 }
 
-Game::~Game()
-{
-
-}
-
 void Game::play()
 {
-    printTitle(this->getName());
+    printTitle(this->getName()); // Print game title
 
-    do
+    // Play game until a player has won
+    do 
     {
         this->nextRound();
+        const Player player = this->nextPlayerToPlay();
+        this->dropPlayerOnCell(player);
+        this->checkIfPlayerHasWon(player.getId());
     } while (!this->isFinished);
 }
 
-void Game::nextRound()
+void Game::nextRound() 
 {
     round++;
-
     std::ostringstream status;
     status << "Tour N° " << this->getRound();
     printHeader(status.str());
+}
 
-    // Determines who is playing this round
+// Determines who is playing this round
+Player Game::nextPlayerToPlay() const
+{
     unsigned int playerIndex = (round - 1) % playerCount;
-    Player player = players[playerIndex];
-    int playerId = player.getId();
+    return players[playerIndex];
+}
 
+// Drop player on a cell
+void Game::dropPlayerOnCell(const Player &player) 
+{
     Cell cell;
+    unsigned int playerId = player.getId();
 
     if (player.getIsComputer())
     {
@@ -60,8 +65,10 @@ void Game::nextRound()
             cell = this->cellRequester->askForCell(Player::getPlayerChar(playerId), this->getGrid());
         } while (!this->getGrid().place(cell, playerId));
     }
+}
 
-    // Verify if player has won
+void Game::checkIfPlayerHasWon(const unsigned int &playerId)
+{
     if (this->gameEvaluator->hasPlayerWon(playerId, this->getGrid()))
     {
         win(playerId);
@@ -73,7 +80,7 @@ void Game::nextRound()
     }
 }
 
-Cell Game::playAsComputer(const unsigned int playerId)
+Cell Game::playAsComputer(const unsigned int &playerId)
 {
     std::vector<Cell> freeCells = this->getGrid().getFreeCells();
 
@@ -84,7 +91,7 @@ Cell Game::playAsComputer(const unsigned int playerId)
     return freeCells[cellSelected];
 }
 
-void Game::win(int playerId)
+void Game::win(const int &playerId)
 {
     std::ostringstream msg;
     msg << "Victoire du joueur " << playerId << " (" << Player::getPlayerChar(playerId) << ")";

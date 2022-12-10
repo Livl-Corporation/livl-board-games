@@ -33,5 +33,5 @@ public:
      * @param playerId
      * @return Cell
      */
-    Cell playAsComputer(const unsigned int playerId) override;
+    Cell playAsComputer(const unsigned int &playerId) override;
 };

@@ -24,10 +24,10 @@ public:
     /**
      * @brief Construct a new Game object
      *
-     * @param name
-     * @param xSize
-     * @param ySize
-     * @param players
+     * @param name The game name (ex: Tic Tac Toe)
+     * @param xSize The grid width
+     * @param ySize The grid height
+     * @param players  The players list in the game
      * @param cellRequester A unique pointer to a cell requester
      * @param gameEvaluator A unique pointer to a game evaluator
      */
@@ -39,12 +39,27 @@ public:
         std::unique_ptr<CellRequester> cellRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator);
 
-    ~Game();
-
     /**
      * @brief Start the game
      */
     void play();
+
+    /**
+     * @brief Get the next player to play
+     * 
+     * @return Player the player Object who is playing
+     */
+    Player nextPlayerToPlay() const;
+
+    /**
+     * @brief Drop the player where has choosen to play
+    */
+    void dropPlayerOnCell(const Player &player);
+
+    /**
+     * @brief Check if the player has won
+     */
+    void checkIfPlayerHasWon(const unsigned int &playerId);
 
     inline unsigned int getRound() const { return this->round; };
 
@@ -65,7 +80,7 @@ protected:
      *
      * @param playerId  The player id
      */
-    virtual Cell playAsComputer(const unsigned int playerId);
+    virtual Cell playAsComputer(const unsigned int &playerId);
 
 private:
     /**
@@ -108,7 +123,7 @@ private:
      *
      * @param playerId
      */
-    void win(int playerId);
+    void win(const int &playerId);
 
     /**
      * @brief End a game on a tie
