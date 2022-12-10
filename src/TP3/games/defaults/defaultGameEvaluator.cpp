@@ -55,7 +55,7 @@ void DefaultGameEvaluator::checkMaxConsecutive(const PlayerId id, const Grid &gr
     unsigned int curMaxConsecutive = 0;
     for (unsigned int row = startRow, col = startCol; row < grid.getYSize() && col < grid.getXSize(); row += rowStep, col += colStep)
     {
-        if (grid.getCell({x : col, y : row}) == id)
+        if (grid.getPosition({x : col, y : row}) == id)
         {
             curMaxConsecutive++;
         }

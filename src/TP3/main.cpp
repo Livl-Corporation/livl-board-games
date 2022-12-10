@@ -54,12 +54,12 @@ std::unique_ptr<Game> createGame(unsigned int gameSelection, std::vector<Player>
     if (gameSelection == 1)
     {
         // Create a TicTacToe
-        return std::make_unique<TicTacToe>(players, std::make_unique<TicTacToeCellRequester>(), std::make_unique<DefaultGameEvaluator>(3));
+        return std::make_unique<TicTacToe>(players, std::make_unique<TicTacToePositionRequester>(), std::make_unique<DefaultGameEvaluator>(3));
     }
     else if (gameSelection == 2)
     {
         // Create a Power4
-        return std::make_unique<Power4>(players, std::make_unique<Power4CellRequester>(), std::make_unique<DefaultGameEvaluator>(4));
+        return std::make_unique<Power4>(players, std::make_unique<Power4PositionRequester>(), std::make_unique<DefaultGameEvaluator>(4));
     }
     else
     {

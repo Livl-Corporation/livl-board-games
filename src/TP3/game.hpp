@@ -3,10 +3,10 @@
 #include "grid.hpp"
 
 #include "models/player.hpp"
-#include "models/cell.hpp"
+#include "models/position.hpp"
 
 #include "interfaces/gameEvaluator.hpp"
-#include "interfaces/cellRequester.hpp"
+#include "interfaces/positionRequester.hpp"
 
 #include "shared/functions.hpp"
 #include "shared/exceptions/out-of-bounds-exception.hpp"
@@ -28,7 +28,7 @@ public:
      * @param xSize The grid width
      * @param ySize The grid height
      * @param players  The players list in the game
-     * @param cellRequester A unique pointer to a cell requester
+     * @param positionRequester A unique pointer to a position requester
      * @param gameEvaluator A unique pointer to a game evaluator
      */
     Game(
@@ -36,7 +36,7 @@ public:
         const unsigned int xSize,
         const unsigned int ySize,
         const std::vector<Player> players,
-        std::unique_ptr<CellRequester> cellRequester,
+        std::unique_ptr<PositionRequester> positionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator);
 
     /**
@@ -54,7 +54,7 @@ public:
     /**
      * @brief Drop the player where has choosen to play
     */
-    void dropPlayerOnCell(const Player &player);
+    void dropPlayerOnPosition(const Player &player);
 
     /**
      * @brief Check if the player has won
@@ -72,15 +72,15 @@ public:
     std::vector<Player> getPlayers() const;
 
 protected:
-    std::unique_ptr<CellRequester> cellRequester;
+    std::unique_ptr<PositionRequester> positionRequester;
     std::unique_ptr<GameEvaluator> gameEvaluator;
 
     /**
-     * @brief Play as computer : place his symbol on a free grid cell
+     * @brief Play as computer : place his symbol on a free grid position
      *
      * @param playerId  The player id
      */
-    virtual Cell playAsComputer(const PlayerId &playerId);
+    virtual Position playAsComputer(const PlayerId &playerId);
 
 private:
     /**

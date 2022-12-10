@@ -1,6 +1,6 @@
-#include "power4CellRequester.hpp"
+#include "power4PositionRequester.hpp"
 
-Cell Power4CellRequester::askForCell(const char playerChar, const Grid &grid) const
+Position Power4PositionRequester::askForPosition(const char playerChar, const Grid &grid) const
 {
     unsigned int col, row;
 
@@ -23,7 +23,7 @@ Cell Power4CellRequester::askForCell(const char playerChar, const Grid &grid) co
             {
                 row = grid.firstRowAvailableInCol(col - 1);
 
-                // if the previous functions has not thrown any error, we have a valid cell
+                // if the previous functions has not thrown any error, we have a valid Position
                 return {x : col - 1, y : row};
             }
             catch (const std::exception &e)

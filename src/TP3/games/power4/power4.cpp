@@ -1,6 +1,6 @@
 #include "power4.hpp"
 
-Cell Power4::playAsComputer(const PlayerId &playerId)
+Position Power4::playAsComputer(const PlayerId &playerId)
 {
 
     unsigned int col, row = 0;

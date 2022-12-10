@@ -5,9 +5,9 @@ Game::Game(
     const unsigned int xSize,
     const unsigned int ySize,
     const std::vector<Player> players,
-    std::unique_ptr<CellRequester> cellRequester,
+    std::unique_ptr<PositionRequester> positionRequester,
     std::unique_ptr<GameEvaluator> gameEvaluator)
-    : players(players), grid(xSize, ySize), name(name), cellRequester(std::move(cellRequester)), gameEvaluator(std::move(gameEvaluator))
+    : players(players), grid(xSize, ySize), name(name), positionRequester(std::move(positionRequester)), gameEvaluator(std::move(gameEvaluator))
 {
     this->playerCount = players.size();
 }
@@ -21,7 +21,7 @@ void Game::play()
     {
         this->nextRound();
         const Player player = this->nextPlayerToPlay();
-        this->dropPlayerOnCell(player);
+        this->dropPlayerOnPosition(player);
         this->checkIfPlayerHasWon(player.getId());
     } while (!this->isFinished);
 }
@@ -41,29 +41,29 @@ Player Game::nextPlayerToPlay() const
     return players[playerIndex];
 }
 
-// Drop player on a cell
-void Game::dropPlayerOnCell(const Player &player) 
+// Drop player on a position
+void Game::dropPlayerOnPosition(const Player &player) 
 {
-    Cell cell;
+    Position position;
     PlayerId playerId = player.getId();
 
     if (player.getIsComputer())
     {
         // Player is computer
-        cell = this->playAsComputer(playerId);
-        std::cout << "Joué par l'ordinateur en " << cell.x << "," << cell.y << "." << std::endl;
+        position = this->playAsComputer(playerId);
+        std::cout << "Joué par l'ordinateur en " << position.x << "," << position.y << "." << std::endl;
     }
     else
     {
         // Player is a real person
         std::cout << "Joueur " << playerId << ", c'est à toi !" << std::endl;
 
-        // Ask him in which cell he wants to place his cell and place it in the grid
+        // Ask him in which position he wants to place his position and place it in the grid
         do
         {
             this->getGrid().displayGrid();
-            cell = this->cellRequester->askForCell(Player::getPlayerChar(playerId), this->getGrid());
-        } while (!this->getGrid().place(cell, playerId));
+            position = this->positionRequester->askForPosition(Player::getPlayerChar(playerId), this->getGrid());
+        } while (!this->getGrid().place(position, playerId));
     }
 }
 
@@ -80,15 +80,15 @@ void Game::checkIfPlayerHasWon(const PlayerId &playerId)
     }
 }
 
-Cell Game::playAsComputer(const PlayerId &playerId)
+Position Game::playAsComputer(const PlayerId &playerId)
 {
-    std::vector<Cell> freeCells = this->getGrid().getFreeCells();
+    std::vector<Position> freePositions = this->getGrid().getFreePositions();
 
-    int cellSelected = shared::randomInt(0, freeCells.size());
+    int positionSelected = shared::randomInt(0, freePositions.size());
 
-    this->getGrid().place(freeCells[cellSelected], playerId);
+    this->getGrid().place(freePositions[positionSelected], playerId);
 
-    return freeCells[cellSelected];
+    return freePositions[positionSelected];
 }
 
 void Game::win(const PlayerId &playerId)

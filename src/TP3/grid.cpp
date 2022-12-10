@@ -1,46 +1,46 @@
 #include "grid.hpp"
 
-int Grid::getCell(const Cell &cell) const
+int Grid::getPosition(const Position &position) const
 {
-    return this->grid.at(cell.y).at(cell.x);
+    return this->grid.at(position.y).at(position.x);
 }
 
-bool Grid::isCellEmpty(const Cell &cell) const
+bool Grid::isPositionEmpty(const Position &position) const
 {
 
-    if (!this->isCellInBounds(cell))
+    if (!this->isPositionInBounds(position))
     {
         throw new OutOfBoundsException();
     }
 
-    return this->getCell(cell) == NO_PLAYER;
+    return this->getPosition(position) == NO_PLAYER;
 }
 
-bool Grid::isCellInBounds(const Cell &cell) const
+bool Grid::isPositionInBounds(const Position &position) const
 {
-    return (cell.x >= 0 && cell.x < this->xSize) && (cell.y >= 0 && cell.y < this->ySize);
+    return (position.x >= 0 && position.x < this->xSize) && (position.y >= 0 && position.y < this->ySize);
 }
 
 bool Grid::isGridFull() const
 {
-    return getFreeCells().size() == 0;
+    return getFreePositions().size() == 0;
 }
 
-bool Grid::place(const Cell &cell, const unsigned int id)
+bool Grid::place(const Position &position, const unsigned int id)
 {
     try
     {
-        if (!this->isCellInBounds(cell))
+        if (!this->isPositionInBounds(position))
         {
             throw OutOfBoundsException();
         }
 
-        if (!this->isCellEmpty(cell))
+        if (!this->isPositionEmpty(position))
         {
-            throw OccupiedCellException();
+            throw OccupiedPositionException();
         }
 
-        this->grid[cell.y][cell.x] = id;
+        this->grid[position.y][position.x] = id;
 
         return true;
     }
@@ -52,24 +52,24 @@ bool Grid::place(const Cell &cell, const unsigned int id)
     }
 }
 
-std::vector<Cell> Grid::getFreeCells() const
+std::vector<Position> Grid::getFreePositions() const
 {
 
-    std::vector<Cell> freeCells;
+    std::vector<Position> freePositions;
 
     for (unsigned int row = 0; row < this->ySize; row++)
     {
         for (unsigned int col = 0; col < this->xSize; col++)
         {
-            Cell cell = {x : col, y : row};
-            if (this->isCellEmpty(cell))
+            Position position = {x : col, y : row};
+            if (this->isPositionEmpty(position))
             {
-                freeCells.push_back(cell);
+                freePositions.push_back(position);
             }
         }
     }
 
-    return freeCells;
+    return freePositions;
 }
 
 void Grid::displayGrid() const
@@ -81,7 +81,7 @@ void Grid::displayGrid() const
     {
         for (unsigned int col = 0; col < this->getXSize(); col++)
         {
-            std::cout << Player::getPlayerChar(this->getCell({x : col, y : row}));
+            std::cout << Player::getPlayerChar(this->getPosition({x : col, y : row}));
 
             if (col < this->getXSize() - 1)
             {
@@ -98,21 +98,21 @@ void Grid::displayGrid() const
 unsigned int Grid::firstRowAvailableInCol(unsigned int col) const
 {
 
-    Cell cell{x : col, y : (this->getYSize() - 1)};
+    Position position{x : col, y : (this->getYSize() - 1)};
 
-    while (!this->isCellEmpty(cell))
+    while (!this->isPositionEmpty(position))
     {
 
-        if (cell.y == 0)
+        if (position.y == 0)
         {
             // If there is no row available in this col, throw an exception & exit function
             throw ColumnFullException();
         }
         else
         {
-            cell.y--;
+            position.y--;
         }
     }
 
-    return cell.y;
+    return position.y;
 }

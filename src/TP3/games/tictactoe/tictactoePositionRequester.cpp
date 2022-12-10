@@ -1,6 +1,6 @@
-#include "tictactoeCellRequester.hpp"
+#include "tictactoePositionRequester.hpp"
 
-Cell TicTacToeCellRequester::askForCell(const char playerChar, const Grid &grid) const
+Position TicTacToePositionRequester::askForPosition(const char playerChar, const Grid &grid) const
 {
     std::cout << "Où voulez vous placer votre pion (" << playerChar << ") entre 1,1 et " << grid.getXSize() << "," << grid.getYSize() << " ?" << std::endl;
 
