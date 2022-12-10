@@ -16,6 +16,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <memory>
 
 class Game
 {
@@ -27,84 +28,78 @@ public:
      * @param xSize
      * @param ySize
      * @param players
+     * @param cellRequester A unique pointer to a cell requester
+     * @param gameEvaluator A unique pointer to a game evaluator
      */
     Game(
         const std::string name,
         const unsigned int xSize,
         const unsigned int ySize,
-        // GameEvaluator &gameEvaluator,
-        // CellRequester &cellRequester,
-        const std::vector<Player> players);
+        const std::vector<Player> players,
+        std::unique_ptr<CellRequester> cellRequester,
+        std::unique_ptr<GameEvaluator> gameEvaluator);
 
-    /**
-     * @brief Destroy the Game object
-     *
-     */
     ~Game();
 
     /**
      * @brief Start the game
-     *
      */
     void play();
 
-    /**
-     * @brief Get the Round object
-     *
-     * @return unsigned int
-     */
     inline unsigned int getRound() const { return this->round; };
 
-    /**
-     * @brief Get the Player Count object
-     *
-     * @return unsigned int
-     */
     inline unsigned int getPlayerCount() const { return this->playerCount; };
 
-    /**
-     * @brief Get the Name object
-     *
-     * @return std::string
-     */
     inline std::string getName() const { return this->name; };
 
-    /**
-     * @brief Get the Grid object
-     *
-     * @return Grid
-     */
     inline Grid &getGrid() { return this->grid; };
 
-    /**
-     * @brief Get the Players object
-     *
-     * @return std::vector<Player>
-     */
     std::vector<Player> getPlayers() const;
 
 protected:
-    GameEvaluator *gameEvaluator;
-    CellRequester *cellRequester;
+    std::unique_ptr<CellRequester> cellRequester;
+    std::unique_ptr<GameEvaluator> gameEvaluator;
 
     /**
      * @brief Play as computer : place his symbol on a free grid cell
      *
-     * @param playerId
+     * @param playerId  The player id
      */
     virtual Cell playAsComputer(const unsigned int playerId);
 
 private:
+    /**
+     * @brief The game name (ex: Tic Tac Toe)
+     */
     std::string name;
+
+    /**
+     * @brief The round number (starts at 0)
+     */
     unsigned int round = 0;
+
+    /**
+     * @brief The number of players
+     */
     unsigned int playerCount = 0;
+
+    /**
+     * @brief The players list in the game
+     */
     std::vector<Player> players;
+
+    /**
+     * @brief The grid (ex: 3x3 for Tic Tac Toe)
+     */
     Grid grid;
+
+    /**
+     * @brief If the game is finished
+     */
     bool isFinished = false;
 
     /**
      * @brief Start playing the next game round
-     *
      */
     void nextRound();
 

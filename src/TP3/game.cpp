@@ -4,22 +4,21 @@ Game::Game(
     const std::string name,
     const unsigned int xSize,
     const unsigned int ySize,
-    const std::vector<Player> players) : players(players), grid(xSize, ySize), name(name),
-                                         // theses members will be initialized by each games :
-                                         cellRequester(nullptr), gameEvaluator(nullptr)
+    const std::vector<Player> players,
+    std::unique_ptr<CellRequester> cellRequester,
+    std::unique_ptr<GameEvaluator> gameEvaluator)
+    : players(players), grid(xSize, ySize), name(name), cellRequester(std::move(cellRequester)), gameEvaluator(std::move(gameEvaluator))
 {
     this->playerCount = players.size();
 }
 
 Game::~Game()
 {
-    delete cellRequester;
-    delete gameEvaluator;
+
 }
 
 void Game::play()
 {
-
     printTitle(this->getName());
 
     do

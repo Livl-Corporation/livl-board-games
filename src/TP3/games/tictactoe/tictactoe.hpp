@@ -5,21 +5,24 @@
 #include "tictactoeCellRequester.hpp"
 #include "../defaults/defaultGameEvaluator.hpp"
 #include <vector>
+#include <memory>
 
 class TicTacToe : public Game
 {
 public:
     /**
-     * @brief Construct a new Tic Tac Toe object
+     * @brief Construct a new TicTacToe object
      *
      * @param players
+     * @param cellRequester
+     * @param gameEvaluator
      */
-    TicTacToe(std::vector<Player> players) : Game(
-                                                 "TicTacToe",
-                                                 3, 3,
-                                                 players)
+    TicTacToe(
+        std::vector<Player> players,
+        std::unique_ptr<CellRequester> cellRequester,
+        std::unique_ptr<GameEvaluator> gameEvaluator)
+        : Game("Tic Tac Toe", 3, 3, players, std::move(cellRequester), std::move(gameEvaluator))
     {
-        this->cellRequester = new TicTacToeCellRequester();
-        this->gameEvaluator = new DefaultGameEvaluator(3);
-    };
+
+    }
 };
