@@ -3,7 +3,7 @@
 #include "../../interfaces/positionRequester.hpp"
 #include "../../models/position.hpp"
 #include "../../shared/functions.hpp"
-#include <iostream>
+#include "../../shared/consoleHandler.hpp"
 
 class Power4PositionRequester : public PositionRequester
 {

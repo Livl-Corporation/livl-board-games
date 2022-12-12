@@ -9,9 +9,9 @@
 #include "interfaces/positionRequester.hpp"
 
 #include "shared/functions.hpp"
+#include "shared/consoleHandler.hpp"
 #include "shared/exceptions/out-of-bounds-exception.hpp"
 
-#include <iostream>
 #include <cstdio>
 #include <sstream>
 #include <vector>

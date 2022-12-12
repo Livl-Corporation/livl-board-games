@@ -9,7 +9,7 @@
 #include "shared/exceptions/column-full-exception.hpp"
 
 #include <vector>
-#include <iostream>
+#include <string>
 
 class Grid
 {

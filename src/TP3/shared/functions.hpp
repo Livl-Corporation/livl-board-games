@@ -2,7 +2,7 @@
 
 #include <string>
 #include <random>
-#include <iostream>
+#include "consoleHandler.hpp"
 
 namespace shared {
     /**

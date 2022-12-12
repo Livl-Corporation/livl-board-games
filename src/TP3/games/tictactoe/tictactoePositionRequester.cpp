@@ -2,14 +2,17 @@
 
 Position TicTacToePositionRequester::askForPosition(const char playerChar, const Grid &grid) const
 {
-    std::cout << "Où voulez vous placer votre pion (" << playerChar << ") entre 1,1 et " << grid.getXSize() << "," << grid.getYSize() << " ?" << std::endl;
+    std::string outputAskPlayer = "Où voulez vous placer votre pion (";
+    outputAskPlayer += playerChar;
+    outputAskPlayer += ") entre 1,1 et " + std::to_string(grid.getXSize()) + "," + std::to_string(grid.getYSize()) + " ?";
+    
+    ConsoleHandler::printOutput(outputAskPlayer);
 
     unsigned int x, y;
     int scanfResult = 0;
     do {
         // Read the input as a string and check for the comma separator
-        std::string input;
-        std::cin >> input;
+        std::string input = ConsoleHandler::getInput();
         if (input.find(',') != std::string::npos) { // std::string::npos is returned if no comma is found
             // If the comma separator is found, use sscanf to parse the x and y values
             scanfResult = sscanf(input.c_str(), "%d,%d", &x, &y);
@@ -19,7 +22,7 @@ Position TicTacToePositionRequester::askForPosition(const char playerChar, const
         }
 
         if (scanfResult != 2) {
-            std::cout << "Entrée invalide. Veuillez entrer deux nombres séparés par une virgule." << std::endl;
+            ConsoleHandler::printOutput("Entrée invalide. Veuillez entrer deux nombres séparés par une virgule.");
         }
     } while (scanfResult != 2);
 

@@ -1,4 +1,3 @@
-#include <iostream>
 #include <memory>
 #include "game.hpp"
 #include "shared/functions.hpp"
@@ -11,12 +10,9 @@ unsigned int getPlayerSelection()
 {
     shared::printHeader("Choix des joueurs");
 
-    std::cout
-        << "1. Contre l'ordinateur" << std::endl;
-    std::cout << "2. 2 joueurs" << std::endl;
-
-    std::cout << std::endl
-              << "Entrez n'importe quel autre chiffre pour quitter." << std::endl;
+    ConsoleHandler::printOutput("1. Contre l'ordinateur");
+    ConsoleHandler::printOutput("2. 2 joueurs");
+    ConsoleHandler::printOutput("\nEntrez n'importe quel autre chiffre pour quitter.");
 
     return shared::readInt();
 }
@@ -36,15 +32,10 @@ std::vector<Player> createPlayers(unsigned int playerSelection)
 unsigned int getGameSelection()
 {
     shared::printHeader("Choix du jeu");
-
-    std::cout << "1. Morpion" << std::endl;
-    std::cout << "2. Puissance 4" << std::endl
-              << std::endl;
-
-    std::cout << "Entrez n'importe quel autre chiffre pour quitter." << std::endl;
-
-    std::cout << "Faites votre choix :" << std::endl;
-
+    ConsoleHandler::printOutput("1. Morpion");
+    ConsoleHandler::printOutput("2. Puissance 4");
+    ConsoleHandler::printOutput("\nEntrez n'importe quel autre chiffre pour quitter.");
+    ConsoleHandler::printOutput("Faites votre choix :");
     return shared::readInt();
 }
 
@@ -76,17 +67,14 @@ void playGame(std::unique_ptr<Game> game)
 
 int main()
 {
-
     while (true)
     {
         // Ask for player selection
         unsigned int playerSelection = getPlayerSelection();
 
         // Exit if the player selection is invalid
-        if (playerSelection > 2)
-        {
+        if (playerSelection > 2 || playerSelection < 1)
             return EXIT_SUCCESS;
-        }
 
         // Create players
         std::vector<Player> players = createPlayers(playerSelection);
@@ -96,6 +84,7 @@ int main()
 
         // Create the requested game
         std::unique_ptr<Game> game = createGame(gameSelection, players);
+        if (!game) return EXIT_SUCCESS; // if return nullptr, exit
 
         // Launch game
         playGame(std::move(game));

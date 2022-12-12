@@ -51,12 +51,11 @@ void Game::dropPlayerOnPosition(const Player &player)
     {
         // Player is computer
         position = this->playAsComputer(playerId);
-        std::cout << "Joué par l'ordinateur en " << position.x << "," << position.y << "." << std::endl;
-    }
+        ConsoleHandler::printOutput("Joué par l'ordinateur en " + std::to_string(position.x+1) + "," + std::to_string(position.y+1) + ".");    }
     else
     {
         // Player is a real person
-        std::cout << "Joueur " << playerId << ", c'est à toi !" << std::endl;
+        ConsoleHandler::printOutput("Joueur " + std::to_string(playerId) + ", c'est à toi !");
 
         // Ask him in which position he wants to place his position and place it in the grid
         do
@@ -86,7 +85,11 @@ Position Game::playAsComputer(const PlayerId &playerId)
 
     int positionSelected = shared::randomInt(0, freePositions.size());
 
-    this->getGrid().place(freePositions[positionSelected], playerId);
+    // Keep trying to place a piece on the grid until a valid position is found
+    while (!this->getGrid().place(freePositions[positionSelected], playerId))
+    {
+        positionSelected = shared::randomInt(0, freePositions.size());
+    }
 
     return freePositions[positionSelected];
 }

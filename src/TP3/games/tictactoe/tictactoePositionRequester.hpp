@@ -2,7 +2,7 @@
 
 #include "../../interfaces/positionRequester.hpp"
 #include "../../models/position.hpp"
-#include <iostream>
+#include "../../shared/consoleHandler.hpp"
 
 class TicTacToePositionRequester : public PositionRequester
 {

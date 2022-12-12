@@ -7,7 +7,6 @@ int Grid::getPosition(const Position &position) const
 
 bool Grid::isPositionEmpty(const Position &position) const
 {
-
     if (!this->isPositionInBounds(position))
     {
         throw new OutOfBoundsException();
@@ -46,15 +45,13 @@ bool Grid::place(const Position &position, const unsigned int id)
     }
     catch (const std::exception &e)
     {
-        std::cout << std::endl
-                  << e.what() << std::endl;
+        ConsoleHandler::printOutput("\n" + std::string(e.what()) + "\n");
         return false;
     }
 }
 
 std::vector<Position> Grid::getFreePositions() const
 {
-
     std::vector<Position> freePositions;
 
     for (unsigned int row = 0; row < this->ySize; row++)
@@ -74,30 +71,27 @@ std::vector<Position> Grid::getFreePositions() const
 
 void Grid::displayGrid() const
 {
-
-    std::cout << std::endl;
+    ConsoleHandler::printOutputWithoutNewLine("\n");
 
     for (unsigned int row = 0; row < this->getYSize(); row++)
     {
         for (unsigned int col = 0; col < this->getXSize(); col++)
         {
-            std::cout << Player::getPlayerChar(this->getPosition({x : col, y : row}));
-
+    	    std::string characterAsString(1, Player::getPlayerChar(this->getPosition({x : col, y : row})));
+            ConsoleHandler::printOutputWithoutNewLine(characterAsString);            
+            
             if (col < this->getXSize() - 1)
             {
-                std::cout << "|";
-            }
+                ConsoleHandler::printOutputWithoutNewLine("|");
+            }        
         }
-
-        std::cout << std::endl;
+        ConsoleHandler::printOutputWithoutNewLine("\n");
     }
-
-    std::cout << std::endl;
+    ConsoleHandler::printOutputWithoutNewLine("\n");
 }
 
 unsigned int Grid::firstRowAvailableInCol(unsigned int col) const
 {
-
     Position position{x : col, y : (this->getYSize() - 1)};
 
     while (!this->isPositionEmpty(position))
