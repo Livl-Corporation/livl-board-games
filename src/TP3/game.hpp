@@ -8,7 +8,7 @@
 #include "interfaces/gameEvaluator.hpp"
 #include "interfaces/positionRequester.hpp"
 
-#include "shared/functions.hpp"
+#include "shared/shared.hpp"
 #include "shared/consoleHandler.hpp"
 #include "shared/exceptions/out-of-bounds-exception.hpp"
 
@@ -118,7 +118,7 @@ private:
      *
      * @param playerId
      */
-    void win(const PlayerId &playerId);
+    void win(const PlayerId playerId);
 
     /**
      * @brief End a game on a tie

@@ -7,7 +7,7 @@ Position Power4::playAsComputer(const PlayerId &playerId)
 
     do
     {
-        col = shared::randomInt(0, this->getGrid().getXSize() - 1);
+        col = Shared::randomInt(0, this->getGrid().getXSize() - 1);
 
         try
         {

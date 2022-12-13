@@ -2,7 +2,7 @@
 
 #include "../../game.hpp"
 #include "../../models/player.hpp"
-#include "../../shared/functions.hpp"
+#include "../../shared/shared.hpp"
 #include "power4PositionRequester.hpp"
 #include "../defaults/defaultGameEvaluator.hpp"
 #include <vector>
@@ -11,7 +11,7 @@
 class Power4 : public Game
 {
 public:
-      /**
+    /**
      * @brief Construct a new Power 4 object
      *
      * @param players
@@ -34,6 +34,7 @@ public:
      * @return position
      */
     Position playAsComputer(const PlayerId &playerId) override;
+
 private:
     static constexpr unsigned int xSize = 7; // declared as constexpr so that they can be used as compile-time constants.
     static constexpr unsigned int ySize = 4;

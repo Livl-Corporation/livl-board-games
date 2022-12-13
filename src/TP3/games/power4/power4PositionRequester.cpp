@@ -8,15 +8,7 @@ Position Power4PositionRequester::askForPosition(const char playerChar, const Gr
     {
         ConsoleHandler::printOutput("Dans quelle colonne souhaitez vous jouer ? (1-" + std::to_string(grid.getXSize()) + ")");
 
-        try
-        {
-            col = std::stoi(ConsoleHandler::getInput());
-        }
-        catch (const std::exception &e)
-        {
-            ConsoleHandler::printOutput("Veuillez entrer un nombre entier valide.");
-            continue;
-        }
+        col = ConsoleHandler::readInt();
 
         // Check if the column is valid
         if (col < 1 || col > grid.getXSize())

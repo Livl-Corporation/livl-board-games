@@ -4,7 +4,8 @@
 #include <random>
 #include "consoleHandler.hpp"
 
-namespace shared {
+namespace Shared
+{
     /**
      * @brief Get a random int between min & max
      *
@@ -12,13 +13,6 @@ namespace shared {
      * @return unsigned int
      */
     int randomInt(int min, int max);
-
-    /**
-     * @brief Read an integer from user
-     *
-     * @return int
-     */
-    int readInt();
 
     /**
      * @brief Print a title in the console

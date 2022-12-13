@@ -1,6 +1,6 @@
 #include <memory>
 #include "game.hpp"
-#include "shared/functions.hpp"
+#include "shared/consoleHandler.hpp"
 #include "models/player.hpp"
 #include "games/tictactoe/tictactoe.hpp"
 #include "games/power4/power4.hpp"
@@ -8,13 +8,13 @@
 // Function to ask the user for player selection
 unsigned int getPlayerSelection()
 {
-    shared::printHeader("Choix des joueurs");
+    ConsoleHandler::printHeader("Choix des joueurs");
 
     ConsoleHandler::printOutput("1. Contre l'ordinateur");
     ConsoleHandler::printOutput("2. 2 joueurs");
     ConsoleHandler::printOutput("\nEntrez n'importe quel autre chiffre pour quitter.");
 
-    return shared::readInt();
+    return ConsoleHandler::readInt();
 }
 
 // Function to create players based on the given player selection
@@ -31,12 +31,12 @@ std::vector<Player> createPlayers(unsigned int playerSelection)
 // Function to ask the user for game selection
 unsigned int getGameSelection()
 {
-    shared::printHeader("Choix du jeu");
+    ConsoleHandler::printHeader("Choix du jeu");
     ConsoleHandler::printOutput("1. Morpion");
     ConsoleHandler::printOutput("2. Puissance 4");
     ConsoleHandler::printOutput("\nEntrez n'importe quel autre chiffre pour quitter.");
     ConsoleHandler::printOutput("Faites votre choix :");
-    return shared::readInt();
+    return ConsoleHandler::readInt();
 }
 
 // Function to create the requested game based on the given game selection
@@ -62,7 +62,7 @@ std::unique_ptr<Game> createGame(unsigned int gameSelection, std::vector<Player>
 void playGame(std::unique_ptr<Game> game)
 {
     game->play();
-    shared::printHeader("GAME FINISHED");
+    ConsoleHandler::printHeader("GAME FINISHED");
 }
 
 int main()
@@ -84,10 +84,10 @@ int main()
 
         // Create the requested game
         std::unique_ptr<Game> game = createGame(gameSelection, players);
-        if (!game) return EXIT_SUCCESS; // if return nullptr, exit
+        if (!game)
+            return EXIT_SUCCESS; // if return nullptr, exit
 
         // Launch game
         playGame(std::move(game));
     }
 }
-

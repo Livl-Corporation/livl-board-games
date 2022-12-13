@@ -14,7 +14,7 @@ Game::Game(
 
 void Game::play()
 {
-    shared::printTitle(this->getName()); // Print game title
+    ConsoleHandler::printTitle(this->getName()); // Print game title
 
     // Play game until a player has won
     bool isGameFinished = false;
@@ -32,7 +32,7 @@ void Game::nextRound()
     round++;
     std::ostringstream status;
     status << "Tour N° " << this->getRound();
-    shared::printHeader(status.str());
+    ConsoleHandler::printHeader(status.str());
 }
 
 // Determines who is playing this round
@@ -89,28 +89,28 @@ Position Game::playAsComputer(const PlayerId &playerId)
 {
     std::vector<Position> freePositions = this->getGrid().getFreePositions();
 
-    int positionSelected = shared::randomInt(0, freePositions.size());
+    int positionSelected = Shared::randomInt(0, freePositions.size());
 
     // Keep trying to place a piece on the grid until a valid position is found
     while (!this->getGrid().place(freePositions[positionSelected], playerId))
     {
-        positionSelected = shared::randomInt(0, freePositions.size());
+        positionSelected = Shared::randomInt(0, freePositions.size());
     }
 
     return freePositions[positionSelected];
 }
 
-void Game::win(const PlayerId &playerId)
+void Game::win(const PlayerId playerId)
 {
     std::ostringstream msg;
     msg << "Victoire du joueur " << playerId << " (" << Player::getPlayerChar(playerId) << ")";
-    shared::printTitle(msg.str());
+    ConsoleHandler::printTitle(msg.str());
     this->getGrid().displayGrid();
 }
 
 void Game::tie()
 {
-    shared::printTitle(std::string("Match nul"));
+    ConsoleHandler::printTitle(std::string("Match nul"));
     this->getGrid().displayGrid();
 }
 
