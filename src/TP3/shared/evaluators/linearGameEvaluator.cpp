@@ -1,6 +1,6 @@
 #include "linearGameEvaluator.hpp"
 
-bool LinearGameEvaluator::hasPlayerWon(const PlayerId id, const Grid &grid) const
+bool LinearGameEvaluator::hasPlayerWon(const PlayerId id, const Grid<PlayerId> &grid) const
 {
     unsigned int maxConsecutive = 0;
 
@@ -22,7 +22,7 @@ bool LinearGameEvaluator::hasPlayerWon(const PlayerId id, const Grid &grid) cons
     return false;
 }
 
-void LinearGameEvaluator::checkRows(const PlayerId id, const Grid &grid, unsigned int &maxConsecutive) const
+void LinearGameEvaluator::checkRows(const PlayerId id, const Grid<PlayerId> &grid, unsigned int &maxConsecutive) const
 {
     for (unsigned int row = 0; row < grid.getYSize(); row++)
     {
@@ -30,7 +30,7 @@ void LinearGameEvaluator::checkRows(const PlayerId id, const Grid &grid, unsigne
     }
 }
 
-void LinearGameEvaluator::checkColumns(const PlayerId id, const Grid &grid, unsigned int &maxConsecutive) const
+void LinearGameEvaluator::checkColumns(const PlayerId id, const Grid<PlayerId> &grid, unsigned int &maxConsecutive) const
 {
     for (unsigned int col = 0; col < grid.getXSize(); col++)
     {
@@ -38,7 +38,7 @@ void LinearGameEvaluator::checkColumns(const PlayerId id, const Grid &grid, unsi
     }
 }
 
-void LinearGameEvaluator::checkDiagonals(const PlayerId id, const Grid &grid, unsigned int &maxConsecutive) const
+void LinearGameEvaluator::checkDiagonals(const PlayerId id, const Grid<PlayerId> &grid, unsigned int &maxConsecutive) const
 {
     unsigned int maxCol = grid.getXSize() - grid.getYSize();
     for (unsigned int startCol = 0; startCol <= maxCol; startCol++)
@@ -50,12 +50,12 @@ void LinearGameEvaluator::checkDiagonals(const PlayerId id, const Grid &grid, un
     }
 }
 
-void LinearGameEvaluator::checkMaxConsecutive(const PlayerId id, const Grid &grid, unsigned int startRow, unsigned int startCol, unsigned int rowStep, unsigned int colStep, unsigned int &maxConsecutive) const
+void LinearGameEvaluator::checkMaxConsecutive(const PlayerId id, const Grid<PlayerId> &grid, unsigned int startRow, unsigned int startCol, unsigned int rowStep, unsigned int colStep, unsigned int &maxConsecutive) const
 {
     unsigned int curMaxConsecutive = 0;
     for (unsigned int row = startRow, col = startCol; row < grid.getYSize() && col < grid.getXSize(); row += rowStep, col += colStep)
     {
-        if (grid.getPosition({x : col, y : row}) == id)
+        if (grid.getElementAt({x : col, y : row}) == id)
         {
             curMaxConsecutive++;
         }

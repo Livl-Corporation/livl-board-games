@@ -1,31 +1,36 @@
 #include "grid.hpp"
 
-int Grid::getPosition(const Position &position) const
+template <typename T>
+T Grid<T>::getElementAt(const Position &position) const
 {
     return this->grid.at(position.y).at(position.x);
 }
 
-bool Grid::isPositionEmpty(const Position &position) const
+template <typename T>
+bool Grid<T>::isPositionEmpty(const Position &position) const
 {
     if (!this->isPositionInBounds(position))
     {
         throw new OutOfBoundsException();
     }
 
-    return this->getPosition(position) == NO_PLAYER;
+    return this->getElementAt(position) == NO_PLAYER;
 }
 
-bool Grid::isPositionInBounds(const Position &position) const
+template <typename T>
+bool Grid<T>::isPositionInBounds(const Position &position) const
 {
     return (position.x >= 0 && position.x < this->xSize) && (position.y >= 0 && position.y < this->ySize);
 }
 
-bool Grid::isGridFull() const
+template <typename T>
+bool Grid<T>::isGridFull() const
 {
     return getFreePositions().size() == 0;
 }
 
-bool Grid::place(const Position &position, const unsigned int id)
+template <typename T>
+bool Grid<T>::place(const Position &position, const T &element)
 {
     try
     {
@@ -39,7 +44,7 @@ bool Grid::place(const Position &position, const unsigned int id)
             throw OccupiedPositionException();
         }
 
-        this->grid[position.y][position.x] = id;
+        this->grid[position.y][position.x] = element;
 
         return true;
     }
@@ -50,7 +55,8 @@ bool Grid::place(const Position &position, const unsigned int id)
     }
 }
 
-std::vector<Position> Grid::getFreePositions() const
+template <typename T>
+std::vector<Position> Grid<T>::getFreePositions() const
 {
     std::vector<Position> freePositions;
 
@@ -69,7 +75,8 @@ std::vector<Position> Grid::getFreePositions() const
     return freePositions;
 }
 
-void Grid::displayGrid() const
+template <typename T>
+void Grid<T>::displayGrid() const
 {
     ConsoleHandler::printOutputWithoutNewLine("\n");
 
@@ -77,20 +84,21 @@ void Grid::displayGrid() const
     {
         for (unsigned int col = 0; col < this->getXSize(); col++)
         {
-    	    std::string characterAsString(1, Player::getPlayerChar(this->getPosition({x : col, y : row})));
-            ConsoleHandler::printOutputWithoutNewLine(characterAsString);            
-            
+            std::string characterAsString(1, Player::getPlayerChar(this->getElementAt({x : col, y : row})));
+            ConsoleHandler::printOutputWithoutNewLine(characterAsString);
+
             if (col < this->getXSize() - 1)
             {
                 ConsoleHandler::printOutputWithoutNewLine("|");
-            }        
+            }
         }
         ConsoleHandler::printOutputWithoutNewLine("\n");
     }
     ConsoleHandler::printOutputWithoutNewLine("\n");
 }
 
-unsigned int Grid::firstRowAvailableInCol(unsigned int col) const
+template <typename T>
+unsigned int Grid<T>::firstRowAvailableInCol(unsigned int col) const
 {
     Position position{x : col, y : (this->getYSize() - 1)};
 

@@ -11,19 +11,10 @@
 #include <vector>
 #include <string>
 
+template <typename T>
 class Grid
 {
 public:
-    /**
-     * @brief Construct a new Grid object
-     *
-     * @param size
-     */
-    Grid(const unsigned int x, const unsigned int y)
-        : xSize(x), ySize(y), grid(y, std::vector<int>(x, NO_PLAYER))
-    {
-    }
-
     /**
      * @brief Get grid X size
      *
@@ -72,7 +63,7 @@ public:
      * @return true
      * @return false
      */
-    bool place(const Position &position, const unsigned int id);
+    bool place(const Position &position, const T &element);
 
     /**
      * @brief Get the symbol placed on provided position
@@ -80,7 +71,7 @@ public:
      * @param position
      * @return Symbol
      */
-    int getPosition(const Position &position) const;
+    T getElementAt(const Position &position) const;
 
     /**
      * @brief Get all the free positions remainings
@@ -101,10 +92,21 @@ public:
      * @param col
      * @return unsigned int
      */
-    unsigned int firstRowAvailableInCol(const unsigned int col) const;
+    // unsigned int firstRowAvailableInCol(const unsigned int col) const;
+
+protected:
+    /**
+     * @brief Construct a new Grid object
+     *
+     * @param size
+     */
+    Grid(const unsigned int x, const unsigned int y, const T &defaultValue)
+        : xSize(x), ySize(y), grid(y, std::vector<T>(x, defaultValue))
+    {
+    }
 
 private:
     unsigned int xSize;
     unsigned int ySize;
-    std::vector<std::vector<int>> grid;
+    std::vector<std::vector<T>> grid;
 };

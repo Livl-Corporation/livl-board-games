@@ -7,7 +7,7 @@ Game::Game(
     const std::vector<Player> players,
     std::unique_ptr<PositionRequester> positionRequester,
     std::unique_ptr<GameEvaluator> gameEvaluator)
-    : players(players), grid(xSize, ySize), name(name), positionRequester(std::move(positionRequester)), gameEvaluator(std::move(gameEvaluator))
+    : players(players), grid(xSize, ySize, NO_PLAYER), name(name), positionRequester(std::move(positionRequester)), gameEvaluator(std::move(gameEvaluator))
 {
     this->playerCount = players.size();
 }

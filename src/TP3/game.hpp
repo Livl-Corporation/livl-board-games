@@ -22,6 +22,22 @@ class Game
 {
 public:
     /**
+     * @brief Start the game
+     */
+    void play();
+
+    inline unsigned int getRound() const { return this->round; };
+
+    inline unsigned int getPlayerCount() const { return this->playerCount; };
+
+    inline std::string getName() const { return this->name; };
+
+    inline Grid<PlayerId> &getGrid() { return this->grid; };
+
+    std::vector<Player> getPlayers() const;
+
+protected:
+    /**
      * @brief Construct a new Game object
      *
      * @param name The game name (ex: Tic Tac Toe)
@@ -39,22 +55,6 @@ public:
         std::unique_ptr<PositionRequester> positionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator);
 
-    /**
-     * @brief Start the game
-     */
-    void play();
-
-    inline unsigned int getRound() const { return this->round; };
-
-    inline unsigned int getPlayerCount() const { return this->playerCount; };
-
-    inline std::string getName() const { return this->name; };
-
-    inline Grid &getGrid() { return this->grid; };
-
-    std::vector<Player> getPlayers() const;
-
-protected:
     std::unique_ptr<PositionRequester> positionRequester;
     std::unique_ptr<GameEvaluator> gameEvaluator;
 
@@ -89,7 +89,7 @@ private:
     /**
      * @brief The grid (ex: 3x3 for Tic Tac Toe)
      */
-    Grid grid;
+    Grid<PlayerId> grid;
 
     /**
      * @brief Start playing the next game round

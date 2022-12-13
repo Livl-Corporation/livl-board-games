@@ -13,5 +13,5 @@ public:
      * @param playerChar
      * @return Position
      */
-    virtual Position askForPosition(const char playerChar, const Grid &grid) const = 0;
+    virtual Position askForPosition(const char playerChar, const Grid<PlayerId> &grid) const = 0;
 };

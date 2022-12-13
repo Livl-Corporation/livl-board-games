@@ -7,5 +7,5 @@
 class Power4PositionRequester : public PositionRequester
 {
 public:
-    Position askForPosition(const char playerChar, const Grid &grid) const override;
+    Position askForPosition(const char playerChar, const Grid<PlayerId> &grid) const override;
 };
