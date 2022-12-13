@@ -2,8 +2,7 @@
 #include "game.hpp"
 #include "shared/consoleHandler.hpp"
 #include "models/player.hpp"
-#include "games/tictactoe/tictactoe.hpp"
-#include "games/power4/power4.hpp"
+#include "games/gameFactory.hpp"
 
 // Function to ask the user for player selection
 unsigned int getPlayerSelection()
@@ -40,22 +39,18 @@ unsigned int getGameSelection()
 }
 
 // Function to create the requested game based on the given game selection
-std::unique_ptr<Game> createGame(unsigned int gameSelection, std::vector<Player> players)
+std::unique_ptr<Game> createGame(unsigned int gameSelection, const std::vector<Player> &players)
 {
     if (gameSelection == 1)
     {
-        // Create a TicTacToe
-        return std::make_unique<TicTacToe>(players, std::make_unique<TicTacToePositionRequester>(), std::make_unique<LinearGameEvaluator>(3));
+        return GameFactory::createTicTacToe(players);
     }
     else if (gameSelection == 2)
     {
-        // Create a Power4
-        return std::make_unique<Power4>(players, std::make_unique<Power4PositionRequester>(), std::make_unique<LinearGameEvaluator>(4));
+        return GameFactory::createPower4(players);
     }
-    else
-    {
-        return nullptr;
-    }
+
+    return nullptr;
 }
 
 // Function to play the given game
@@ -84,6 +79,7 @@ int main()
 
         // Create the requested game
         std::unique_ptr<Game> game = createGame(gameSelection, players);
+
         if (!game)
             return EXIT_SUCCESS; // if return nullptr, exit
 

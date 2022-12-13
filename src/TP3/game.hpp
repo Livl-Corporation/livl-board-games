@@ -63,7 +63,7 @@ protected:
      *
      * @param playerId  The player id
      */
-    virtual Position playAsComputer(const PlayerId &playerId);
+    virtual Position playAsComputer(const PlayerId &playerId) = 0;
 
 private:
     /**

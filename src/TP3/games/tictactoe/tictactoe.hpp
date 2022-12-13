@@ -25,6 +25,14 @@ public:
     {
     }
 
+    /**
+     * @brief Place a symbol in a available col
+     *
+     * @param playerId
+     * @return position
+     */
+    Position playAsComputer(const PlayerId &playerId) override;
+
 private:
     static constexpr unsigned int xSize = 3; // declared as constexpr so that they can be used as compile-time constants.
     static constexpr unsigned int ySize = 3;

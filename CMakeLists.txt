@@ -39,4 +39,6 @@ add_executable(tp3
     src/TP3/games/power4/power4.cpp
     src/TP3/games/power4/power4PositionRequester.cpp
     src/TP3/games/tictactoe/tictactoePositionRequester.cpp
+    src/TP3/games/tictactoe/tictactoe.cpp
+    src/TP3/games/gameFactory.cpp
 )
