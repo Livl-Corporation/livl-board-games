@@ -44,23 +44,6 @@ public:
      */
     void play();
 
-    /**
-     * @brief Get the next player to play
-     * 
-     * @return Player the player Object who is playing
-     */
-    Player nextPlayerToPlay() const;
-
-    /**
-     * @brief Drop the player where has choosen to play
-    */
-    void dropPlayerOnPosition(const Player &player);
-
-    /**
-     * @brief Check if the player has won
-     */
-    void checkIfPlayerHasWon(const PlayerId &playerId);
-
     inline unsigned int getRound() const { return this->round; };
 
     inline unsigned int getPlayerCount() const { return this->playerCount; };
@@ -109,14 +92,26 @@ private:
     Grid grid;
 
     /**
-     * @brief If the game is finished
-     */
-    bool isFinished = false;
-
-    /**
      * @brief Start playing the next game round
      */
     void nextRound();
+
+    /**
+     * @brief Get the next player to play
+     *
+     * @return Player the player Object who is playing
+     */
+    Player nextPlayer() const;
+
+    /**
+     * @brief Drop the player where has choosen to play
+     */
+    void dropPlayerOnPosition(const Player &player);
+
+    /**
+     * @brief Check if the player has won
+     */
+    bool checkIfGameFinished(const PlayerId playerId);
 
     /**
      * @brief End a game with a winner

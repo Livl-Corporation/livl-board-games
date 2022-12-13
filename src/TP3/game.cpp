@@ -17,16 +17,17 @@ void Game::play()
     shared::printTitle(this->getName()); // Print game title
 
     // Play game until a player has won
-    do 
+    bool isGameFinished = false;
+    do
     {
         this->nextRound();
-        const Player player = this->nextPlayerToPlay();
+        const Player player = this->nextPlayer();
         this->dropPlayerOnPosition(player);
-        this->checkIfPlayerHasWon(player.getId());
-    } while (!this->isFinished);
+        isGameFinished = this->checkIfGameFinished(player.getId());
+    } while (!isGameFinished);
 }
 
-void Game::nextRound() 
+void Game::nextRound()
 {
     round++;
     std::ostringstream status;
@@ -35,14 +36,14 @@ void Game::nextRound()
 }
 
 // Determines who is playing this round
-Player Game::nextPlayerToPlay() const
+Player Game::nextPlayer() const
 {
     unsigned int playerIndex = (round - 1) % playerCount;
     return players[playerIndex];
 }
 
 // Drop player on a position
-void Game::dropPlayerOnPosition(const Player &player) 
+void Game::dropPlayerOnPosition(const Player &player)
 {
     Position position;
     PlayerId playerId = player.getId();
@@ -51,7 +52,8 @@ void Game::dropPlayerOnPosition(const Player &player)
     {
         // Player is computer
         position = this->playAsComputer(playerId);
-        ConsoleHandler::printOutput("Joué par l'ordinateur en " + std::to_string(position.x+1) + "," + std::to_string(position.y+1) + ".");    }
+        ConsoleHandler::printOutput("Joué par l'ordinateur en " + std::to_string(position.x + 1) + "," + std::to_string(position.y + 1) + ".");
+    }
     else
     {
         // Player is a real person
@@ -66,17 +68,21 @@ void Game::dropPlayerOnPosition(const Player &player)
     }
 }
 
-void Game::checkIfPlayerHasWon(const PlayerId &playerId)
+bool Game::checkIfGameFinished(const PlayerId playerId)
 {
     if (this->gameEvaluator->hasPlayerWon(playerId, this->getGrid()))
     {
         win(playerId);
+        return true;
     }
     else if (this->getGrid().isGridFull())
     {
         // If grid is full, tie
         tie();
+        return true;
     }
+
+    return false;
 }
 
 Position Game::playAsComputer(const PlayerId &playerId)
@@ -99,19 +105,13 @@ void Game::win(const PlayerId &playerId)
     std::ostringstream msg;
     msg << "Victoire du joueur " << playerId << " (" << Player::getPlayerChar(playerId) << ")";
     shared::printTitle(msg.str());
-
     this->getGrid().displayGrid();
-
-    this->isFinished = true;
 }
 
 void Game::tie()
 {
     shared::printTitle(std::string("Match nul"));
-
     this->getGrid().displayGrid();
-
-    this->isFinished = true;
 }
 
 std::vector<Player> Game::getPlayers() const
