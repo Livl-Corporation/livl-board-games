@@ -35,8 +35,8 @@ add_executable(tp3
     src/TP3/models/player.cpp
     src/TP3/shared/shared.cpp
     src/TP3/shared/consoleHandler.cpp
+    src/TP3/shared/evaluators/linearGameEvaluator.cpp
     src/TP3/games/power4/power4.cpp
-    src/TP3/games/defaults/defaultGameEvaluator.cpp
     src/TP3/games/power4/power4PositionRequester.cpp
     src/TP3/games/tictactoe/tictactoePositionRequester.cpp
 )

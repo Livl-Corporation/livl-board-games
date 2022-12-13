@@ -4,7 +4,7 @@
 #include "../../models/player.hpp"
 #include "../../shared/shared.hpp"
 #include "power4PositionRequester.hpp"
-#include "../defaults/defaultGameEvaluator.hpp"
+#include "../../shared/evaluators/linearGameEvaluator.hpp"
 #include <vector>
 #include <memory>
 

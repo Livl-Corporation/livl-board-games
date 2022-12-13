@@ -3,7 +3,7 @@
 #include "../../game.hpp"
 #include "../../models/player.hpp"
 #include "tictactoePositionRequester.hpp"
-#include "../defaults/defaultGameEvaluator.hpp"
+#include "../../shared/evaluators/linearGameEvaluator.hpp"
 #include <vector>
 #include <memory>
 
@@ -23,8 +23,8 @@ public:
         std::unique_ptr<GameEvaluator> gameEvaluator)
         : Game("Tic Tac Toe", xSize, ySize, players, std::move(positionRequester), std::move(gameEvaluator))
     {
-
     }
+
 private:
     static constexpr unsigned int xSize = 3; // declared as constexpr so that they can be used as compile-time constants.
     static constexpr unsigned int ySize = 3;

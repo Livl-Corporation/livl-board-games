@@ -3,10 +3,10 @@
 #include "../../grid.hpp"
 #include "../../interfaces/gameEvaluator.hpp"
 
-class DefaultGameEvaluator : public GameEvaluator
+class LinearGameEvaluator : public GameEvaluator
 {
 public:
-    DefaultGameEvaluator(const unsigned int consecutiveIdsToWin) : GameEvaluator(consecutiveIdsToWin) {}
+    LinearGameEvaluator(const unsigned int consecutiveIdsToWin) : GameEvaluator(consecutiveIdsToWin) {}
 
     /**
      * @brief Return true if the given id have won the game
