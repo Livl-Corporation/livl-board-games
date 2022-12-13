@@ -20,7 +20,8 @@ Position Power4PositionRequester::askForPosition(const char playerChar, const Gr
             // Get first y position available in this col
             try
             {
-                row = grid.firstRowAvailableInCol(col - 1);
+                Power4Grid p4grid = static_cast<Power4Grid>(grid);
+                row = p4grid.firstRowAvailableInCol(col - 1);
 
                 // if the previous functions has not thrown any error, we have a valid Position
                 return {x : col - 1, y : row};

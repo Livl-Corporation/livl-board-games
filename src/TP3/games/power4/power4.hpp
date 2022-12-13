@@ -5,8 +5,11 @@
 #include "../../shared/shared.hpp"
 #include "power4PositionRequester.hpp"
 #include "../../shared/evaluators/linearGameEvaluator.hpp"
+
 #include <vector>
 #include <memory>
+
+#include "power4Grid.hpp"
 
 class Power4 : public Game
 {
@@ -22,9 +25,8 @@ public:
         std::vector<Player> players,
         std::unique_ptr<PositionRequester> PositionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator)
-        : Game("Power 4", xSize, ySize, players, std::move(PositionRequester), std::move(gameEvaluator))
+        : Game("Power 4", players, std::move(PositionRequester), std::move(gameEvaluator), std::make_unique<Power4Grid>())
     {
-        // other initializations
     }
 
     /**
@@ -34,8 +36,4 @@ public:
      * @return position
      */
     Position playAsComputer(const PlayerId &playerId) override;
-
-private:
-    static constexpr unsigned int xSize = 7; // declared as constexpr so that they can be used as compile-time constants.
-    static constexpr unsigned int ySize = 4;
 };

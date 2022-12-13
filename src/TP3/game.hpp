@@ -1,6 +1,8 @@
 #pragma once
 
 #include "grid.hpp"
+#include "games/power4/power4Grid.hpp"
+#include "games/tictactoe/tictactoeGrid.hpp"
 
 #include "models/player.hpp"
 #include "models/position.hpp"
@@ -32,7 +34,7 @@ public:
 
     inline std::string getName() const { return this->name; };
 
-    inline Grid<PlayerId> &getGrid() { return this->grid; };
+    Grid<PlayerId> &getGrid() { return *this->grid; }
 
     std::vector<Player> getPlayers() const;
 
@@ -49,11 +51,10 @@ protected:
      */
     Game(
         const std::string name,
-        const unsigned int xSize,
-        const unsigned int ySize,
         const std::vector<Player> players,
         std::unique_ptr<PositionRequester> positionRequester,
-        std::unique_ptr<GameEvaluator> gameEvaluator);
+        std::unique_ptr<GameEvaluator> gameEvaluator,
+        std::unique_ptr<Grid<PlayerId>> grid);
 
     std::unique_ptr<PositionRequester> positionRequester;
     std::unique_ptr<GameEvaluator> gameEvaluator;
@@ -89,7 +90,7 @@ private:
     /**
      * @brief The grid (ex: 3x3 for Tic Tac Toe)
      */
-    Grid<PlayerId> grid;
+    std::unique_ptr<Grid<PlayerId>> grid;
 
     /**
      * @brief Start playing the next game round

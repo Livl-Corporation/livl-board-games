@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../grid.hpp"
+#include <memory>
 
 class GameEvaluator
 {

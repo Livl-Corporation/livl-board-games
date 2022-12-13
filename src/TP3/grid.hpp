@@ -86,14 +86,6 @@ public:
      */
     void displayGrid() const;
 
-    /**
-     * @brief Get the first row available in a given col
-     *
-     * @param col
-     * @return unsigned int
-     */
-    // unsigned int firstRowAvailableInCol(const unsigned int col) const;
-
 protected:
     /**
      * @brief Construct a new Grid object

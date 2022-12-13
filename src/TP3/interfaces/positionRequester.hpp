@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "../models/position.hpp"
 #include "../grid.hpp"
 

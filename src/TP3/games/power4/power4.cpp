@@ -11,7 +11,9 @@ Position Power4::playAsComputer(const PlayerId &playerId)
 
         try
         {
-            row = this->getGrid().firstRowAvailableInCol(col);
+            row = 1;
+            // TODO : Remove comment
+            // row = this->getGrid()->firstRowAvailableInCol(col);
         }
         catch (...)
         {
