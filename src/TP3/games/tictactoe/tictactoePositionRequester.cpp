@@ -31,5 +31,5 @@ Position TicTacToePositionRequester::askForPosition(const char playerChar, const
         }
     } while (scanfResult != 2);
 
-    return {x : x - 1, y : y - 1};
+    return {(x - 1), (y - 1)};
 }

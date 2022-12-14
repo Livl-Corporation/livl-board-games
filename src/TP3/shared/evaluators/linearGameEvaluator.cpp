@@ -55,7 +55,7 @@ void LinearGameEvaluator::checkMaxConsecutive(const PlayerId id, const Grid<Play
     unsigned int curMaxConsecutive = 0;
     for (unsigned int row = startRow, col = startCol; row < grid.getYSize() && col < grid.getXSize(); row += rowStep, col += colStep)
     {
-        if (grid.getElementAt({x : col, y : row}) == id)
+        if (grid.getElementAt({col, row}) == id)
         {
             curMaxConsecutive++;
         }

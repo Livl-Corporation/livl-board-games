@@ -2,7 +2,7 @@
 
 unsigned int Power4Grid::firstRowAvailableInCol(unsigned int col) const
 {
-    Position position{x : col, y : (this->getYSize() - 1)};
+    Position position{col, (this->getYSize() - 1)};
 
     while (!this->isPositionEmpty(position))
     {

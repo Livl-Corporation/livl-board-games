@@ -24,7 +24,7 @@ Position Power4PositionRequester::askForPosition(const char playerChar, const Gr
                 row = p4grid.firstRowAvailableInCol(col - 1);
 
                 // if the previous functions has not thrown any error, we have a valid Position
-                return {x : col - 1, y : row};
+                return {(col - 1), row};
             }
             catch (const std::exception &e)
             {
