@@ -11,9 +11,8 @@ Position Power4::playAsComputer(const PlayerId &playerId)
 
         try
         {
-            row = 1;
-            // TODO : Remove comment
-            // row = this->getGrid()->firstRowAvailableInCol(col);
+            Power4Grid p4grid = static_cast<Power4Grid>(this->getGrid());
+            row = p4grid.firstRowAvailableInCol(col);
         }
         catch (...)
         {

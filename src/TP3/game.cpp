@@ -1,5 +1,9 @@
 #include "game.hpp"
 
+// This tells the compiler that there is a class template called Grid that can be instantiated with any type.
+template <typename T>
+class Grid;
+
 Game::Game(
     const std::string name,
     const std::vector<Player> players,

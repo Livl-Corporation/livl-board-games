@@ -1,5 +1,7 @@
 #include "grid.hpp"
 
+template class Grid<unsigned int>;
+
 template <typename T>
 T Grid<T>::getElementAt(const Position &position) const
 {
