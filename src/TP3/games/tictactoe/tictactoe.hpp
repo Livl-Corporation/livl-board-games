@@ -36,6 +36,8 @@ public:
      */
     Position playAsComputer(const PlayerId &playerId) override;
 
+    static constexpr unsigned int pointsToWin = 3;
+
 private:
     static constexpr unsigned int xSize = 3; // declared as constexpr so that they can be used as compile-time constants.
     static constexpr unsigned int ySize = 3;
