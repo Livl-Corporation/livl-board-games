@@ -33,9 +33,13 @@ add_executable(tp3
     src/TP3/game.cpp
     src/TP3/grid.cpp
     src/TP3/models/player.cpp
-    src/TP3/shared/functions.cpp
+    src/TP3/shared/shared.cpp
+    src/TP3/shared/consoleHandler.cpp
+    src/TP3/shared/evaluators/linearGameEvaluator.cpp
     src/TP3/games/power4/power4.cpp
-    src/TP3/games/defaults/defaultGameEvaluator.cpp
-    src/TP3/games/power4/power4CellRequester.cpp
-    src/TP3/games/tictactoe/tictactoeCellRequester.cpp
+    src/TP3/games/power4/power4PositionRequester.cpp
+    src/TP3/games/power4/power4Grid.cpp
+    src/TP3/games/tictactoe/tictactoePositionRequester.cpp
+    src/TP3/games/tictactoe/tictactoe.cpp
+    src/TP3/games/gameFactory.cpp
 )

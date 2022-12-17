@@ -2,33 +2,27 @@
 
 #include "../../game.hpp"
 #include "../../models/player.hpp"
-#include "../../shared/functions.hpp"
-#include "power4CellRequester.hpp"
-#include "../defaults/defaultGameEvaluator.hpp"
+#include "../../shared/shared.hpp"
+#include "power4PositionRequester.hpp"
+#include "../../shared/evaluators/linearGameEvaluator.hpp"
+
 #include <vector>
+#include <memory>
+
+#include "power4Grid.hpp"
 
 class Power4 : public Game
 {
 public:
-    /**
-     * @brief Construct a new Power 4 object
-     *
-     * @param players
-     */
-    Power4(std::vector<Player> players) : Game(
-                                              "Power 4",
-                                              7, 4,
-                                              players)
+    Power4(
+        std::vector<Player> players,
+        std::unique_ptr<PositionRequester> PositionRequester,
+        std::unique_ptr<GameEvaluator> gameEvaluator)
+        : Game("Power 4", players, std::move(PositionRequester), std::move(gameEvaluator), std::make_unique<Power4Grid>())
     {
-        this->cellRequester = new Power4CellRequester();
-        this->gameEvaluator = new DefaultGameEvaluator(4);
-    };
+    }
 
-    /**
-     * @brief Place a symbol in a available col
-     *
-     * @param playerId
-     * @return Cell
-     */
-    Cell playAsComputer(const unsigned int playerId) override;
+    Position playAsComputer(const PlayerId &playerId) override;
+
+    static constexpr unsigned int pointsToWin = 4;
 };

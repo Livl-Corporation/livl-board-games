@@ -1,118 +1,100 @@
 #include "grid.hpp"
 
-int Grid::getCell(const Cell &cell) const
+template class Grid<unsigned int>;
+
+template <typename T>
+T Grid<T>::getElementAt(const Position &position) const
 {
-    return this->grid.at(cell.y).at(cell.x);
+    return this->grid.at(position.y).at(position.x);
 }
 
-bool Grid::isCellEmpty(const Cell &cell) const
+template <typename T>
+bool Grid<T>::isPositionEmpty(const Position &position) const
 {
-
-    if (!this->isCellInBounds(cell))
+    if (!this->isPositionInBounds(position))
     {
         throw new OutOfBoundsException();
     }
 
-    return this->getCell(cell) == NO_PLAYER;
+    return this->getElementAt(position) == NO_PLAYER;
 }
 
-bool Grid::isCellInBounds(const Cell &cell) const
+template <typename T>
+bool Grid<T>::isPositionInBounds(const Position &position) const
 {
-    return (cell.x >= 0 && cell.x < this->xSize) && (cell.y >= 0 && cell.y < this->ySize);
+    return (position.x >= 0 && position.x < this->xSize) && (position.y >= 0 && position.y < this->ySize);
 }
 
-bool Grid::isGridFull() const
+template <typename T>
+bool Grid<T>::isGridFull() const
 {
-    return getFreeCells().size() == 0;
+    return getFreePositions().size() == 0;
 }
 
-bool Grid::place(const Cell &cell, const unsigned int id)
+template <typename T>
+bool Grid<T>::place(const Position &position, const T &element)
 {
     try
     {
-        if (!this->isCellInBounds(cell))
+        if (!this->isPositionInBounds(position))
         {
             throw OutOfBoundsException();
         }
 
-        if (!this->isCellEmpty(cell))
+        if (!this->isPositionEmpty(position))
         {
-            throw OccupiedCellException();
+            throw OccupiedPositionException();
         }
 
-        this->grid[cell.y][cell.x] = id;
+        this->grid[position.y][position.x] = element;
 
         return true;
     }
     catch (const std::exception &e)
     {
-        std::cout << std::endl
-                  << e.what() << std::endl;
+        ConsoleHandler::printLine("\n" + std::string(e.what()) + "\n");
         return false;
     }
 }
 
-std::vector<Cell> Grid::getFreeCells() const
+template <typename T>
+std::vector<Position> Grid<T>::getFreePositions() const
 {
-
-    std::vector<Cell> freeCells;
+    std::vector<Position> freePositions;
 
     for (unsigned int row = 0; row < this->ySize; row++)
     {
         for (unsigned int col = 0; col < this->xSize; col++)
         {
-            Cell cell = {x : col, y : row};
-            if (this->isCellEmpty(cell))
+            Position position = {x : col, y : row};
+            if (this->isPositionEmpty(position))
             {
-                freeCells.push_back(cell);
+                freePositions.push_back(position);
             }
         }
     }
 
-    return freeCells;
+    return freePositions;
 }
 
-void Grid::displayGrid() const
+template <typename T>
+void Grid<T>::displayGrid() const
 {
-
-    std::cout << std::endl;
+    ConsoleHandler::print("\n");
 
     for (unsigned int row = 0; row < this->getYSize(); row++)
     {
         for (unsigned int col = 0; col < this->getXSize(); col++)
         {
-            std::cout << Player::getPlayerChar(this->getCell({x : col, y : row}));
+            std::string characterAsString(1, Player::getPlayerChar(this->getElementAt({x : col, y : row})));
+            ConsoleHandler::print(characterAsString);
 
             if (col < this->getXSize() - 1)
             {
-                std::cout << "|";
+                ConsoleHandler::print("|");
             }
         }
-
-        std::cout << std::endl;
+        ConsoleHandler::printLine("");
     }
-
-    std::cout << std::endl;
-}
-
-unsigned int Grid::firstRowAvailableInCol(unsigned int col) const
-{
-
-    Cell cell{x : col, y : (this->getYSize() - 1)};
-
-    while (!this->isCellEmpty(cell))
-    {
-
-        if (cell.y == 0)
-        {
-            // If there is no row available in this col, throw an exception & exit function
-            throw ColumnFullException();
-        }
-        else
-        {
-            cell.y--;
-        }
-    }
-
-    return cell.y;
+    ConsoleHandler::printLine("");
 }

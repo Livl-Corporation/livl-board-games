@@ -1,119 +1,111 @@
 #pragma once
 
 #include "grid.hpp"
+#include "games/power4/power4Grid.hpp"
+#include "games/tictactoe/tictactoeGrid.hpp"
 
 #include "models/player.hpp"
-#include "models/cell.hpp"
+#include "models/position.hpp"
 
 #include "interfaces/gameEvaluator.hpp"
-#include "interfaces/cellRequester.hpp"
+#include "interfaces/positionRequester.hpp"
 
-#include "shared/functions.hpp"
+#include "shared/shared.hpp"
+#include "shared/consoleHandler.hpp"
 #include "shared/exceptions/out-of-bounds-exception.hpp"
 
-#include <iostream>
 #include <cstdio>
 #include <sstream>
 #include <vector>
 #include <string>
+#include <memory>
 
 class Game
 {
 public:
     /**
-     * @brief Construct a new Game object
-     *
-     * @param name
-     * @param xSize
-     * @param ySize
-     * @param players
-     */
-    Game(
-        const std::string name,
-        const unsigned int xSize,
-        const unsigned int ySize,
-        // GameEvaluator &gameEvaluator,
-        // CellRequester &cellRequester,
-        const std::vector<Player> players);
-
-    /**
-     * @brief Destroy the Game object
-     *
-     */
-    ~Game();
-
-    /**
      * @brief Start the game
-     *
      */
     void play();
 
-    /**
-     * @brief Get the Round object
-     *
-     * @return unsigned int
-     */
     inline unsigned int getRound() const { return this->round; };
 
-    /**
-     * @brief Get the Player Count object
-     *
-     * @return unsigned int
-     */
     inline unsigned int getPlayerCount() const { return this->playerCount; };
 
-    /**
-     * @brief Get the Name object
-     *
-     * @return std::string
-     */
     inline std::string getName() const { return this->name; };
 
-    /**
-     * @brief Get the Grid object
-     *
-     * @return Grid
-     */
-    inline Grid &getGrid() { return this->grid; };
+    Grid<PlayerId> &getGrid() { return *this->grid; }
 
-    /**
-     * @brief Get the Players object
-     *
-     * @return std::vector<Player>
-     */
     std::vector<Player> getPlayers() const;
 
 protected:
-    GameEvaluator *gameEvaluator;
-    CellRequester *cellRequester;
+    Game(
+        const std::string name,
+        const std::vector<Player> players,
+        std::unique_ptr<PositionRequester> positionRequester,
+        std::unique_ptr<GameEvaluator> gameEvaluator,
+        std::unique_ptr<Grid<PlayerId>> grid);
 
-    /**
-     * @brief Play as computer : place his symbol on a free grid cell
-     *
-     * @param playerId
-     */
-    virtual Cell playAsComputer(const unsigned int playerId);
+    std::unique_ptr<PositionRequester> positionRequester;
+
+    std::unique_ptr<GameEvaluator> gameEvaluator;
+
+    virtual Position playAsComputer(const PlayerId &playerId) = 0;
 
 private:
+    /**
+     * @brief The game name (ex: Tic Tac Toe)
+     */
     std::string name;
+
+    /**
+     * @brief The round number (starts at 0)
+     */
     unsigned int round = 0;
+
+    /**
+     * @brief The number of players playing
+     */
     unsigned int playerCount = 0;
+
+    /**
+     * @brief The players list in the game
+     */
     std::vector<Player> players;
-    Grid grid;
-    bool isFinished = false;
+
+    /**
+     * @brief The grid of the game
+     */
+    std::unique_ptr<Grid<PlayerId>> grid;
 
     /**
      * @brief Start playing the next game round
-     *
      */
     void nextRound();
+
+    /**
+     * @brief Get the next player to play
+     *
+     * @return Player the player Object who is playing
+     */
+    Player nextPlayer() const;
+
+    /**
+     * @brief Drop the player where has choosen to play
+     */
+    void playerChoosePosition(const Player &player);
+
+    /**
+     * @brief Check if the player has won
+     */
+    bool checkIfPlayerFinishedGame(const PlayerId playerId);
 
     /**
      * @brief End a game with a winner
      *
      * @param playerId
      */
-    void win(int playerId);
+    void win(const PlayerId playerId);
 
     /**
      * @brief End a game on a tie

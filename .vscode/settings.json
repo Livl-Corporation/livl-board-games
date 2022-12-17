@@ -77,7 +77,8 @@
         "queue": "cpp",
         "semaphore": "cpp",
         "thread": "cpp",
-        "stop_token": "cpp"
+        "stop_token": "cpp",
+        "__availability": "cpp"
     },
     "cmake.configureOnOpen": true
 }

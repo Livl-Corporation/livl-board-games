@@ -1,108 +1,104 @@
 #include "game.hpp"
 
+// This tells the compiler that there is a class template called Grid that can be instantiated with any type.
+template <typename T>
+class Grid;
+
 Game::Game(
     const std::string name,
-    const unsigned int xSize,
-    const unsigned int ySize,
-    const std::vector<Player> players) : players(players), grid(xSize, ySize), name(name),
-                                         // theses members will be initialized by each games :
-                                         cellRequester(nullptr), gameEvaluator(nullptr)
+    const std::vector<Player> players,
+    std::unique_ptr<PositionRequester> positionRequester,
+    std::unique_ptr<GameEvaluator> gameEvaluator, std::unique_ptr<Grid<PlayerId>> grid)
+    : players(players), grid(std::move(grid)), name(name), positionRequester(std::move(positionRequester)), gameEvaluator(std::move(gameEvaluator))
 {
     this->playerCount = players.size();
 }
 
-Game::~Game()
-{
-    delete cellRequester;
-    delete gameEvaluator;
-}
-
 void Game::play()
 {
+    ConsoleHandler::printTitle(this->getName()); // Print game title
 
-    printTitle(this->getName());
-
+    // Play game until a player has won
+    bool isGameFinished = false;
     do
     {
         this->nextRound();
-    } while (!this->isFinished);
+        const Player player = this->nextPlayer();
+        this->playerChoosePosition(player);
+        isGameFinished = this->checkIfPlayerFinishedGame(player.getId());
+    } while (!isGameFinished);
 }
 
 void Game::nextRound()
 {
     round++;
-
     std::ostringstream status;
     status << "Tour N° " << this->getRound();
-    printHeader(status.str());
+    ConsoleHandler::printHeader(status.str());
+}
 
-    // Determines who is playing this round
+// Determines who is playing this round
+Player Game::nextPlayer() const
+{
     unsigned int playerIndex = (round - 1) % playerCount;
-    Player player = players[playerIndex];
-    int playerId = player.getId();
+    return players[playerIndex];
+}
 
-    Cell cell;
+// Drop player on a position
+void Game::playerChoosePosition(const Player &player)
+{
+    Position position;
+    PlayerId playerId = player.getId();
 
     if (player.getIsComputer())
     {
         // Player is computer
-        cell = this->playAsComputer(playerId);
-        std::cout << "Joué par l'ordinateur en " << cell.x << "," << cell.y << "." << std::endl;
+        position = this->playAsComputer(playerId);
+        ConsoleHandler::printLine("Joué par l'ordinateur en " + std::to_string(position.x + 1) + "," + std::to_string(position.y + 1) + ".");
     }
     else
     {
         // Player is a real person
-        std::cout << "Joueur " << playerId << ", c'est à toi !" << std::endl;
+        ConsoleHandler::printLine("Joueur " + std::to_string(playerId) + ", c'est à toi !");
 
-        // Ask him in which cell he wants to place his cell and place it in the grid
+        // Ask him in which position he wants to place his position and place it in the grid
         do
         {
             this->getGrid().displayGrid();
-            cell = this->cellRequester->askForCell(Player::getPlayerChar(playerId), this->getGrid());
-        } while (!this->getGrid().place(cell, playerId));
+            position = this->positionRequester->askForPosition(Player::getPlayerChar(playerId), this->getGrid());
+        } while (!this->getGrid().place(position, playerId));
     }
+}
 
-    // Verify if player has won
+bool Game::checkIfPlayerFinishedGame(const PlayerId playerId)
+{
     if (this->gameEvaluator->hasPlayerWon(playerId, this->getGrid()))
     {
         win(playerId);
+        return true;
     }
     else if (this->getGrid().isGridFull())
     {
         // If grid is full, tie
         tie();
+        return true;
     }
+
+    return false;
 }
 
-Cell Game::playAsComputer(const unsigned int playerId)
-{
-    std::vector<Cell> freeCells = this->getGrid().getFreeCells();
-
-    int cellSelected = randomInt(0, freeCells.size());
-
-    this->getGrid().place(freeCells[cellSelected], playerId);
-
-    return freeCells[cellSelected];
-}
-
-void Game::win(int playerId)
+void Game::win(const PlayerId playerId)
 {
     std::ostringstream msg;
     msg << "Victoire du joueur " << playerId << " (" << Player::getPlayerChar(playerId) << ")";
-    printTitle(msg.str());
-
+    ConsoleHandler::printTitle(msg.str());
     this->getGrid().displayGrid();
-
-    this->isFinished = true;
 }
 
 void Game::tie()
 {
-    printTitle(std::string("Match nul"));
-
+    ConsoleHandler::printTitle(std::string("Match nul"));
     this->getGrid().displayGrid();
-
-    this->isFinished = true;
 }
 
 std::vector<Player> Game::getPlayers() const

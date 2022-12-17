@@ -1,29 +1,20 @@
 #pragma once
 
-#include "models/cell.hpp"
+#include "models/position.hpp"
 #include "models/player.hpp"
 
-#include "shared/functions.hpp"
+#include "shared/consoleHandler.hpp"
 #include "shared/exceptions/out-of-bounds-exception.hpp"
-#include "shared/exceptions/occupied-cell-exception.hpp"
+#include "shared/exceptions/occupied-position-exception.hpp"
 #include "shared/exceptions/column-full-exception.hpp"
 
 #include <vector>
-#include <iostream>
+#include <string>
 
+template <typename T>
 class Grid
 {
 public:
-    /**
-     * @brief Construct a new Grid object
-     *
-     * @param size
-     */
-    Grid(const unsigned int x, const unsigned int y)
-        : xSize(x), ySize(y), grid(y, std::vector<int>(x, NO_PLAYER))
-    {
-    }
-
     /**
      * @brief Get grid X size
      *
@@ -39,25 +30,25 @@ public:
     inline unsigned int getYSize() const { return this->ySize; };
 
     /**
-     * @brief Return true if requested cell is empty;
+     * @brief Return true if requested position is empty;
      *
-     * @param cell
+     * @param position
      * @return true
      * @return false
      */
-    bool isCellEmpty(const Cell &cell) const;
+    bool isPositionEmpty(const Position &position) const;
 
     /**
-     * @brief Return true if requested cell is in grid bounds
+     * @brief Return true if requested position is in grid bounds
      *
-     * @param cell
+     * @param position
      * @return true
      * @return false
      */
-    bool isCellInBounds(const Cell &cell) const;
+    bool isPositionInBounds(const Position &position) const;
 
     /**
-     * @brief Return true if there is no free cells left
+     * @brief Return true if there is no free positions left
      *
      * @return true
      * @return false
@@ -65,29 +56,29 @@ public:
     bool isGridFull() const;
 
     /**
-     * @brief Place id on cell
+     * @brief Place id on position
      *
-     * @param cell
+     * @param position
      * @param id
      * @return true
      * @return false
      */
-    bool place(const Cell &cell, const unsigned int id);
+    bool place(const Position &position, const T &element);
 
     /**
-     * @brief Get the symbol placed on provided cell
+     * @brief Get the symbol placed on provided position
      *
-     * @param cell
+     * @param position
      * @return Symbol
      */
-    int getCell(const Cell &cell) const;
+    T getElementAt(const Position &position) const;
 
     /**
-     * @brief Get all the free cells remainings
+     * @brief Get all the free positions remainings
      *
-     * @return std::vector<Cell>
+     * @return std::vector<Position>
      */
-    std::vector<Cell> getFreeCells() const;
+    std::vector<Position> getFreePositions() const;
 
     /**
      * @brief Display grid in the console
@@ -95,16 +86,14 @@ public:
      */
     void displayGrid() const;
 
-    /**
-     * @brief Get the first row available in a given col
-     *
-     * @param col
-     * @return unsigned int
-     */
-    unsigned int firstRowAvailableInCol(const unsigned int col) const;
+protected:
+    Grid(const unsigned int x, const unsigned int y, const T &defaultValue)
+        : xSize(x), ySize(y), grid(y, std::vector<T>(x, defaultValue))
+    {
+    }
 
 private:
     unsigned int xSize;
     unsigned int ySize;
-    std::vector<std::vector<int>> grid;
+    std::vector<std::vector<T>> grid;
 };

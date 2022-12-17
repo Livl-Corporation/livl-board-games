@@ -1,17 +1,18 @@
 #include "power4.hpp"
 
-Cell Power4::playAsComputer(const unsigned int playerId)
+Position Power4::playAsComputer(const PlayerId &playerId)
 {
 
     unsigned int col, row = 0;
 
     do
     {
-        col = randomInt(0, this->getGrid().getXSize() - 1);
+        col = Shared::randomInt(0, this->getGrid().getXSize() - 1);
 
         try
         {
-            row = this->getGrid().firstRowAvailableInCol(col);
+            Power4Grid p4grid = static_cast<Power4Grid>(this->getGrid());
+            row = p4grid.firstRowAvailableInCol(col);
         }
         catch (...)
         {
