@@ -14,13 +14,6 @@
 class Power4 : public Game
 {
 public:
-    /**
-     * @brief Construct a new Power 4 object
-     *
-     * @param players
-     * @param PositionRequester A unique pointer to a Position requester
-     * @param gameEvaluator A unique pointer to a game evaluator
-     */
     Power4(
         std::vector<Player> players,
         std::unique_ptr<PositionRequester> PositionRequester,
@@ -29,12 +22,6 @@ public:
     {
     }
 
-    /**
-     * @brief Place a symbol in a available col
-     *
-     * @param playerId
-     * @return position
-     */
     Position playAsComputer(const PlayerId &playerId) override;
 
     static constexpr unsigned int pointsToWin = 4;

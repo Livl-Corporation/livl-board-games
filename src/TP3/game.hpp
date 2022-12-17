@@ -39,16 +39,6 @@ public:
     std::vector<Player> getPlayers() const;
 
 protected:
-    /**
-     * @brief Construct a new Game object
-     *
-     * @param name The game name (ex: Tic Tac Toe)
-     * @param xSize The grid width
-     * @param ySize The grid height
-     * @param players  The players list in the game
-     * @param positionRequester A unique pointer to a position requester
-     * @param gameEvaluator A unique pointer to a game evaluator
-     */
     Game(
         const std::string name,
         const std::vector<Player> players,
@@ -57,13 +47,9 @@ protected:
         std::unique_ptr<Grid<PlayerId>> grid);
 
     std::unique_ptr<PositionRequester> positionRequester;
+
     std::unique_ptr<GameEvaluator> gameEvaluator;
 
-    /**
-     * @brief Play as computer : place his symbol on a free grid position
-     *
-     * @param playerId  The player id
-     */
     virtual Position playAsComputer(const PlayerId &playerId) = 0;
 
 private:
@@ -78,7 +64,7 @@ private:
     unsigned int round = 0;
 
     /**
-     * @brief The number of players
+     * @brief The number of players playing
      */
     unsigned int playerCount = 0;
 
@@ -88,7 +74,7 @@ private:
     std::vector<Player> players;
 
     /**
-     * @brief The grid (ex: 3x3 for Tic Tac Toe)
+     * @brief The grid of the game
      */
     std::unique_ptr<Grid<PlayerId>> grid;
 

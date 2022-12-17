@@ -13,13 +13,6 @@
 class TicTacToe : public Game
 {
 public:
-    /**
-     * @brief Construct a new TicTacToe object
-     *
-     * @param players
-     * @param positionRequester
-     * @param gameEvaluator
-     */
     TicTacToe(
         std::vector<Player> players,
         std::unique_ptr<PositionRequester> positionRequester,
@@ -28,17 +21,11 @@ public:
     {
     }
 
-    /**
-     * @brief Place a symbol in a available col
-     *
-     * @param playerId
-     * @return position
-     */
     Position playAsComputer(const PlayerId &playerId) override;
 
     static constexpr unsigned int pointsToWin = 3;
 
 private:
-    static constexpr unsigned int xSize = 3; // declared as constexpr so that they can be used as compile-time constants.
+    static constexpr unsigned int xSize = 3;
     static constexpr unsigned int ySize = 3;
 };

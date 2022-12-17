@@ -87,11 +87,6 @@ public:
     void displayGrid() const;
 
 protected:
-    /**
-     * @brief Construct a new Grid object
-     *
-     * @param size
-     */
     Grid(const unsigned int x, const unsigned int y, const T &defaultValue)
         : xSize(x), ySize(y), grid(y, std::vector<T>(x, defaultValue))
     {
