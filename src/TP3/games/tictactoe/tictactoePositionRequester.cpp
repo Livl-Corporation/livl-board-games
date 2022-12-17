@@ -6,7 +6,7 @@ Position TicTacToePositionRequester::askForPosition(const char playerChar, const
     outputAskPlayer += playerChar;
     outputAskPlayer += ") entre 1,1 et " + std::to_string(grid.getXSize()) + "," + std::to_string(grid.getYSize()) + " ?";
 
-    ConsoleHandler::printOutput(outputAskPlayer);
+    ConsoleHandler::print(outputAskPlayer);
 
     unsigned int x, y;
     int scanfResult = 0;
@@ -27,7 +27,7 @@ Position TicTacToePositionRequester::askForPosition(const char playerChar, const
 
         if (scanfResult != 2)
         {
-            ConsoleHandler::printOutput("Entrée invalide. Veuillez entrer deux nombres séparés par une virgule.");
+            ConsoleHandler::print("Entrée invalide. Veuillez entrer deux nombres séparés par une virgule.");
         }
     } while (scanfResult != 2);
 

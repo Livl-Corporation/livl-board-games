@@ -9,9 +9,9 @@ unsigned int getPlayerSelection()
 {
     ConsoleHandler::printHeader("Choix des joueurs");
 
-    ConsoleHandler::printOutput("1. Contre l'ordinateur");
-    ConsoleHandler::printOutput("2. 2 joueurs");
-    ConsoleHandler::printOutput("\nEntrez n'importe quel autre chiffre pour quitter.");
+    ConsoleHandler::print("1. Contre l'ordinateur");
+    ConsoleHandler::print("2. 2 joueurs");
+    ConsoleHandler::print("\nEntrez n'importe quel autre chiffre pour quitter.");
 
     return ConsoleHandler::readInt();
 }
@@ -31,10 +31,10 @@ std::vector<Player> createPlayers(unsigned int playerSelection)
 unsigned int getGameSelection()
 {
     ConsoleHandler::printHeader("Choix du jeu");
-    ConsoleHandler::printOutput("1. Morpion");
-    ConsoleHandler::printOutput("2. Puissance 4");
-    ConsoleHandler::printOutput("\nEntrez n'importe quel autre chiffre pour quitter.");
-    ConsoleHandler::printOutput("Faites votre choix :");
+    ConsoleHandler::print("1. Morpion");
+    ConsoleHandler::print("2. Puissance 4");
+    ConsoleHandler::print("\nEntrez n'importe quel autre chiffre pour quitter.");
+    ConsoleHandler::print("Faites votre choix :");
     return ConsoleHandler::readInt();
 }
 

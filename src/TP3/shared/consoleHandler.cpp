@@ -10,12 +10,12 @@ namespace ConsoleHandler
         return input;
     }
 
-    void printOutput(const std::string &output)
+    void print(const std::string &output)
     {
         std::cout << output << std::endl;
     }
 
-    void printOutputWithoutNewLine(const std::string &output)
+    void printLine(const std::string &output)
     {
         std::cout << output;
     }
@@ -34,7 +34,7 @@ namespace ConsoleHandler
             }
             catch (const std::exception &e)
             {
-                ConsoleHandler::printOutput("Veuillez saisir un chiffre valide.");
+                ConsoleHandler::print("Veuillez saisir un chiffre valide.");
             }
         } while (!valid);
 
@@ -43,14 +43,14 @@ namespace ConsoleHandler
 
     void printTitle(const std::string &string)
     {
-        ConsoleHandler::printOutput("*-----------------------------*");
-        ConsoleHandler::printOutput("     " + string + "     ");
-        ConsoleHandler::printOutput("*-----------------------------*");
+        ConsoleHandler::print("*-----------------------------*");
+        ConsoleHandler::print("     " + string + "     ");
+        ConsoleHandler::print("*-----------------------------*");
     }
 
     void printHeader(const std::string &string)
     {
-        ConsoleHandler::printOutput("*** " + string + " ***");
+        ConsoleHandler::print("*** " + string + " ***");
     }
 
 }
