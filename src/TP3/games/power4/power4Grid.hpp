@@ -8,7 +8,7 @@ class Power4Grid : public Grid<PlayerId>
 public:
     Power4Grid() : Grid(xSize, ySize, NO_PLAYER){};
 
-    Power4Grid(const Grid<unsigned int> &other) : Grid<unsigned int>(other) {}
+    Power4Grid(const Grid<PlayerId> &other) : Grid<PlayerId>(other) {}
 
     unsigned int firstRowAvailableInCol(const unsigned int col) const;
 
