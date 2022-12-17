@@ -24,8 +24,4 @@ public:
     Position playAsComputer(const PlayerId &playerId) override;
 
     static constexpr unsigned int pointsToWin = 3;
-
-private:
-    static constexpr unsigned int xSize = 3;
-    static constexpr unsigned int ySize = 3;
 };
