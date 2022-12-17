@@ -93,12 +93,12 @@ private:
     /**
      * @brief Drop the player where has choosen to play
      */
-    void dropPlayerOnPosition(const Player &player);
+    void playerChoosePosition(const Player &player);
 
     /**
      * @brief Check if the player has won
      */
-    bool checkIfGameFinished(const PlayerId playerId);
+    bool checkIfPlayerFinishedGame(const PlayerId playerId);
 
     /**
      * @brief End a game with a winner

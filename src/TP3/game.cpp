@@ -24,8 +24,8 @@ void Game::play()
     {
         this->nextRound();
         const Player player = this->nextPlayer();
-        this->dropPlayerOnPosition(player);
-        isGameFinished = this->checkIfGameFinished(player.getId());
+        this->playerChoosePosition(player);
+        isGameFinished = this->checkIfPlayerFinishedGame(player.getId());
     } while (!isGameFinished);
 }
 
@@ -45,7 +45,7 @@ Player Game::nextPlayer() const
 }
 
 // Drop player on a position
-void Game::dropPlayerOnPosition(const Player &player)
+void Game::playerChoosePosition(const Player &player)
 {
     Position position;
     PlayerId playerId = player.getId();
@@ -70,7 +70,7 @@ void Game::dropPlayerOnPosition(const Player &player)
     }
 }
 
-bool Game::checkIfGameFinished(const PlayerId playerId)
+bool Game::checkIfPlayerFinishedGame(const PlayerId playerId)
 {
     if (this->gameEvaluator->hasPlayerWon(playerId, this->getGrid()))
     {
