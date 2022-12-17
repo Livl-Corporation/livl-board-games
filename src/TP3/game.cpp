@@ -54,12 +54,12 @@ void Game::playerChoosePosition(const Player &player)
     {
         // Player is computer
         position = this->playAsComputer(playerId);
-        ConsoleHandler::print("Joué par l'ordinateur en " + std::to_string(position.x + 1) + "," + std::to_string(position.y + 1) + ".");
+        ConsoleHandler::printLine("Joué par l'ordinateur en " + std::to_string(position.x + 1) + "," + std::to_string(position.y + 1) + ".");
     }
     else
     {
         // Player is a real person
-        ConsoleHandler::print("Joueur " + std::to_string(playerId) + ", c'est à toi !");
+        ConsoleHandler::printLine("Joueur " + std::to_string(playerId) + ", c'est à toi !");
 
         // Ask him in which position he wants to place his position and place it in the grid
         do

@@ -52,7 +52,7 @@ bool Grid<T>::place(const Position &position, const T &element)
     }
     catch (const std::exception &e)
     {
-        ConsoleHandler::print("\n" + std::string(e.what()) + "\n");
+        ConsoleHandler::printLine("\n" + std::string(e.what()) + "\n");
         return false;
     }
 }
@@ -80,21 +80,21 @@ std::vector<Position> Grid<T>::getFreePositions() const
 template <typename T>
 void Grid<T>::displayGrid() const
 {
-    ConsoleHandler::printLine("\n");
+    ConsoleHandler::print("\n");
 
     for (unsigned int row = 0; row < this->getYSize(); row++)
     {
         for (unsigned int col = 0; col < this->getXSize(); col++)
         {
             std::string characterAsString(1, Player::getPlayerChar(this->getElementAt({x : col, y : row})));
-            ConsoleHandler::printLine(characterAsString);
+            ConsoleHandler::print(characterAsString);
 
             if (col < this->getXSize() - 1)
             {
-                ConsoleHandler::printLine("|");
+                ConsoleHandler::print("|");
             }
         }
-        ConsoleHandler::printLine("\n");
+        ConsoleHandler::printLine("");
     }
-    ConsoleHandler::printLine("\n");
+    ConsoleHandler::printLine("");
 }

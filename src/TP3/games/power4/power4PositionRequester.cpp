@@ -6,14 +6,14 @@ Position Power4PositionRequester::askForPosition(const char playerChar, const Gr
 
     do
     {
-        ConsoleHandler::print("Dans quelle colonne souhaitez vous jouer ? (1-" + std::to_string(grid.getXSize()) + ")");
+        ConsoleHandler::printLine("Dans quelle colonne souhaitez vous jouer ? (1-" + std::to_string(grid.getXSize()) + ")");
 
         col = ConsoleHandler::readInt();
 
         // Check if the column is valid
         if (col < 1 || col > grid.getXSize())
         {
-            ConsoleHandler::print("Veuillez entrer une colonne entre 1 et " + std::to_string(grid.getXSize()) + ".");
+            ConsoleHandler::printLine("Veuillez entrer une colonne entre 1 et " + std::to_string(grid.getXSize()) + ".");
         }
         else
         {
@@ -28,7 +28,7 @@ Position Power4PositionRequester::askForPosition(const char playerChar, const Gr
             }
             catch (const std::exception &e)
             {
-                ConsoleHandler::print(e.what());
+                ConsoleHandler::printLine(e.what());
             }
         }
     } while (true);
