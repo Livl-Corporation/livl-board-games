@@ -33,6 +33,6 @@ namespace GameFactory
 
     std::unique_ptr<Game> createOthello(const std::vector<Player> &players)
     {
-        return std::make_unique<Othello>(players, std::make_unique<TicTacToePositionRequester>(), std::make_unique<LinearGameEvaluator>(TicTacToe::pointsToWin));
+        return std::make_unique<Othello>(players, nullptr, std::make_unique<LinearGameEvaluator>(0));
     };
 }
