@@ -33,24 +33,10 @@ unsigned int getGameSelection()
     ConsoleHandler::printHeader("Choix du jeu");
     ConsoleHandler::printLine("1. Morpion");
     ConsoleHandler::printLine("2. Puissance 4");
+    ConsoleHandler::printLine("3. Othello");
     ConsoleHandler::printLine("\nEntrez n'importe quel autre chiffre pour quitter.");
     ConsoleHandler::printLine("Faites votre choix :");
     return ConsoleHandler::readInt();
-}
-
-// Function to create the requested game based on the given game selection
-std::unique_ptr<Game> createGame(unsigned int gameSelection, const std::vector<Player> &players)
-{
-    if (gameSelection == 1)
-    {
-        return GameFactory::createTicTacToe(players);
-    }
-    else if (gameSelection == 2)
-    {
-        return GameFactory::createPower4(players);
-    }
-
-    return nullptr;
 }
 
 // Function to play the given game
@@ -78,7 +64,7 @@ int main()
         unsigned int gameSelection = getGameSelection();
 
         // Create the requested game
-        std::unique_ptr<Game> game = createGame(gameSelection, players);
+        std::unique_ptr<Game> game = GameFactory::createGame(gameSelection, players);
 
         if (!game)
             return EXIT_SUCCESS; // if return nullptr, exit
