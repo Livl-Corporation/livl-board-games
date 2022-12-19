@@ -28,7 +28,7 @@ bool Grid<T>::isPositionInBounds(const Position &position) const
 template <typename T>
 bool Grid<T>::isGridFull() const
 {
-    return getFreePositions().size() == 0;
+    return getEmptyPositions().size() == 0;
 }
 
 template <typename T>
@@ -58,7 +58,7 @@ bool Grid<T>::place(const Position &position, const T &element)
 }
 
 template <typename T>
-std::vector<Position> Grid<T>::getFreePositions() const
+std::vector<Position> Grid<T>::getEmptyPositions() const
 {
     std::vector<Position> freePositions;
 
