@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.html": "html",
         "array": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
@@ -78,7 +79,17 @@
         "semaphore": "cpp",
         "thread": "cpp",
         "stop_token": "cpp",
-        "__availability": "cpp"
+        "__availability": "cpp",
+        "xfacet": "cpp",
+        "xiosbase": "cpp",
+        "xlocale": "cpp",
+        "xlocinfo": "cpp",
+        "xlocnum": "cpp",
+        "xmemory": "cpp",
+        "xstddef": "cpp",
+        "xstring": "cpp",
+        "xtr1common": "cpp",
+        "xutility": "cpp"
     },
     "cmake.configureOnOpen": true
 }
