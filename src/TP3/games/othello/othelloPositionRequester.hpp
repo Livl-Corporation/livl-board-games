@@ -10,5 +10,5 @@ public:
     Position askForPosition(const PlayerId playerId, const Grid<PlayerId> &grid) const override;
 
 private:
-    bool canPlaceToken(const Position &pos, const PlayerId playerId, const Grid<PlayerId> &grid) const;
+    static bool canPlaceToken(const Position &pos, const PlayerId playerId, const Grid<PlayerId> &grid) ;
 };

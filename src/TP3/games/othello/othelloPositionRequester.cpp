@@ -31,17 +31,18 @@ Position OthelloPositionRequester::askForPosition(const PlayerId playerId, const
     }
 }
 
-bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId playerId, const Grid<PlayerId> &grid) const
+bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId playerId, const Grid<PlayerId> &grid)
 {
     // Check the eight possible directions from the position that the player choose to place his token
     // (left-up, up, right-up, right, right-down, down, left-down, left)
-    static const std::vector<std::pair<int, int>> directions{
-        {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
+    static const std::vector<Position> directions{
+            {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}
+    };
 
     for (int i = 0; i < directions.size(); i++)
     {
-        int x = pos.x + directions[i].first;
-        int y = pos.y + directions[i].second;
+        int x = pos.x + directions[i].x;
+        int y = pos.y + directions[i].y;
         bool foundOpponent = false;
         while (grid.isPositionInBounds({x, y}))
         {
@@ -59,8 +60,8 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId
                 // We reached a blank cell or a sequence of our own tokens, so we can stop searching in this direction
                 break;
             }
-            x += directions[i].first;
-            y += directions[i].second;
+            x += directions[i].x;
+            y += directions[i].y;
         }
     }
     return false;
