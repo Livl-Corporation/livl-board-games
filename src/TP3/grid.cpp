@@ -9,13 +9,6 @@ T Grid<T>::getElementAt(const Position &position) const
 }
 
 template <typename T>
-T Grid<T>::getPiece(const Position& position) const
-{
-    // Return the piece at the given position in the grid
-    return this->grid[position.x][position.y];
-}
-
-template <typename T>
 bool Grid<T>::isPositionEmpty(const Position &position) const
 {
     if (!this->isPositionInBounds(position))
