@@ -8,8 +8,12 @@ Position TicTacToePositionRequester::askForPosition(const char playerChar, const
 
     ConsoleHandler::printLine(outputAskPlayer);
 
-    unsigned int x, y;
-    ConsoleHandler::readTwoValues(x, y);
+    // Read two values using the readValues function
+    std::vector<int> values = ConsoleHandler::readValues(2);
+
+    // Extract the row and col values from the vector
+    int x = values[0];
+    int y = values[1];
 
     return {(x - 1), (y - 1)};
 }

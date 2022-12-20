@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 namespace ConsoleHandler
 {
@@ -9,7 +10,7 @@ namespace ConsoleHandler
     void printLine(const std::string &output);
     void print(const std::string &output);
     int readInt();
-    void readTwoValues(unsigned int &x, unsigned int &y);
+    std::vector<int> readValues(int numValues);
     void printTitle(const std::string &string);
     void printHeader(const std::string &string);
 };
