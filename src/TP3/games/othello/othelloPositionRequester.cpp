@@ -10,8 +10,12 @@ Position OthelloPositionRequester::askForPosition(const PlayerId playerId, const
 
         ConsoleHandler::printLine(outputAskPlayer);
 
-        unsigned int row, col;
-        ConsoleHandler::readTwoValues(row, col);
+        // Read two values using the readValues function
+        std::vector<int> values = ConsoleHandler::readValues(2);
+
+        // Extract the row and col values from the vector
+        int row = values[0];
+        int col = values[1];
 
         Position pos{col - 1, row - 1};
         if (grid.isPositionInBounds(pos) && grid.isPositionEmpty(pos))
@@ -36,8 +40,8 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId
 
     for (int i = 0; i < directions.size(); i++)
     {
-        unsigned int x = pos.x + directions[i].first;
-        unsigned int y = pos.y + directions[i].second;
+        int x = pos.x + directions[i].first;
+        int y = pos.y + directions[i].second;
         bool foundOpponent = false;
         while (grid.isPositionInBounds({x, y}))
         {
