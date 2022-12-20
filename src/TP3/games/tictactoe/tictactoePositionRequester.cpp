@@ -9,27 +9,7 @@ Position TicTacToePositionRequester::askForPosition(const char playerChar, const
     ConsoleHandler::printLine(outputAskPlayer);
 
     unsigned int x, y;
-    int scanfResult = 0;
-    do
-    {
-        // Read the input as a string and check for the comma separator
-        std::string input = ConsoleHandler::getInput();
-        if (input.find(',') != std::string::npos)
-        { // std::string::npos is returned if no comma is found
-            // If the comma separator is found, use sscanf to parse the x and y values
-            scanfResult = sscanf(input.c_str(), "%d,%d", &x, &y);
-        }
-        else
-        {
-            // Otherwise, reset the scanfResult to 0
-            scanfResult = 0;
-        }
-
-        if (scanfResult != 2)
-        {
-            ConsoleHandler::printLine("Entrée invalide. Veuillez entrer deux nombres séparés par une virgule.");
-        }
-    } while (scanfResult != 2);
+    ConsoleHandler::readTwoValues(x, y);
 
     return {(x - 1), (y - 1)};
 }

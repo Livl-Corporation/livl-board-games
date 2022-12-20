@@ -4,11 +4,16 @@ Position OthelloPositionRequester::askForPosition(const char playerChar, const G
 {
     while (true)
     {
-        std::cout << "Player " << playerChar << ", enter the row and column where you want to place your token (e.g. 3 4): ";
-        int row, col;
-        std::cin >> row >> col;
+        std::string outputAskPlayer = "Où voulez vous placer votre pion (";
+        outputAskPlayer += playerChar;
+        outputAskPlayer += ") entre 1,1 et " + std::to_string(grid.getXSize()) + "," + std::to_string(grid.getYSize()) + " ?";
 
-        Position pos{ static_cast<unsigned int>(col - 1), static_cast<unsigned int>(row - 1) };
+        ConsoleHandler::printLine(outputAskPlayer);
+
+        unsigned int row, col;
+        ConsoleHandler::readTwoValues(row, col);
+
+        Position pos{ col - 1, row - 1 };
         if (grid.isPositionInBounds(pos) && grid.isPositionEmpty(pos))
         {
             // Check if the position is valid according to the rules of the Reversi game
@@ -23,28 +28,28 @@ Position OthelloPositionRequester::askForPosition(const char playerChar, const G
     }
 }
 
-bool OthelloPositionRequester::canPlaceToken(const Position &pos, char playerChar, char opponentChar, const Grid<PlayerId> &grid) const
+bool OthelloPositionRequester::canPlaceToken(const Position &pos, char playerChar, char opponentChar, Grid<PlayerId> grid) const
 {
     // Check the eight possible directions from the position that the player choose to place his token
     // (left-up, up, right-up, right, right-down, down, left-down, left)
-    static const std::vector<int> dx{ -1, -1, -1, 0, 1, 1,  1,  0 };
-    static const std::vector<int> dy{ -1,  0,  1, 1, 1, 0, -1, -1 };
+    static const std::vector<std::pair<int, int>> directions{
+            {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}
+    };
 
     for (int i = 0; i < 8; i++)
     {
-        int x = pos.x + dx[i];
-        int y = pos.y + dy[i];
+        unsigned int x = pos.x + directions[i].first;
+        unsigned int y = pos.y + directions[i].second;
         bool foundOpponent = false;
-        while (grid.isPositionInBounds({ static_cast<unsigned int>(x), static_cast<unsigned int>(y) }))
+        while (grid.isPositionInBounds({ x, y }))
         {
-            char cell = Player::getPlayerChar(grid.getElementAt({ static_cast<unsigned int>(x), static_cast<unsigned int>(y) }));
+            char cell = Player::getPlayerChar(grid.getElementAt({ x, y }));
             if (cell == opponentChar)
             {
                 foundOpponent = true;
             }
             else if (cell == playerChar && foundOpponent)
             {
-                // We found a sequence of opponent's tokens that can be flipped
                 return true;
             }
             else
@@ -52,8 +57,8 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, char playerCha
                 // We reached a blank cell or a sequence of our own tokens, so we can stop searching in this direction
                 break;
             }
-            x += dx[i];
-            y += dy[i];
+            x += directions[i].first;
+            y += directions[i].second;
         }
     }
     return false;
