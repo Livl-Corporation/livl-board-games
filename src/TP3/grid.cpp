@@ -9,6 +9,13 @@ T Grid<T>::getElementAt(const Position &position) const
 }
 
 template <typename T>
+T Grid<T>::getPiece(const Position& position) const
+{
+    // Return the piece at the given position in the grid
+    return this->grid[position.x][position.y];
+}
+
+template <typename T>
 bool Grid<T>::isPositionEmpty(const Position &position) const
 {
     if (!this->isPositionInBounds(position))
@@ -55,6 +62,12 @@ bool Grid<T>::place(const Position &position, const T &element)
         ConsoleHandler::printLine("\n" + std::string(e.what()) + "\n");
         return false;
     }
+}
+
+template <typename T>
+bool Grid<T>::change(const Position &position, const T &element)
+{
+    this->grid[position.y][position.x] = element;
 }
 
 template <typename T>

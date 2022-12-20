@@ -26,13 +26,12 @@ public:
     bool isGridFull() const;
 
     bool place(const Position &position, const T &element);
+    bool change(const Position &position, const T &element);
 
     T getElementAt(const Position &position) const;
-
     std::vector<Position> getEmptyPositions() const;
 
     void displayGrid() const;
-
 protected:
     Grid(const unsigned int x, const unsigned int y, const T &defaultValue)
         : xSize(x), ySize(y), grid(y, std::vector<T>(x, defaultValue))
