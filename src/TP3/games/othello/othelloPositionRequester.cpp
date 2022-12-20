@@ -46,8 +46,11 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId
         bool foundOpponent = false;
         while (grid.isPositionInBounds({x, y}))
         {
-            PlayerId idInCell = grid.getElementAt({x, y});
-            if (idInCell != playerId)
+            int idInCell = grid.getElementAt({x, y});
+            if(idInCell == NO_PLAYER){
+                break;
+            }
+            else if (idInCell != playerId)
             {
                 foundOpponent = true;
             }
@@ -66,3 +69,4 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId
     }
     return false;
 }
+
