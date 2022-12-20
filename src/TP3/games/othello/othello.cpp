@@ -7,3 +7,7 @@ Position Othello::playAsComputer(const PlayerId &playerId)
 
     return {col, row};
 }
+
+void Othello::afterPlacementAction(const PlayerId &playerId, const Position position)
+{
+}

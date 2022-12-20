@@ -52,6 +52,8 @@ protected:
 
     virtual Position playAsComputer(const PlayerId &playerId) = 0;
 
+    virtual void afterPlacementAction(const PlayerId &playerId, const Position position){};
+
 private:
     /**
      * @brief The game name (ex: Tic Tac Toe)

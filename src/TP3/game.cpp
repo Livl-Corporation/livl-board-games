@@ -68,6 +68,9 @@ void Game::playerChoosePosition(const Player &player)
             position = this->positionRequester->askForPosition(playerId, this->getGrid());
         } while (!this->getGrid().place(position, playerId));
     }
+
+    // Do something after the placement
+    this->afterPlacementAction(playerId, position);
 }
 
 bool Game::checkIfPlayerFinishedGame(const PlayerId playerId)
