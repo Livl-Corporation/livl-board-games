@@ -15,9 +15,9 @@ template <typename T>
 class Grid
 {
 public:
-    inline unsigned int getXSize() const { return this->xSize; };
+    inline int getXSize() const { return this->xSize; };
 
-    inline unsigned int getYSize() const { return this->ySize; };
+    inline int getYSize() const { return this->ySize; };
 
     bool isPositionEmpty(const Position &position) const;
 
