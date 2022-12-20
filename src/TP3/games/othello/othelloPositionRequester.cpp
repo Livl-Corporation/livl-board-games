@@ -34,7 +34,7 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId
     static const std::vector<std::pair<int, int>> directions{
         {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < directions.size(); i++)
     {
         unsigned int x = pos.x + directions[i].first;
         unsigned int y = pos.y + directions[i].second;
