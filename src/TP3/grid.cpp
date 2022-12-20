@@ -62,9 +62,9 @@ std::vector<Position> Grid<T>::getEmptyPositions() const
 {
     std::vector<Position> freePositions;
 
-    for (unsigned int row = 0; row < this->ySize; row++)
+    for (int row = 0; row < this->ySize; row++)
     {
-        for (unsigned int col = 0; col < this->xSize; col++)
+        for (int col = 0; col < this->xSize; col++)
         {
             Position position = {x : col, y : row};
             if (this->isPositionEmpty(position))
@@ -80,21 +80,56 @@ std::vector<Position> Grid<T>::getEmptyPositions() const
 template <typename T>
 void Grid<T>::displayGrid() const
 {
-    ConsoleHandler::print("\n");
 
-    for (unsigned int row = 0; row < this->getYSize(); row++)
+    ConsoleHandler::print("\n   ");
+    for (int col = 0; col < this->getXSize(); col++)
     {
-        for (unsigned int col = 0; col < this->getXSize(); col++)
+        ConsoleHandler::print(std::to_string(col + 1) + " ");
+    }
+
+    ConsoleHandler::print("\n  ┌");
+    for (int col = 0; col < (this->getXSize() * 2) - 1; col++)
+    {
+        if (col % 2 == 0)
+        {
+            ConsoleHandler::print("─");
+        }
+        else
+        {
+            ConsoleHandler::print("┬");
+        }
+    }
+    ConsoleHandler::printLine("┐");
+
+    for (int row = 0; row < this->getYSize(); row++)
+    {
+
+        ConsoleHandler::print(std::to_string(row + 1) + " │");
+
+        for (int col = 0; col < this->getXSize(); col++)
         {
             std::string characterAsString(1, Player::getPlayerChar(this->getElementAt({x : col, y : row})));
             ConsoleHandler::print(characterAsString);
 
             if (col < this->getXSize() - 1)
             {
-                ConsoleHandler::print("|");
+                ConsoleHandler::print("│");
             }
         }
-        ConsoleHandler::printLine("");
+        ConsoleHandler::printLine("│");
     }
-    ConsoleHandler::printLine("");
+
+    ConsoleHandler::print("  └");
+    for (int col = 0; col < (this->getXSize() * 2) - 1; col++)
+    {
+        if (col % 2 == 0)
+        {
+            ConsoleHandler::print("─");
+        }
+        else
+        {
+            ConsoleHandler::print("┴");
+        }
+    }
+    ConsoleHandler::printLine("┘");
 }
