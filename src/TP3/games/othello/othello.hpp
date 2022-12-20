@@ -20,5 +20,7 @@ public:
     {
     }
 
+    virtual void afterPlacementAction(const PlayerId &playerId, const Position position) override;
+
     Position playAsComputer(const PlayerId &playerId) override;
 };
