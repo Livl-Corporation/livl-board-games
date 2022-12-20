@@ -61,7 +61,13 @@ void LinearGameEvaluator::checkMaxConsecutive(const PlayerId id, const Grid<Play
         }
         else
         {
-            curMaxConsecutive = 0;
+            if(curMaxConsecutive >= this->consecutiveIdsToWin){
+                maxConsecutive = curMaxConsecutive;
+                return;
+            } else{
+                curMaxConsecutive = 0;
+            }
+
         }
     }
     if (curMaxConsecutive > maxConsecutive)
