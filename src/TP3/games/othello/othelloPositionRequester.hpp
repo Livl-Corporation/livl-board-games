@@ -1,10 +1,14 @@
 #pragma once
 
 #include "../../interfaces/positionRequester.hpp"
+#include "../../models/position.hpp"
+#include "../../models/player.hpp"
 
-class OthelloPositionRequester : public PositionRequester{
+class OthelloPositionRequester : public PositionRequester
+{
 public:
-    Position askForPosition(const char playerChar, const Grid<PlayerId> &grid) const override;
+    Position askForPosition(const PlayerId playerId, const Grid<PlayerId> &grid) const override;
+
 private:
-    bool canPlaceToken(const Position &pos, char playerChar, char opponentChar, Grid<PlayerId> grid) const;
+    bool canPlaceToken(const Position &pos, const PlayerId playerId, const Grid<PlayerId> &grid) const;
 };
