@@ -14,6 +14,7 @@
 #include "power4/power4PositionRequester.hpp"
 
 #include "othello/othello.hpp"
+#include "othello/othelloPositionRequester.hpp"
 
 #include "../shared/evaluators/linearGameEvaluator.hpp"
 

@@ -1,8 +1,8 @@
 #include "power4PositionRequester.hpp"
 
-Position Power4PositionRequester::askForPosition(const char playerChar, const Grid<PlayerId> &grid) const
+Position Power4PositionRequester::askForPosition(const PlayerId playerId, const Grid<PlayerId> &grid) const
 {
-    unsigned int col, row;
+    int col, row;
 
     do
     {

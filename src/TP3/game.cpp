@@ -65,7 +65,7 @@ void Game::playerChoosePosition(const Player &player)
         do
         {
             this->getGrid().displayGrid();
-            position = this->positionRequester->askForPosition(Player::getPlayerChar(playerId), this->getGrid());
+            position = this->positionRequester->askForPosition(playerId, this->getGrid());
         } while (!this->getGrid().place(position, playerId));
     }
 }
