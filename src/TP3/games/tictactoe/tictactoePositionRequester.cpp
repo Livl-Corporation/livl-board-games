@@ -1,9 +1,9 @@
 #include "tictactoePositionRequester.hpp"
 
-Position TicTacToePositionRequester::askForPosition(const char playerChar, const Grid<PlayerId> &grid) const
+Position TicTacToePositionRequester::askForPosition(const PlayerId playerId, const Grid<PlayerId> &grid) const
 {
     std::string outputAskPlayer = "Où voulez vous placer votre pion (";
-    outputAskPlayer += playerChar;
+    outputAskPlayer += Player::getPlayerChar(playerId);
     outputAskPlayer += ") entre 1,1 et " + std::to_string(grid.getXSize()) + "," + std::to_string(grid.getYSize()) + " ?";
 
     ConsoleHandler::printLine(outputAskPlayer);

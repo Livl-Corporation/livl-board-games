@@ -1,11 +1,11 @@
 #include "othelloPositionRequester.hpp"
 
-Position OthelloPositionRequester::askForPosition(const char playerChar, const Grid<PlayerId> &grid) const
+Position OthelloPositionRequester::askForPosition(const PlayerId playerId, const Grid<PlayerId> &grid) const
 {
     while (true)
     {
         std::string outputAskPlayer = "Où voulez vous placer votre pion (";
-        outputAskPlayer += playerChar;
+        outputAskPlayer += Player::getPlayerChar(playerId);
         outputAskPlayer += ") entre 1,1 et " + std::to_string(grid.getXSize()) + "," + std::to_string(grid.getYSize()) + " ?";
 
         ConsoleHandler::printLine(outputAskPlayer);
@@ -13,12 +13,11 @@ Position OthelloPositionRequester::askForPosition(const char playerChar, const G
         unsigned int row, col;
         ConsoleHandler::readTwoValues(row, col);
 
-        Position pos{ col - 1, row - 1 };
+        Position pos{col - 1, row - 1};
         if (grid.isPositionInBounds(pos) && grid.isPositionEmpty(pos))
         {
             // Check if the position is valid according to the rules of the Reversi game
-            char opponentChar = (playerChar == 'X') ? 'O' : 'X';
-            if (canPlaceToken(pos, playerChar, opponentChar, grid))
+            if (canPlaceToken(pos, playerId, grid))
             {
                 return pos;
             }
@@ -28,27 +27,26 @@ Position OthelloPositionRequester::askForPosition(const char playerChar, const G
     }
 }
 
-bool OthelloPositionRequester::canPlaceToken(const Position &pos, char playerChar, char opponentChar, Grid<PlayerId> grid) const
+bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId playerId, const Grid<PlayerId> &grid) const
 {
     // Check the eight possible directions from the position that the player choose to place his token
     // (left-up, up, right-up, right, right-down, down, left-down, left)
     static const std::vector<std::pair<int, int>> directions{
-            {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}
-    };
+        {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
 
     for (int i = 0; i < 8; i++)
     {
         unsigned int x = pos.x + directions[i].first;
         unsigned int y = pos.y + directions[i].second;
         bool foundOpponent = false;
-        while (grid.isPositionInBounds({ x, y }))
+        while (grid.isPositionInBounds({x, y}))
         {
-            char cell = Player::getPlayerChar(grid.getElementAt({ x, y }));
-            if (cell == opponentChar)
+            PlayerId idInCell = grid.getElementAt({x, y});
+            if (idInCell != playerId)
             {
                 foundOpponent = true;
             }
-            else if (cell == playerChar && foundOpponent)
+            else if (idInCell == playerId && foundOpponent)
             {
                 return true;
             }
