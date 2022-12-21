@@ -6,14 +6,14 @@ Position Power4PositionRequester::askForPosition(const PlayerId playerId) const
 
     do
     {
-        ConsoleHandler::printLine("Dans quelle colonne souhaitez vous jouer ? (1-" + std::to_string(this->getGrid()->getXSize()) + ")");
+        ConsoleHandler::print("Place your token (" + std::string(1, Player::getPlayerChar(playerId)) + ") between (1 to " +  std::to_string(this->getGrid()->getXSize()) + ") : ");
 
         col = ConsoleHandler::readInt();
 
         // Check if the column is valid
         if (col < 1 || col > this->getGrid()->getXSize())
         {
-            ConsoleHandler::printLine("Veuillez entrer une colonne entre 1 et " + std::to_string(this->getGrid()->getXSize()) + ".");
+            ConsoleHandler::printLine("Oops, error. Enter a column between 1 and " + std::to_string(this->getGrid()->getXSize()) + " !");
         }
         else
         {

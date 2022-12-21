@@ -4,11 +4,7 @@ Position OthelloPositionRequester::askForPosition(const PlayerId playerId) const
 {
     while (true)
     {
-        std::string outputAskPlayer = "Où voulez vous placer votre pion (";
-        outputAskPlayer += Player::getPlayerChar(playerId);
-        outputAskPlayer += ") entre 1,1 et " + std::to_string(this->getGrid()->getXSize()) + "," + std::to_string(this->getGrid()->getYSize()) + " ?";
-
-        ConsoleHandler::printLine(outputAskPlayer);
+        ConsoleHandler::print("Place your token (" + std::string(1, Player::getPlayerChar(playerId)) + ") between (1,1 to " + std::to_string(this->getGrid()->getYSize()) + "," + std::to_string(this->getGrid()->getXSize()) + ") : ");
 
         std::vector<int> values = ConsoleHandler::readValues(2);
 
@@ -25,7 +21,6 @@ Position OthelloPositionRequester::askForPosition(const PlayerId playerId) const
                 return pos;
             }
         }
-
-        std::cout << "Invalid position. Please try again." << std::endl;
+        ConsoleHandler::printLine("Oops. Invalid position (" + std::to_string(pos.y + 1) + "," + std::to_string(pos.x + 1) + "). Please try again !");
     }
 }
