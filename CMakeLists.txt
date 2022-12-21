@@ -44,4 +44,5 @@ add_executable(tp3
     src/TP3/games/gameFactory.cpp
     src/TP3/games/othello/othello.cpp
     src/TP3/games/othello/othelloPositionRequester.cpp
+    src/TP3/games/othello/othelloGameEvaluator.cpp
 )
