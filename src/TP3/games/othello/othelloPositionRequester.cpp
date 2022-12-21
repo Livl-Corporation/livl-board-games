@@ -4,11 +4,7 @@ Position OthelloPositionRequester::askForPosition(const PlayerId playerId) const
 {
     while (true)
     {
-        std::string outputAskPlayer = "Où voulez vous placer votre pion (";
-        outputAskPlayer += Player::getPlayerChar(playerId);
-        outputAskPlayer += ") entre 1,1 et " + std::to_string(this->getGrid()->getXSize()) + "," + std::to_string(this->getGrid()->getYSize()) + " ?";
-
-        ConsoleHandler::printLine(outputAskPlayer);
+        ConsoleHandler::print("Place your token (" + std::string(1, Player::getPlayerChar(playerId)) + ") between (1,1 to " + std::to_string(this->getGrid()->getYSize()) + "," + std::to_string(this->getGrid()->getXSize()) + ") : ");
 
         std::vector<int> values = ConsoleHandler::readValues(2);
 
@@ -25,8 +21,7 @@ Position OthelloPositionRequester::askForPosition(const PlayerId playerId) const
                 return pos;
             }
         }
-
-        std::cout << "Invalid position. Please try again." << std::endl;
+        ConsoleHandler::printLine("Oops. Invalid position (" + std::to_string(pos.y+1) + "," + std::to_string(pos.x+1) + "). Please try again !");
     }
 }
 
@@ -37,10 +32,10 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId
     static const std::vector<Position> directions{
         {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
 
-    for (int i = 0; i < directions.size(); i++)
+    for (auto direction : directions)
     {
-        int x = pos.x + directions[i].x;
-        int y = pos.y + directions[i].y;
+        int x = pos.x + direction.x;
+        int y = pos.y + direction.y;
         bool foundOpponent = false;
         while (grid.isPositionInBounds({x, y}))
         {
@@ -62,8 +57,8 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId
                 // We reached a blank cell or a sequence of our own tokens, so we can stop searching in this direction
                 break;
             }
-            x += directions[i].x;
-            y += directions[i].y;
+            x += direction.x;
+            y += direction.y;
         }
     }
     return false;
