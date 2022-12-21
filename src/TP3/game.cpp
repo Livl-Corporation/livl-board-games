@@ -26,7 +26,7 @@ void Game::play()
         const Player player = this->getNextPlayer();
         this->playerChoosePosition(player.getId(), player.getIsComputer());
 
-    } while (!this->gameEvaluator->hasGameEnded(getPlayerId(this->getRound() + 1)));
+    } while (!this->gameEvaluator->hasGameEnded(getPlayerId(this->getRound() - 1)+1));
 
     this->endGame();
 }

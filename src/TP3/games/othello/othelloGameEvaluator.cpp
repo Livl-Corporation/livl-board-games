@@ -2,19 +2,48 @@
 
 bool OthelloGameEvaluator::hasGameEnded(const PlayerId nextPlayerId)
 {
-
     ConsoleHandler::printLine("Checking if the game has ended... for player " + std::to_string(nextPlayerId));
-
     std::vector<Position> ids = OthelloGameEvaluator::getValidPositions(nextPlayerId, *this->getGrid());
-
-    ConsoleHandler::printLine(std::to_string(ids.size()));
-
     return this->getGrid()->isFull() || ids.empty();
 }
 
 PlayerId OthelloGameEvaluator::getWinner() const
 {
-    return 0;
+    // Initialize counters for the number of tokens placed by each player
+    int player1Tokens = 0;
+    int player2Tokens = 0;
+
+    // Iterate through the cells in the grid and count the number of tokens placed by each player
+    for (int i = 0; i < this->getGrid()->getYSize(); i++)
+    {
+        for (int j = 0; j < this->getGrid()->getXSize(); j++)
+        {
+            PlayerId idInCell = this->getGrid()->getElementAt({i, j});
+            if (idInCell == 1)
+            {
+                player1Tokens++;
+            }
+            else if (idInCell == 2)
+            {
+                player2Tokens++;
+            }
+        }
+    }
+
+    // Return the player with the most tokens as the winner
+    if (player1Tokens > player2Tokens)
+    {
+        return 1;
+    }
+    else if (player2Tokens > player1Tokens)
+    {
+        return 2;
+    }
+    else
+    {
+        // In case of a tie, return NO_PLAYER
+        return NO_PLAYER;
+    }
 }
 
 bool OthelloGameEvaluator::canPlaceToken(const Position &pos, const PlayerId playerId, const Grid<PlayerId> &grid)
@@ -24,14 +53,14 @@ bool OthelloGameEvaluator::canPlaceToken(const Position &pos, const PlayerId pla
     static const std::vector<Position> directions{
         {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
 
-    for (int i = 0; i < directions.size(); i++)
+    for (auto direction : directions)
     {
-        int x = pos.x + directions[i].x;
-        int y = pos.y + directions[i].y;
+        int x = pos.x + direction.x;
+        int y = pos.y + direction.y;
         bool foundOpponent = false;
         while (grid.isPositionInBounds({x, y}))
         {
-            int idInCell = grid.getElementAt({x, y});
+            unsigned int idInCell = grid.getElementAt({x, y});
             if (idInCell == NO_PLAYER)
             {
                 break;
@@ -49,8 +78,8 @@ bool OthelloGameEvaluator::canPlaceToken(const Position &pos, const PlayerId pla
                 // We reached a blank cell or a sequence of our own tokens, so we can stop searching in this direction
                 break;
             }
-            x += directions[i].x;
-            y += directions[i].y;
+            x += direction.x;
+            y += direction.y;
         }
     }
     return false;
