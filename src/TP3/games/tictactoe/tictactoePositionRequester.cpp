@@ -4,7 +4,7 @@ Position TicTacToePositionRequester::askForPosition(const PlayerId playerId) con
 {
     std::string outputAskPlayer = "Où voulez vous placer votre pion (";
     outputAskPlayer += Player::getPlayerChar(playerId);
-    outputAskPlayer += ") entre 1,1 et " + std::to_string(this->getGrid().getXSize()) + "," + std::to_string(this->getGrid().getYSize()) + " ?";
+    outputAskPlayer += ") entre 1,1 et " + std::to_string(this->getGrid()->getXSize()) + "," + std::to_string(this->getGrid()->getYSize()) + " ?";
 
     ConsoleHandler::printLine(outputAskPlayer);
 

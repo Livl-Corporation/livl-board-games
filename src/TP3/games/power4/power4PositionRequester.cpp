@@ -6,21 +6,21 @@ Position Power4PositionRequester::askForPosition(const PlayerId playerId) const
 
     do
     {
-        ConsoleHandler::printLine("Dans quelle colonne souhaitez vous jouer ? (1-" + std::to_string(this->getGrid().getXSize()) + ")");
+        ConsoleHandler::printLine("Dans quelle colonne souhaitez vous jouer ? (1-" + std::to_string(this->getGrid()->getXSize()) + ")");
 
         col = ConsoleHandler::readInt();
 
         // Check if the column is valid
-        if (col < 1 || col > this->getGrid().getXSize())
+        if (col < 1 || col > this->getGrid()->getXSize())
         {
-            ConsoleHandler::printLine("Veuillez entrer une colonne entre 1 et " + std::to_string(this->getGrid().getXSize()) + ".");
+            ConsoleHandler::printLine("Veuillez entrer une colonne entre 1 et " + std::to_string(this->getGrid()->getXSize()) + ".");
         }
         else
         {
             // Get first y position available in this col
             try
             {
-                Power4Grid p4grid = static_cast<Power4Grid>(this->getGrid());
+                Power4Grid p4grid = static_cast<Power4Grid>(*this->getGrid());
                 row = p4grid.firstRowAvailableInCol(col - 1);
 
                 // if the previous functions has not thrown any error, we have a valid Position

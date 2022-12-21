@@ -33,7 +33,7 @@ public:
 
     inline std::string getName() const { return this->name; };
 
-    Grid<PlayerId> &getGrid() { return *this->grid; }
+    std::shared_ptr<Grid<PlayerId>> getGrid() const { return this->grid; }
 
     std::vector<Player> getPlayers() const;
 
@@ -43,7 +43,7 @@ protected:
         const std::vector<Player> players,
         std::unique_ptr<PositionRequester> positionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator,
-        std::unique_ptr<Grid<PlayerId>> grid);
+        std::shared_ptr<Grid<PlayerId>> grid);
 
     std::unique_ptr<PositionRequester> positionRequester;
 
@@ -77,7 +77,7 @@ private:
     /**
      * @brief The grid of the game
      */
-    std::unique_ptr<Grid<PlayerId>> grid;
+    std::shared_ptr<Grid<PlayerId>> grid;
 
     /**
      * @brief Start playing the next game round

@@ -5,6 +5,12 @@ template class Grid<unsigned int>;
 template <typename T>
 T Grid<T>::getElementAt(const Position &position) const
 {
+
+    if (!this->isPositionInBounds(position))
+    {
+        throw new OutOfBoundsException();
+    }
+
     return this->grid.at(position.y).at(position.x);
 }
 
@@ -34,6 +40,7 @@ bool Grid<T>::isFull() const
 template <typename T>
 bool Grid<T>::place(const Position &position, const T &element)
 {
+
     try
     {
         if (!this->isPositionInBounds(position))
@@ -61,6 +68,7 @@ template <typename T>
 bool Grid<T>::change(const Position &position, const T &element)
 {
     this->grid[position.y][position.x] = element;
+    return true;
 }
 
 template <typename T>

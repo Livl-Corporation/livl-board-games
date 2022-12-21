@@ -8,12 +8,12 @@ Game::Game(
     const std::string name,
     const std::vector<Player> players,
     std::unique_ptr<PositionRequester> positionRequester,
-    std::unique_ptr<GameEvaluator> gameEvaluator, std::unique_ptr<Grid<PlayerId>> grid)
-    : players(players), grid(std::move(grid)), name(name), positionRequester(std::move(positionRequester)), gameEvaluator(std::move(gameEvaluator))
+    std::unique_ptr<GameEvaluator> gameEvaluator, std::shared_ptr<Grid<PlayerId>> grid)
+    : players(players), grid(grid), name(name), positionRequester(std::move(positionRequester)), gameEvaluator(std::move(gameEvaluator))
 {
     this->playerCount = players.size();
-    this->gameEvaluator->setGrid(std::move(this->grid));
-    this->positionRequester->setGrid(std::move(this->grid));
+    this->gameEvaluator->setGrid(this->grid);
+    this->positionRequester->setGrid(this->grid);
 }
 
 void Game::play()
@@ -25,6 +25,7 @@ void Game::play()
         this->nextRound();
         const Player player = this->nextPlayer();
         this->playerChoosePosition(player.getId(), player.getIsComputer());
+
     } while (!this->gameEvaluator->hasGameEnded());
 
     this->endGame();
@@ -42,7 +43,7 @@ void Game::endGame()
         ConsoleHandler::printTitle(std::string("Match nul"));
     }
 
-    this->getGrid().display();
+    this->getGrid()->display();
 }
 
 void Game::nextRound()
@@ -77,9 +78,9 @@ void Game::playerChoosePosition(const PlayerId playerId, const bool isComputer)
         // Ask him in which position he wants to place his position and place it in the grid
         do
         {
-            this->getGrid().display();
+            this->getGrid()->display();
             position = this->positionRequester->askForPosition(playerId);
-        } while (!this->getGrid().place(position, playerId));
+        } while (!this->getGrid()->place(position, playerId));
     }
 
     // Do something after the placement

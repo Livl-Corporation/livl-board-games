@@ -18,7 +18,7 @@ public:
         std::vector<Player> players,
         std::unique_ptr<PositionRequester> PositionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator)
-        : Game("Power 4", players, std::move(PositionRequester), std::move(gameEvaluator), std::make_unique<Power4Grid>())
+        : Game("Power 4", players, std::move(PositionRequester), std::move(gameEvaluator), std::make_shared<Power4Grid>())
     {
     }
 

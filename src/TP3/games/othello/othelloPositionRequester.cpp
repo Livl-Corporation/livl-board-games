@@ -6,7 +6,7 @@ Position OthelloPositionRequester::askForPosition(const PlayerId playerId) const
     {
         std::string outputAskPlayer = "Où voulez vous placer votre pion (";
         outputAskPlayer += Player::getPlayerChar(playerId);
-        outputAskPlayer += ") entre 1,1 et " + std::to_string(this->getGrid().getXSize()) + "," + std::to_string(this->getGrid().getYSize()) + " ?";
+        outputAskPlayer += ") entre 1,1 et " + std::to_string(this->getGrid()->getXSize()) + "," + std::to_string(this->getGrid()->getYSize()) + " ?";
 
         ConsoleHandler::printLine(outputAskPlayer);
 
@@ -17,7 +17,7 @@ Position OthelloPositionRequester::askForPosition(const PlayerId playerId) const
         int col = values[1];
 
         Position pos{col - 1, row - 1};
-        if (this->getGrid().isPositionInBounds(pos) && this->getGrid().isPositionEmpty(pos))
+        if (this->getGrid()->isPositionInBounds(pos) && this->getGrid()->isPositionEmpty(pos))
         {
             // Check if the position is valid according to the rules of the Reversi game
             if (this->canPlaceToken(pos, playerId))
@@ -42,9 +42,9 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId
         int x = pos.x + directions[i].x;
         int y = pos.y + directions[i].y;
         bool foundOpponent = false;
-        while (this->getGrid().isPositionInBounds({x, y}))
+        while (this->getGrid()->isPositionInBounds({x, y}))
         {
-            int idInCell = this->getGrid().getElementAt({x, y});
+            int idInCell = this->getGrid()->getElementAt({x, y});
             if (idInCell == NO_PLAYER)
             {
                 break;

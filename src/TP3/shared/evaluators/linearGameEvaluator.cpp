@@ -4,11 +4,15 @@ bool LinearGameEvaluator::hasGameEnded()
 {
 
     if (this->hasPlayerWon(1))
+    {
         this->winner = 1;
+    }
     else if (this->hasPlayerWon(2))
+    {
         this->winner = 2;
+    }
 
-    return this->winner != NO_PLAYER || this->getGrid().isFull();
+    return this->winner != NO_PLAYER || this->getGrid()->isFull();
 }
 
 PlayerId LinearGameEvaluator::getWinner() const
@@ -37,7 +41,7 @@ bool LinearGameEvaluator::hasPlayerWon(const PlayerId id) const
 
 void LinearGameEvaluator::checkRows(const PlayerId id, unsigned int &maxConsecutive) const
 {
-    for (unsigned int row = 0; row < this->getGrid().getYSize(); row++)
+    for (unsigned int row = 0; row < this->getGrid()->getYSize(); row++)
     {
         checkMaxConsecutive(id, row, 0, 0, 1, maxConsecutive);
     }
@@ -45,7 +49,7 @@ void LinearGameEvaluator::checkRows(const PlayerId id, unsigned int &maxConsecut
 
 void LinearGameEvaluator::checkColumns(const PlayerId id, unsigned int &maxConsecutive) const
 {
-    for (unsigned int col = 0; col < this->getGrid().getXSize(); col++)
+    for (unsigned int col = 0; col < this->getGrid()->getXSize(); col++)
     {
         checkMaxConsecutive(id, 0, col, 1, 0, maxConsecutive);
     }
@@ -53,22 +57,23 @@ void LinearGameEvaluator::checkColumns(const PlayerId id, unsigned int &maxConse
 
 void LinearGameEvaluator::checkDiagonals(const PlayerId id, unsigned int &maxConsecutive) const
 {
-    unsigned int maxCol = this->getGrid().getXSize() - this->getGrid().getYSize();
+    ConsoleHandler::printLine("check diagonals");
+    unsigned int maxCol = this->getGrid()->getXSize() - this->getGrid()->getYSize();
     for (unsigned int startCol = 0; startCol <= maxCol; startCol++)
     {
         checkMaxConsecutive(id, 0, startCol, 1, 1, maxConsecutive);
         checkMaxConsecutive(id, 0, startCol, 1, -1, maxConsecutive);
-        checkMaxConsecutive(id, this->getGrid().getYSize() - 1, startCol, -1, 1, maxConsecutive);
-        checkMaxConsecutive(id, this->getGrid().getYSize() - 1, startCol, -1, -1, maxConsecutive);
+        checkMaxConsecutive(id, this->getGrid()->getYSize() - 1, startCol, -1, 1, maxConsecutive);
+        checkMaxConsecutive(id, this->getGrid()->getYSize() - 1, startCol, -1, -1, maxConsecutive);
     }
 }
 
 void LinearGameEvaluator::checkMaxConsecutive(const PlayerId id, unsigned int startRow, unsigned int startCol, unsigned int rowStep, unsigned int colStep, unsigned int &maxConsecutive) const
 {
     unsigned int curMaxConsecutive = 0;
-    for (int row = startRow, col = startCol; row < this->getGrid().getYSize() && col < this->getGrid().getXSize(); row += rowStep, col += colStep)
+    for (int row = startRow, col = startCol; row < this->getGrid()->getYSize() && col < this->getGrid()->getXSize() && row >= 0 && col >= 0; row += rowStep, col += colStep)
     {
-        if (this->getGrid().getElementAt({col, row}) == id)
+        if (this->getGrid()->getElementAt({col, row}) == id)
         {
             curMaxConsecutive++;
         }
