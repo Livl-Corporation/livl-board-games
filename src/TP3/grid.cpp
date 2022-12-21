@@ -16,7 +16,7 @@ T Grid<T>::getElementAt(const Position &position) const
 template <typename T>
 bool Grid<T>::isPositionEmpty(const Position &position) const
 {
-    return this->getElementAt(position) == NO_PLAYER;
+    return !this->getElementAt(position);
 }
 
 template <typename T>
