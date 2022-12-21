@@ -2,7 +2,14 @@
 
 bool OthelloGameEvaluator::hasGameEnded(const PlayerId nextPlayerId)
 {
-    return this->getGrid()->isFull() || OthelloGameEvaluator::getValidPositions(nextPlayerId, *this->getGrid()).empty();
+
+    ConsoleHandler::printLine("Checking if the game has ended... for player " + std::to_string(nextPlayerId));
+
+    std::vector<Position> ids = OthelloGameEvaluator::getValidPositions(nextPlayerId, *this->getGrid());
+
+    ConsoleHandler::printLine(std::to_string(ids.size()));
+
+    return this->getGrid()->isFull() || ids.empty();
 }
 
 PlayerId OthelloGameEvaluator::getWinner() const

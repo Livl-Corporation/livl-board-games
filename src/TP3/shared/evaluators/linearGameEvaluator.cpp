@@ -1,6 +1,6 @@
 #include "linearGameEvaluator.hpp"
 
-bool LinearGameEvaluator::hasGameEnded()
+bool LinearGameEvaluator::hasGameEnded(const PlayerId nextPlayerId)
 {
 
     if (this->hasPlayerWon(1))
@@ -76,10 +76,12 @@ void LinearGameEvaluator::checkMaxConsecutive(const PlayerId id, unsigned int st
         {
             curMaxConsecutive++;
         }
-        else if(curMaxConsecutive >= this->consecutiveIdsToWin)
+        else if (curMaxConsecutive >= this->consecutiveIdsToWin)
         {
             break;
-        } else {
+        }
+        else
+        {
             curMaxConsecutive = 0;
         }
     }
