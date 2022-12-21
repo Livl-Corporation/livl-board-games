@@ -36,11 +36,11 @@ void Game::endGame()
     PlayerId winner = this->gameEvaluator->getWinner();
     if (winner != NO_PLAYER)
     {
-        ConsoleHandler::printTitle("Victoire du joueur " + std::to_string(winner) + " (" + Player::getPlayerChar(winner) + ")");
+        ConsoleHandler::printTitle("Player's victory " + std::to_string(winner) + " (" + Player::getPlayerChar(winner) + ")");
     }
     else
     {
-        ConsoleHandler::printTitle(std::string("Match nul"));
+        ConsoleHandler::printTitle(std::string("Tie Game"));
     }
 
     this->getGrid()->display();
@@ -49,7 +49,7 @@ void Game::endGame()
 void Game::nextRound()
 {
     round++;
-    ConsoleHandler::printHeader("Tour N° " + std::to_string(this->getRound()));
+    ConsoleHandler::printHeader("Round N° " + std::to_string(this->getRound()));
 }
 
 // Determines who is playing this round
@@ -70,12 +70,12 @@ void Game::playerChoosePosition(const PlayerId playerId, const bool isComputer)
         {
             // Player is computer
             position = this->playAsComputer(playerId);
-            ConsoleHandler::printLine("Joué par l'ordinateur en " + std::to_string(position.y + 1) + "," + std::to_string(position.x + 1) + ".");
+            ConsoleHandler::printLine("Played by the computer at position " + std::to_string(position.y + 1) + "," + std::to_string(position.x + 1) + ".");
         }
         else
         {
             // Player is a real person
-            ConsoleHandler::printLine("Joueur " + std::to_string(playerId) + ", c'est à toi !");
+            ConsoleHandler::printLine("Player " + std::to_string(playerId) + ", it's your turn !");
 
             // Ask him in which position he wants to place his position and place it in the grid
             this->getGrid()->display();

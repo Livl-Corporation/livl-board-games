@@ -7,11 +7,11 @@
 // Function to ask the user for player selection
 unsigned int getPlayerSelection()
 {
-    ConsoleHandler::printHeader("Choix des joueurs");
-
-    ConsoleHandler::printLine("1. Contre l'ordinateur");
-    ConsoleHandler::printLine("2. 2 joueurs");
-    ConsoleHandler::printLine("\nEntrez n'importe quel autre chiffre pour quitter.");
+    ConsoleHandler::printHeader("GAME MODE");
+    ConsoleHandler::printLine("1. Against the computer");
+    ConsoleHandler::printLine("2. 2 players");
+    ConsoleHandler::printLine("Enter any other number to exit.\n");
+    ConsoleHandler::print("Choice : n°");
 
     return ConsoleHandler::readInt();
 }
@@ -30,12 +30,13 @@ std::vector<Player> createPlayers(unsigned int playerSelection)
 // Function to ask the user for game selection
 unsigned int getGameSelection()
 {
-    ConsoleHandler::printHeader("Choix du jeu");
-    ConsoleHandler::printLine("1. Morpion");
-    ConsoleHandler::printLine("2. Puissance 4");
+    ConsoleHandler::printLine("");
+    ConsoleHandler::printHeader("BOARD GAME CHOICE");
+    ConsoleHandler::printLine("1. Tic-Tac-Toe");
+    ConsoleHandler::printLine("2. Power 4");
     ConsoleHandler::printLine("3. Othello");
-    ConsoleHandler::printLine("\nEntrez n'importe quel autre chiffre pour quitter.");
-    ConsoleHandler::printLine("Faites votre choix :");
+    ConsoleHandler::printLine("Enter any other number to exit.\n");
+    ConsoleHandler::print("Choice : n°");
     return ConsoleHandler::readInt();
 }
 
