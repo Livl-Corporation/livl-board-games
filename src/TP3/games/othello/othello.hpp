@@ -26,4 +26,6 @@ public:
 private:
     void flipPieces(const Position &pos, PlayerId playerId);
     std::vector<Position> getFlippablePieces(const Position &pos, PlayerId playerId, const Position &direction);
+    std::vector<Position> getValidPositions(PlayerId playerId);
+    Position getBestPosition(const std::vector<Position> &validPositions, PlayerId playerId);
 };

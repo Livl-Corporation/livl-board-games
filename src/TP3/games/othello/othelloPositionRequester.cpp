@@ -20,7 +20,7 @@ Position OthelloPositionRequester::askForPosition(const PlayerId playerId) const
         if (this->getGrid()->isPositionInBounds(pos) && this->getGrid()->isPositionEmpty(pos))
         {
             // Check if the position is valid according to the rules of the Reversi game
-            if (this->canPlaceToken(pos, playerId))
+            if (OthelloPositionRequester::canPlaceToken(pos, playerId, *this->getGrid()))
             {
                 return pos;
             }
@@ -30,7 +30,7 @@ Position OthelloPositionRequester::askForPosition(const PlayerId playerId) const
     }
 }
 
-bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId playerId) const
+bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId playerId, const Grid<PlayerId> &grid)
 {
     // Check the eight possible directions from the position that the player choose to place his token
     // (left-up, up, right-up, right, right-down, down, left-down, left)
@@ -42,9 +42,9 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId
         int x = pos.x + directions[i].x;
         int y = pos.y + directions[i].y;
         bool foundOpponent = false;
-        while (this->getGrid()->isPositionInBounds({x, y}))
+        while (grid.isPositionInBounds({x, y}))
         {
-            int idInCell = this->getGrid()->getElementAt({x, y});
+            int idInCell = grid.getElementAt({x, y});
             if (idInCell == NO_PLAYER)
             {
                 break;

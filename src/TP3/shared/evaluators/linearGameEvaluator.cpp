@@ -57,7 +57,6 @@ void LinearGameEvaluator::checkColumns(const PlayerId id, unsigned int &maxConse
 
 void LinearGameEvaluator::checkDiagonals(const PlayerId id, unsigned int &maxConsecutive) const
 {
-    ConsoleHandler::printLine("check diagonals");
     unsigned int maxCol = this->getGrid()->getXSize() - this->getGrid()->getYSize();
     for (unsigned int startCol = 0; startCol <= maxCol; startCol++)
     {

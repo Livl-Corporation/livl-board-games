@@ -8,7 +8,5 @@ class OthelloPositionRequester : public PositionRequester
 {
 public:
     Position askForPosition(const PlayerId playerId) const override;
-
-private:
-    bool canPlaceToken(const Position &pos, const PlayerId playerId) const;
+    static bool canPlaceToken(const Position &pos, const PlayerId playerId, const Grid<PlayerId> &grid);
 };
