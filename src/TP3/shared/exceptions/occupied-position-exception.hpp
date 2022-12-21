@@ -7,6 +7,6 @@ class OccupiedPositionException : public std::exception
 public:
     const char *what() const throw()
     {
-        return "La position demandée est déjà occupée !";
+        return "The requested position is already occupied !";
     }
 };
