@@ -76,8 +76,10 @@ void LinearGameEvaluator::checkMaxConsecutive(const PlayerId id, unsigned int st
         {
             curMaxConsecutive++;
         }
-        else
+        else if(curMaxConsecutive >= this->consecutiveIdsToWin)
         {
+            break;
+        } else {
             curMaxConsecutive = 0;
         }
     }
