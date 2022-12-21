@@ -47,27 +47,27 @@ Player Game::nextPlayer() const
 // Drop player on a position
 void Game::playerChoosePosition(const Player &player)
 {
-    Position position;
-    PlayerId playerId = player.getId();
+    Position position{};
+    PlayerId playerId = static_cast<unsigned char>(player.getId());
 
-    if (player.getIsComputer())
+    do
     {
-        // Player is computer
-        position = this->playAsComputer(playerId);
-        ConsoleHandler::printLine("Joué par l'ordinateur en " + std::to_string(position.x + 1) + "," + std::to_string(position.y + 1) + ".");
-    }
-    else
-    {
-        // Player is a real person
-        ConsoleHandler::printLine("Joueur " + std::to_string(playerId) + ", c'est à toi !");
-
-        // Ask him in which position he wants to place his position and place it in the grid
-        do
+        if (player.getIsComputer())
         {
+            // Player is computer
+            position = this->playAsComputer(playerId);
+            ConsoleHandler::printLine("Joué par l'ordinateur en " + std::to_string(position.y + 1) + "," + std::to_string(position.x + 1) + ".");
+        }
+        else
+        {
+            // Player is a real person
+            ConsoleHandler::printLine("Joueur " + std::to_string(playerId) + ", c'est à toi !");
+
+            // Ask him in which position he wants to place his position and place it in the grid
             this->getGrid().displayGrid();
             position = this->positionRequester->askForPosition(playerId, this->getGrid());
-        } while (!this->getGrid().place(position, playerId));
-    }
+        }
+    } while (!this->getGrid().place(position, playerId));
 
     // Do something after the placement
     this->afterPlacementAction(playerId, position);
@@ -106,6 +106,6 @@ void Game::tie()
 
 std::vector<Player> Game::getPlayers() const
 {
-    std::vector<Player> vect(this->players);
-    return vect;
+    std::vector<Player> vector(this->players);
+    return vector;
 }
