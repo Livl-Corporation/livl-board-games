@@ -5,17 +5,17 @@ template class Grid<unsigned int>;
 template <typename T>
 T Grid<T>::getElementAt(const Position &position) const
 {
+    if (!this->isPositionInBounds(position))
+    {
+        throw OutOfBoundsException();
+    }
+
     return this->grid.at(position.y).at(position.x);
 }
 
 template <typename T>
 bool Grid<T>::isPositionEmpty(const Position &position) const
 {
-    if (!this->isPositionInBounds(position))
-    {
-        throw new OutOfBoundsException();
-    }
-
     return this->getElementAt(position) == NO_PLAYER;
 }
 
