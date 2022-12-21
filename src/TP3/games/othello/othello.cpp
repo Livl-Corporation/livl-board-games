@@ -88,7 +88,7 @@ void Othello::flipPieces(const Position& pos, PlayerId playerId)
         // Flip the opponent's tokens in this direction
         for (const Position& p : piecesToFlip)
         {
-            getGrid().change(p, playerId);
+            getGrid().replaceAt(p, playerId);
         }
     }
 }
