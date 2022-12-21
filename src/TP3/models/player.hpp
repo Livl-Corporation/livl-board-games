@@ -1,7 +1,7 @@
 #pragma once
 
-const int NO_PLAYER = -1;
-typedef unsigned int PlayerId; // makes the code more readable and self-explanatory.
+const int NO_PLAYER = 0;
+typedef unsigned int PlayerId;
 
 class Player
 {

@@ -8,5 +8,5 @@
 class TicTacToePositionRequester : public PositionRequester
 {
 public:
-    Position askForPosition(const PlayerId playerId, const Grid<PlayerId> &grid) const override;
+    Position askForPosition(const PlayerId playerId) const override;
 };

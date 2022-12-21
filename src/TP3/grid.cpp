@@ -26,7 +26,7 @@ bool Grid<T>::isPositionInBounds(const Position &position) const
 }
 
 template <typename T>
-bool Grid<T>::isGridFull() const
+bool Grid<T>::isFull() const
 {
     return getEmptyPositions().size() == 0;
 }
@@ -84,7 +84,7 @@ std::vector<Position> Grid<T>::getEmptyPositions() const
 }
 
 template <typename T>
-void Grid<T>::displayGrid() const
+void Grid<T>::display() const
 {
 
     ConsoleHandler::print("\n   ");

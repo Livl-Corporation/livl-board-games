@@ -15,7 +15,6 @@
 #include "shared/exceptions/out-of-bounds-exception.hpp"
 
 #include <cstdio>
-#include <sstream>
 #include <vector>
 #include <string>
 #include <memory>
@@ -92,26 +91,7 @@ private:
      */
     Player nextPlayer() const;
 
-    /**
-     * @brief Drop the player where has choosen to play
-     */
-    void playerChoosePosition(const Player &player);
+    void playerChoosePosition(const PlayerId playerId, const bool isComputer);
 
-    /**
-     * @brief Check if the player has won
-     */
-    bool checkIfPlayerFinishedGame(const PlayerId playerId);
-
-    /**
-     * @brief End a game with a winner
-     *
-     * @param playerId
-     */
-    void win(const PlayerId playerId);
-
-    /**
-     * @brief End a game on a tie
-     *
-     */
-    void tie();
+    void endGame();
 };

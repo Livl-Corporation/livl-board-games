@@ -3,7 +3,7 @@
 Position Power4::playAsComputer(const PlayerId &playerId)
 {
 
-    unsigned int col, row = 0;
+    int col, row = 0;
 
     do
     {
