@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "../models/position.hpp"
-#include "../grid.hpp"
+#include "grid.hpp"
 #include "../models/player.hpp"
 
 class PositionRequester

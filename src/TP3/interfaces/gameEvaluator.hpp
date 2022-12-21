@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../grid.hpp"
+#include "grid.hpp"
 #include "../models/player.hpp"
 #include <memory>
 

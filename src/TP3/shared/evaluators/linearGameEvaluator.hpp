@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../grid.hpp"
+#include "../../interfaces/grid.hpp"
 #include "../../interfaces/gameEvaluator.hpp"
 
 class LinearGameEvaluator : public GameEvaluator

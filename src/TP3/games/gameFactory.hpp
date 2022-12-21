@@ -5,7 +5,7 @@
 
 #include "../models/player.hpp"
 
-#include "../game.hpp"
+#include "../interfaces/game.hpp"
 
 #include "tictactoe/tictactoe.hpp"
 #include "tictactoe/tictactoePositionRequester.hpp"
