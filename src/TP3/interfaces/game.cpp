@@ -49,6 +49,7 @@ void Game::endGame()
 void Game::nextRound()
 {
     round++;
+    ConsoleHandler::printLine("");
     ConsoleHandler::printHeader("Round N° " + std::to_string(this->getRound()));
 }
 

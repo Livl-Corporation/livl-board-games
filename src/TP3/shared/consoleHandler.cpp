@@ -99,7 +99,7 @@ namespace ConsoleHandler
             ConsoleHandler::print(" ");
         ConsoleHandler::printLine("*");
 
-        ConsoleHandler::printLine("*------------------------------*\n");
+        ConsoleHandler::printLine("*------------------------------*");
     }
 
     void printHeader(const std::string &string)
