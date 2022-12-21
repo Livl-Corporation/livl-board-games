@@ -1,5 +1,5 @@
 #include <memory>
-#include "game.hpp"
+#include "interfaces/game.hpp"
 #include "shared/consoleHandler.hpp"
 #include "models/player.hpp"
 #include "games/gameFactory.hpp"

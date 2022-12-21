@@ -1,18 +1,18 @@
 #pragma once
 
 #include "grid.hpp"
-#include "games/power4/power4Grid.hpp"
-#include "games/tictactoe/tictactoeGrid.hpp"
+#include "../games/power4/power4Grid.hpp"
+#include "../games/tictactoe/tictactoeGrid.hpp"
 
-#include "models/player.hpp"
-#include "models/position.hpp"
+#include "../models/player.hpp"
+#include "../models/position.hpp"
 
-#include "interfaces/gameEvaluator.hpp"
-#include "interfaces/positionRequester.hpp"
+#include "gameEvaluator.hpp"
+#include "positionRequester.hpp"
 
-#include "shared/shared.hpp"
-#include "shared/consoleHandler.hpp"
-#include "shared/exceptions/out-of-bounds-exception.hpp"
+#include "../shared/shared.hpp"
+#include "../shared/consoleHandler.hpp"
+#include "../shared/exceptions/out-of-bounds-exception.hpp"
 
 #include <cstdio>
 #include <vector>

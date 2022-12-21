@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../game.hpp"
+#include "../../interfaces/game.hpp"
 #include "../../models/player.hpp"
 #include "../../shared/shared.hpp"
 

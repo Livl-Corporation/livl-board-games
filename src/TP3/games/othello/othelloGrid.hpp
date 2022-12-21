@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../grid.hpp"
+#include "../../interfaces/grid.hpp"
 #include "../../models/player.hpp"
 
 class OthelloGrid : public Grid<PlayerId>

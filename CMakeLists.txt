@@ -30,8 +30,8 @@ add_executable(tp2
 
 add_executable(tp3
     src/TP3/main.cpp
-    src/TP3/game.cpp
-    src/TP3/grid.cpp
+    src/TP3/interfaces/game.cpp
+    src/TP3/interfaces/grid.cpp
     src/TP3/models/player.cpp
     src/TP3/shared/shared.cpp
     src/TP3/shared/consoleHandler.cpp

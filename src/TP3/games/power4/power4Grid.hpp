@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../grid.hpp"
+#include "../../interfaces/grid.hpp"
 #include "../../models/player.hpp"
 
 class Power4Grid : public Grid<PlayerId>
