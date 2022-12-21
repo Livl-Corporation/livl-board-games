@@ -11,7 +11,7 @@ public:
 
     std::shared_ptr<Grid<PlayerId>> getGrid() const { return this->grid; }
 
-    virtual bool hasGameEnded() = 0;
+    virtual bool hasGameEnded(const PlayerId nextPlayerId) = 0;
 
     virtual PlayerId getWinner() const = 0;
 
