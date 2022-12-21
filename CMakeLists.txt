@@ -30,8 +30,8 @@ add_executable(tp2
 
 add_executable(tp3
     src/TP3/main.cpp
-    src/TP3/game.cpp
-    src/TP3/grid.cpp
+    src/TP3/interfaces/game.cpp
+    src/TP3/interfaces/grid.cpp
     src/TP3/models/player.cpp
     src/TP3/shared/shared.cpp
     src/TP3/shared/consoleHandler.cpp
@@ -42,4 +42,7 @@ add_executable(tp3
     src/TP3/games/tictactoe/tictactoePositionRequester.cpp
     src/TP3/games/tictactoe/tictactoe.cpp
     src/TP3/games/gameFactory.cpp
+    src/TP3/games/othello/othello.cpp
+    src/TP3/games/othello/othelloPositionRequester.cpp
+    src/TP3/games/othello/othelloGameEvaluator.cpp
 )

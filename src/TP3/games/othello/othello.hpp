@@ -3,26 +3,26 @@
 #include "../../interfaces/game.hpp"
 #include "../../models/player.hpp"
 #include "../../shared/shared.hpp"
-#include "power4PositionRequester.hpp"
-#include "../../shared/evaluators/linearGameEvaluator.hpp"
 
 #include <vector>
 #include <memory>
 
-#include "power4Grid.hpp"
+#include "othelloGrid.hpp"
 
-class Power4 : public Game
+class Othello : public Game
 {
 public:
-    Power4(
+    Othello(
         std::vector<Player> players,
         std::unique_ptr<PositionRequester> PositionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator)
-        : Game("Power 4", players, std::move(PositionRequester), std::move(gameEvaluator), std::make_shared<Power4Grid>())
+        : Game("Othello", players, std::move(PositionRequester), std::move(gameEvaluator), std::make_shared<OthelloGrid>())
     {
     }
 
+    void afterPlacementAction(const PlayerId &playerId, const Position position) override;
     Position playAsComputer(const PlayerId &playerId) override;
 
-    static constexpr unsigned int pointsToWin = 4;
+private:
+    void flipPieces(const Position &pos, PlayerId playerId);
 };

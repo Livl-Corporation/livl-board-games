@@ -1,5 +1,5 @@
 #include <memory>
-#include "game.hpp"
+#include "interfaces/game.hpp"
 #include "shared/consoleHandler.hpp"
 #include "models/player.hpp"
 #include "games/gameFactory.hpp"
@@ -7,11 +7,11 @@
 // Function to ask the user for player selection
 unsigned int getPlayerSelection()
 {
-    ConsoleHandler::printHeader("Choix des joueurs");
-
-    ConsoleHandler::printLine("1. Contre l'ordinateur");
-    ConsoleHandler::printLine("2. 2 joueurs");
-    ConsoleHandler::printLine("\nEntrez n'importe quel autre chiffre pour quitter.");
+    ConsoleHandler::printHeader("GAME MODE");
+    ConsoleHandler::printLine("1. Against the computer");
+    ConsoleHandler::printLine("2. 2 players");
+    ConsoleHandler::printLine("Enter any other number to exit.\n");
+    ConsoleHandler::print("Choice : n°");
 
     return ConsoleHandler::readInt();
 }
@@ -30,27 +30,14 @@ std::vector<Player> createPlayers(unsigned int playerSelection)
 // Function to ask the user for game selection
 unsigned int getGameSelection()
 {
-    ConsoleHandler::printHeader("Choix du jeu");
-    ConsoleHandler::printLine("1. Morpion");
-    ConsoleHandler::printLine("2. Puissance 4");
-    ConsoleHandler::printLine("\nEntrez n'importe quel autre chiffre pour quitter.");
-    ConsoleHandler::printLine("Faites votre choix :");
+    ConsoleHandler::printLine("");
+    ConsoleHandler::printHeader("BOARD GAME CHOICE");
+    ConsoleHandler::printLine("1. Tic-Tac-Toe");
+    ConsoleHandler::printLine("2. Power 4");
+    ConsoleHandler::printLine("3. Othello");
+    ConsoleHandler::printLine("Enter any other number to exit.\n");
+    ConsoleHandler::print("Choice : n°");
     return ConsoleHandler::readInt();
-}
-
-// Function to create the requested game based on the given game selection
-std::unique_ptr<Game> createGame(unsigned int gameSelection, const std::vector<Player> &players)
-{
-    if (gameSelection == 1)
-    {
-        return GameFactory::createTicTacToe(players);
-    }
-    else if (gameSelection == 2)
-    {
-        return GameFactory::createPower4(players);
-    }
-
-    return nullptr;
 }
 
 // Function to play the given game
@@ -78,7 +65,7 @@ int main()
         unsigned int gameSelection = getGameSelection();
 
         // Create the requested game
-        std::unique_ptr<Game> game = createGame(gameSelection, players);
+        std::unique_ptr<Game> game = GameFactory::createGame(gameSelection, players);
 
         if (!game)
             return EXIT_SUCCESS; // if return nullptr, exit

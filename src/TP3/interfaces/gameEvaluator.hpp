@@ -1,18 +1,20 @@
 #pragma once
 
-#include "../grid.hpp"
+#include "grid.hpp"
+#include "../models/player.hpp"
 #include <memory>
 
 class GameEvaluator
 {
 public:
-    GameEvaluator(const unsigned int consecutiveIdsToWin)
-    {
-        this->consecutiveIdsToWin = consecutiveIdsToWin;
-    };
+    inline void setGrid(std::shared_ptr<Grid<PlayerId>> grid) { this->grid = grid; }
 
-    virtual bool hasPlayerWon(const PlayerId id, const Grid<PlayerId> &grid) const = 0;
+    std::shared_ptr<Grid<PlayerId>> getGrid() const { return this->grid; }
 
-protected:
-    unsigned int consecutiveIdsToWin;
+    virtual bool hasGameEnded(const PlayerId nextPlayerId) = 0;
+
+    virtual PlayerId getWinner() const = 0;
+
+private:
+    std::shared_ptr<Grid<PlayerId>> grid;
 };

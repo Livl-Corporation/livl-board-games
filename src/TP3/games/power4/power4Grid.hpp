@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../grid.hpp"
+#include "../../interfaces/grid.hpp"
 #include "../../models/player.hpp"
 
 class Power4Grid : public Grid<PlayerId>
@@ -10,7 +10,7 @@ public:
 
     Power4Grid(const Grid<PlayerId> &other) : Grid<PlayerId>(other) {}
 
-    unsigned int firstRowAvailableInCol(const unsigned int col) const;
+    int firstRowAvailableInCol(const int col) const;
 
 private:
     static constexpr unsigned int xSize = 7; // declared as constexpr so that they can be used as compile-time constants.

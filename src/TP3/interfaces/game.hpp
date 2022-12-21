@@ -1,21 +1,20 @@
 #pragma once
 
 #include "grid.hpp"
-#include "games/power4/power4Grid.hpp"
-#include "games/tictactoe/tictactoeGrid.hpp"
+#include "../games/power4/power4Grid.hpp"
+#include "../games/tictactoe/tictactoeGrid.hpp"
 
-#include "models/player.hpp"
-#include "models/position.hpp"
+#include "../models/player.hpp"
+#include "../models/position.hpp"
 
-#include "interfaces/gameEvaluator.hpp"
-#include "interfaces/positionRequester.hpp"
+#include "gameEvaluator.hpp"
+#include "positionRequester.hpp"
 
-#include "shared/shared.hpp"
-#include "shared/consoleHandler.hpp"
-#include "shared/exceptions/out-of-bounds-exception.hpp"
+#include "../shared/shared.hpp"
+#include "../shared/consoleHandler.hpp"
+#include "../shared/exceptions/out-of-bounds-exception.hpp"
 
 #include <cstdio>
-#include <sstream>
 #include <vector>
 #include <string>
 #include <memory>
@@ -34,7 +33,7 @@ public:
 
     inline std::string getName() const { return this->name; };
 
-    Grid<PlayerId> &getGrid() { return *this->grid; }
+    std::shared_ptr<Grid<PlayerId>> getGrid() const { return this->grid; }
 
     std::vector<Player> getPlayers() const;
 
@@ -44,13 +43,15 @@ protected:
         const std::vector<Player> players,
         std::unique_ptr<PositionRequester> positionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator,
-        std::unique_ptr<Grid<PlayerId>> grid);
+        std::shared_ptr<Grid<PlayerId>> grid);
 
     std::unique_ptr<PositionRequester> positionRequester;
 
     std::unique_ptr<GameEvaluator> gameEvaluator;
 
     virtual Position playAsComputer(const PlayerId &playerId) = 0;
+
+    virtual void afterPlacementAction(const PlayerId &playerId, const Position position){};
 
 private:
     /**
@@ -76,40 +77,18 @@ private:
     /**
      * @brief The grid of the game
      */
-    std::unique_ptr<Grid<PlayerId>> grid;
+    std::shared_ptr<Grid<PlayerId>> grid;
 
     /**
      * @brief Start playing the next game round
      */
     void nextRound();
 
-    /**
-     * @brief Get the next player to play
-     *
-     * @return Player the player Object who is playing
-     */
-    Player nextPlayer() const;
+    PlayerId getPlayerId(unsigned int roundNumber) const;
 
-    /**
-     * @brief Drop the player where has choosen to play
-     */
-    void playerChoosePosition(const Player &player);
+    Player getNextPlayer() const;
 
-    /**
-     * @brief Check if the player has won
-     */
-    bool checkIfPlayerFinishedGame(const PlayerId playerId);
+    void playerChoosePosition(const PlayerId playerId, const bool isComputer);
 
-    /**
-     * @brief End a game with a winner
-     *
-     * @param playerId
-     */
-    void win(const PlayerId playerId);
-
-    /**
-     * @brief End a game on a tie
-     *
-     */
-    void tie();
+    void endGame();
 };
