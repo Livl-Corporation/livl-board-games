@@ -15,6 +15,7 @@
 
 #include "othello/othello.hpp"
 #include "othello/othelloPositionRequester.hpp"
+#include "othello/othelloGameEvaluator.hpp"
 
 #include "../shared/evaluators/linearGameEvaluator.hpp"
 

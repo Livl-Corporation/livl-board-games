@@ -11,7 +11,7 @@ public:
         this->consecutiveIdsToWin = consecutiveIdsToWin;
     }
 
-    bool hasGameEnded() override;
+    bool hasGameEnded(const PlayerId nextPlayerId) override;
 
     PlayerId getWinner() const override;
 

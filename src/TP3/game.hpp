@@ -84,12 +84,9 @@ private:
      */
     void nextRound();
 
-    /**
-     * @brief Get the next player to play
-     *
-     * @return Player the player Object who is playing
-     */
-    Player nextPlayer() const;
+    PlayerId getPlayerId(unsigned int roundNumber) const;
+
+    Player getNextPlayer() const;
 
     void playerChoosePosition(const PlayerId playerId, const bool isComputer);
 

@@ -23,10 +23,10 @@ void Game::play()
     do
     {
         this->nextRound();
-        const Player player = this->nextPlayer();
+        const Player player = this->getNextPlayer();
         this->playerChoosePosition(player.getId(), player.getIsComputer());
 
-    } while (!this->gameEvaluator->hasGameEnded());
+    } while (!this->gameEvaluator->hasGameEnded(getPlayerId(this->getRound() - 1)+1));
 
     this->endGame();
 }
@@ -52,11 +52,15 @@ void Game::nextRound()
     ConsoleHandler::printHeader("Tour N° " + std::to_string(this->getRound()));
 }
 
-// Determines who is playing this round
-Player Game::nextPlayer() const
+PlayerId Game::getPlayerId(unsigned int roundNumber) const
 {
-    unsigned int playerIndex = (round - 1) % playerCount;
-    return players[playerIndex];
+    return (roundNumber - 1) % playerCount;
+}
+
+// Determines who is playing next
+Player Game::getNextPlayer() const
+{
+    return players[getPlayerId(this->getRound())];
 }
 
 // Drop player on a position
