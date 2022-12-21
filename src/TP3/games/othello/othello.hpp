@@ -20,7 +20,9 @@ public:
     {
     }
 
-    virtual void afterPlacementAction(const PlayerId &playerId, const Position position) override;
-
+    void afterPlacementAction(const PlayerId &playerId, const Position position) override;
     Position playAsComputer(const PlayerId &playerId) override;
+private:
+    static void flipPieces(const Position& pos, PlayerId playerId, Grid<PlayerId>& grid);
+    static std::vector<Position> getFlippablePieces(const Position& pos, PlayerId playerId, const Position& direction, const Grid<PlayerId>& grid);
 };

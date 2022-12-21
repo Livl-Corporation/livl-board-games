@@ -1,6 +1,6 @@
 #include "power4Grid.hpp"
 
-unsigned int Power4Grid::firstRowAvailableInCol(unsigned int col) const
+int Power4Grid::firstRowAvailableInCol(int col) const
 {
     Position position{col, (this->getYSize() - 1)};
 

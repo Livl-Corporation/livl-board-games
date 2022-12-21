@@ -58,6 +58,12 @@ bool Grid<T>::place(const Position &position, const T &element)
 }
 
 template <typename T>
+bool Grid<T>::change(const Position &position, const T &element)
+{
+    this->grid[position.y][position.x] = element;
+}
+
+template <typename T>
 std::vector<Position> Grid<T>::getEmptyPositions() const
 {
     std::vector<Position> freePositions;
