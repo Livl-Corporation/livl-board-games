@@ -23,7 +23,7 @@ public:
 
     bool isPositionInBounds(const Position &position) const;
 
-    bool isGridFull() const;
+    bool isFull() const;
 
     bool place(const Position &position, const T &element);
     bool replaceAt(const Position &position, const T &element);
@@ -31,7 +31,8 @@ public:
     T getElementAt(const Position &position) const;
     std::vector<Position> getEmptyPositions() const;
 
-    void displayGrid() const;
+    void display() const;
+
 protected:
     Grid(const unsigned int x, const unsigned int y, const T &defaultValue)
         : xSize(x), ySize(y), grid(y, std::vector<T>(x, defaultValue))

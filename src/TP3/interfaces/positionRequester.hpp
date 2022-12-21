@@ -10,5 +10,15 @@ class PositionRequester
 {
 
 public:
-    virtual Position askForPosition(const PlayerId playerId, const Grid<PlayerId> &grid) const = 0;
+    inline void setGrid(std::shared_ptr<Grid<PlayerId>> grid) { this->grid = grid; }
+
+    std::shared_ptr<Grid<PlayerId>> getGrid() const
+    {
+        return this->grid;
+    }
+
+    virtual Position askForPosition(const PlayerId playerId) const = 0;
+
+private:
+    std::shared_ptr<Grid<PlayerId>> grid;
 };

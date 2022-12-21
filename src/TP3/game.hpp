@@ -15,7 +15,6 @@
 #include "shared/exceptions/out-of-bounds-exception.hpp"
 
 #include <cstdio>
-#include <sstream>
 #include <vector>
 #include <string>
 #include <memory>
@@ -34,7 +33,7 @@ public:
 
     inline std::string getName() const { return this->name; };
 
-    Grid<PlayerId> &getGrid() { return *this->grid; }
+    std::shared_ptr<Grid<PlayerId>> getGrid() const { return this->grid; }
 
     std::vector<Player> getPlayers() const;
 
@@ -44,7 +43,7 @@ protected:
         const std::vector<Player> players,
         std::unique_ptr<PositionRequester> positionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator,
-        std::unique_ptr<Grid<PlayerId>> grid);
+        std::shared_ptr<Grid<PlayerId>> grid);
 
     std::unique_ptr<PositionRequester> positionRequester;
 
@@ -78,7 +77,7 @@ private:
     /**
      * @brief The grid of the game
      */
-    std::unique_ptr<Grid<PlayerId>> grid;
+    std::shared_ptr<Grid<PlayerId>> grid;
 
     /**
      * @brief Start playing the next game round
@@ -92,26 +91,7 @@ private:
      */
     Player nextPlayer() const;
 
-    /**
-     * @brief Drop the player where has choosen to play
-     */
-    void playerChoosePosition(const Player &player);
+    void playerChoosePosition(const PlayerId playerId, const bool isComputer);
 
-    /**
-     * @brief Check if the player has won
-     */
-    bool checkIfPlayerFinishedGame(const PlayerId playerId);
-
-    /**
-     * @brief End a game with a winner
-     *
-     * @param playerId
-     */
-    void win(const PlayerId playerId);
-
-    /**
-     * @brief End a game on a tie
-     *
-     */
-    void tie();
+    void endGame();
 };

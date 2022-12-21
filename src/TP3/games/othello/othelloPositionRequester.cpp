@@ -1,16 +1,15 @@
 #include "othelloPositionRequester.hpp"
 
-Position OthelloPositionRequester::askForPosition(const PlayerId playerId, const Grid<PlayerId> &grid) const
+Position OthelloPositionRequester::askForPosition(const PlayerId playerId) const
 {
     while (true)
     {
         std::string outputAskPlayer = "Où voulez vous placer votre pion (";
         outputAskPlayer += Player::getPlayerChar(playerId);
-        outputAskPlayer += ") entre 1,1 et " + std::to_string(grid.getXSize()) + "," + std::to_string(grid.getYSize()) + " ?";
+        outputAskPlayer += ") entre 1,1 et " + std::to_string(this->getGrid()->getXSize()) + "," + std::to_string(this->getGrid()->getYSize()) + " ?";
 
         ConsoleHandler::printLine(outputAskPlayer);
 
-        // Read two values using the readValues function
         std::vector<int> values = ConsoleHandler::readValues(2);
 
         // Extract the row and col values from the vector
@@ -18,10 +17,10 @@ Position OthelloPositionRequester::askForPosition(const PlayerId playerId, const
         int col = values[1];
 
         Position pos{col - 1, row - 1};
-        if (grid.isPositionInBounds(pos) && grid.isPositionEmpty(pos))
+        if (this->getGrid()->isPositionInBounds(pos) && this->getGrid()->isPositionEmpty(pos))
         {
             // Check if the position is valid according to the rules of the Reversi game
-            if (canPlaceToken(pos, playerId, grid))
+            if (OthelloPositionRequester::canPlaceToken(pos, playerId, *this->getGrid()))
             {
                 return pos;
             }
@@ -36,8 +35,7 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId
     // Check the eight possible directions from the position that the player choose to place his token
     // (left-up, up, right-up, right, right-down, down, left-down, left)
     static const std::vector<Position> directions{
-            {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}
-    };
+        {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
 
     for (int i = 0; i < directions.size(); i++)
     {
@@ -47,7 +45,8 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId
         while (grid.isPositionInBounds({x, y}))
         {
             int idInCell = grid.getElementAt({x, y});
-            if(idInCell == NO_PLAYER){
+            if (idInCell == NO_PLAYER)
+            {
                 break;
             }
             else if (idInCell != playerId)
@@ -69,4 +68,3 @@ bool OthelloPositionRequester::canPlaceToken(const Position &pos, const PlayerId
     }
     return false;
 }
-
