@@ -1,15 +1,17 @@
 #include "game.hpp"
 
+#include <utility>
+
 // This tells the compiler that there is a class template called Grid that can be instantiated with any type.
 template <typename T>
 class Grid;
 
 Game::Game(
-    const std::string name,
-    const std::vector<Player> players,
+    std::string name,
+    const std::vector<Player>& players,
     std::unique_ptr<PositionRequester> positionRequester,
     std::unique_ptr<GameEvaluator> gameEvaluator, std::shared_ptr<Grid<PlayerId>> grid)
-    : players(players), grid(grid), name(name), positionRequester(std::move(positionRequester)), gameEvaluator(std::move(gameEvaluator))
+    : players(players), grid(std::move(grid)), name(std::move(name)), positionRequester(std::move(positionRequester)), gameEvaluator(std::move(gameEvaluator))
 {
     this->playerCount = players.size();
     this->gameEvaluator->setGrid(this->grid);
@@ -65,7 +67,7 @@ Player Game::getNextPlayer() const
 }
 
 // Drop player on a position
-void Game::playerChoosePosition(const PlayerId playerId, const bool isComputer)
+void Game::playerChoosePosition(const PlayerId &playerId, const bool isComputer)
 {
     Position position{};
 

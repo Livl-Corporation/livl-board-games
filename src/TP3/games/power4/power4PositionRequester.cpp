@@ -1,6 +1,6 @@
 #include "power4PositionRequester.hpp"
 
-Position Power4PositionRequester::askForPosition(const PlayerId playerId) const
+Position Power4PositionRequester::askForPosition(const PlayerId &playerId) const
 {
     int col, row;
 

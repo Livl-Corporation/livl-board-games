@@ -15,21 +15,23 @@ template <typename T>
 class Grid
 {
 public:
-    inline int getXSize() const { return this->xSize; };
+    [[nodiscard]] inline int getXSize() const { return this->xSize; };
 
-    inline int getYSize() const { return this->ySize; };
+    [[nodiscard]] inline int getYSize() const { return this->ySize; };
 
-    bool isPositionEmpty(const Position &position) const;
+    [[nodiscard]] bool isPositionEmpty(const Position &position) const;
 
-    bool isPositionInBounds(const Position &position) const;
+    [[nodiscard]] bool isPositionInBounds(const Position &position) const;
 
-    bool isFull() const;
+    [[nodiscard]] bool isFull() const;
 
     bool place(const Position &position, const T &element);
+
     bool replaceAt(const Position &position, const T &element);
 
     T getElementAt(const Position &position) const;
-    std::vector<Position> getEmptyPositions() const;
+
+    [[nodiscard]] std::vector<Position> getEmptyPositions() const;
 
     void display() const;
 

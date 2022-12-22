@@ -14,7 +14,7 @@ class TicTacToe : public Game
 {
 public:
     TicTacToe(
-        std::vector<Player> players,
+        const std::vector<Player>& players,
         std::unique_ptr<PositionRequester> positionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator)
         : Game("Tic Tac Toe", players, std::move(positionRequester), std::move(gameEvaluator), std::make_shared<TicTacToeGrid>())

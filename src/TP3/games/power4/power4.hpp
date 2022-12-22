@@ -15,7 +15,7 @@ class Power4 : public Game
 {
 public:
     Power4(
-        std::vector<Player> players,
+        const std::vector<Player>& players,
         std::unique_ptr<PositionRequester> PositionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator)
         : Game("Power 4", players, std::move(PositionRequester), std::move(gameEvaluator), std::make_shared<Power4Grid>())

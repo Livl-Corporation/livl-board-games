@@ -1,6 +1,6 @@
 #include "othelloPositionRequester.hpp"
 
-Position OthelloPositionRequester::askForPosition(const PlayerId playerId) const
+Position OthelloPositionRequester::askForPosition(const PlayerId &playerId) const
 {
     while (true)
     {

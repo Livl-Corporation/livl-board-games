@@ -88,7 +88,7 @@ std::vector<Position> Grid<T>::getEmptyPositions() const
     {
         for (int col = 0; col < this->xSize; col++)
         {
-            Position position = {x : col, y : row};
+            Position position = {.x =  col, .y =  row};
             if (this->isPositionEmpty(position))
             {
                 freePositions.push_back(position);
@@ -130,7 +130,7 @@ void Grid<T>::display() const
 
         for (int col = 0; col < this->getXSize(); col++)
         {
-            std::string characterAsString(1, Player::getPlayerChar(this->getElementAt({x : col, y : row})));
+            std::string characterAsString(1, Player::getPlayerChar(this->getElementAt({.x =  col, .y =  row})));
             ConsoleHandler::print(characterAsString);
 
             if (col < this->getXSize() - 1)

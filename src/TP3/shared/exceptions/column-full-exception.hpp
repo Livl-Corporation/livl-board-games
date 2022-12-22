@@ -5,7 +5,7 @@
 class ColumnFullException : public std::exception
 {
 public:
-    const char *what() const throw()
+    [[nodiscard]] const char *what() const noexcept override
     {
         return "This column is full !";
     }

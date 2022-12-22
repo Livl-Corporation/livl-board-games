@@ -3,17 +3,20 @@
 #include "grid.hpp"
 #include "../models/player.hpp"
 #include <memory>
+#include <utility>
 
 class GameEvaluator
 {
 public:
-    inline void setGrid(std::shared_ptr<Grid<PlayerId>> grid) { this->grid = grid; }
+    virtual ~GameEvaluator() = default;
 
-    std::shared_ptr<Grid<PlayerId>> getGrid() const { return this->grid; }
+    inline void setGrid(std::shared_ptr<Grid<PlayerId>> _grid) { this->grid = std::move(_grid); }
 
-    virtual bool hasGameEnded(const PlayerId nextPlayerId) = 0;
+    [[nodiscard]] std::shared_ptr<Grid<PlayerId>> getGrid() const { return this->grid; }
 
-    virtual PlayerId getWinner() const = 0;
+    virtual bool hasGameEnded(const PlayerId &nextPlayerId) = 0;
+
+    [[nodiscard]] virtual PlayerId getWinner() const = 0;
 
 private:
     std::shared_ptr<Grid<PlayerId>> grid;

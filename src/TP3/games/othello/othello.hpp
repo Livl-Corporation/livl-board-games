@@ -13,14 +13,14 @@ class Othello : public Game
 {
 public:
     Othello(
-        std::vector<Player> players,
+        const std::vector<Player>& players,
         std::unique_ptr<PositionRequester> PositionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator)
         : Game("Othello", players, std::move(PositionRequester), std::move(gameEvaluator), std::make_shared<OthelloGrid>())
     {
     }
 
-    void afterPlacementAction(const PlayerId &playerId, const Position position) override;
+    void afterPlacementAction(const PlayerId &playerId, const Position &position) override;
     Position playAsComputer(const PlayerId &playerId) override;
 
 private:

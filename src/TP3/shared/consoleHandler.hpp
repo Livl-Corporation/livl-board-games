@@ -13,4 +13,4 @@ namespace ConsoleHandler
     std::vector<int> readValues(int numValues);
     void printTitle(const std::string &string);
     void printHeader(const std::string &string);
-};
+}
