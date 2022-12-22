@@ -1,92 +1,104 @@
-# cplusplus
+<h1 align="center"><img src="https://user-images.githubusercontent.com/62793491/209164462-fc75b654-15e8-47ac-9fa0-4bd006de8d02.png" width="224px"/><br/>
+  Board Game Livl
+</h1>
+<p align="center">In the Livl Board Game, you will be able to play Othello, Checkers, Tic Tac Toe and Power 4 !</p>
 
-## **Lien du rapport du TP3 - SOLID : [rapport TP3 SOLID](src/README.md)**
+# 📃 Table of content
 
-## Getting started
+- [🧑‍💻 Installation](#-compiling-the-code-with-cmake)  
+    - [🛠 Compiling the code with CMake](#-compiling-the-code-with-cmake)
+    - [🛠 Installation Locally](#-installation-locally)
+- [🎮 How to Play](#-how-to-play)
+    - [❌ Tic Tac Toe](#-tic-tac-toe)
+    - [⭕ Power4](#-power4)
+    - [⚪ Othello](#-othello)
+    - [♟ Checkers](#-checkers)
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+# 🧑‍💻 Installation
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+> As you may be aware, in order to compile and run C++ programs, you will need to have a compiler installed on your system. Some popular compilers for C++ include g++ and gcc.
 
-## Add your files
+- On Windows:
+  - Installing the MinGW compiler, which includes gcc and g++.
+  - Installing the Visual C++ Build Tools, which includes cl.exe, the Microsoft C++ compiler.
+  
+- On Linux:
+    - Installing the gcc and g++ packages using your distribution's package manager (e.g., apt-get, yum, etc.).
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- On macOS:
+  - Installing the gcc and g++ packages using Homebrew.
+  - Installing the Xcode command line tools, which includes clang, the LLVM C++ compiler.
 
+## 🛠‍ Compiling the code with CMake
+1. Make sure you have CMake installed on your system. If you do not have CMake, you can download it from the CMake website.
+2. Open a terminal and navigate to the directory where you have the CMakeLists.txt file.
+3. Run the following command to create a build directory:
+    ```bash
+    $ mkdir build
+    ```
+4. Navigate to the build directory:
+    ```bash
+    $ cd build
+    ```
+5. Run CMake to generate the build files:
+    ```bash
+    $ cmake ..
+    ```
+6. Run make to build the code:
+    ```bash
+    $ make
+    ```
+
+## 🛠 Installation Locally
+
+- To install our project locally, `fork` our repository, and in an empty directory,
+  type the following command to `clone` your fork :
+
+```console
+$> git clone git@gitlab.com:cours-franck-g/cplusplus.git
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/cours-franck-g/cplusplus.git
-git branch -M main
-git push -uf origin main
+
+# 🎮 How to Play
+
+- Run the othello executable from the build directory:
+
+```bash
+$ ./boardgame
 ```
 
-## Integrate with your tools
+## ❌ Tic Tac Toe
 
-- [ ] [Set up project integrations](https://gitlab.com/cours-franck-g/cplusplus/-/settings/integrations)
+1. The game will prompt you to choose which player goes first (X or O). Choose your desired player by entering X or O.
+2. The game will then display the current state of the board, with empty squares represented by _, and player moves represented by X or O.
+3. To make a move, enter the row and column where you want to place your symbol. For example, to place an X in the top left corner, you would enter 0 0.
+4. The game will then update the board and switch to the other player's turn.
+5. The game continues until one player gets three of their symbols in a row (horizontally, vertically, or diagonally), or the board is full and the game is a draw.
 
-## Collaborate with your team
+## ⭕ Power4
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+1. The game will prompt you to choose which player goes first (X or O). Choose your desired player by entering X or O.
+2. The game will then display the current state of the board, with empty squares represented by _, and player moves represented by X or O.
+3. To make a move, enter the column where you want to place your symbol. The symbol will be placed in the lowest empty square in the chosen column.
+4. The game will then update the board and switch to the other player's turn.
+5. The game continues until one player gets four of their symbols in a row (horizontally, vertically, or diagonally), or the board is full and the game is a draw.
 
-## Test and Deploy
+## ⚪ Othello
 
-Use the built-in continuous integration in GitLab.
+1. The game will prompt you to choose which player goes first (X or O). Choose your desired player by entering X or O.
+2. The game will then display the current state of the board, with empty squares represented by _, player X's moves represented by X, and player O's moves represented by O.
+3. To make a move, enter the row and column where you want to place your symbol. For example, to place an X in the top left corner, you would enter 0 0.
+4. The game will then update the board and switch to the other player's turn.
+5. The game continues until one player gets the majority of the board filled with their symbols, or the board is full and no more moves can be made.
+6. The player with the most symbols on the board at the end of the game wins.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+> Note: In Othello, players can also capture their opponent's pieces by sandwiching them between their own pieces. When this occurs, the opponent's pieces are flipped to the current player's color.
 
-***
+## ♟ Checkers
 
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+1. Once the program is running, you should see a graphical interface for the game of Checkers.
+2. The game is played on a 8x8 board, with each player starting with 12 pieces of their own color (typically red and white).
+3. The objective of the game is to capture all of the opponent's pieces, or to block them so that they cannot make any more moves.
+4. Pieces can only move diagonally forward, and can only capture other pieces by jumping over them. A player can capture multiple pieces in a single turn by jumping over them in sequence.
+5. The player with the red pieces moves first, and players take turns making moves until the game is over.
+6. To make a move, select a piece by clicking on it, then click on the desired destination square. The game will automatically handle capturing pieces and displaying the updated board.
+7. The game ends when one player has captured all of the opponent's pieces, or when the board is blocked and no more moves can be made.
