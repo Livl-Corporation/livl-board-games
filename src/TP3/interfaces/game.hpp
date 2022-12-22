@@ -22,25 +22,27 @@
 class Game
 {
 public:
+    virtual ~Game() = default;
+
     /**
      * @brief Start the game
      */
     void play();
 
-    inline unsigned int getRound() const { return this->round; };
+    [[nodiscard]] inline unsigned int getRound() const { return this->round; };
 
-    inline unsigned int getPlayerCount() const { return this->playerCount; };
+    [[nodiscard]] inline unsigned int getPlayerCount() const { return this->playerCount; };
 
-    inline std::string getName() const { return this->name; };
+    [[nodiscard]] inline std::string getName() const { return this->name; };
 
-    std::shared_ptr<Grid<PlayerId>> getGrid() const { return this->grid; }
+    [[nodiscard]] std::shared_ptr<Grid<PlayerId>> getGrid() const { return this->grid; }
 
-    std::vector<Player> getPlayers() const;
+    [[nodiscard]] std::vector<Player> getPlayers() const;
 
 protected:
     Game(
-        const std::string name,
-        const std::vector<Player> players,
+        std::string  name,
+        const std::vector<Player>& players,
         std::unique_ptr<PositionRequester> positionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator,
         std::shared_ptr<Grid<PlayerId>> grid);
@@ -51,7 +53,7 @@ protected:
 
     virtual Position playAsComputer(const PlayerId &playerId) = 0;
 
-    virtual void afterPlacementAction(const PlayerId &playerId, const Position position){};
+    virtual void afterPlacementAction(const PlayerId &playerId, const Position &position){};
 
 private:
     /**
@@ -84,11 +86,11 @@ private:
      */
     void nextRound();
 
-    PlayerId getPlayerId(unsigned int roundNumber) const;
+    [[nodiscard]] PlayerId getPlayerId(unsigned int roundNumber) const;
 
-    Player getNextPlayer() const;
+    [[nodiscard]] Player getNextPlayer() const;
 
-    void playerChoosePosition(const PlayerId playerId, const bool isComputer);
+    void playerChoosePosition(const PlayerId &playerId, bool isComputer);
 
     void endGame();
 };

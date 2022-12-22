@@ -14,7 +14,7 @@ public:
         this->place({4, 3}, 2);
     };
 
-    OthelloGrid(const Grid<PlayerId> &other) : Grid<PlayerId>(other) {}
+    explicit OthelloGrid(const Grid<PlayerId> &other) : Grid<PlayerId>(other) {}
 
 private:
     static constexpr unsigned int size = 8;

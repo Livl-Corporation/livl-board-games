@@ -1,6 +1,6 @@
 #include "othelloGameEvaluator.hpp"
 
-bool OthelloGameEvaluator::hasGameEnded(const PlayerId nextPlayerId)
+bool OthelloGameEvaluator::hasGameEnded(const PlayerId &nextPlayerId)
 {
     std::vector<Position> ids = OthelloGameEvaluator::getValidPositions(nextPlayerId, *this->getGrid());
     return this->getGrid()->isFull() || ids.empty();
@@ -45,7 +45,7 @@ PlayerId OthelloGameEvaluator::getWinner() const
     }
 }
 
-bool OthelloGameEvaluator::canPlaceToken(const Position &pos, const PlayerId playerId, const Grid<PlayerId> &grid)
+bool OthelloGameEvaluator::canPlaceToken(const Position &pos, PlayerId playerId, const Grid<PlayerId> &grid)
 {
     // Check the eight possible directions from the position that the player choose to place his token
     // (left-up, up, right-up, right, right-down, down, left-down, left)
@@ -64,7 +64,8 @@ bool OthelloGameEvaluator::canPlaceToken(const Position &pos, const PlayerId pla
             {
                 break;
             }
-            else if (idInCell != playerId)
+
+            if (idInCell != playerId)
             {
                 foundOpponent = true;
             }
@@ -77,6 +78,7 @@ bool OthelloGameEvaluator::canPlaceToken(const Position &pos, const PlayerId pla
                 // We reached a blank cell or a sequence of our own tokens, so we can stop searching in this direction
                 break;
             }
+
             x += direction.x;
             y += direction.y;
         }
@@ -84,7 +86,7 @@ bool OthelloGameEvaluator::canPlaceToken(const Position &pos, const PlayerId pla
     return false;
 }
 
-std::vector<Position> OthelloGameEvaluator::getValidPositions(PlayerId playerId, const Grid<PlayerId> &grid)
+std::vector<Position> OthelloGameEvaluator::getValidPositions(const PlayerId &playerId, const Grid<PlayerId> &grid)
 {
     std::vector<Position> validPositions;
 
@@ -106,7 +108,7 @@ std::vector<Position> OthelloGameEvaluator::getValidPositions(PlayerId playerId,
     return validPositions;
 }
 
-Position OthelloGameEvaluator::getBestPosition(const std::vector<Position> &validPositions, PlayerId playerId, const Grid<PlayerId> &grid)
+Position OthelloGameEvaluator::getBestPosition(const std::vector<Position> &validPositions, const PlayerId &playerId, const Grid<PlayerId> &grid)
 {
     // Start with the first position in the list
     Position bestPosition = validPositions[0];
@@ -133,7 +135,7 @@ Position OthelloGameEvaluator::getBestPosition(const std::vector<Position> &vali
     return bestPosition;
 }
 
-std::vector<Position> OthelloGameEvaluator::getFlippablePieces(const Position &pos, PlayerId playerId, const Position &direction, const Grid<PlayerId> &grid)
+std::vector<Position> OthelloGameEvaluator::getFlippablePieces(const Position &pos, const PlayerId &playerId, const Position &direction, const Grid<PlayerId> &grid)
 {
     std::vector<Position> pieces;
 

@@ -9,5 +9,5 @@
 class Power4PositionRequester : public PositionRequester
 {
 public:
-    Position askForPosition(const PlayerId playerId) const override;
+    [[nodiscard]] Position askForPosition(const PlayerId &playerId) const override;
 };

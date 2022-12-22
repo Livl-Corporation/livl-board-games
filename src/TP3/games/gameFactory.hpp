@@ -21,7 +21,7 @@
 
 namespace GameFactory
 {
-    std::unique_ptr<Game> createGame(const unsigned int gameId, const std::vector<Player> &players);
+    std::unique_ptr<Game> createGame(unsigned int gameId, const std::vector<Player> &players);
     std::unique_ptr<Game> createPower4(const std::vector<Player> &players);
     std::unique_ptr<Game> createTicTacToe(const std::vector<Player> &players);
     std::unique_ptr<Game> createOthello(const std::vector<Player> &players);

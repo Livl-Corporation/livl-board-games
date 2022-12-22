@@ -12,9 +12,9 @@ public:
         this->isComputer = isComputer;
     }
 
-    inline char getId() const { return this->id; };
+    [[nodiscard]] inline char getId() const { return static_cast<char>(this->id); };
 
-    inline bool getIsComputer() const { return this->isComputer; };
+    [[nodiscard]] inline bool getIsComputer() const { return this->isComputer; };
 
     static char getPlayerChar(PlayerId playerId);
 

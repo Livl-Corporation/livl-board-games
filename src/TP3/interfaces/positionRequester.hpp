@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <utility>
 
 #include "../models/position.hpp"
 #include "grid.hpp"
@@ -10,14 +11,13 @@ class PositionRequester
 {
 
 public:
-    inline void setGrid(std::shared_ptr<Grid<PlayerId>> grid) { this->grid = grid; }
+    virtual ~PositionRequester() = default;
 
-    std::shared_ptr<Grid<PlayerId>> getGrid() const
-    {
-        return this->grid;
-    }
+    inline void setGrid(std::shared_ptr<Grid<PlayerId>> _grid) { this->grid = std::move(_grid); }
 
-    virtual Position askForPosition(const PlayerId playerId) const = 0;
+    [[nodiscard]] std::shared_ptr<Grid<PlayerId>> getGrid() const { return this->grid; }
+
+    [[nodiscard]] virtual Position askForPosition(const PlayerId &playerId) const = 0;
 
 private:
     std::shared_ptr<Grid<PlayerId>> grid;

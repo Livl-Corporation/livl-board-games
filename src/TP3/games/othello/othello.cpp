@@ -12,7 +12,7 @@ Position Othello::playAsComputer(const PlayerId &playerId)
     return bestPosition;
 }
 
-void Othello::afterPlacementAction(const PlayerId &playerId, const Position position)
+void Othello::afterPlacementAction(const PlayerId &playerId, const Position &position)
 {
     flipPieces(position, playerId);
 }
