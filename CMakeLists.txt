@@ -1,9 +1,20 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.5)
 
-project(tp-cpp)
+project(Livl VERSION 0.1 LANGUAGES CXX)
 
-add_executable(boardgame
-        src/main.cpp
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+
+set(PROJECT_SOURCES
         src/interfaces/game.cpp
         src/interfaces/grid.cpp
         src/models/player.cpp
@@ -19,31 +30,45 @@ add_executable(boardgame
         src/games/othello/othello.cpp
         src/games/othello/othelloPositionRequester.cpp
         src/games/othello/othelloGameEvaluator.cpp
+        src/forms/main.cpp
+        src/forms/menu.cpp
+        src/forms/menu.h
+        src/forms/menu.ui
+)
+
+if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+    qt_add_executable(Livl
+        MANUAL_FINALIZATION
+        ${PROJECT_SOURCES}
+    )
+# Define target properties for Android with Qt 6 as:
+#    set_property(TARGET Livl APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
+# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
+else()
+    if(ANDROID)
+        add_library(Livl SHARED
+            ${PROJECT_SOURCES}
         )
+# Define properties for Android with Qt 5 after find_package() calls as:
+#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
+    else()
+        add_executable(Livl
+            ${PROJECT_SOURCES}
+        )
+    endif()
+endif()
 
-add_executable(tp1-ex1
-        archives/TP1-ex1/main.cpp
-        archives/TP1-ex1/functions.cpp
+target_link_libraries(Livl PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
+set_target_properties(Livl PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
 )
 
-add_executable(tp1-tenis
-        archives/TP1-tenis/main.cpp
-)
-
-add_executable(tp1-ex3
-        archives/TP1-ex3/main.cpp
-        archives/TP1-ex3/functions.cpp
-)
-
-add_executable(tp1-ex3_2
-        archives/TP1-ex3_2/main.cpp
-)
-
-add_executable(tp2
-        archives/TP2/main.cpp
-        archives/TP2/rectangle.cpp
-        archives/TP2/round.cpp
-        archives/TP2/triangle.cpp
-        archives/TP2/functions.cpp
-)
-
+if(QT_VERSION_MAJOR EQUAL 6)
+    qt_finalize_executable(Livl)
+endif()
