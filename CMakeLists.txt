@@ -34,6 +34,7 @@ set(PROJECT_SOURCES
         src/forms/menu.cpp
         src/forms/menu.h
         src/forms/menu.ui
+        img/img.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

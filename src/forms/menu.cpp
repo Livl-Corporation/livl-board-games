@@ -5,6 +5,7 @@ Menu::Menu(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Menu)
 {
+    QCoreApplication::applicationDirPath();
     ui->setupUi(this);
     this->setupUI();
     this->showGameModesDialog();
@@ -17,67 +18,51 @@ void Menu::setupUI()
 
 void Menu::showGameModesDialog()
 {
-        QLabel* title = new QLabel("Welcome to Livl Boardgame", this);
-        title->setAlignment(Qt::AlignCenter);
+    QLabel* title = new QLabel("Welcome to Livl Boardgame", this);
+    title->setAlignment(Qt::AlignCenter);
 
-        // Appliquer une police d'écriture en grande taille
-        QFont fontTitle("Verdana", 30);
-        title->setFont(fontTitle);
+    QFont fontTitle("Verdana", 30);
+    title->setFont(fontTitle);
 
-        // Création du QLabel pour l'image
-        QFileInfo fileInfo("../../img/LIVL_CPP.png");
-        QString absolutePath = fileInfo.absoluteFilePath();
+    QLabel* imageLabel = new QLabel(this);
+    QPixmap image(":/img/logo.png"); // from .qrc file located in img/img.qrc
+    imageLabel->setPixmap(image);
+    imageLabel->setAlignment(Qt::AlignCenter);
 
-        QLabel* imageLabel = new QLabel(this);
-        imageLabel->setMinimumSize(500, 500); // Définit une taille minimale de 500x500 pixels
-        QPixmap image("../../img/LIVL_CPP.png");
-        imageLabel->setPixmap(image);
-        imageLabel->setAlignment(Qt::AlignCenter);
+    QLabel* titleLabel = new QLabel("Choose a game mode", this);
+    titleLabel->setAlignment(Qt::AlignCenter);
 
-    // Création du QLabel pour le titre
-       QLabel* titleLabel = new QLabel("Choose a game mode", this);
-       titleLabel->setAlignment(Qt::AlignCenter);
+    QFont font("Verdana", 20);
+    titleLabel->setFont(font);
 
-       // Appliquer une police d'écriture en grande taille
-       QFont font("Verdana", 20);
-       titleLabel->setFont(font);
+    gameModesComboBox = new QComboBox(this);
+    gameModesComboBox->addItem("Othello");
+    gameModesComboBox->addItem("Tic Tac Toe");
+    gameModesComboBox->addItem("Power 4");
+    gameModesComboBox->addItem("Checkers");
+    gameModesComboBox->setFont(font);
 
-       // Création du QComboBox
-       gameModesComboBox = new QComboBox(this);
-       gameModesComboBox->addItem("Othello");
-       gameModesComboBox->addItem("Tic Tac Toe");
-       gameModesComboBox->addItem("Power 4");
-       gameModesComboBox->addItem("Checkers");
-       gameModesComboBox->setFont(font);
+    QPushButton* okButton = new QPushButton("OK", this);
+    okButton->setFont(font);
 
-       // Création du bouton OK
-       QPushButton* okButton = new QPushButton("OK", this);
-       okButton->setFont(font);
+    QHBoxLayout* hLayout = new QHBoxLayout();
+    hLayout->addWidget(gameModesComboBox);
+    hLayout->addWidget(okButton);
+    hLayout->setAlignment(Qt::AlignCenter);
 
-       // Création du layout horizontal
-      QHBoxLayout* hLayout = new QHBoxLayout();
-      hLayout->addWidget(gameModesComboBox);
-      hLayout->addWidget(okButton);
+    // Connecter le signal "clicked" du bouton OK au slot "accept" de la fenêtre de dialogue
+    connect(okButton, &QPushButton::clicked, this, &Menu::acceptGameModeSelection);
 
-      // Centrer les données
-      hLayout->setAlignment(Qt::AlignCenter);
+    QVBoxLayout* vLayout = new QVBoxLayout();
+    vLayout->addWidget(title);
+    vLayout->addWidget(imageLabel);
+    vLayout->addWidget(titleLabel);
+    vLayout->addLayout(hLayout);
 
-       // Connecter le signal "clicked" du bouton OK au slot "accept" de la fenêtre de dialogue
-       connect(okButton, &QPushButton::clicked, this, &Menu::acceptGameModeSelection);
+    QWidget* centralWidget = new QWidget(this);
+    centralWidget->setLayout(vLayout);
 
-       // Ajouter le titre et le layout horizontal à la fenêtre principale
-       QVBoxLayout* vLayout = new QVBoxLayout();
-       vLayout->addWidget(title);
-       vLayout->addWidget(imageLabel);
-       vLayout->addWidget(titleLabel);
-       vLayout->addLayout(hLayout);
-
-       // Création d'un widget pour contenir le layout vertical
-       QWidget* centralWidget = new QWidget(this);
-       centralWidget->setLayout(vLayout);
-
-       // Remplacer le widget central par le widget contenant le layout vertical
-       this->setCentralWidget(centralWidget);
+    this->setCentralWidget(centralWidget);
 }
 
 void Menu::acceptGameModeSelection()
