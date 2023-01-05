@@ -30,12 +30,12 @@ set(PROJECT_SOURCES
         src/games/othello/othello.cpp
         src/games/othello/othelloPositionRequester.cpp
         src/games/othello/othelloGameEvaluator.cpp
-        src/forms/main.cpp
+        src/main.cpp
         src/forms/menu.cpp
         src/forms/menu.h
         src/forms/menu.ui
         img/img.qrc
-)
+        src/games/checkers/checkers.hpp src/games/checkers/checkers.cpp src/games/checkers/checkersGrid.cpp src/games/checkers/checkersGrid.hpp src/games/checkers/checkersPositionRequester.cpp src/games/checkers/checkersPositionRequester.hpp)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Livl
