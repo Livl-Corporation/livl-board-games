@@ -34,6 +34,7 @@ set(PROJECT_SOURCES
         src/forms/menu.cpp
         src/forms/menu.h
         src/forms/menu.ui
+        src/forms/gamewindow.h src/forms/gamewindow.cpp src/forms/gamewindow.ui
         img/img.qrc
 )
 

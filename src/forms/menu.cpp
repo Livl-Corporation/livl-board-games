@@ -36,9 +36,9 @@ void Menu::showGameModesDialog()
     titleLabel->setFont(font);
 
     gameModesComboBox = new QComboBox(this);
-    gameModesComboBox->addItem("Othello");
     gameModesComboBox->addItem("Tic Tac Toe");
     gameModesComboBox->addItem("Power 4");
+    gameModesComboBox->addItem("Othello");
     gameModesComboBox->addItem("Checkers");
     gameModesComboBox->setFont(font);
 
@@ -65,15 +65,48 @@ void Menu::showGameModesDialog()
     this->setCentralWidget(centralWidget);
 }
 
+// Function to create players based on the given player selection
+std::vector<Player> Menu::createPlayers(unsigned int playerSelection)
+{
+    std::vector<Player> players;
+    Player p1(1, false);
+    Player p2(2, playerSelection == 1);
+    players.push_back(p1);
+    players.push_back(p2);
+    return players;
+}
+
 void Menu::acceptGameModeSelection()
 {
     // Récupérer l'élément sélectionné dans le QComboBox
     int index = gameModesComboBox->currentIndex();
     QString gameMode = gameModesComboBox->itemText(index);
+
+    // Create the GameWindow object on the heap
+    GameWindow* gameWindow = new GameWindow(this);
+    close();
+
+    gameWindow->setWindowTitle(gameMode);
+
+    unsigned int playerSelection = 1;
+
+    // Create players
+    std::vector<Player> players = createPlayers(playerSelection);
+
+    // Create the appropriate game using the GameFactory
+    std::unique_ptr<Game> game = GameFactory::createGame(index+1, players);
+
+    // Set the game in the GameWindow
+    gameWindow->setGame(std::move(game), gameMode);
+
+    // Show the GameWindow and close the Menu
+    gameWindow->show();
 }
 
 Menu::~Menu()
 {
     delete ui;
 }
+
+
 

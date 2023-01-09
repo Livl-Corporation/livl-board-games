@@ -15,6 +15,10 @@
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QFileInfo>
+#include "src/forms/gamewindow.h"
+#include "src/games/gameFactory.hpp"
+#include "src/models/player.hpp"
+#include <memory>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Menu; }
@@ -30,6 +34,7 @@ public:
     void showGameModesDialog();
     void setupUI();
     void acceptGameModeSelection();
+    std::vector<Player> createPlayers(unsigned int playerSelection);
 private:
     Ui::Menu *ui;
     QComboBox* gameModesComboBox;
