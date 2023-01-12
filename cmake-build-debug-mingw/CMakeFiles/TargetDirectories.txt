@@ -1,5 +1,0 @@
-C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/cmake-build-debug-mingw/CMakeFiles/Livl.dir
-C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/cmake-build-debug-mingw/CMakeFiles/edit_cache.dir
-C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/cmake-build-debug-mingw/CMakeFiles/rebuild_cache.dir
-C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/cmake-build-debug-mingw/CMakeFiles/Livl_autogen_timestamp_deps.dir
-C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/cmake-build-debug-mingw/CMakeFiles/Livl_autogen.dir
