@@ -1,0 +1,22 @@
+{
+	"BUILD_DIR" : "C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/cmake-build-debug-mingw/Livl_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/cmake-build-debug-mingw",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/cmake-build-debug-mingw",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games",
+	"CMAKE_SOURCE_DIR" : "C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games",
+	"INCLUDE_DIR" : "C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/cmake-build-debug-mingw/Livl_autogen/include",
+	"INPUTS" : 
+	[
+		"C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/img/logo.png"
+	],
+	"LOCK_FILE" : "C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/cmake-build-debug-mingw/CMakeFiles/Livl_autogen.dir/AutoRcc_img_T24IUX3VL4_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "img" ],
+	"OUTPUT_CHECKSUM" : "T24IUX3VL4",
+	"OUTPUT_NAME" : "qrc_img.cpp",
+	"RCC_EXECUTABLE" : "C:/Programmation/QT/6.3.0/mingw_64/./bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/cmake-build-debug-mingw/CMakeFiles/Livl_autogen.dir/AutoRcc_img_T24IUX3VL4_Used.txt",
+	"SOURCE" : "C:/Users/Julien/Documents/IT/Cpp/Project/livl-board-games/img/img.qrc",
+	"VERBOSITY" : 0
+}

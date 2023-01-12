@@ -29,6 +29,7 @@ private:
     std::unique_ptr<Game> localGame;
     QString gameName;
     std::vector<std::vector<QPushButton*>> buttons;
+
 private slots:
     void buttonClicked();
 };
