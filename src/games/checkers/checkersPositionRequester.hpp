@@ -7,5 +7,6 @@
 class CheckersPositionRequester : public PositionRequester
 {
 public:
-    Position askForPosition(const PlayerId &playerId) const;
+    [[nodiscard]] Position askForPosition(const PlayerId &playerId) const override;
+    static bool isMoveValid(const PlayerId &playerId, const Position &from, const Position &to);
 };
