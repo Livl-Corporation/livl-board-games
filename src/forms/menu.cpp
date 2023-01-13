@@ -20,18 +20,18 @@ void Menu::setupUI()
 
 void Menu::showGameModesDialog()
 {
-    QLabel* title = new QLabel("Welcome to Livl Boardgame", this);
+    auto* title = new QLabel("Welcome to Livl Boardgame", this);
     title->setAlignment(Qt::AlignCenter);
 
     QFont fontTitle("Verdana", 30);
     title->setFont(fontTitle);
 
-    QLabel* imageLabel = new QLabel(this);
+    auto* imageLabel = new QLabel(this);
     QPixmap image(":/img/logo.png"); // from .qrc file located in img/img.qrc
     imageLabel->setPixmap(image);
     imageLabel->setAlignment(Qt::AlignCenter);
 
-    QLabel* titleLabel = new QLabel("Choose a game mode", this);
+    auto* titleLabel = new QLabel("Choose a game mode", this);
     titleLabel->setAlignment(Qt::AlignCenter);
 
     QFont font("Verdana", 20);
@@ -44,10 +44,10 @@ void Menu::showGameModesDialog()
     gameModesComboBox->addItem("Checkers");
     gameModesComboBox->setFont(font);
 
-    QPushButton* okButton = new QPushButton("OK", this);
+    auto* okButton = new QPushButton("OK", this);
     okButton->setFont(font);
 
-    QHBoxLayout* hLayout = new QHBoxLayout();
+    auto* hLayout = new QHBoxLayout();
     hLayout->addWidget(gameModesComboBox);
     hLayout->addWidget(okButton);
     hLayout->setAlignment(Qt::AlignCenter);
@@ -55,13 +55,13 @@ void Menu::showGameModesDialog()
     // Connecter le signal "clicked" du bouton OK au slot "accept" de la fenêtre de dialogue
     connect(okButton, &QPushButton::clicked, this, &Menu::acceptGameModeSelection);
 
-    QVBoxLayout* vLayout = new QVBoxLayout();
+    auto* vLayout = new QVBoxLayout();
     vLayout->addWidget(title);
     vLayout->addWidget(imageLabel);
     vLayout->addWidget(titleLabel);
     vLayout->addLayout(hLayout);
 
-    QWidget* centralWidget = new QWidget(this);
+    auto* centralWidget = new QWidget(this);
     centralWidget->setLayout(vLayout);
 
     this->setCentralWidget(centralWidget);
@@ -80,28 +80,22 @@ std::vector<Player> Menu::createPlayers(unsigned int playerSelection)
 
 void Menu::acceptGameModeSelection()
 {
-    // Récupérer l'élément sélectionné dans le QComboBox
+    // Retrieve the selected game mode from the combo box
     int index = gameModesComboBox->currentIndex();
     QString gameMode = gameModesComboBox->itemText(index);
 
     // Create the GameWindow object on the heap
-    GameWindow* gameWindow = new GameWindow(this);
-    close();
+    auto* gameWindow = new GameWindow(this);
+    close(); // Close the menu window to display the other one just after
 
     gameWindow->setWindowTitle(gameMode);
 
     unsigned int playerSelection = 1;
-
-    // Create players
     std::vector<Player> players = createPlayers(playerSelection);
-
-    // Create the appropriate game using the GameFactory
     std::unique_ptr<Game> game = GameFactory::createGame(index+1, players);
 
-    // Set the game in the GameWindow
     gameWindow->setGame(std::move(game), gameMode);
 
-    // Show the GameWindow and close the Menu
     gameWindow->show();
 }
 

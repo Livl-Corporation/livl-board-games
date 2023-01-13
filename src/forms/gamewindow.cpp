@@ -16,15 +16,14 @@ GameWindow::~GameWindow()
     delete ui;
 }
 
-// In GameWindow source file
-void GameWindow::setGame(std::unique_ptr<Game> game, const QString &gameName)
+void GameWindow::setGame(std::unique_ptr<Game> game, const QString &_gameName)
 {
     localGame = std::move(game);
-    this->gameName = gameName;
+    this->gameName = _gameName;
 
-    QVBoxLayout *layout = new QVBoxLayout;
+    auto *layout = new QVBoxLayout;
 
-    QLabel *titleLabel = new QLabel;
+    auto *titleLabel = new QLabel;
     titleLabel->setText(gameName);
     titleLabel->setAlignment(Qt::AlignCenter);
     QFont titleFont("Arial", 20, QFont::Bold);
@@ -41,12 +40,12 @@ void GameWindow::setGame(std::unique_ptr<Game> game, const QString &gameName)
     for (int row = 0; row < localGame->getGrid()->getYSize(); row++)
     {
         buttons[row].resize(localGame->getGrid()->getXSize());
-        QHBoxLayout *buttonRowLayout = new QHBoxLayout;
+        auto *buttonRowLayout = new QHBoxLayout;
         buttonRowLayout->setSpacing(5);
 
         for (int col = 0; col < localGame->getGrid()->getXSize(); col++)
         {
-            QPushButton *button = new QPushButton;
+            auto *button = new QPushButton;
             buttons[row][col] = button;
 
             QObject::connect(button, SIGNAL(clicked()), this, SLOT(buttonClicked()));
@@ -65,7 +64,7 @@ void GameWindow::setGame(std::unique_ptr<Game> game, const QString &gameName)
 void GameWindow::buttonClicked()
 {
     // Get the sender QPushButton
-    QPushButton *button = qobject_cast<QPushButton*>(sender());
+    auto *button = qobject_cast<QPushButton*>(sender());
 
     // Find the row and column of the clicked button
     int row, col;

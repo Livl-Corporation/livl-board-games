@@ -27,14 +27,14 @@ class Menu : public QMainWindow
     Q_OBJECT
 
 public:
-    Menu(QWidget *parent = nullptr);
-    ~Menu();
+    explicit Menu(QWidget *parent = nullptr);
+    ~Menu() override;
     void showGameModesDialog();
     void setupUI();
     void acceptGameModeSelection();
-    std::vector<Player> createPlayers(unsigned int playerSelection);
+    static std::vector<Player> createPlayers(unsigned int playerSelection);
 private:
     Ui::Menu *ui;
-    QComboBox* gameModesComboBox;
+    QComboBox* gameModesComboBox{};
 };
 #endif // MENU_H
