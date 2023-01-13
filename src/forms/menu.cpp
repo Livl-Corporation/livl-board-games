@@ -1,5 +1,7 @@
 #include "menu.h"
 #include "./ui_menu.h"
+#include "gamewindow.h"
+#include "../games/gameFactory.hpp"
 
 Menu::Menu(QWidget *parent)
     : QMainWindow(parent)

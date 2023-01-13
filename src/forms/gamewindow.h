@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <qpushbutton.h>
 
-#include <src/interfaces/game.hpp>
+#include "../interfaces/game.hpp"
 
 namespace Ui {
 class GameWindow;

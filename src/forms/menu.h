@@ -15,9 +15,7 @@
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QFileInfo>
-#include "src/forms/gamewindow.h"
-#include "src/games/gameFactory.hpp"
-#include "src/models/player.hpp"
+#include "../models/player.hpp"
 #include <memory>
 
 QT_BEGIN_NAMESPACE
