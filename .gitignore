@@ -1,5 +1,10 @@
 build/
 *.user
-/cmake-build-debug/*
-/.idea/*
+cmake-build-debug/
+cmake-build-debug-mingw/
+.qt/
+.idea/*
+.vscode/
+.vs/
 CMakeLists.txt.user
+.idea/vcs.xml
