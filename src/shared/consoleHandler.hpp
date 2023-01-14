@@ -3,10 +3,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <QLabel>
 
 namespace ConsoleHandler
 {
     std::string getInput();
+    void printLineLabel(QLabel* label, const std::string& output);
     void printLine(const std::string &output);
     void print(const std::string &output);
     int readInt();

@@ -1,6 +1,7 @@
 #pragma once
 #include <QMainWindow>
 #include <qpushbutton.h>
+#include <QLabel>
 
 #include "../interfaces/game.hpp"
 
@@ -23,11 +24,13 @@ public:
 
     ~GameWindow() override;
     void setGame(std::unique_ptr<Game> game, const QString &gameName);
+    void displayError(const std::string &message);
 private:
     Ui::GameWindow *ui;
     std::unique_ptr<Game> localGame;
     QString gameName;
     std::vector<std::vector<QPushButton*>> buttons;
+    QLabel *errorLabel;
 private slots:
     void buttonClicked();
 };

@@ -18,11 +18,14 @@ GameWindow::~GameWindow()
 
 void GameWindow::setGame(std::unique_ptr<Game> game, const QString &_gameName)
 {
+    // Set the game
     localGame = std::move(game);
     this->gameName = _gameName;
 
+    // Set the main layout of the window
     auto *layout = new QVBoxLayout;
 
+    // Display the main title of the game
     auto *titleLabel = new QLabel;
     titleLabel->setText(gameName);
     titleLabel->setAlignment(Qt::AlignCenter);
@@ -32,11 +35,29 @@ void GameWindow::setGame(std::unique_ptr<Game> game, const QString &_gameName)
     titleLabel->setFixedHeight(50);
     layout->addWidget(titleLabel);
 
+    // Display the game information and the error label
+    auto *gridLayout = new QGridLayout;
+    auto* informationLabel = new QLabel(this);
+    informationLabel->setText("Information: Player 1 it is your turn");
+    informationLabel->setAlignment(Qt::AlignCenter);
+    QFont informationFont("Arial", 12, QFont::Bold);
+    informationLabel->setFont(informationFont);
+    informationLabel->setStyleSheet("QLabel {color : blue;}");
+    informationLabel->setFixedHeight(50);
+    gridLayout->addWidget(informationLabel, 0, 0, 1, 1);
+    errorLabel = new QLabel(this);
+    errorLabel->setText("Hello");
+    errorLabel->hide();
+    errorLabel->setAlignment(Qt::AlignCenter);
+    errorLabel->setStyleSheet("QLabel { color : red; }");
+    errorLabel->setFixedHeight(errorLabel->fontMetrics().height());
+    gridLayout->addWidget(errorLabel, 1, 0, 1, 1);
+    layout->addLayout(gridLayout);
+
+    // Display the game board
     buttons = std::vector<std::vector<QPushButton*>>();
     buttons.resize(localGame->getGrid()->getYSize());
-
     QString styleSheet = "QPushButton { background-color: white; border: none; color: black; font: bold 14px; } QPushButton:hover { background-color: #6699CC; } QPushButton:pressed { background-color: #003366; }";
-
     for (int row = 0; row < localGame->getGrid()->getYSize(); row++)
     {
         buttons[row].resize(localGame->getGrid()->getXSize());
@@ -58,6 +79,7 @@ void GameWindow::setGame(std::unique_ptr<Game> game, const QString &_gameName)
         layout->addLayout(buttonRowLayout);
     }
 
+    // Add the layout to the window
     this->centralWidget()->setLayout(layout);
 }
 
@@ -76,6 +98,7 @@ void GameWindow::buttonClicked()
             {
                 // Update the button's text to show the token
                 QString token = "X";
+                this->displayError("error");
                 button->setText(token);
                 button->setEnabled(false);
 
@@ -83,6 +106,12 @@ void GameWindow::buttonClicked()
             }
         }
     }
+}
+
+void GameWindow::displayError(const std::string &message)
+{
+    ConsoleHandler::printLineLabel(errorLabel, "This is an error message");
+    errorLabel->setVisible(true);
 }
 
 
