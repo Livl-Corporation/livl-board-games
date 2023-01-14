@@ -17,6 +17,9 @@
 #include "othello/othelloPositionRequester.hpp"
 #include "othello/othelloGameEvaluator.hpp"
 
+#include "checkers/checkers.hpp"
+#include "checkers/checkersPositionRequester.hpp"
+
 #include "../shared/evaluators/linearGameEvaluator.hpp"
 
 namespace GameFactory
@@ -25,5 +28,5 @@ namespace GameFactory
     std::unique_ptr<Game> createPower4(const std::vector<Player> &players);
     std::unique_ptr<Game> createTicTacToe(const std::vector<Player> &players);
     std::unique_ptr<Game> createOthello(const std::vector<Player> &players);
-
+    std::unique_ptr<Game> createCheckers(const std::vector<Player>& players);
 }

@@ -35,6 +35,7 @@ unsigned int getGameSelection()
     ConsoleHandler::printLine("1. Tic-Tac-Toe");
     ConsoleHandler::printLine("2. Power 4");
     ConsoleHandler::printLine("3. Othello");
+    ConsoleHandler::printLine("4. Checkers");
     ConsoleHandler::printLine("Enter any other number to exit.\n");
     ConsoleHandler::print("Choice : n°");
     return ConsoleHandler::readInt();
