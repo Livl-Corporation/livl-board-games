@@ -8,5 +8,8 @@ class CheckersPositionRequester : public PositionRequester
 {
 public:
     [[nodiscard]] Position askForPosition(const PlayerId &playerId) const override;
-    static bool isMoveValid(const PlayerId &playerId, const Position &from, const Position &to);
+private:
+    [[nodiscard]] Position promptAndValidateDestinationPosition(const std::string &prompt, const PlayerId &playerId, const Position &from) const;
+    [[nodiscard]] Position promptAndValidatePosition(const std::string &prompt, const PlayerId &playerId) const;
+    [[nodiscard]] bool isMoveValid(const PlayerId &playerId, const Position &from, const Position &to) const;
 };
