@@ -12,4 +12,8 @@ private:
     [[nodiscard]] Position promptAndValidateDestinationPosition(const std::string &prompt, const PlayerId &playerId, const Position &from) const;
     [[nodiscard]] Position promptAndValidatePosition(const std::string &prompt, const PlayerId &playerId) const;
     [[nodiscard]] bool isMoveValid(const PlayerId &playerId, const Position &from, const Position &to) const;
+
+    bool captureEnemyToken(const Position &from, const Position &to) const;
+
+    bool isCaptureMove(const PlayerId &playerId, const Position &from, const Position &to) const;
 };
