@@ -7,8 +7,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_PREFIX_PATH "C:\\Qt\\6.4.2\\mingw_64")
-
 find_package(Qt6 COMPONENTS
         Core
         Gui
@@ -33,13 +31,13 @@ add_executable(Livl
         src/games/othello/othello.cpp
         src/games/othello/othelloPositionRequester.cpp
         src/games/othello/othelloGameEvaluator.cpp
-        src/forms/main.cpp
-        src/forms/menu.cpp
-        src/forms/menu.h
-        src/forms/menu.ui
-        src/forms/gamewindow.h src/forms/gamewindow.cpp src/forms/gamewindow.ui
+        src/ui/forms/main.cpp
+        src/ui/forms/menu.cpp
+        src/ui/forms/menu.h
+        src/ui/forms/menu.ui
+        src/ui/forms/gamewindow.h src/ui/forms/gamewindow.cpp src/ui/forms/gamewindow.ui
         img/img.qrc
-)
+        src/ui/components/gridcomponent.cpp src/ui/components/gridcomponent.h src/ui/components/gridcomponent.ui)
 
 target_link_libraries(Livl
         Qt::Core

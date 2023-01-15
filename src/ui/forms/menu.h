@@ -15,7 +15,7 @@
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QFileInfo>
-#include "../models/player.hpp"
+#include "../../models/player.hpp"
 #include <memory>
 
 QT_BEGIN_NAMESPACE

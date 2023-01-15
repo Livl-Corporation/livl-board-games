@@ -3,7 +3,7 @@
 #include <qpushbutton.h>
 #include <QLabel>
 
-#include "../interfaces/game.hpp"
+#include "../../interfaces/game.hpp"
 
 namespace Ui {
 class GameWindow;

@@ -54,30 +54,7 @@ void GameWindow::setGame(std::unique_ptr<Game> game, const QString &_gameName)
     gridLayout->addWidget(errorLabel, 1, 0, 1, 1);
     layout->addLayout(gridLayout);
 
-    // Display the game board
-    buttons = std::vector<std::vector<QPushButton*>>();
-    buttons.resize(localGame->getGrid()->getYSize());
-    QString styleSheet = "QPushButton { background-color: white; border: none; color: black; font: bold 14px; } QPushButton:hover { background-color: #6699CC; } QPushButton:pressed { background-color: #003366; }";
-    for (int row = 0; row < localGame->getGrid()->getYSize(); row++)
-    {
-        buttons[row].resize(localGame->getGrid()->getXSize());
-        auto *buttonRowLayout = new QHBoxLayout;
-        buttonRowLayout->setSpacing(5);
 
-        for (int col = 0; col < localGame->getGrid()->getXSize(); col++)
-        {
-            auto *button = new QPushButton;
-            buttons[row][col] = button;
-
-            QObject::connect(button, SIGNAL(clicked()), this, SLOT(buttonClicked()));
-
-            buttons[row][col]->setStyleSheet(styleSheet);
-            buttons[row][col]->setFixedSize(50, 50);
-            buttonRowLayout->setContentsMargins(5, 5, 5, 5);
-            buttonRowLayout->addWidget(button);
-        }
-        layout->addLayout(buttonRowLayout);
-    }
 
     // Add the layout to the window
     this->centralWidget()->setLayout(layout);
