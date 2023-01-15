@@ -1,6 +1,7 @@
 #include "gamewindow.h"
 #include "qlabel.h"
 #include "ui_gamewindow.h"
+#include "../components/gridcomponent.h"
 
 #include <QVBoxLayout>
 
@@ -54,36 +55,16 @@ void GameWindow::setGame(std::unique_ptr<Game> game, const QString &_gameName)
     gridLayout->addWidget(errorLabel, 1, 0, 1, 1);
     layout->addLayout(gridLayout);
 
-
+    // Display the game board
+    GridComponent *gridComponent = new GridComponent(this);
+    gridComponent->createGrid(localGame->getGrid());
+    layout->addWidget(gridComponent);
 
     // Add the layout to the window
     this->centralWidget()->setLayout(layout);
 }
 
-void GameWindow::buttonClicked()
-{
-    // Get the sender QPushButton
-    auto *button = qobject_cast<QPushButton*>(sender());
 
-    // Find the row and column of the clicked button
-    int row, col;
-    for (row = 0; row < localGame->getGrid()->getYSize(); row++)
-    {
-        for (col = 0; col < localGame->getGrid()->getXSize(); col++)
-        {
-            if (buttons[row][col] == button)
-            {
-                // Update the button's text to show the token
-                QString token = "X";
-                this->displayError("error");
-                button->setText(token);
-                button->setEnabled(false);
-
-                return;
-            }
-        }
-    }
-}
 
 void GameWindow::displayError(const std::string &message)
 {

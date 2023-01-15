@@ -31,6 +31,4 @@ private:
     QString gameName;
     std::vector<std::vector<QPushButton*>> buttons;
     QLabel *errorLabel;
-private slots:
-    void buttonClicked();
 };

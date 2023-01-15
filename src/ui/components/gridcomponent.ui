@@ -13,7 +13,6 @@
                 <height>300</height>
             </rect>
         </property>
-        <widget name="mainWidget" class="QWidget"/>
     </widget>
     <pixmapfunction/>
     <connections/>

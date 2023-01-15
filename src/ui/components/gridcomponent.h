@@ -6,7 +6,7 @@
 #define LIVL_GRIDCOMPONENT_H
 
 #include <QWidget>
-#include <QPushButton>
+#include <QGridLayout>
 #include "../../models/player.hpp"
 #include "../../interfaces/grid.hpp"
 
@@ -20,16 +20,15 @@ Q_OBJECT
 public:
     explicit GridComponent(QWidget *parent = nullptr);
 
-    void createGrid(const Grid<PlayerId> &grid);
-    void updateGrid(const Grid<PlayerId> &grid);
+    void createGrid(const std::shared_ptr<Grid<PlayerId>> grid);
+    void updateGrid(const std::shared_ptr<Grid<PlayerId>> grid);
 
     ~GridComponent() override;
 
 private:
     Ui::GridComponent *ui;
-
+    QGridLayout *gridLayout;
     std::shared_ptr<Grid<PlayerId>> grid;
-    std::vector<std::vector<QPushButton*>> buttons = std::vector<std::vector<QPushButton*>>();
 };
 
 
