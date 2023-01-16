@@ -12,7 +12,7 @@
 
 #include "../shared/shared.hpp"
 #include "../shared/exceptions/out-of-bounds-exception.hpp"
-#include "gameInterface.h"
+#include "gameInteractions.h"
 
 #include <cstdio>
 #include <vector>

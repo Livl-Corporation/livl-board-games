@@ -2,22 +2,18 @@
 // Created by Franck GUTMANN on 16/01/2023.
 //
 
-#ifndef LIVL_GUIINTERFACE_H
-#define LIVL_GUIINTERFACE_H
+#ifndef LIVL_GAMECONSOLEINTERACTIONS_H
+#define LIVL_GAMECONSOLEINTERACTIONS_H
 
+#include "../interfaces/gameInteractions.h"
+#include "../interfaces/game.hpp"
 
-#include <utility>
-
-#include "../interfaces/gameInterface.h"
-#include "forms/gamewindow.h"
-
-class GuiInterface : public GameInterface
+class GameConsoleInteractions : public GameInteractions
 {
 
 public:
 
-    explicit GuiInterface(const std::shared_ptr<GameWindow> &_gameWindow) : gameWindow(_gameWindow) {
-    }
+    GameConsoleInteractions() = default;
 
     void printGameInfos(const std::string &gameName, const std::vector<Player> &players) const override;
     void printGrid(const std::shared_ptr<Grid<PlayerId>> &grid) const override;
@@ -28,9 +24,6 @@ public:
     void printDraw() const override;
     void printComputerPlay() const override;
 
-private:
-    std::shared_ptr<GameWindow> gameWindow;
 };
 
-
-#endif //LIVL_GUIINTERFACE_H
+#endif //LIVL_GAMECONSOLEINTERACTIONS_H

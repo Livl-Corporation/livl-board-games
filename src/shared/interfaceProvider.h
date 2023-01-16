@@ -6,7 +6,8 @@
 #define LIVL_INTERFACEPROVIDER_H
 
 #include <memory>
-#include "../interfaces/gameInterface.h"
+#include "../interfaces/gameInteractions.h"
+#include "../interfaces/menuInteractions.h"
 
 class InterfaceProvider {
 
@@ -15,23 +16,21 @@ public:
 
     void operator=(const InterfaceProvider &) = delete;
 
-    void setGameInterface(const std::shared_ptr<GameInterface> &gameInterface) {
-        this->_value = gameInterface;
-    }
-
     static InterfaceProvider *getInstance();
 
-    static void *init(const std::shared_ptr<GameInterface> &gameInterface);
+    static void *init(const std::shared_ptr<GameInteractions> &gameInterface, const std::shared_ptr<MenuInteractions> &menuInterface);
 
+    [[nodiscard]] const std::shared_ptr<GameInteractions> &gameInterface() const;
+
+    [[nodiscard]] const std::shared_ptr<MenuInteractions> &menuInterface() const;
 
 protected:
 
-    explicit InterfaceProvider(const std::shared_ptr<GameInterface> &value): _value(value)
-    {
-    }
+    explicit InterfaceProvider(const std::shared_ptr<GameInteractions> &gameInterface, const std::shared_ptr<MenuInteractions> &menuInterface): _gameInterface(gameInterface), _menuInterface(menuInterface) {}
 
     static InterfaceProvider* singleton_;
-    std::shared_ptr<GameInterface> _value;
+    std::shared_ptr<GameInteractions> _gameInterface;
+    std::shared_ptr<MenuInteractions> _menuInterface;
 
 };
 

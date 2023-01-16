@@ -6,7 +6,7 @@
 #include "../models/player.hpp"
 #include "game.hpp"
 
-class GameInterface {
+class GameInteractions {
 
 public:
 

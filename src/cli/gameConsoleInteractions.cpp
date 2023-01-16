@@ -2,35 +2,35 @@
 // Created by Franck GUTMANN on 16/01/2023.
 //
 
-#include "consoleInterface.h"
+#include "gameConsoleInteractions.h"
 
-void ConsoleInterface::printGameInfos(const std::string &gameName, const std::vector<Player> &players) const {
+void GameConsoleInteractions::printGameInfos(const std::string &gameName, const std::vector<Player> &players) const {
     ConsoleHandler::printTitle(gameName);
 }
 
-void ConsoleInterface::printNextRound(const PlayerId &playerId, unsigned int round) const {
+void GameConsoleInteractions::printNextRound(const PlayerId &playerId, unsigned int round) const {
     ConsoleHandler::printLine("");
     ConsoleHandler::printHeader("Round N° " + std::to_string(round));
 }
 
-void ConsoleInterface::printInfo(const std::string &message) const {
+void GameConsoleInteractions::printInfo(const std::string &message) const {
     ConsoleHandler::printLine(message);
 }
 
-void ConsoleInterface::printError(const std::string &message) const {
+void GameConsoleInteractions::printError(const std::string &message) const {
     ConsoleHandler::printLine(message);
 }
 
-void ConsoleInterface::printWinner(const PlayerId &playerId) const {
+void GameConsoleInteractions::printWinner(const PlayerId &playerId) const {
     ConsoleHandler::printTitle("Player's victory " + std::to_string(playerId
     ) + " (" + Player::getPlayerChar(playerId) + ")");
 }
 
-void ConsoleInterface::printDraw() const {
+void GameConsoleInteractions::printDraw() const {
     ConsoleHandler::printTitle(std::string("Tie Game"));
 }
 
-void ConsoleInterface::printGrid(const std::shared_ptr<Grid<PlayerId>> &grid) const {
+void GameConsoleInteractions::printGrid(const std::shared_ptr<Grid<PlayerId>> &grid) const {
     ConsoleHandler::print("\n   ");
     for (int col = 0; col < grid->getXSize(); col++)
     {
@@ -84,3 +84,7 @@ void ConsoleInterface::printGrid(const std::shared_ptr<Grid<PlayerId>> &grid) co
     ConsoleHandler::printLine("┘");
 }
 
+void GameConsoleInteractions::printComputerPlay() const {
+    ConsoleHandler::printLine("Computer is playing...");
+
+}

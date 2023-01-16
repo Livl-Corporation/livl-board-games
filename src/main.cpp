@@ -3,20 +3,12 @@
 #include "cli/consoleHandler.hpp"
 #include "models/player.hpp"
 #include "games/gameFactory.hpp"
-
-// Function to ask the user for player selection
-unsigned int getPlayerSelection()
-{
-    ConsoleHandler::printHeader("GAME MODE");
-    ConsoleHandler::printLine("1. Against the computer");
-    ConsoleHandler::printLine("2. 2 players");
-    ConsoleHandler::printLine("Enter any other number to exit.\n");
-    ConsoleHandler::print("Choice : n°");
-
-    return ConsoleHandler::readInt();
-}
+#include "cli/gameConsoleInteractions.h"
+#include "shared/interfaceProvider.h"
+#include "cli/menuConsoleInterface.h"
 
 // Function to create players based on the given player selection
+/*
 std::vector<Player> createPlayers(unsigned int playerSelection)
 {
     std::vector<Player> players;
@@ -27,29 +19,37 @@ std::vector<Player> createPlayers(unsigned int playerSelection)
     return players;
 }
 
-// Function to ask the user for game selection
-unsigned int getGameSelection()
-{
-    ConsoleHandler::printLine("");
-    ConsoleHandler::printHeader("BOARD GAME CHOICE");
-    ConsoleHandler::printLine("1. Tic-Tac-Toe");
-    ConsoleHandler::printLine("2. Power 4");
-    ConsoleHandler::printLine("3. Othello");
-    ConsoleHandler::printLine("Enter any other number to exit.\n");
-    ConsoleHandler::print("Choice : n°");
-    return ConsoleHandler::readInt();
-}
-
 // Function to play the given game
 void playGame(std::unique_ptr<Game> game)
 {
     game->play();
     ConsoleHandler::printHeader("GAME FINISHED");
 }
+*/
 
-int main()
+int main(int argc, char** argv)
 {
-    while (true)
+
+    // Run with param -console use the cli
+    if (argc > 1 && std::string(argv[1]) == "-console") {
+
+        std::shared_ptr<GameConsoleInteractions> gameConsoleInteractions = std::make_shared<GameConsoleInteractions>();
+        std::shared_ptr<MenuConsoleInteractions> menuConsoleInteractions = std::make_shared<MenuConsoleInteractions>();
+
+        InterfaceProvider::init(gameConsoleInteractions, menuConsoleInteractions);
+
+    } else {
+
+        std::shared_ptr<GameConsoleInteractions> gameConsoleInteractions = std::make_shared<GameConsoleInteractions>();
+        std::shared_ptr<MenuConsoleInteractions> menuConsoleInteractions = std::make_shared<MenuConsoleInteractions>();
+
+        InterfaceProvider::init(gameConsoleInteractions, menuConsoleInteractions);
+
+    }
+
+    //
+
+/*    while (true)
     {
         // Ask for player selection
         unsigned int playerSelection = getPlayerSelection();
@@ -72,5 +72,5 @@ int main()
 
         // Launch game
         playGame(std::move(game));
-    }
+    }*/
 }
