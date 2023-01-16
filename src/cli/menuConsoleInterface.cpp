@@ -5,11 +5,11 @@
 #include "menuConsoleInterface.h"
 #include "consoleHandler.hpp"
 
-void MenuConsoleInteractions::printMenu() const {
-    ConsoleHandler::printHeader("Welcome to the LIVL board games");
-}
+void MenuConsoleInteractions::printMenu(const std::vector<std::string> &gameList,
+                                        const std::vector<std::string> &playerList) const {
 
-void MenuConsoleInteractions::printGameSelection(const std::vector<std::string> &gameList) const {
+    ConsoleHandler::printHeader("Welcome to LIVL Board Games");
+
     ConsoleHandler::printLine("");
     ConsoleHandler::printHeader("BOARD GAME CHOICE");
     ConsoleHandler::printLine("1. Tic-Tac-Toe");
@@ -18,9 +18,7 @@ void MenuConsoleInteractions::printGameSelection(const std::vector<std::string> 
     ConsoleHandler::printLine("Enter any other number to exit.\n");
     ConsoleHandler::print("Choice : n°");
 //    return ConsoleHandler::readInt();
-}
 
-void MenuConsoleInteractions::printPlayerSelection(const std::vector<std::string> &playerList) const {
     ConsoleHandler::printHeader("GAME MODE");
     ConsoleHandler::printLine("1. Against the computer");
     ConsoleHandler::printLine("2. 2 players");
@@ -28,4 +26,5 @@ void MenuConsoleInteractions::printPlayerSelection(const std::vector<std::string
     ConsoleHandler::print("Choice : n°");
 
 //    return ConsoleHandler::readInt();
+
 }

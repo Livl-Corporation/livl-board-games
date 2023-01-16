@@ -31,8 +31,6 @@ public:
 
     [[nodiscard]] inline unsigned int getRound() const { return this->round; };
 
-    [[nodiscard]] inline unsigned int getPlayerCount() const { return this->playerCount; };
-
     [[nodiscard]] inline std::string getName() const { return this->name; };
 
     [[nodiscard]] std::shared_ptr<Grid<PlayerId>> getGrid() const { return this->grid; }

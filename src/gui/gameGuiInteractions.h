@@ -8,15 +8,14 @@
 #include <utility>
 
 #include "../interfaces/gameInteractions.h"
-#include "forms/gamewindow.h"
+#include "forms/game/gamewindow.h"
 
 class GameGuiInteractions : public GameInteractions
 {
 
 public:
 
-    explicit GameGuiInteractions(const std::shared_ptr<GameWindow> &_gameWindow) : gameWindow(_gameWindow) {
-    }
+    GameGuiInteractions();
 
     void printGameInfos(const std::string &gameName, const std::vector<Player> &players) const override;
     void printGrid(const std::shared_ptr<Grid<PlayerId>> &grid) const override;

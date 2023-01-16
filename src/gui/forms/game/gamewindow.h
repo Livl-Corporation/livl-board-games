@@ -1,7 +1,7 @@
 #pragma once
 #include <QMainWindow>
-#include "../../models/player.hpp"
-#include "../../interfaces/grid.hpp"
+#include "../../../models/player.hpp"
+#include "../../../interfaces/grid.hpp"
 
 namespace Ui {
 class GameWindow;

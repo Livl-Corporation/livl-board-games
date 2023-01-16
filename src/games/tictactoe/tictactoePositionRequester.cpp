@@ -1,9 +1,8 @@
 #include "tictactoePositionRequester.hpp"
-#include "../../shared/interfaceProvider.h"
 
 Position TicTacToePositionRequester::askForPosition(const PlayerId &playerId) const
 {
-    InterfaceProvider::getInstance()->gameInterface()->printInfo("Place your token (" + std::string(1, Player::getPlayerChar(playerId)) + ") between (1,1 to " + std::to_string(this->getGrid()->getYSize()) + "," + std::to_string(this->getGrid()->getXSize()) + ") : ");
+    InteractionsProvider::gameInterface()->printInfo("Place your token (" + std::string(1, Player::getPlayerChar(playerId)) + ") between (1,1 to " + std::to_string(this->getGrid()->getYSize()) + "," + std::to_string(this->getGrid()->getXSize()) + ") : ");
 
     std::vector<int> values = ConsoleHandler::readValues(2);
 

@@ -3,6 +3,23 @@
 namespace GameFactory
 {
 
+    std::vector<std::string> getGameList()
+    {
+        std::vector<std::string> gameList;
+        gameList.emplace_back("TicTacToe");
+        gameList.emplace_back("Power4");
+        gameList.emplace_back("Othello");
+        return gameList;
+    }
+
+    std::vector<std::string> getPlayerList()
+    {
+        std::vector<std::string> playerList;
+        playerList.emplace_back("Human vs Human");
+        playerList.emplace_back("Human vs Computer");
+        return playerList;
+    }
+
     std::unique_ptr<Game> createGame(const unsigned int gameId, const std::vector<Player> &players)
     {
         if (gameId == 1)

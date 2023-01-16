@@ -31,13 +31,29 @@ add_executable(Livl
         src/games/othello/othello.cpp
         src/games/othello/othelloPositionRequester.cpp
         src/games/othello/othelloGameEvaluator.cpp
-        src/gui/forms/main.cpp
-        src/gui/forms/menu.cpp
-        src/gui/forms/menu.h
-        src/gui/forms/menu.ui
-        src/gui/forms/gamewindow.h src/gui/forms/gamewindow.cpp src/gui/forms/gamewindow.ui
+        src/gui/forms/menu/menu.cpp
+        src/gui/forms/menu/menu.h
+        src/gui/forms/menu/menu.ui
+        src/gui/forms/game/gamewindow.h
+        src/gui/forms/game/gamewindow.cpp
+        src/gui/forms/game/gamewindow.ui
         img/img.qrc
-        src/gui/components/gridcomponent.cpp src/gui/components/gridcomponent.h src/gui/components/gridcomponent.ui src/interfaces/gameInteractions.h src/cli/gameConsoleInteractions.cpp src/cli/gameConsoleInteractions.h src/gui/gameGuiInteractions.cpp src/gui/gameGuiInteractions.h src/shared/interfaceProvider.cpp src/shared/interfaceProvider.h src/interfaces/menuInteractions.h src/cli/menuConsoleInterface.cpp src/cli/menuConsoleInterface.h src/main.cpp src/gui/menuGuiInteractions.cpp src/gui/menuGuiInteractions.h)
+        src/gui/components/gridcomponent.cpp
+        src/gui/components/gridcomponent.h
+        src/gui/components/gridcomponent.ui
+        src/interfaces/gameInteractions.h
+        src/cli/gameConsoleInteractions.cpp
+        src/cli/gameConsoleInteractions.h
+        src/gui/gameGuiInteractions.cpp
+        src/gui/gameGuiInteractions.h
+        src/shared/interactionsProvider.cpp
+        src/shared/interactionsProvider.h
+        src/interfaces/menuInteractions.h
+        src/cli/menuConsoleInterface.cpp
+        src/cli/menuConsoleInterface.h
+        src/main.cpp
+        src/gui/menuGuiInteractions.cpp
+        src/gui/menuGuiInteractions.h)
 
 target_link_libraries(Livl
         Qt::Core

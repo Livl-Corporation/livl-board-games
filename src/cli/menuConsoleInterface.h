@@ -12,11 +12,8 @@ public:
 
     MenuConsoleInteractions() = default;
 
-    void printMenu() const override;
+    void printMenu(const std::vector<std::string> &gameList, const std::vector<std::string> &playerList) const override;
 
-    void printGameSelection(const std::vector<std::string> &gameList) const override;
-
-    void printPlayerSelection(const std::vector<std::string> &playerList) const override;
 };
 
 #endif //LIVL_MENUCONSOLEINTERFACE_H

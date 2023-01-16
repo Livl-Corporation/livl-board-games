@@ -7,13 +7,15 @@
 
 #include <string>
 #include <vector>
+#include "../gui/forms/menu/menu.h"
 
 class MenuInteractions {
 
 public:
-    virtual void printMenu() const = 0;
-    virtual void printGameSelection(const std::vector<std::string> &gameList) const = 0;
-    virtual void printPlayerSelection(const std::vector<std::string> &playerList) const = 0;
+    virtual void printMenu(const std::vector<std::string> &gameList, const std::vector<std::string> &playerList) const = 0;
+
+protected:
+    std::shared_ptr<Menu> menuWindow;
 };
 
 #endif //LIVL_MENUINTERACTIONS_H

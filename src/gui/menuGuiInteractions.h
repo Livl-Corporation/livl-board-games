@@ -5,24 +5,16 @@
 #ifndef LIVL_MENUGUIINTERACTIONS_H
 #define LIVL_MENUGUIINTERACTIONS_H
 
-
 #include "../interfaces/menuInteractions.h"
 
 class MenuGuiInteractions : public MenuInteractions {
 
 public:
 
-    MenuGuiInteractions() = default;
+    MenuGuiInteractions();
 
-    void printMenu() const override;
-
-    void printGameSelection(const std::vector<std::string> &gameList) const override;
-
-    void printPlayerSelection(const std::vector<std::string> &playerList) const override;
+    void printMenu(const std::vector<std::string> &gameList, const std::vector<std::string> &playerList) const override;
 
 };
-
-};
-
 
 #endif //LIVL_MENUGUIINTERACTIONS_H

@@ -1,7 +1,7 @@
 #include "gamewindow.h"
 #include "qlabel.h"
 #include "ui_gamewindow.h"
-#include "../components/gridcomponent.h"
+#include "../../components/gridcomponent.h"
 
 #include <QVBoxLayout>
 

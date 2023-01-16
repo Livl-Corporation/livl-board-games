@@ -4,7 +4,10 @@
 #pragma once
 
 #include "../models/player.hpp"
-#include "game.hpp"
+#include "../interfaces/grid.hpp"
+#include <string>
+#include <vector>
+#include <memory>
 
 class GameInteractions {
 

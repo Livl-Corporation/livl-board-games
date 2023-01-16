@@ -1,5 +1,4 @@
 #include "game.hpp"
-#include "../shared/interfaceProvider.h"
 
 // This tells the compiler that there is a class template called Grid that can be instantiated with any type.
 template <typename T>
@@ -19,12 +18,12 @@ Game::Game(
 
 void Game::play()
 {
-    InterfaceProvider::getInstance()->gameInterface()->printGameInfos(this->getName(), this->getPlayers());
+    InteractionsProvider::gameInterface()->printGameInfos(this->getName(), this->getPlayers());
 
     do
     {
         const Player player = this->getNextPlayer();
-        InterfaceProvider::getInstance()->gameInterface()->printNextRound(round, player.getId());
+        InteractionsProvider::gameInterface()->printNextRound(round, player.getId());
         this->playerChoosePosition(player.getId(), player.getIsComputer());
 
     } while (!this->gameEvaluator->hasGameEnded(getPlayerId(this->getRound() - 1)+1));
@@ -37,14 +36,14 @@ void Game::endGame()
     PlayerId winner = this->gameEvaluator->getWinner();
     if (winner != NO_PLAYER)
     {
-        InterfaceProvider::getInstance()->gameInterface()->printWinner(winner);
+        InteractionsProvider::gameInterface()->printWinner(winner);
     }
     else
     {
-        InterfaceProvider::getInstance()->gameInterface()->printDraw();
+        InteractionsProvider::gameInterface()->printDraw();
     }
 
-    InterfaceProvider::getInstance()->gameInterface()->printGrid(this->getGrid());
+    InteractionsProvider::gameInterface()->printGrid(this->getGrid());
 }
 
 
@@ -71,15 +70,15 @@ void Game::playerChoosePosition(const PlayerId &playerId, const bool isComputer)
         {
             // Player is computer
             position = this->playAsComputer(playerId);
-            InterfaceProvider::getInstance()->gameInterface()->printInfo("Played by the computer at position " + std::to_string(position.y + 1) + "," + std::to_string(position.x + 1) + ".");
+            InteractionsProvider::gameInterface()->printInfo("Played by the computer at position " + std::to_string(position.y + 1) + "," + std::to_string(position.x + 1) + ".");
         }
         else
         {
             // Player is a real person
-            InterfaceProvider::getInstance()->gameInterface()->printInfo("Player " + std::to_string(playerId) + ", it's your turn !");
+            InteractionsProvider::gameInterface()->printInfo("Player " + std::to_string(playerId) + ", it's your turn !");
 
             // Ask him in which position he wants to place his position and place it in the grid
-            InterfaceProvider::getInstance()->gameInterface()->printGrid(this->getGrid());
+            InteractionsProvider::gameInterface()->printGrid(this->getGrid());
             position = this->positionRequester->askForPosition(playerId);
         }
     } while (!this->getGrid()->place(position, playerId));

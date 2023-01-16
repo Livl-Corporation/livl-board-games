@@ -15,7 +15,7 @@
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QFileInfo>
-#include "../../models/player.hpp"
+#include "../../../models/player.hpp"
 #include <memory>
 
 QT_BEGIN_NAMESPACE
@@ -29,12 +29,11 @@ class Menu : public QMainWindow
 public:
     explicit Menu(QWidget *parent = nullptr);
     ~Menu() override;
-    void showGameModesDialog();
-    void setupUI();
-    void acceptGameModeSelection();
-    static std::vector<Player> createPlayers(unsigned int playerSelection);
+
+    void setGameList(const std::vector<std::string> &gameList);
+    void setPlayerList(const std::vector<std::string> &playerList);
+
 private:
     Ui::Menu *ui;
-    QComboBox* gameModesComboBox{};
 };
 #endif // MENU_H

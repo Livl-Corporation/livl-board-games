@@ -1,11 +1,12 @@
 #include <memory>
 #include "interfaces/game.hpp"
-#include "cli/consoleHandler.hpp"
 #include "models/player.hpp"
 #include "games/gameFactory.hpp"
 #include "cli/gameConsoleInteractions.h"
-#include "shared/interfaceProvider.h"
+#include "shared/interactionsProvider.h"
 #include "cli/menuConsoleInterface.h"
+#include "gui/gameGuiInteractions.h"
+#include "gui/menuGuiInteractions.h"
 
 // Function to create players based on the given player selection
 /*
@@ -36,18 +37,23 @@ int main(int argc, char** argv)
         std::shared_ptr<GameConsoleInteractions> gameConsoleInteractions = std::make_shared<GameConsoleInteractions>();
         std::shared_ptr<MenuConsoleInteractions> menuConsoleInteractions = std::make_shared<MenuConsoleInteractions>();
 
-        InterfaceProvider::init(gameConsoleInteractions, menuConsoleInteractions);
+        InteractionsProvider::init(gameConsoleInteractions, menuConsoleInteractions);
 
     } else {
 
-        std::shared_ptr<GameConsoleInteractions> gameConsoleInteractions = std::make_shared<GameConsoleInteractions>();
-        std::shared_ptr<MenuConsoleInteractions> menuConsoleInteractions = std::make_shared<MenuConsoleInteractions>();
+        std::shared_ptr<GameGuiInteractions> gameGuiInteractions = std::make_shared<GameGuiInteractions>();
+        std::shared_ptr<MenuGuiInteractions> menuGuiInteractions = std::make_shared<MenuGuiInteractions>();
 
-        InterfaceProvider::init(gameConsoleInteractions, menuConsoleInteractions);
+        InteractionsProvider::init(gameGuiInteractions, menuGuiInteractions);
 
     }
 
-    //
+    // Open main menu
+    InteractionsProvider::menuInterface()->printMenu(
+        GameFactory::getGameList(),
+        GameFactory::getPlayerList()
+        );
+
 
 /*    while (true)
     {

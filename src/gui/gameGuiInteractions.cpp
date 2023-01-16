@@ -4,6 +4,10 @@
 
 #include "gameGuiInteractions.h"
 
+GameGuiInteractions::GameGuiInteractions() {
+    gameWindow = std::make_shared<GameWindow>();
+}
+
 void GameGuiInteractions::printGameInfos(const std::string &gameName, const std::vector<Player> &players) const {
     gameWindow->setGameName(gameName);
     gameWindow->createPlayers(players);

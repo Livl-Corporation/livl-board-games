@@ -26,4 +26,7 @@ namespace GameFactory
     std::unique_ptr<Game> createTicTacToe(const std::vector<Player> &players);
     std::unique_ptr<Game> createOthello(const std::vector<Player> &players);
 
+    std::vector<std::string> getGameList();
+    std::vector<std::string> getPlayerList();
+
 }
