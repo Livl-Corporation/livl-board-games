@@ -37,7 +37,7 @@ add_executable(Livl
         src/gui/forms/menu.ui
         src/gui/forms/gamewindow.h src/gui/forms/gamewindow.cpp src/gui/forms/gamewindow.ui
         img/img.qrc
-        src/gui/components/gridcomponent.cpp src/gui/components/gridcomponent.h src/gui/components/gridcomponent.ui src/interfaces/gameInterface.h src/cli/consoleInterface.cpp src/cli/consoleInterface.h src/gui/guiInterface.cpp src/gui/guiInterface.h)
+        src/gui/components/gridcomponent.cpp src/gui/components/gridcomponent.h src/gui/components/gridcomponent.ui src/interfaces/gameInterface.h src/cli/consoleInterface.cpp src/cli/consoleInterface.h src/gui/guiInterface.cpp src/gui/guiInterface.h src/shared/interfaceProvider.cpp src/shared/interfaceProvider.h)
 
 target_link_libraries(Livl
         Qt::Core

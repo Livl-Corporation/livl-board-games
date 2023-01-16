@@ -45,8 +45,7 @@ protected:
         const std::vector<Player>& players,
         std::unique_ptr<PositionRequester> positionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator,
-        std::shared_ptr<Grid<PlayerId>> grid,
-        std::shared_ptr<GameInterface> gameInterface);
+        std::shared_ptr<Grid<PlayerId>> grid);
 
     std::unique_ptr<PositionRequester> positionRequester;
 
@@ -81,8 +80,6 @@ private:
      * @brief The grid of the game
      */
     std::shared_ptr<Grid<PlayerId>> grid;
-
-    std::shared_ptr<GameInterface> gameInterface;
 
     [[nodiscard]] PlayerId getPlayerId(unsigned int roundNumber) const;
 

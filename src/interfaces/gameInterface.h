@@ -1,14 +1,10 @@
 //
 // Created by Franck GUTMANN on 16/01/2023.
 //
+#pragma once
 
 #include "../models/player.hpp"
 #include "game.hpp"
-
-#ifndef LIVL_INTERACTOR_H
-#define LIVL_INTERACTOR_H
-
-#endif //LIVL_INTERACTOR_H
 
 class GameInterface {
 

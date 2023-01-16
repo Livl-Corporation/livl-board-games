@@ -8,13 +8,12 @@ Game::Game(
     std::string name,
     const std::vector<Player>& players,
     std::unique_ptr<PositionRequester> positionRequester,
-    std::unique_ptr<GameEvaluator> gameEvaluator, std::shared_ptr<Grid<PlayerId>> grid, std::shared_ptr<GameInterface> gameInterface)
-    : players(players), grid(std::move(grid)), name(std::move(name)), positionRequester(std::move(positionRequester)), gameEvaluator(std::move(gameEvaluator)), gameInterface(std::move(gameInterface))
+    std::unique_ptr<GameEvaluator> gameEvaluator, std::shared_ptr<Grid<PlayerId>> grid)
+    : players(players), grid(std::move(grid)), name(std::move(name)), positionRequester(std::move(positionRequester)), gameEvaluator(std::move(gameEvaluator))
 {
     this->playerCount = players.size();
     this->gameEvaluator->setGrid(this->grid);
     this->positionRequester->setGrid(this->grid);
-    this->positionRequester->setGameInterface(this->gameInterface);
 }
 
 void Game::play()
