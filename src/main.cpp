@@ -1,6 +1,6 @@
 #include <memory>
 #include "interfaces/game.hpp"
-#include "shared/consoleHandler.hpp"
+#include "cli/consoleHandler.hpp"
 #include "models/player.hpp"
 #include "games/gameFactory.hpp"
 

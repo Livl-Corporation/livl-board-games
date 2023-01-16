@@ -2,7 +2,6 @@
 
 #include "../../interfaces/positionRequester.hpp"
 #include "../../models/position.hpp"
-#include "../../shared/consoleHandler.hpp"
 #include "power4Grid.hpp"
 #include "../../models/player.hpp"
 

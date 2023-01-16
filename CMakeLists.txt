@@ -20,7 +20,7 @@ add_executable(Livl
         src/interfaces/grid.cpp
         src/models/player.cpp
         src/shared/shared.cpp
-        src/shared/consoleHandler.cpp
+        src/cli/consoleHandler.cpp
         src/shared/evaluators/linearGameEvaluator.cpp
         src/games/power4/power4.cpp
         src/games/power4/power4PositionRequester.cpp
@@ -31,13 +31,13 @@ add_executable(Livl
         src/games/othello/othello.cpp
         src/games/othello/othelloPositionRequester.cpp
         src/games/othello/othelloGameEvaluator.cpp
-        src/ui/forms/main.cpp
-        src/ui/forms/menu.cpp
-        src/ui/forms/menu.h
-        src/ui/forms/menu.ui
-        src/ui/forms/gamewindow.h src/ui/forms/gamewindow.cpp src/ui/forms/gamewindow.ui
+        src/gui/forms/main.cpp
+        src/gui/forms/menu.cpp
+        src/gui/forms/menu.h
+        src/gui/forms/menu.ui
+        src/gui/forms/gamewindow.h src/gui/forms/gamewindow.cpp src/gui/forms/gamewindow.ui
         img/img.qrc
-        src/ui/components/gridcomponent.cpp src/ui/components/gridcomponent.h src/ui/components/gridcomponent.ui)
+        src/gui/components/gridcomponent.cpp src/gui/components/gridcomponent.h src/gui/components/gridcomponent.ui src/interfaces/gameInterface.h src/cli/consoleInterface.cpp src/cli/consoleInterface.h src/gui/guiInterface.cpp src/gui/guiInterface.h)
 
 target_link_libraries(Livl
         Qt::Core

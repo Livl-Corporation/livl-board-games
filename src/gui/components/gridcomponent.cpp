@@ -19,9 +19,9 @@ GridComponent::~GridComponent() {
     delete ui;
 }
 
-void GridComponent::createGrid(const std::shared_ptr<Grid<PlayerId>> grid) {
+void GridComponent::createGrid(const std::shared_ptr<Grid<PlayerId>> &_grid) {
 
-    this->grid = grid;
+    this->grid = _grid;
     this->gridLayout = new QGridLayout(this);
 
     // Display the game board
@@ -39,11 +39,9 @@ void GridComponent::createGrid(const std::shared_ptr<Grid<PlayerId>> grid) {
     }
 
     this->setLayout(this->gridLayout);
-
 }
 
-void GridComponent::updateGrid(const std::shared_ptr<Grid<PlayerId>> grid) {
-    this->grid = grid;
+void GridComponent::updateGrid() {
 
     for (int row = 0; row < this->grid->getYSize(); row++)
     {

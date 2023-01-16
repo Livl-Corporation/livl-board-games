@@ -3,7 +3,7 @@
 #include "../models/position.hpp"
 #include "../models/player.hpp"
 
-#include "../shared/consoleHandler.hpp"
+#include "../cli/consoleHandler.hpp"
 #include "../shared/exceptions/out-of-bounds-exception.hpp"
 #include "../shared/exceptions/occupied-position-exception.hpp"
 #include "../shared/exceptions/column-full-exception.hpp"
@@ -32,8 +32,6 @@ public:
     T getElementAt(const Position &position) const;
 
     [[nodiscard]] std::vector<Position> getEmptyPositions() const;
-
-    void display() const;
 
 protected:
     Grid(const unsigned int x, const unsigned int y, const T &defaultValue)

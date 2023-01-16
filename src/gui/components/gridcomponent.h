@@ -20,16 +20,16 @@ Q_OBJECT
 public:
     explicit GridComponent(QWidget *parent = nullptr);
 
-    void createGrid(const std::shared_ptr<Grid<PlayerId>> grid);
-    void updateGrid(const std::shared_ptr<Grid<PlayerId>> grid);
+    void createGrid(const std::shared_ptr<Grid<PlayerId>> &_grid);
+    void updateGrid();
 
     ~GridComponent() override;
 
 private:
+
     Ui::GridComponent *ui;
-    QGridLayout *gridLayout;
+    QGridLayout *gridLayout{};
     std::shared_ptr<Grid<PlayerId>> grid;
 };
-
 
 #endif //LIVL_GRIDCOMPONENT_H

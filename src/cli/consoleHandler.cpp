@@ -1,6 +1,5 @@
 #include <vector>
 #include <sstream>
-#include <QLabel>
 #include "consoleHandler.hpp"
 
 namespace ConsoleHandler
@@ -13,24 +12,14 @@ namespace ConsoleHandler
         return input;
     }
 
-    void printLineLabel(QLabel* label, const std::string& output) {
-        label->setText(QString::fromStdString(output));
-        label->show();
-    }
-
     void printLine(const std::string &output)
     {
-        auto *outputLabel = new QLabel;
-        outputLabel->setText(QString::fromStdString(output));
-        outputLabel->show();
+        std::cout << output << std::endl;
     }
 
     void print(const std::string &output)
     {
         std::cout << output;
-        auto *outputLabel = new QLabel;
-        outputLabel->setText(QString::fromStdString(output));
-        outputLabel->show();
     }
 
     int readInt()

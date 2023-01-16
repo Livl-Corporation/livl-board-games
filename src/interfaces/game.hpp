@@ -11,8 +11,8 @@
 #include "positionRequester.hpp"
 
 #include "../shared/shared.hpp"
-#include "../shared/consoleHandler.hpp"
 #include "../shared/exceptions/out-of-bounds-exception.hpp"
+#include "gameInterface.h"
 
 #include <cstdio>
 #include <vector>
@@ -45,7 +45,8 @@ protected:
         const std::vector<Player>& players,
         std::unique_ptr<PositionRequester> positionRequester,
         std::unique_ptr<GameEvaluator> gameEvaluator,
-        std::shared_ptr<Grid<PlayerId>> grid);
+        std::shared_ptr<Grid<PlayerId>> grid,
+        std::shared_ptr<GameInterface> gameInterface);
 
     std::unique_ptr<PositionRequester> positionRequester;
 
@@ -81,14 +82,11 @@ private:
      */
     std::shared_ptr<Grid<PlayerId>> grid;
 
-    /**
-     * @brief Start playing the next game round
-     */
-    void nextRound();
+    std::shared_ptr<GameInterface> gameInterface;
 
     [[nodiscard]] PlayerId getPlayerId(unsigned int roundNumber) const;
 
-    [[nodiscard]] Player getNextPlayer() const;
+    [[nodiscard]] Player getNextPlayer();
 
     void playerChoosePosition(const PlayerId &playerId, bool isComputer);
 
