@@ -8,24 +8,25 @@ class Grid;
 
 Game::Game(
     std::string name,
-    const std::vector<Player>& players,
-    std::unique_ptr<PositionRequester> positionRequester,
-    std::unique_ptr<GameEvaluator> gameEvaluator, std::shared_ptr<Grid<PlayerId>> grid)
-    : players(players), grid(std::move(grid)), name(std::move(name)), positionRequester(std::move(positionRequester)), gameEvaluator(std::move(gameEvaluator))
+    const std::vector<Player> &players,
+    const std::shared_ptr<PositionRequester> &positionRequester,
+    const std::shared_ptr<GameEvaluator> &gameEvaluator,
+    const std::shared_ptr<Grid<PlayerId>> &grid)
+    : players(players), grid(grid), name(std::move(name)), positionRequester(positionRequester), gameEvaluator(gameEvaluator)
 {
     this->playerCount = players.size();
-    this->gameEvaluator->setGrid(this->grid);
-    this->positionRequester->setGrid(this->grid);
+    this->gameEvaluator->setGrid(grid);
+    this->positionRequester->setGrid(grid);
 }
 
 void Game::play()
 {
-    ConsoleHandler::printTitle(this->getName()); // Print game title
+    InteractionsProvider::gameInterface->printGameInfos(this->getName(), this->getPlayers());
 
     do
     {
-        this->nextRound();
         const Player player = this->getNextPlayer();
+        InteractionsProvider::gameInterface->printNextRound(player.getId(), round);
         this->playerChoosePosition(player.getId(), player.getIsComputer());
 
     } while (!this->gameEvaluator->hasGameEnded(getPlayerId(this->getRound() - 1)+1));
@@ -38,22 +39,16 @@ void Game::endGame()
     PlayerId winner = this->gameEvaluator->getWinner();
     if (winner != NO_PLAYER)
     {
-        ConsoleHandler::printTitle("Player's victory " + std::to_string(winner) + " (" + Player::getPlayerChar(winner) + ")");
+        InteractionsProvider::gameInterface->printWinner(winner);
     }
     else
     {
-        ConsoleHandler::printTitle(std::string("Tie Game"));
+        InteractionsProvider::gameInterface->printDraw();
     }
 
-    this->getGrid()->display();
+    InteractionsProvider::gameInterface->printGrid(this->getGrid());
 }
 
-void Game::nextRound()
-{
-    round++;
-    ConsoleHandler::printLine("");
-    ConsoleHandler::printHeader("Round N° " + std::to_string(this->getRound()));
-}
 
 PlayerId Game::getPlayerId(unsigned int roundNumber) const
 {
@@ -61,8 +56,9 @@ PlayerId Game::getPlayerId(unsigned int roundNumber) const
 }
 
 // Determines who is playing next
-Player Game::getNextPlayer() const
+Player Game::getNextPlayer()
 {
+    round++;
     return players[getPlayerId(this->getRound())];
 }
 
@@ -77,15 +73,15 @@ void Game::playerChoosePosition(const PlayerId &playerId, const bool isComputer)
         {
             // Player is computer
             position = this->playAsComputer(playerId);
-            ConsoleHandler::printLine("Played by the computer at position " + std::to_string(position.y + 1) + "," + std::to_string(position.x + 1) + ".");
+            InteractionsProvider::gameInterface->printInfo("Played by the computer at position " + std::to_string(position.y + 1) + "," + std::to_string(position.x + 1) + ".");
         }
         else
         {
             // Player is a real person
-            ConsoleHandler::printLine("Player " + std::to_string(playerId) + ", it's your turn !");
+            InteractionsProvider::gameInterface->printInfo("Player " + std::to_string(playerId) + ", it's your turn !");
 
             // Ask him in which position he wants to place his position and place it in the grid
-            this->getGrid()->display();
+            InteractionsProvider::gameInterface->printGrid(this->getGrid());
             position = this->positionRequester->askForPosition(playerId);
         }
     } while (!this->getGrid()->place(position, playerId));

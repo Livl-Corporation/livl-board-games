@@ -1,4 +1,5 @@
 #include "checkersPositionRequester.hpp"
+#include "cli/consoleHandler.hpp"
 
 Position CheckersPositionRequester::askForPosition(const PlayerId &playerId) const {
     Position from = promptAndValidatePosition("Player " + std::to_string(playerId) + ", select a position to move your piece from (x,y): ", playerId);

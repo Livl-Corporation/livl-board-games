@@ -1,12 +1,7 @@
 #pragma once
 
 #include "../../interfaces/game.hpp"
-#include "../../models/player.hpp"
-#include "../../shared/shared.hpp"
-
-#include <vector>
-#include <memory>
-
+#include "othelloGameEvaluator.hpp"
 #include "othelloGrid.hpp"
 
 class Othello : public Game
@@ -14,9 +9,9 @@ class Othello : public Game
 public:
     Othello(
         const std::vector<Player>& players,
-        std::unique_ptr<PositionRequester> PositionRequester,
-        std::unique_ptr<GameEvaluator> gameEvaluator)
-        : Game("Othello", players, std::move(PositionRequester), std::move(gameEvaluator), std::make_shared<OthelloGrid>())
+        const std::shared_ptr<PositionRequester> &positionRequester,
+        const std::shared_ptr<GameEvaluator> &gameEvaluator)
+        : Game( "Othello", players, positionRequester, gameEvaluator, std::make_shared<OthelloGrid>())
     {
     }
 

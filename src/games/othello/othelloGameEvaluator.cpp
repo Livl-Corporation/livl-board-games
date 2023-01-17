@@ -156,7 +156,13 @@ std::vector<Position> OthelloGameEvaluator::getFlippablePieces(const Position &p
         {
             return {};
         }
-        else // This is an opponent's token, so we add it to the list of flippable pieces
+        // We reached the border of the grid & this is an enemy piece
+        else if(grid.isPositionInBorder({x, y}) && idInCell != playerId)
+        {
+            return {};
+        }
+        // This is an opponent's token, so we add it to the list of flippable pieces
+        else
         {
             pieces.push_back({x, y});
         }

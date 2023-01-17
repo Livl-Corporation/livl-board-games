@@ -14,9 +14,9 @@ class Checkers : public Game
 public:
     Checkers(
             const std::vector<Player>& players,
-            std::unique_ptr<PositionRequester> positionRequester,
-            std::unique_ptr<GameEvaluator> gameEvaluator)
-            : Game("Checkers", players, std::move(positionRequester), std::move(gameEvaluator), std::make_shared<CheckersGrid>())
+            const std::shared_ptr<PositionRequester>& positionRequester,
+            const std::shared_ptr<GameEvaluator>& gameEvaluator)
+            : Game("Checkers", players, positionRequester, gameEvaluator, std::make_shared<CheckersGrid>())
     {
     }
 

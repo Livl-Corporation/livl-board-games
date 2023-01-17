@@ -2,8 +2,8 @@
 
 #include "../../interfaces/positionRequester.hpp"
 #include "../../models/position.hpp"
-#include "../../shared/consoleHandler.hpp"
 #include "../../models/player.hpp"
+#include "../../cli/consoleHandler.hpp"
 
 class TicTacToePositionRequester : public PositionRequester
 {

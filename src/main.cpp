@@ -1,56 +1,40 @@
-#include <memory>
-#include "interfaces/game.hpp"
-#include "shared/consoleHandler.hpp"
-#include "models/player.hpp"
-#include "games/gameFactory.hpp"
+#include "cli/gameConsoleInteractions.h"
+#include "cli/menuConsoleInterface.h"
+#include "gui/gameGuiInteractions.h"
+#include "gui/menuGuiInteractions.h"
 
-// Function to ask the user for player selection
-unsigned int getPlayerSelection()
-{
-    ConsoleHandler::printHeader("GAME MODE");
-    ConsoleHandler::printLine("1. Against the computer");
-    ConsoleHandler::printLine("2. 2 players");
-    ConsoleHandler::printLine("Enter any other number to exit.\n");
-    ConsoleHandler::print("Choice : n°");
+int setupConsole() {
 
-    return ConsoleHandler::readInt();
+    InteractionsProvider::gameInterface =  std::make_shared<GameConsoleInteractions>();
+    InteractionsProvider::menuInterface = std::make_shared<MenuConsoleInteractions>();
+
+    return 0;
 }
 
-// Function to create players based on the given player selection
-std::vector<Player> createPlayers(unsigned int playerSelection)
-{
-    std::vector<Player> players;
-    Player p1(1, false);
-    Player p2(2, playerSelection == 1);
-    players.push_back(p1);
-    players.push_back(p2);
-    return players;
+int setupGui() {
+    int argc = 0;
+    QApplication a(argc, nullptr);
+    QApplication::setWindowIcon(QIcon(":/img/logo.png"));
+
+    InteractionsProvider::gameInterface = std::make_shared<GameGuiInteractions>();
+    InteractionsProvider::menuInterface = std::make_shared<MenuGuiInteractions>();
+
+    return QApplication::exec();
 }
 
-// Function to ask the user for game selection
-unsigned int getGameSelection()
+int main(int argc, char** argv)
 {
-    ConsoleHandler::printLine("");
-    ConsoleHandler::printHeader("BOARD GAME CHOICE");
-    ConsoleHandler::printLine("1. Tic-Tac-Toe");
-    ConsoleHandler::printLine("2. Power 4");
-    ConsoleHandler::printLine("3. Othello");
-    ConsoleHandler::printLine("4. Checkers");
-    ConsoleHandler::printLine("Enter any other number to exit.\n");
-    ConsoleHandler::print("Choice : n°");
-    return ConsoleHandler::readInt();
-}
 
-// Function to play the given game
-void playGame(std::unique_ptr<Game> game)
-{
-    game->play();
-    ConsoleHandler::printHeader("GAME FINISHED");
-}
+    // Run with param -console use the cli
+    bool useConsole = argc > 1 && std::string(argv[1]) == "-console";
+    if (useConsole) {
+        return setupConsole();
+    } else {
+        return setupGui();
+    }
 
-int main()
-{
-    while (true)
+
+/*    while (true)
     {
         // Ask for player selection
         unsigned int playerSelection = getPlayerSelection();
@@ -73,5 +57,5 @@ int main()
 
         // Launch game
         playGame(std::move(game));
-    }
+    }*/
 }

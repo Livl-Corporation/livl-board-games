@@ -6,6 +6,8 @@
 #include "../models/position.hpp"
 #include "grid.hpp"
 #include "../models/player.hpp"
+#include "gameInteractions.h"
+#include "../shared/interactionsProvider.h"
 
 class PositionRequester
 {

@@ -1,15 +1,9 @@
 #pragma once
 
+#include <vector>
 #include "../models/position.hpp"
-#include "../models/player.hpp"
-
-#include "../shared/consoleHandler.hpp"
 #include "../shared/exceptions/out-of-bounds-exception.hpp"
 #include "../shared/exceptions/occupied-position-exception.hpp"
-#include "../shared/exceptions/column-full-exception.hpp"
-
-#include <vector>
-#include <string>
 
 template <typename T>
 class Grid
@@ -23,6 +17,8 @@ public:
 
     [[nodiscard]] bool isPositionInBounds(const Position &position) const;
 
+    [[nodiscard]] bool isPositionInBorder(const Position &position) const;
+
     [[nodiscard]] bool isFull() const;
 
     bool place(const Position &position, const T &element);
@@ -32,8 +28,6 @@ public:
     T getElementAt(const Position &position) const;
 
     [[nodiscard]] std::vector<Position> getEmptyPositions() const;
-
-    void display() const;
 
 protected:
     Grid(const unsigned int x, const unsigned int y, const T &defaultValue)
