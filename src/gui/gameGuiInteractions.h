@@ -6,9 +6,8 @@
 #define LIVL_GAMEGUIINTERACTIONS_H
 
 #include <utility>
-
-#include "../interfaces/gameInteractions.h"
 #include "forms/game/gamewindow.h"
+#include "../interfaces/gameInteractions.h"
 
 class GameGuiInteractions : public GameInteractions
 {

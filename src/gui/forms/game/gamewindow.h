@@ -1,7 +1,12 @@
 #pragma once
+
 #include <QMainWindow>
+#include <QVBoxLayout>
 #include "../../../models/player.hpp"
 #include "../../../interfaces/grid.hpp"
+#include <QLabel>
+#include "ui_gamewindow.h"
+#include "../../components/gridcomponent.h"
 
 namespace Ui {
 class GameWindow;

@@ -1,12 +1,7 @@
 #pragma once
 
 #include "../../interfaces/game.hpp"
-#include "../../models/player.hpp"
-#include "../../shared/shared.hpp"
-
-#include <vector>
-#include <memory>
-
+#include "othelloGameEvaluator.hpp"
 #include "othelloGrid.hpp"
 
 class Othello : public Game

@@ -1,9 +1,9 @@
 #pragma once
 
-#include <iostream>
 #include <string>
 #include <vector>
-#include <QLabel>
+#include <iostream>
+#include <sstream>
 
 namespace ConsoleHandler
 {

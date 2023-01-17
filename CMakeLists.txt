@@ -32,28 +32,19 @@ add_executable(Livl
         src/games/othello/othelloPositionRequester.cpp
         src/games/othello/othelloGameEvaluator.cpp
         src/gui/forms/menu/menu.cpp
-        src/gui/forms/menu/menu.h
         src/gui/forms/menu/menu.ui
-        src/gui/forms/game/gamewindow.h
         src/gui/forms/game/gamewindow.cpp
         src/gui/forms/game/gamewindow.ui
         img/img.qrc
         src/gui/components/gridcomponent.cpp
-        src/gui/components/gridcomponent.h
         src/gui/components/gridcomponent.ui
-        src/interfaces/gameInteractions.h
         src/cli/gameConsoleInteractions.cpp
-        src/cli/gameConsoleInteractions.h
         src/gui/gameGuiInteractions.cpp
-        src/gui/gameGuiInteractions.h
-        src/shared/interactionsProvider.cpp
-        src/shared/interactionsProvider.h
-        src/interfaces/menuInteractions.h
         src/cli/menuConsoleInterface.cpp
-        src/cli/menuConsoleInterface.h
         src/main.cpp
         src/gui/menuGuiInteractions.cpp
-        src/gui/menuGuiInteractions.h)
+        src/shared/exceptions/column-full-exception.hpp
+        src/shared/interactionsProvider.h)
 
 target_link_libraries(Livl
         Qt::Core

@@ -1,15 +1,9 @@
 #pragma once
 
+#include <vector>
 #include "../models/position.hpp"
-#include "../models/player.hpp"
-
-#include "../cli/consoleHandler.hpp"
 #include "../shared/exceptions/out-of-bounds-exception.hpp"
 #include "../shared/exceptions/occupied-position-exception.hpp"
-#include "../shared/exceptions/column-full-exception.hpp"
-
-#include <vector>
-#include <string>
 
 template <typename T>
 class Grid

@@ -7,8 +7,11 @@
 
 #include <QWidget>
 #include <QGridLayout>
+#include <QHBoxLayout>
+#include <QPushButton>
 #include "../../models/player.hpp"
 #include "../../interfaces/grid.hpp"
+#include "ui_GridComponent.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GridComponent; }

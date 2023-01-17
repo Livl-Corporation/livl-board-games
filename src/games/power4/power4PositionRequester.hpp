@@ -1,9 +1,8 @@
 #pragma once
 
-#include "../../interfaces/positionRequester.hpp"
-#include "../../models/position.hpp"
 #include "power4Grid.hpp"
-#include "../../models/player.hpp"
+#include "../../interfaces/positionRequester.hpp"
+#include "../../cli/consoleHandler.hpp"
 
 class Power4PositionRequester : public PositionRequester
 {

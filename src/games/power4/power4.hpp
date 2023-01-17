@@ -1,15 +1,10 @@
 #pragma once
 
-#include "../../interfaces/game.hpp"
 #include "../../models/player.hpp"
+#include "../../interfaces/gameEvaluator.hpp"
 #include "../../shared/shared.hpp"
-#include "power4PositionRequester.hpp"
-#include "../../shared/evaluators/linearGameEvaluator.hpp"
-
-#include <vector>
-#include <memory>
-
 #include "power4Grid.hpp"
+#include "../../interfaces/game.hpp"
 
 class Power4 : public Game
 {

@@ -6,14 +6,13 @@
 #define LIVL_MENUGUIINTERACTIONS_H
 
 #include "../interfaces/menuInteractions.h"
+#include "../games/gameFactory.hpp"
 
 class MenuGuiInteractions : public MenuInteractions {
 
 public:
 
     MenuGuiInteractions();
-
-    void printMenu(const std::vector<std::string> &gameList, const std::vector<std::string> &playerList) const override;
 
 };
 

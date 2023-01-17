@@ -6,13 +6,12 @@
 #define LIVL_MENUCONSOLEINTERFACE_H
 
 #include "../interfaces/menuInteractions.h"
+#include "consoleHandler.hpp"
 
 class MenuConsoleInteractions : public MenuInteractions {
 public:
 
-    MenuConsoleInteractions() = default;
-
-    void printMenu(const std::vector<std::string> &gameList, const std::vector<std::string> &playerList) const override;
+    MenuConsoleInteractions();
 
 };
 

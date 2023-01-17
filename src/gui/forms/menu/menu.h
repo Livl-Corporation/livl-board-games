@@ -2,21 +2,7 @@
 #define MENU_H
 
 #include <QMainWindow>
-#include <QScopedPointer>
-#include <QSharedPointer>
-#include <QLabel>
-#include <QComboBox>
-#include <QFont>
-#include <QVBoxLayout>
-#include <QDialog>
-#include <QPushButton>
-#include <QVBoxLayout>
-#include <QLabel>
-#include <QPixmap>
-#include <QVBoxLayout>
-#include <QFileInfo>
-#include "../../../models/player.hpp"
-#include <memory>
+#include "./ui_menu.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Menu; }

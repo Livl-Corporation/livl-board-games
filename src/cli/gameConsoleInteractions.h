@@ -7,6 +7,7 @@
 
 #include "../interfaces/gameInteractions.h"
 #include "../interfaces/game.hpp"
+#include "consoleHandler.hpp"
 
 class GameConsoleInteractions : public GameInteractions
 {

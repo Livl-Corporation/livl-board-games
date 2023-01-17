@@ -12,7 +12,9 @@
 class MenuInteractions {
 
 public:
-    virtual void printMenu(const std::vector<std::string> &gameList, const std::vector<std::string> &playerList) const = 0;
+    inline static std::vector<std::string> playerList = std::vector<std::string> {
+        "Human vs Human", "Human vs Computer"
+    };
 
 protected:
     std::shared_ptr<Menu> menuWindow;

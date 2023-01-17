@@ -1,13 +1,8 @@
 #pragma once
 
+#include "../../shared/shared.hpp"
 #include "../../interfaces/game.hpp"
 #include "../../models/player.hpp"
-#include "tictactoePositionRequester.hpp"
-#include "../../shared/evaluators/linearGameEvaluator.hpp"
-
-#include <vector>
-#include <memory>
-
 #include "tictactoeGrid.hpp"
 
 class TicTacToe : public Game
