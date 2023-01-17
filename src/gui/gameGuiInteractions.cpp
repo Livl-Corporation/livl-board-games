@@ -8,11 +8,10 @@ GameGuiInteractions::GameGuiInteractions() {
     gameWindow = std::make_shared<GameWindow>();
 }
 
-void
-
 void GameGuiInteractions::printGameInfos(const std::string &gameName, const std::vector<Player> &players) const {
     gameWindow->setGameName(gameName);
     gameWindow->createPlayers(players);
+    gameWindow->show();
 }
 
 void GameGuiInteractions::printNextRound(const PlayerId &playerId, unsigned int round) const {
@@ -47,8 +46,4 @@ void GameGuiInteractions::printGrid(const std::shared_ptr<Grid<PlayerId>> &grid)
 void GameGuiInteractions::printComputerPlay() const {
     gameWindow->setInfoText("Computer is playing...");
     gameWindow->setInfoTextColor("black");
-}
-
-void GameGuiInteractions::openWindow() const {
-    gameWindow->show();
 }
