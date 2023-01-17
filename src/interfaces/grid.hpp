@@ -17,6 +17,8 @@ public:
 
     [[nodiscard]] bool isPositionInBounds(const Position &position) const;
 
+    [[nodiscard]] bool isPositionInBorder(const Position &position) const;
+
     [[nodiscard]] bool isFull() const;
 
     bool place(const Position &position, const T &element);
