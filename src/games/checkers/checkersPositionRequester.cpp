@@ -73,34 +73,30 @@ bool CheckersPositionRequester::forceEnemyToCaptureEnemy(const PlayerId &playerI
     PlayerId enemyPlayerId = (playerId == 1) ? 2 : 1;
 
     Position diag1{}, diag2{};
+    bool positionHasEnemyTokenDiag1;
+    bool positionHasEnemyTokenDiag2;
 
     // check only two diagonals because a player can only move forward and not backwards
     if(enemyPlayerId == 1) {
         diag1 = {from.x + 2, from.y - 2};
         diag2 = {from.x - 2, from.y - 2};
-
-        if(getGrid()->isPositionInBounds(diag1) && getGrid()->getElementAt(diag1) == NO_PLAYER && getGrid()->getElementAt({diag1.x-1,diag1.y+1}) == enemyPlayerId) {
-            capturableEnemyPos = {diag1.x-1,diag1.y+1};
-            return true;
-        }
-
-        if(getGrid()->isPositionInBounds(diag2) && getGrid()->getElementAt(diag2) == NO_PLAYER && getGrid()->getElementAt({diag2.x+1,diag2.y+1}) == enemyPlayerId) {
-            capturableEnemyPos = {diag2.x+1,diag2.y+1};
-            return true;
-        }
+        positionHasEnemyTokenDiag1 = getGrid()->getElementAt({diag1.x-1,diag1.y+1}) == enemyPlayerId;
+        positionHasEnemyTokenDiag2 = getGrid()->getElementAt({diag2.x+1,diag2.y+1}) == enemyPlayerId;
     } else {
         diag1 = {from.x + 2, from.y + 2};
         diag2 = {from.x - 2, from.y + 2};
+        positionHasEnemyTokenDiag1 = getGrid()->getElementAt({diag1.x-1,diag1.y-1}) == enemyPlayerId;
+        positionHasEnemyTokenDiag2 = getGrid()->getElementAt({diag1.x+1,diag1.y-1}) == enemyPlayerId;
+    }
 
-        if(getGrid()->isPositionInBounds(diag1) && getGrid()->getElementAt(diag1) == NO_PLAYER && getGrid()->getElementAt({diag1.x-1,diag1.y-1}) == enemyPlayerId) {
-            capturableEnemyPos = {diag1.x-1,diag1.y-1};
-            return true;
-        }
+    if(getGrid()->isPositionInBounds(diag1) && getGrid()->getElementAt(diag1) == NO_PLAYER && positionHasEnemyTokenDiag1) {
+        capturableEnemyPos = diag1;
+        return true;
+    }
 
-        if(getGrid()->isPositionInBounds(diag2) && getGrid()->getElementAt(diag2) == NO_PLAYER && getGrid()->getElementAt({diag2.x+1,diag2.y-1}) == enemyPlayerId) {
-            capturableEnemyPos = {diag2.x+1,diag2.y-1};
-            return true;
-        }
+    if(getGrid()->isPositionInBounds(diag2) && getGrid()->getElementAt(diag2) == NO_PLAYER && positionHasEnemyTokenDiag2) {
+        capturableEnemyPos = diag2;
+        return true;
     }
 
     return false;
