@@ -16,4 +16,6 @@ private:
     bool captureEnemyToken(const Position &from, const Position &to) const;
 
     bool isCaptureMove(const PlayerId &playerId, const Position &from, const Position &to) const;
+
+    bool forceEnemyToCaptureEnemy(const PlayerId &playerId, const Position &from, Position &capturableEnemyPos) const;
 };

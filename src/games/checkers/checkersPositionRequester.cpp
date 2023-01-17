@@ -33,39 +33,77 @@ Position CheckersPositionRequester::promptAndValidatePosition(const std::string 
 
 Position CheckersPositionRequester::promptAndValidateDestinationPosition(const std::string &prompt, const PlayerId &playerId, const Position &from) const {
     Position position{};
-    while (true) {
-        ConsoleHandler::print(prompt);
 
-        auto input = ConsoleHandler::readValues(2);
-        position = {input[1] - 1, input[0] - 1};
+    // Check if the player has to capture an enemy piece
+    if(forceEnemyToCaptureEnemy(playerId, from, position)) {
+        ConsoleHandler::printLine("You are forced to capture an enemy piece!");
+    } else {
+        while (true) {
+            ConsoleHandler::print(prompt);
 
-        if (!this->getGrid()->isPositionInBounds(position)) {
-            ConsoleHandler::printLine("Invalid position! The position is out of bounds.");
-            continue;
+            auto input = ConsoleHandler::readValues(2);
+            position = {input[1] - 1, input[0] - 1};
+
+            if (!this->getGrid()->isPositionInBounds(position)) {
+                ConsoleHandler::printLine("Invalid position! The position is out of bounds.");
+                continue;
+            }
+
+            if (!this->getGrid()->isPositionEmpty(position)) {
+                ConsoleHandler::printLine("Invalid position! The position is not empty.");
+                continue;
+            }
+
+            if (!this->isMoveValid(playerId, from, position)) {
+                ConsoleHandler::printLine("Invalid move! You can only move diagonally and not backward.");
+                continue;
+            }
+
+            break;
         }
-
-        if (!this->getGrid()->isPositionEmpty(position)) {
-            ConsoleHandler::printLine("Invalid position! The position is not empty.");
-            continue;
-        }
-
-        if (!this->isMoveValid(playerId, from, position)) {
-            ConsoleHandler::printLine("Invalid move! You can only move diagonally and not backward.");
-            continue;
-        }
-
-        if (this->isCaptureMove(playerId, from, position)) {
-            this->captureEnemyToken(from, position);
-            ConsoleHandler::printLine("Congratulations ! You captured an enemy token.");
-        }
-
-        break;
     }
 
     // Remove the initial position from the grid if the move is valid
     this->getGrid()->replaceAt(from, NO_PLAYER);
 
     return position;
+}
+
+bool CheckersPositionRequester::forceEnemyToCaptureEnemy(const PlayerId &playerId, const Position &from, Position &capturableEnemyPos) const {
+    PlayerId enemyPlayerId = (playerId == 1) ? 2 : 1;
+
+    Position diag1{}, diag2{};
+
+    // check only two diagonals because a player can only move forward and not backwards
+    if(enemyPlayerId == 1) {
+        diag1 = {from.x + 2, from.y - 2};
+        diag2 = {from.x - 2, from.y - 2};
+
+        if(getGrid()->isPositionInBounds(diag1) && getGrid()->getElementAt(diag1) == NO_PLAYER && getGrid()->getElementAt({diag1.x-1,diag1.y+1}) == enemyPlayerId) {
+            capturableEnemyPos = {diag1.x-1,diag1.y+1};
+            return true;
+        }
+
+        if(getGrid()->isPositionInBounds(diag2) && getGrid()->getElementAt(diag2) == NO_PLAYER && getGrid()->getElementAt({diag2.x+1,diag2.y+1}) == enemyPlayerId) {
+            capturableEnemyPos = {diag2.x+1,diag2.y+1};
+            return true;
+        }
+    } else {
+        diag1 = {from.x + 2, from.y + 2};
+        diag2 = {from.x - 2, from.y + 2};
+
+        if(getGrid()->isPositionInBounds(diag1) && getGrid()->getElementAt(diag1) == NO_PLAYER && getGrid()->getElementAt({diag1.x-1,diag1.y-1}) == enemyPlayerId) {
+            capturableEnemyPos = {diag1.x-1,diag1.y-1};
+            return true;
+        }
+
+        if(getGrid()->isPositionInBounds(diag2) && getGrid()->getElementAt(diag2) == NO_PLAYER && getGrid()->getElementAt({diag2.x+1,diag2.y-1}) == enemyPlayerId) {
+            capturableEnemyPos = {diag2.x+1,diag2.y-1};
+            return true;
+        }
+    }
+
+    return false;
 }
 
 bool CheckersPositionRequester::captureEnemyToken(const Position &from, const Position &to) const {
@@ -98,9 +136,10 @@ bool CheckersPositionRequester::isCaptureMove(const PlayerId &playerId, const Po
 
     // check if the position in between the from and to positions is occupied by the enemy player
     int enemyPlayerId = (playerId == 1) ? 2 : 1;
-    int capturedPieceX = (from.x + to.x) / 2;
-    int capturedPieceY = (from.y + to.y) / 2;
-    if (this->getGrid()->getElementAt({capturedPieceX, capturedPieceY}) == enemyPlayerId) {
+    int enemyTokenX = (from.x + to.x) / 2;
+    int enemyTokenY = (from.y + to.y) / 2;
+
+    if (this->getGrid()->getElementAt({enemyTokenX, enemyTokenY}) == enemyPlayerId) {
         return true;
     }
 
@@ -108,6 +147,11 @@ bool CheckersPositionRequester::isCaptureMove(const PlayerId &playerId, const Po
 }
 
 bool CheckersPositionRequester::isMoveValid(const PlayerId &playerId, const Position &from, const Position &to) const {
+    if (this->isCaptureMove(playerId, from, to)) {
+        this->captureEnemyToken(from, to);
+        return true;
+    }
+
     // check if the move is diagonal
     if (std::abs(to.x - from.x) != std::abs(to.y - from.y)) {
         return false;
@@ -125,6 +169,6 @@ bool CheckersPositionRequester::isMoveValid(const PlayerId &playerId, const Posi
     if (playerId == 2 && to.x > from.x) {
         return false;
     }
+
     return true;
 }
-
