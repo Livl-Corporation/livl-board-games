@@ -26,6 +26,12 @@ bool Grid<T>::isPositionInBounds(const Position &position) const
 }
 
 template <typename T>
+bool Grid<T>::isPositionInBorder(const Position &position) const
+{
+    return (position.x == 0 || position.x == this->xSize - 1) || (position.y == 0 || position.y == this->ySize - 1);
+}
+
+template <typename T>
 bool Grid<T>::isFull() const
 {
     return getEmptyPositions().size() == 0;

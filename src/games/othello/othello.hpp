@@ -11,7 +11,7 @@ public:
         const std::vector<Player>& players,
         const std::shared_ptr<PositionRequester> &positionRequester,
         const std::shared_ptr<GameEvaluator> &gameEvaluator)
-        : Game((std::string &) "Othello", players, positionRequester, gameEvaluator, std::make_shared<OthelloGrid>())
+        : Game( "Othello", players, positionRequester, gameEvaluator, std::make_shared<OthelloGrid>())
     {
     }
 
