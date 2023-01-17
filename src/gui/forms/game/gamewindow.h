@@ -43,4 +43,5 @@ public:
 
 private:
     Ui::GameWindow *ui;
+    QVector<QLabel*> playerLabels;
 };

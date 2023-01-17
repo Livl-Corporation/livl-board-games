@@ -25,6 +25,8 @@ public:
     void printDraw() const override;
     void printComputerPlay() const override;
 
+    void openWindow() const;
+
 private:
     std::shared_ptr<GameWindow> gameWindow;
 };

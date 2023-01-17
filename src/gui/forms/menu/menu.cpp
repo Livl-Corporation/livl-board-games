@@ -6,6 +6,9 @@ Menu::Menu(QWidget *parent)
 {
     QCoreApplication::applicationDirPath();
     ui->setupUi(this);
+
+    connect(ui->playButton, &QPushButton::clicked, this, &Menu::onPlayClicked);
+
 }
 
 Menu::~Menu()
@@ -25,6 +28,13 @@ void Menu::setPlayerList(const std::vector<std::string> &playerList) {
     }
 }
 
+void Menu::onPlayClicked() {
+    int gameSelection = ui->gameSelectionBox->currentIndex()+1;
+    int playerSelection = ui->playerSelectionBox->currentIndex()+1;
 
+    close();
+
+    GameFactory::startGame(gameSelection, playerSelection);
+}
 
 

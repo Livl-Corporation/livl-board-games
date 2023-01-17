@@ -12,6 +12,8 @@ GameWindow::~GameWindow()
     delete ui;
 }
 
+
+
 void GameWindow::setGameName(const std::string &gameName) {
     ui->gameTitle->setText(QString::fromStdString(gameName));
 }
@@ -23,6 +25,7 @@ void GameWindow::createPlayers(const std::vector<Player>& players) {
         label->setObjectName("playerLabel"+QString::number(player.getId()));
         label->setText(QString(Player::getPlayerChar(player.getId())));
         layout->addWidget(label);
+        this->playerLabels.append(label);
     }
     ui->playerListContainer->addLayout(layout);
 }
@@ -32,9 +35,8 @@ void GameWindow::setRound(unsigned int round) {
 }
 
 void GameWindow::setActivePlayer(const PlayerId &playerId) {
-    for(auto &child : ui->playerListContainer->children()) {
-        auto *label = dynamic_cast<QLabel*>(child);
-        if (label != nullptr) {
+    for(QLabel* label : this->playerLabels) {
+        if (label != nullptr ) {
             if (label->objectName() == "playerLabel"+QString::number(playerId)) {
                 label->setStyleSheet("QLabel { background-color : red; color : white; font-weight: bold; }");
             } else {

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "./ui_menu.h"
+#include "games/gameFactory.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Menu; }
@@ -21,5 +22,9 @@ public:
 
 private:
     Ui::Menu *ui;
+
+public slots:
+    void onPlayClicked();
+
 };
 #endif // MENU_H

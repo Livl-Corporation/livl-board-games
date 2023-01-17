@@ -10,4 +10,3 @@ MenuGuiInteractions::MenuGuiInteractions() {
     this->menuWindow->setPlayerList(MenuInteractions::playerList);
     this->menuWindow->show();
 }
-
