@@ -1,23 +1,11 @@
 #pragma once
 
-#include "grid.hpp"
-#include "../games/power4/power4Grid.hpp"
-#include "../games/tictactoe/tictactoeGrid.hpp"
-
-#include "../models/player.hpp"
-#include "../models/position.hpp"
-
-#include "gameEvaluator.hpp"
-#include "positionRequester.hpp"
-
-#include "../shared/shared.hpp"
-#include "../shared/consoleHandler.hpp"
-#include "../shared/exceptions/out-of-bounds-exception.hpp"
-
-#include <cstdio>
-#include <vector>
 #include <string>
 #include <memory>
+#include <vector>
+#include "positionRequester.hpp"
+#include "../models/player.hpp"
+#include "gameEvaluator.hpp"
 
 class Game
 {
@@ -31,8 +19,6 @@ public:
 
     [[nodiscard]] inline unsigned int getRound() const { return this->round; };
 
-    [[nodiscard]] inline unsigned int getPlayerCount() const { return this->playerCount; };
-
     [[nodiscard]] inline std::string getName() const { return this->name; };
 
     [[nodiscard]] std::shared_ptr<Grid<PlayerId>> getGrid() const { return this->grid; }
@@ -41,15 +27,15 @@ public:
 
 protected:
     Game(
-        std::string  name,
+        std::string name,
         const std::vector<Player>& players,
-        std::unique_ptr<PositionRequester> positionRequester,
-        std::unique_ptr<GameEvaluator> gameEvaluator,
-        std::shared_ptr<Grid<PlayerId>> grid);
+        const std::shared_ptr<PositionRequester> &positionRequester,
+        const std::shared_ptr<GameEvaluator> &gameEvaluator,
+        const std::shared_ptr<Grid<PlayerId>> &grid);
 
-    std::unique_ptr<PositionRequester> positionRequester;
+    std::shared_ptr<PositionRequester> positionRequester;
 
-    std::unique_ptr<GameEvaluator> gameEvaluator;
+    std::shared_ptr<GameEvaluator> gameEvaluator;
 
     virtual Position playAsComputer(const PlayerId &playerId) = 0;
 
@@ -81,14 +67,9 @@ private:
      */
     std::shared_ptr<Grid<PlayerId>> grid;
 
-    /**
-     * @brief Start playing the next game round
-     */
-    void nextRound();
-
     [[nodiscard]] PlayerId getPlayerId(unsigned int roundNumber) const;
 
-    [[nodiscard]] Player getNextPlayer() const;
+    [[nodiscard]] Player getNextPlayer();
 
     void playerChoosePosition(const PlayerId &playerId, bool isComputer);
 

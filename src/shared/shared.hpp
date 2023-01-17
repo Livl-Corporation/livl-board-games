@@ -1,8 +1,6 @@
 #pragma once
 
-#include <string>
 #include <random>
-#include "consoleHandler.hpp"
 
 namespace Shared
 {

@@ -2,12 +2,7 @@
 
 #include "../../interfaces/game.hpp"
 #include "../../models/player.hpp"
-#include "tictactoePositionRequester.hpp"
-#include "../../shared/evaluators/linearGameEvaluator.hpp"
-
-#include <vector>
-#include <memory>
-
+#include "shared/shared.hpp"
 #include "tictactoeGrid.hpp"
 
 class TicTacToe : public Game
@@ -15,9 +10,9 @@ class TicTacToe : public Game
 public:
     TicTacToe(
         const std::vector<Player>& players,
-        std::unique_ptr<PositionRequester> positionRequester,
-        std::unique_ptr<GameEvaluator> gameEvaluator)
-        : Game("Tic Tac Toe", players, std::move(positionRequester), std::move(gameEvaluator), std::make_shared<TicTacToeGrid>())
+        const std::shared_ptr<PositionRequester> &positionRequester,
+        const std::shared_ptr<GameEvaluator> &gameEvaluator)
+        : Game("Tic Tac Toe", players, positionRequester, gameEvaluator, std::make_shared<TicTacToeGrid>())
     {
     }
 

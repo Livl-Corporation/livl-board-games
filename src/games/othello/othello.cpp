@@ -1,5 +1,4 @@
 #include "othello.hpp"
-#include "othelloPositionRequester.hpp"
 
 Position Othello::playAsComputer(const PlayerId &playerId)
 {

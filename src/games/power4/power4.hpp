@@ -1,24 +1,19 @@
 #pragma once
 
-#include "../../interfaces/game.hpp"
 #include "../../models/player.hpp"
+#include "../../interfaces/gameEvaluator.hpp"
 #include "../../shared/shared.hpp"
-#include "power4PositionRequester.hpp"
-#include "../../shared/evaluators/linearGameEvaluator.hpp"
-
-#include <vector>
-#include <memory>
-
 #include "power4Grid.hpp"
+#include "../../interfaces/game.hpp"
 
 class Power4 : public Game
 {
 public:
     Power4(
         const std::vector<Player>& players,
-        std::unique_ptr<PositionRequester> PositionRequester,
-        std::unique_ptr<GameEvaluator> gameEvaluator)
-        : Game("Power 4", players, std::move(PositionRequester), std::move(gameEvaluator), std::make_shared<Power4Grid>())
+        const std::shared_ptr<PositionRequester> &positionRequester,
+        const std::shared_ptr<GameEvaluator> &gameEvaluator)
+        : Game("Power 4", players, positionRequester, gameEvaluator, std::make_shared<Power4Grid>())
     {
     }
 

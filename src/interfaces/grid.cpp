@@ -34,49 +34,32 @@ bool Grid<T>::isFull() const
 template <typename T>
 bool Grid<T>::place(const Position &position, const T &element)
 {
-
-    try
+    if (!this->isPositionInBounds(position))
     {
-        if (!this->isPositionInBounds(position))
-        {
-            throw OutOfBoundsException();
-        }
-
-        if (!this->isPositionEmpty(position))
-        {
-            throw OccupiedPositionException();
-        }
-
-        this->grid[position.y][position.x] = element;
-
-        return true;
+        throw OutOfBoundsException();
     }
-    catch (const std::exception &e)
+
+    if (!this->isPositionEmpty(position))
     {
-        ConsoleHandler::printLine("\n" + std::string(e.what()) + "\n");
-        return false;
+        throw OccupiedPositionException();
     }
+
+    this->grid[position.y][position.x] = element;
+
+    return true;
 }
 
 template <typename T>
 bool Grid<T>::replaceAt(const Position &position, const T &element)
 {
-    try
+    if (!this->isPositionInBounds(position))
     {
-        if (!this->isPositionInBounds(position))
-        {
-            throw OutOfBoundsException();
-        }
-
-        this->grid[position.y][position.x] = element;
-
-        return true;
+        throw OutOfBoundsException();
     }
-    catch (const std::exception &e)
-    {
-        ConsoleHandler::printLine("\n" + std::string(e.what()) + "\n");
-        return false;
-    }
+
+    this->grid[position.y][position.x] = element;
+
+    return true;
 }
 
 template <typename T>
@@ -97,61 +80,4 @@ std::vector<Position> Grid<T>::getEmptyPositions() const
     }
 
     return freePositions;
-}
-
-template <typename T>
-void Grid<T>::display() const
-{
-
-    ConsoleHandler::print("\n   ");
-    for (int col = 0; col < this->getXSize(); col++)
-    {
-        ConsoleHandler::print(std::to_string(col + 1) + " ");
-    }
-
-    ConsoleHandler::print("\n  ┌");
-    for (int col = 0; col < (this->getXSize() * 2) - 1; col++)
-    {
-        if (col % 2 == 0)
-        {
-            ConsoleHandler::print("─");
-        }
-        else
-        {
-            ConsoleHandler::print("┬");
-        }
-    }
-    ConsoleHandler::printLine("┐");
-
-    for (int row = 0; row < this->getYSize(); row++)
-    {
-
-        ConsoleHandler::print(std::to_string(row + 1) + " │");
-
-        for (int col = 0; col < this->getXSize(); col++)
-        {
-            std::string characterAsString(1, Player::getPlayerChar(this->getElementAt({.x =  col, .y =  row})));
-            ConsoleHandler::print(characterAsString);
-
-            if (col < this->getXSize() - 1)
-            {
-                ConsoleHandler::print("│");
-            }
-        }
-        ConsoleHandler::printLine("│");
-    }
-
-    ConsoleHandler::print("  └");
-    for (int col = 0; col < (this->getXSize() * 2) - 1; col++)
-    {
-        if (col % 2 == 0)
-        {
-            ConsoleHandler::print("─");
-        }
-        else
-        {
-            ConsoleHandler::print("┴");
-        }
-    }
-    ConsoleHandler::printLine("┘");
 }
