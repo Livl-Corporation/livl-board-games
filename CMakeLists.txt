@@ -44,7 +44,10 @@ add_executable(Livl
         src/main.cpp
         src/gui/menuGuiInteractions.cpp
         src/shared/exceptions/column-full-exception.hpp
-        src/shared/interactionsProvider.h)
+        src/shared/interactionsProvider.h
+        )
+
+target_include_directories(Livl PRIVATE src)
 
 target_link_libraries(Livl
         Qt::Core

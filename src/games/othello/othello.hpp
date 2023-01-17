@@ -9,9 +9,9 @@ class Othello : public Game
 public:
     Othello(
         const std::vector<Player>& players,
-        std::unique_ptr<PositionRequester> PositionRequester,
-        std::unique_ptr<GameEvaluator> gameEvaluator)
-        : Game("Othello", players, std::move(PositionRequester), std::move(gameEvaluator), std::make_shared<OthelloGrid>())
+        const std::shared_ptr<PositionRequester> &positionRequester,
+        const std::shared_ptr<GameEvaluator> &gameEvaluator)
+        : Game((std::string &) "Othello", players, positionRequester, gameEvaluator, std::make_shared<OthelloGrid>())
     {
     }
 

@@ -27,15 +27,15 @@ public:
 
 protected:
     Game(
-        std::string  name,
+        std::string name,
         const std::vector<Player>& players,
-        std::unique_ptr<PositionRequester> positionRequester,
-        std::unique_ptr<GameEvaluator> gameEvaluator,
-        std::shared_ptr<Grid<PlayerId>> grid);
+        const std::shared_ptr<PositionRequester> &positionRequester,
+        const std::shared_ptr<GameEvaluator> &gameEvaluator,
+        const std::shared_ptr<Grid<PlayerId>> &grid);
 
-    std::unique_ptr<PositionRequester> positionRequester;
+    std::shared_ptr<PositionRequester> positionRequester;
 
-    std::unique_ptr<GameEvaluator> gameEvaluator;
+    std::shared_ptr<GameEvaluator> gameEvaluator;
 
     virtual Position playAsComputer(const PlayerId &playerId) = 0;
 

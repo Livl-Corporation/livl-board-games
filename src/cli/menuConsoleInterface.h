@@ -7,6 +7,7 @@
 
 #include "../interfaces/menuInteractions.h"
 #include "consoleHandler.hpp"
+#include "../games/gameFactory.hpp"
 
 class MenuConsoleInteractions : public MenuInteractions {
 public:

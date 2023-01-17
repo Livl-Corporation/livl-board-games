@@ -17,8 +17,11 @@ namespace GameFactory
     std::unique_ptr<Game> createTicTacToe(const std::vector<Player> &players);
     std::unique_ptr<Game> createOthello(const std::vector<Player> &players);
 
-    static std::vector<std::string> gameList = std::vector<std::string> {
+    inline std::vector<std::string> gameList = std::vector<std::string> {
         "TicTacToe", "Power4", "Othello"
     };
+
+    void generatePlayers(int playerSelection, std::vector<Player> &players);
+    void startGame(int gameSelection, int playerSelection);
 
 }

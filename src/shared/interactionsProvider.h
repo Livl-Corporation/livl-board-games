@@ -9,8 +9,8 @@
 #include "../interfaces/menuInteractions.h"
 
 namespace InteractionsProvider {
-    static std::shared_ptr<GameInteractions> gameInterface;
-    static std::shared_ptr<MenuInteractions> menuInterface;
+    inline std::shared_ptr<GameInteractions> gameInterface;
+    inline std::shared_ptr<MenuInteractions> menuInterface;
 }
 
 #endif //LIVL_INTERACTIONSPROVIDER_H

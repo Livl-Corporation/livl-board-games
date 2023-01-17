@@ -7,12 +7,16 @@
 
 #include "../interfaces/menuInteractions.h"
 #include "../games/gameFactory.hpp"
+#include "gui/forms/menu/menu.h"
 
 class MenuGuiInteractions : public MenuInteractions {
 
 public:
 
     MenuGuiInteractions();
+
+protected:
+    std::shared_ptr<Menu> menuWindow;
 
 };
 

@@ -7,7 +7,6 @@
 
 #include <string>
 #include <vector>
-#include "../gui/forms/menu/menu.h"
 
 class MenuInteractions {
 
@@ -15,9 +14,6 @@ public:
     inline static std::vector<std::string> playerList = std::vector<std::string> {
         "Human vs Human", "Human vs Computer"
     };
-
-protected:
-    std::shared_ptr<Menu> menuWindow;
 };
 
 #endif //LIVL_MENUINTERACTIONS_H
