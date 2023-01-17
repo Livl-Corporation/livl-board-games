@@ -40,7 +40,7 @@ namespace GameFactory
 
     void generatePlayers(int playerSelection, std::vector<Player> &players) {
         Player p1(1, false);
-        Player p2(2, playerSelection == 1);
+        Player p2(2, playerSelection == 2);
         players.push_back(p1);
         players.push_back(p2);
     }
