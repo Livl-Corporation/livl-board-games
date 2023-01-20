@@ -16,7 +16,7 @@ namespace Ui {
 class GameWindow;
 }
 
-class GameWindow : public QMainWindow, public Observer<Game>, public Subject<Grid<Token>>
+class GameWindow : public QMainWindow, public Observer<std::shared_ptr<Game>>, public Subject<Grid<Token>>
 {
     Q_OBJECT
 
@@ -47,11 +47,11 @@ public:
         this->controller = _controller;
     };
 
-    void update(const Game &value) override;
+    void update(const std::shared_ptr<Game> &value) override;
 
     void createGrid(const std::shared_ptr<Grid<Token>> &grid);
-    void attachGridComponentObserver();
 
+    void attachGameWindowObserver();
 private:
     Ui::GameWindow *ui;
     QVector<QLabel*> playerLabels;

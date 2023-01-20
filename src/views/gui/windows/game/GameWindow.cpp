@@ -1,3 +1,4 @@
+#include <iostream>
 #include "GameWindow.h"
 #include "models/Subject.cpp"
 
@@ -14,6 +15,7 @@ GameWindow::~GameWindow()
 }
 
 void GameWindow::setGameName(const std::string &gameName) {
+    std::cout << "Setting game name to" << gameName << std::endl;
     ui->gameTitle->setText(QString::fromStdString(gameName));
 }
 
@@ -59,23 +61,20 @@ void GameWindow::createGrid(const std::shared_ptr<Grid<Token>> &grid) {
     ui->gridContainer->addWidget(gridComponent.get());
 }
 
-void GameWindow::attachGridComponentObserver()
+void GameWindow::attachGameWindowObserver()
 {
-    if (gridComponent == nullptr) {
-        createGrid(this->controller->getGame()->getGrid());
-        this->controller->getGame()->getGrid()->attach(gridComponent);
-    }
+    this->controller->getGame()->attach(std::make_shared<GameWindow>(this));
 }
 
-void GameWindow::update(const Game &value) {
-    setGameName(value.getName());
-    setRound(value.getRound());
-    setInfoText(value.getMessage());
+void GameWindow::update(const std::shared_ptr<Game> &value) {
+    setGameName(value->getName());
+    setRound(value->getRound());
+    setInfoText(value->getMessage());
 
     // Grid
     if (gridComponent == nullptr) {
-        createGrid(value.getGrid());
-        value.getGrid()->attach(gridComponent);
+        createGrid(value->getGrid());
+        value->getGrid()->attach(gridComponent);
     }
 
     // Players
@@ -83,10 +82,10 @@ void GameWindow::update(const Game &value) {
 //        ui->playerListContainer->children().clear();
 //        createPlayers(value.getPlayers());
 //    }
-    if (playerLabels.size() != value.getPlayers().size()) {
+    if (playerLabels.size() != value->getPlayers().size()) {
         QObjectList children = ui->playerListContainer->children();
         children.clear();
-        createPlayers(value.getPlayers());
+        createPlayers(value->getPlayers());
     }
 
 }

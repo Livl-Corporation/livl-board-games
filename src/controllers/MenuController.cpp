@@ -11,7 +11,7 @@ void MenuController::onPlayClicked(GameMode gameSelection, PlayMode playerSelect
     GameController gameController(game);
     gameWindow.setController(std::make_shared<GameController>(gameController));
     gameWindow.show();
-    gameWindow.attachGridComponentObserver();
+    gameWindow.attachGameWindowObserver();
     gameController.start();
 
     qDebug() << "Game started";
