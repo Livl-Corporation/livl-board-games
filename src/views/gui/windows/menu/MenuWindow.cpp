@@ -35,8 +35,7 @@ void MenuWindow::onPlayClicked() {
     auto gameSelection = static_cast<GameMode>(ui->gameSelectionBox->currentIndex() + 1);
     auto playerSelection = static_cast<PlayMode>(ui->playerSelectionBox->currentIndex() + 1);
 
+    this->close();
+
     controller->onPlayClicked(gameSelection, playerSelection);
-
-    close();
-
 }

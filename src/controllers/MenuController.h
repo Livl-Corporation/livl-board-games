@@ -24,7 +24,7 @@ public:
     void onPlayClicked(GameMode gameSelection, PlayMode playerSelection);
 
 protected:
-
+    GameWindow gameWindow;
     static std::shared_ptr<Game> createGame(GameMode gameId, PlayMode playerSelection);
 
 };

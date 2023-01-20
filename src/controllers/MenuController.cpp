@@ -8,7 +8,6 @@ void MenuController::onPlayClicked(GameMode gameSelection, PlayMode playerSelect
 
     auto game = createGame(gameSelection, playerSelection);
 
-    GameWindow gameWindow;
     GameController gameController(game);
     gameWindow.setController(std::make_shared<GameController>(gameController));
     gameWindow.show();
