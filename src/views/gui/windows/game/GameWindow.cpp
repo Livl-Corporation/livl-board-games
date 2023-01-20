@@ -59,6 +59,14 @@ void GameWindow::createGrid(const std::shared_ptr<Grid<Token>> &grid) {
     ui->gridContainer->addWidget(gridComponent.get());
 }
 
+void GameWindow::attachGridComponentObserver()
+{
+    if (gridComponent == nullptr) {
+        createGrid(this->controller->getGame()->getGrid());
+        this->controller->getGame()->getGrid()->attach(gridComponent);
+    }
+}
+
 void GameWindow::update(const Game &value) {
     setGameName(value.getName());
     setRound(value.getRound());

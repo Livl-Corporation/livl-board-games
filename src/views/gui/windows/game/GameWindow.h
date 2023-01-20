@@ -50,6 +50,7 @@ public:
     void update(const Game &value) override;
 
     void createGrid(const std::shared_ptr<Grid<Token>> &grid);
+    void attachGridComponentObserver();
 
 private:
     Ui::GameWindow *ui;

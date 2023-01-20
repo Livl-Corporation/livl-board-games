@@ -14,13 +14,12 @@ class GameController {
 public:
 
     explicit GameController(const std::shared_ptr<Game> &game) : game(game) {};
-
+    [[nodiscard]] std::shared_ptr<Game> getGame() const { return game; };
     void start();
 
-private:
+protected:
 
     std::shared_ptr<Game> game;
-
 };
 
 
