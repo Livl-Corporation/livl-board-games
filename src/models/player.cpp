@@ -5,10 +5,10 @@ char Player::getPlayerChar(PlayerId playerId)
     switch (playerId)
     {
     case 1:
-        return 'X';
+        return 'x';
 
     case 2:
-        return 'O';
+        return 'o';
 
     default:
         return ' ';

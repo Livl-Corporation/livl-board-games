@@ -2,11 +2,13 @@
 
 #include "../../interfaces/grid.hpp"
 #include "../../models/player.hpp"
+#include "checkersToken.hpp"
 
-class CheckersGrid : public Grid<PlayerId>
+class CheckersGrid : public Grid<CheckersToken>
 {
 public:
-    CheckersGrid() : Grid(xSize, ySize, NO_PLAYER){
+    CheckersGrid() : Grid(xSize, ySize, )
+    {
         // place default token on the board for a checkers game for element 1 and 2 in horizontal direction
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < xSize; j++) {
@@ -23,7 +25,7 @@ public:
             }
         }
     };
-    explicit CheckersGrid(const Grid<PlayerId> &other) : Grid<PlayerId>(other) {}
+    explicit CheckersGrid(const Grid<CheckersToken> &other) : Grid<CheckersToken>(other) {}
 
     static constexpr int xSize = 8;
     static constexpr int ySize = 8;

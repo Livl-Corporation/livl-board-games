@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "token.hpp"
 
 #include <utility>
 
@@ -66,6 +67,7 @@ Player Game::getNextPlayer()
 void Game::playerChoosePosition(const PlayerId &playerId, const bool isComputer)
 {
     Position position{};
+    Token token;
 
     do
     {

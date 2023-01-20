@@ -46,7 +46,7 @@ add_executable(Livl
         src/shared/exceptions/column-full-exception.hpp
         src/shared/interactionsProvider.h
         src/games/checkers/checkers.hpp src/games/checkers/checkers.cpp src/games/checkers/checkersGrid.cpp src/games/checkers/checkersGrid.hpp src/games/checkers/checkersPositionRequester.cpp src/games/checkers/checkersPositionRequester.hpp
-)
+        src/interfaces/token.hpp src/games/checkers/checkersToken.hpp src/games/checkers/checkersToken.cpp)
 
 target_include_directories(Livl PRIVATE src)
 
