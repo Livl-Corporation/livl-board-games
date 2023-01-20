@@ -26,10 +26,12 @@ class GridComponent : public QWidget, public Subject<Position>, public Observer<
 public:
     explicit GridComponent(QWidget *parent = nullptr);
 
-    void createGrid(const Grid<Token> &grid);
+    void createGrid(const std::shared_ptr<Grid<Token>> &grid);
     void updateGrid(const Grid<Token> &grid);
 
     void update(const Grid<Token> &value) override;
+
+    QGridLayout* getGridLayout() { return this->gridLayout; };
 
     ~GridComponent() override;
 

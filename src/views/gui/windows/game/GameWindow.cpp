@@ -17,6 +17,7 @@ GameWindow::~GameWindow()
 void GameWindow::setGameName(const std::string &gameName) {
     std::cout << "Setting game name to" << gameName << std::endl;
     ui->gameTitle->setText(QString::fromStdString(gameName));
+    ui->gameTitle->update();
 }
 
 void GameWindow::createPlayers(const std::vector<std::shared_ptr<Player>>& players) {
@@ -58,7 +59,11 @@ void GameWindow::setInfoTextColor(const std::string &color) {
 void GameWindow::createGrid(const std::shared_ptr<Grid<Token>> &grid) {
     gridComponent = std::make_shared<GridComponent>(this);
     gridComponent->setObjectName("gridComponent");
-    ui->gridContainer->addWidget(gridComponent.get());
+    gridComponent->createGrid(grid);
+    auto* container = new QWidget(this);
+    container->setLayout(gridComponent->getGridLayout());
+    ui->gridContainer->addWidget(container);
+    ui->centralwidget->repaint();
 }
 
 void GameWindow::attachGameWindowObserver()
