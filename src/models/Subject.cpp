@@ -13,7 +13,11 @@ void Subject<T>::notify(const T &value) {
 
 template <typename T>
 void Subject<T>::detach(const std::shared_ptr<Observer<T>> &observer) {
-    throw std::logic_error("Not implemented");
+    // remove observer from the list
+    auto it = std::find(observers.begin(), observers.end(), observer);
+    if (it != observers.end()) {
+        observers.erase(it);
+    }
 }
 
 template <typename T>

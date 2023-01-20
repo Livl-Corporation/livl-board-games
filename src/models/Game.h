@@ -37,7 +37,7 @@ public:
 
     [[nodiscard]] std::shared_ptr<Grid<Token>> getGrid() const {return this->grid; }
 
-    [[nodiscard]] std::vector<Player> getPlayers() const { return this->players; }
+    [[nodiscard]] std::vector<std::shared_ptr<Player>> getPlayers() const { return this->players; }
 
     [[nodiscard]] GameMode getGameMode() const { return this->gameMode; }
 

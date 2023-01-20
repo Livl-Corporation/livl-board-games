@@ -9,6 +9,8 @@
 #include <vector>
 #include <stdexcept>
 #include "models/interfaces/Observer.h"
+#include <algorithm>
+
 
 template <typename T>
 class Subject {

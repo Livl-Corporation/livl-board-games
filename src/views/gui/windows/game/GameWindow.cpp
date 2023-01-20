@@ -1,4 +1,5 @@
 #include "GameWindow.h"
+#include "models/Subject.cpp"
 
 GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,12 +17,12 @@ void GameWindow::setGameName(const std::string &gameName) {
     ui->gameTitle->setText(QString::fromStdString(gameName));
 }
 
-void GameWindow::createPlayers(const std::vector<Player>& players) {
+void GameWindow::createPlayers(const std::vector<std::shared_ptr<Player>>& players) {
     auto *layout = new QVBoxLayout();
     for (auto &player : players) {
         auto *label = new QLabel();
-        label->setObjectName("playerLabel"+QString::number(player.getId()));
-        label->setText(QString::number(player.getId()));
+        label->setObjectName("playerLabel"+QString::number(player->getId()));
+        label->setText(QString::number(player->getId()));
         layout->addWidget(label);
         this->playerLabels.append(label);
     }
@@ -53,9 +54,9 @@ void GameWindow::setInfoTextColor(const std::string &color) {
 }
 
 void GameWindow::createGrid(const std::shared_ptr<Grid<Token>> &grid) {
-    gridComponent = new GridComponent(this);
+    gridComponent = std::make_shared<GridComponent>(this);
     gridComponent->setObjectName("gridComponent");
-    ui->gridContainer->addWidget(gridComponent);
+    ui->gridContainer->addWidget(gridComponent.get());
 }
 
 void GameWindow::update(const Game &value) {
@@ -70,8 +71,13 @@ void GameWindow::update(const Game &value) {
     }
 
     // Players
+//    if (playerLabels.size() != value.getPlayers().size()) {
+//        ui->playerListContainer->children().clear();
+//        createPlayers(value.getPlayers());
+//    }
     if (playerLabels.size() != value.getPlayers().size()) {
-        ui->playerListContainer->children().clear();
+        QObjectList children = ui->playerListContainer->children();
+        children.clear();
         createPlayers(value.getPlayers());
     }
 

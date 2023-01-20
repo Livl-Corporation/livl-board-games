@@ -7,17 +7,16 @@
 #include <QAbstractButton>
 #include "ui_GameWindow.h"
 #include "../../components/GridComponent.h"
-#include "models/Subject.h"
 #include "models/interfaces/Player.h"
-#include "models/Grid.h"
 #include "models/interfaces/Token.h"
 #include "controllers/GameController.h"
+#include "../../../../models/Subject.h"
 
 namespace Ui {
 class GameWindow;
 }
 
-class GameWindow : public QMainWindow, public Observer<Game>
+class GameWindow : public QMainWindow, public Observer<Game>, public Subject<Grid<Token>>
 {
     Q_OBJECT
 
@@ -34,7 +33,7 @@ public:
 
     void setGameName(const std::string &gameName);
 
-    void createPlayers(const std::vector<Player>& players);
+    void createPlayers(const std::vector<std::shared_ptr<Player>>& players);
 
     void setRound(unsigned int round);
 
@@ -55,6 +54,6 @@ public:
 private:
     Ui::GameWindow *ui;
     QVector<QLabel*> playerLabels;
-    GridComponent *gridComponent;
+    std::shared_ptr<GridComponent> gridComponent;
     std::shared_ptr<GameController> controller;
 };

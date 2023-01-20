@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.24)
 project(livl)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -29,6 +29,7 @@ add_executable(livl
         src/models/Grid.cpp
         src/views/gui/components/GridComponent.cpp
         src/views/gui/windows/game/GameWindow.cpp
+        src/views/gui/windows/game/GameWindow.h
         src/views/gui/windows/menu/MenuWindow.h
         src/views/gui/windows/menu/MenuWindow.cpp
         src/models/interfaces/Token.h
