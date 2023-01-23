@@ -30,8 +30,10 @@ add_executable(Livl
         src/views/gui/components/GridComponent.cpp
         src/views/gui/windows/game/GameWindow.cpp
         src/views/gui/windows/game/GameWindow.h
+        src/views/gui/windows/game/GameWindow.ui
         src/views/gui/windows/menu/MenuWindow.h
         src/views/gui/windows/menu/MenuWindow.cpp
+        src/views/gui/windows/menu/MenuWindow.ui
         src/models/interfaces/Token.h
         img/img.qrc
         src/models/MenuData.cpp
@@ -48,7 +50,7 @@ add_executable(Livl
         src/models/games/ticTacToe/players/TicTacToeComputerPlayer.h
         src/models/exceptions/UnimplementedPlayMode.h
         src/views/cli/menu/MenuConsole.h
-        src/views/cli/menu/MenuConsole.cpp src/views/interfaces/MenuInteraction.h src/views/cli/game/GameConsole.cpp src/views/cli/game/GameConsole.h src/views/cli/game/GameConsole.h src/views/interfaces/GameView.h src/views/enums/ViewMode.h)
+        src/views/cli/menu/MenuConsole.cpp src/views/interfaces/MenuInteraction.h src/views/cli/game/GameConsole.cpp src/views/cli/game/GameConsole.h src/views/cli/game/GameConsole.h src/views/interfaces/GameView.h)
 
 target_link_libraries(Livl
         Qt::Core

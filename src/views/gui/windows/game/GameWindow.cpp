@@ -16,9 +16,7 @@ GameWindow::~GameWindow()
 }
 
 void GameWindow::setGameName(const std::string &gameName) {
-    std::cout << "Setting game name to" << gameName << std::endl;
     ui->gameTitle->setText(QString::fromStdString(gameName));
-    ui->gameTitle->repaint();
 }
 
 void GameWindow::createPlayers(const std::vector<std::shared_ptr<Player>>& players) {
@@ -31,7 +29,6 @@ void GameWindow::createPlayers(const std::vector<std::shared_ptr<Player>>& playe
         this->playerLabels.append(label);
     }
     ui->playerListContainer->addLayout(layout);
-    ui->playerListContainer->update();
 }
 
 void GameWindow::setRound(unsigned int round) {
