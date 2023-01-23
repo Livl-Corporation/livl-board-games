@@ -3,15 +3,23 @@
 #include <memory>
 #include "views/gui/windows/menu/MenuWindow.h"
 #include "controllers/MenuController.h"
+#include "views/cli/menu/MenuConsole.h"
 
 int setupConsole() {
-    return 1;
+    auto menuConsole = std::make_shared<MenuConsole>();
+    auto menuController = std::make_shared<MenuController>();
+
+    menuConsole->setController(menuController);
+    menuConsole->show();
+
+    return 0;
 }
 
 int setupGui() {
     int argc = 0;
     QApplication a(argc, nullptr);
     QApplication::setWindowIcon(QIcon(":/img/logo.png"));
+    std::cout << "Starting GUI" << std::endl;
 
     auto menuWindow = std::make_shared<MenuWindow>();
     auto menuController = std::make_shared<MenuController>();

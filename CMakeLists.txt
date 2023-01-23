@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.24)
-project(livl)
+project(Livl)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
@@ -13,7 +13,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(livl
+add_executable(Livl
         src/main.cpp
         src/models/interfaces/Observer.h
         src/models/Subject.h
@@ -37,12 +37,23 @@ add_executable(livl
         src/models/MenuData.cpp
         src/models/MenuData.h
         src/controllers/MenuController.cpp
-        src/controllers/MenuController.h src/models/enums/PlayMode.h src/models/enums/GameMode.h src/models/games/ticTacToe/TicTacToe.cpp src/models/games/ticTacToe/TicTacToe.h src/models/games/ticTacToe/players/TicTacToeHumanPlayer.cpp src/models/games/ticTacToe/players/TicTacToeHumanPlayer.h src/models/games/ticTacToe/players/TicTacToeComputerPlayer.cpp src/models/games/ticTacToe/players/TicTacToeComputerPlayer.h src/models/exceptions/UnimplementedPlayMode.h)
+        src/controllers/MenuController.h
+        src/models/enums/PlayMode.h
+        src/models/enums/GameMode.h
+        src/models/games/ticTacToe/TicTacToe.cpp
+        src/models/games/ticTacToe/TicTacToe.h
+        src/models/games/ticTacToe/players/TicTacToeHumanPlayer.cpp
+        src/models/games/ticTacToe/players/TicTacToeHumanPlayer.h
+        src/models/games/ticTacToe/players/TicTacToeComputerPlayer.cpp
+        src/models/games/ticTacToe/players/TicTacToeComputerPlayer.h
+        src/models/exceptions/UnimplementedPlayMode.h
+        src/views/cli/menu/MenuConsole.h
+        src/views/cli/menu/MenuConsole.cpp src/views/interfaces/MenuInteraction.h src/views/cli/game/GameConsole.cpp src/views/cli/game/GameConsole.h src/views/cli/game/GameConsole.h src/views/interfaces/GameView.h src/views/enums/ViewMode.h)
 
-target_link_libraries(livl
+target_link_libraries(Livl
         Qt::Core
         Qt::Gui
         Qt::Widgets
         )
 
-target_include_directories(livl PRIVATE src)
+target_include_directories(Livl PRIVATE src)

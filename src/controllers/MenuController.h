@@ -21,10 +21,9 @@ class MenuController {
 public:
     MenuController() = default;
 
-    void onPlayClicked(GameMode gameSelection, PlayMode playerSelection);
+    void onGameChoose(GameMode gameSelection, PlayMode playerSelection, const std::shared_ptr<GameView>& gameView);
 
 protected:
-    GameWindow gameWindow;
     static std::shared_ptr<Game> createGame(GameMode gameId, PlayMode playerSelection);
 
 };

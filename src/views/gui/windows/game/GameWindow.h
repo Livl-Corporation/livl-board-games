@@ -11,12 +11,13 @@
 #include "models/interfaces/Token.h"
 #include "controllers/GameController.h"
 #include "../../../../models/Subject.h"
+#include "views/interfaces/GameView.h"
 
 namespace Ui {
 class GameWindow;
 }
 
-class GameWindow : public QMainWindow, public Observer<std::shared_ptr<Game>>, public Subject<Grid<Token>>
+class GameWindow : public QMainWindow, public GameView, public Observer<std::shared_ptr<Game>>, public Subject<Grid<Token>>, public std::enable_shared_from_this<GameWindow>
 {
     Q_OBJECT
 
@@ -25,7 +26,6 @@ public:
 
     void closeEvent(QCloseEvent* event) override
     {
-        // Delete the object when it is closed
         delete this;
     };
 
@@ -43,18 +43,17 @@ public:
 
     void setInfoTextColor(const std::string &color);
 
-    void setController(const std::shared_ptr<GameController> &_controller) {
-        this->controller = _controller;
-    };
-
     void update(const std::shared_ptr<Game> &value) override;
 
     void createGrid(const std::shared_ptr<Grid<Token>> &grid);
 
-    void attachGameWindowObserver();
+    void attachToObserver() override;
+
+    GameWindow* getGameWindow() { return this;}
+
+    void show() override;
 private:
     Ui::GameWindow *ui;
     QVector<QLabel*> playerLabels;
     std::shared_ptr<GridComponent> gridComponent;
-    std::shared_ptr<GameController> controller;
 };

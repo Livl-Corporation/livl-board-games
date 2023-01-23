@@ -4,18 +4,15 @@
 
 #include "MenuController.h"
 
-void MenuController::onPlayClicked(GameMode gameSelection, PlayMode playerSelection) {
+void MenuController::onGameChoose(GameMode gameSelection, PlayMode playerSelection, const std::shared_ptr<GameView>& gameView) {
 
     auto game = createGame(gameSelection, playerSelection);
 
     GameController gameController(game);
-    gameWindow.setController(std::make_shared<GameController>(gameController));
-    gameWindow.show();
-    gameWindow.attachGameWindowObserver();
+    gameView->setController(std::make_shared<GameController>(gameController));
+    gameView->show();
+    gameView->attachToObserver();
     gameController.start();
-
-    qDebug() << "Game started";
-
 }
 
 std::shared_ptr<Game> MenuController::createGame(GameMode gameId, PlayMode playerSelection) {

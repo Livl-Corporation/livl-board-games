@@ -17,7 +17,7 @@ GameWindow::~GameWindow()
 void GameWindow::setGameName(const std::string &gameName) {
     std::cout << "Setting game name to" << gameName << std::endl;
     ui->gameTitle->setText(QString::fromStdString(gameName));
-    ui->gameTitle->update();
+    ui->gameTitle->repaint();
 }
 
 void GameWindow::createPlayers(const std::vector<std::shared_ptr<Player>>& players) {
@@ -30,6 +30,7 @@ void GameWindow::createPlayers(const std::vector<std::shared_ptr<Player>>& playe
         this->playerLabels.append(label);
     }
     ui->playerListContainer->addLayout(layout);
+    ui->playerListContainer->update();
 }
 
 void GameWindow::setRound(unsigned int round) {
@@ -66,9 +67,9 @@ void GameWindow::createGrid(const std::shared_ptr<Grid<Token>> &grid) {
     ui->centralwidget->repaint();
 }
 
-void GameWindow::attachGameWindowObserver()
+void GameWindow::attachToObserver()
 {
-    this->controller->getGame()->attach(std::make_shared<GameWindow>(this));
+    this->controller->getGame()->attach(shared_from_this());
 }
 
 void GameWindow::update(const std::shared_ptr<Game> &value) {
@@ -93,5 +94,9 @@ void GameWindow::update(const std::shared_ptr<Game> &value) {
         createPlayers(value->getPlayers());
     }
 
+}
+
+void GameWindow::show() {
+    QMainWindow::show();
 }
 
