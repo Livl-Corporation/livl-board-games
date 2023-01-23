@@ -26,7 +26,7 @@ public:
 
     void closeEvent(QCloseEvent* event) override
     {
-        delete this;
+        QMainWindow::closeEvent(event);
     };
 
     ~GameWindow() override;

@@ -28,7 +28,6 @@ int setupGui() {
     menuWindow->show();
 
     return QApplication::exec();
-
 }
 
 int main(int argc, char *argv[]) {

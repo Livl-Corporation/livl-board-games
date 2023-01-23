@@ -12,6 +12,7 @@ GameWindow::GameWindow(QWidget *parent) :
 GameWindow::~GameWindow()
 {
     delete ui;
+    free(playerLabels.data());
 }
 
 void GameWindow::setGameName(const std::string &gameName) {
@@ -83,11 +84,6 @@ void GameWindow::update(const std::shared_ptr<Game> &value) {
         value->getGrid()->attach(gridComponent);
     }
 
-    // Players
-//    if (playerLabels.size() != value.getPlayers().size()) {
-//        ui->playerListContainer->children().clear();
-//        createPlayers(value.getPlayers());
-//    }
     if (playerLabels.size() != value->getPlayers().size()) {
         QObjectList children = ui->playerListContainer->children();
         children.clear();
@@ -97,6 +93,5 @@ void GameWindow::update(const std::shared_ptr<Game> &value) {
 }
 
 void GameWindow::show() {
-    QMainWindow::show();
+    QWidget::show();
 }
-

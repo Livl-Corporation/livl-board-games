@@ -15,6 +15,7 @@ GridComponent::GridComponent(QWidget *parent) :
 
 GridComponent::~GridComponent() {
     delete ui;
+    delete gridLayout;
 }
 
 void GridComponent::createGrid(const std::shared_ptr<Grid<Token>> &grid) {
