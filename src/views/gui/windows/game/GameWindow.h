@@ -50,7 +50,7 @@ public:
     void attachObserver() override;
 
     // The game window should provide access to the position subject
-    //std::shared_ptr<Subject<Position>> getPositionSubject() override;
+    std::shared_ptr<Subject<Position>> getPositionSubject() override;
 
     GameWindow* getGameWindow() { return this;}
 

@@ -102,3 +102,7 @@ void GameConsole::attachObserver() {
 void GameConsole::update(const Game &game) {
 
 }
+
+std::shared_ptr<Subject<Position>> GameConsole::getPositionSubject() {
+    return {};
+}

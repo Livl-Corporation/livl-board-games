@@ -20,6 +20,7 @@ public:
     void show() override;
     void attachObserver() override;
     void update(const Game &game) override;
+    std::shared_ptr<Subject<Position>> getPositionSubject() override;
     GameConsole* getGameConsole() { return this;}
 
     void printGameInfos(const std::string &gameName, const std::vector<Player> &players) const;

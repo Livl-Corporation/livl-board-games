@@ -15,7 +15,7 @@ public:
         this->controller = _controller;
     };
     virtual void attachObserver() = 0;
-    //virtual std::shared_ptr<Subject<Position>> getPositionSubject() = 0;
+    virtual std::shared_ptr<Subject<Position>> getPositionSubject() = 0;
 protected:
     std::shared_ptr<GameController> controller;
 };

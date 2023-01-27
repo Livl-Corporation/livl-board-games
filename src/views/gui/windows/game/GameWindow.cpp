@@ -96,3 +96,7 @@ void GameWindow::update(const Game &value) {
 void GameWindow::show() {
     QWidget::show();
 }
+
+std::shared_ptr<Subject<Position>> GameWindow::getPositionSubject() {
+    return {};
+}
