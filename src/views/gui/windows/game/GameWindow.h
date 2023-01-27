@@ -10,14 +10,14 @@
 #include "models/interfaces/Player.h"
 #include "models/interfaces/Token.h"
 #include "controllers/GameController.h"
-#include "../../../../models/Subject.h"
+//#include "../../../../models/Subject.h"
 #include "views/interfaces/GameView.h"
 
 namespace Ui {
 class GameWindow;
 }
 
-class GameWindow : public QMainWindow, public GameView, public Observer<std::shared_ptr<Game>>, public Subject<Grid<Token>>, public std::enable_shared_from_this<GameWindow>
+class GameWindow : public QMainWindow, public GameView, public Observer<Game>, public std::enable_shared_from_this<GameWindow>
 {
     Q_OBJECT
 
@@ -43,11 +43,14 @@ public:
 
     void setInfoTextColor(const std::string &color);
 
-    void update(const std::shared_ptr<Game> &value) override;
+    void createGrid(const Grid<Token> &grid);
 
-    void createGrid(const std::shared_ptr<Grid<Token>> &grid);
+    // As an observer, the game windows react to game change
+    void update(const Game &value) override;
+    void attachObserver() override;
 
-    void attachToObserver() override;
+    // The game window should provide access to the position subject
+    //std::shared_ptr<Subject<Position>> getPositionSubject() override;
 
     GameWindow* getGameWindow() { return this;}
 

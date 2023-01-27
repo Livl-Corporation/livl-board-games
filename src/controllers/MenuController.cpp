@@ -9,9 +9,10 @@ void MenuController::onGameChoose(GameMode gameSelection, PlayMode playerSelecti
     auto game = createGame(gameSelection, playerSelection);
 
     GameController gameController(game);
+    //gameController.setGameView(gameView);
     gameView->setController(std::make_shared<GameController>(gameController));
     gameView->show();
-    gameView->attachToObserver();
+    gameView->attachObserver();
     gameController.start();
 }
 

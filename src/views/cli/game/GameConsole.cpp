@@ -32,15 +32,15 @@ void GameConsole::printDraw() const {
     ConsoleHandler::printTitle(std::string("Tie Game"));
 }
 
-void GameConsole::printGrid(const std::shared_ptr<Grid<Token>> &grid) const {
+void GameConsole::printGrid(const Grid<Token> &grid) const {
     ConsoleHandler::print("\n   ");
-    for (int col = 0; col < grid->getXSize(); col++)
+    for (int col = 0; col < grid.getXSize(); col++)
     {
         ConsoleHandler::print(std::to_string(col + 1) + " ");
     }
 
     ConsoleHandler::print("\n  ┌");
-    for (int col = 0; col < (grid->getXSize() * 2) - 1; col++)
+    for (int col = 0; col < (grid.getXSize() * 2) - 1; col++)
     {
         if (col % 2 == 0)
         {
@@ -53,17 +53,17 @@ void GameConsole::printGrid(const std::shared_ptr<Grid<Token>> &grid) const {
     }
     ConsoleHandler::printLine("┐");
 
-    for (int row = 0; row < grid->getYSize(); row++)
+    for (int row = 0; row < grid.getYSize(); row++)
     {
 
         ConsoleHandler::print(std::to_string(row + 1) + " │");
 
-        for (int col = 0; col < grid->getXSize(); col++)
+        for (int col = 0; col < grid.getXSize(); col++)
         {
             //std::string characterAsString(1, Player::getPlayerChar(grid->getElementAt({.x =  col, .y =  row})));
             //ConsoleHandler::print(characterAsString);
 
-            if (col < grid->getXSize() - 1)
+            if (col < grid.getXSize() - 1)
             {
                 ConsoleHandler::print("│");
             }
@@ -72,7 +72,7 @@ void GameConsole::printGrid(const std::shared_ptr<Grid<Token>> &grid) const {
     }
 
     ConsoleHandler::print("  └");
-    for (int col = 0; col < (grid->getXSize() * 2) - 1; col++)
+    for (int col = 0; col < (grid.getXSize() * 2) - 1; col++)
     {
         if (col % 2 == 0)
         {
@@ -95,10 +95,10 @@ void GameConsole::show() {
     ConsoleHandler::printLine("Welcome !");
 }
 
-void GameConsole::attachToObserver() {
+void GameConsole::attachObserver() {
     this->controller->getGame()->attach(shared_from_this());
 }
 
-void GameConsole::update(const std::shared_ptr<Game> &game) {
+void GameConsole::update(const Game &game) {
 
 }

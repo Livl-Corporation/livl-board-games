@@ -15,15 +15,15 @@
 #include "views/interfaces/GameView.h"
 #include "controllers/GameController.h"
 
-class GameConsole : public GameView, public Observer<std::shared_ptr<Game>>, public std::enable_shared_from_this<GameConsole> {
+class GameConsole : public GameView, public Observer<Game>, public std::enable_shared_from_this<GameConsole> {
 public:
     void show() override;
-    void attachToObserver() override;
-    void update(const std::shared_ptr<Game> &game) override;
+    void attachObserver() override;
+    void update(const Game &game) override;
     GameConsole* getGameConsole() { return this;}
 
     void printGameInfos(const std::string &gameName, const std::vector<Player> &players) const;
-    void printGrid(const std::shared_ptr<Grid<Token>> &grid) const ;
+    void printGrid(const Grid<Token> &grid) const ;
     void printNextRound(const PlayerId &playerId, unsigned int round) const;
     void printInfo(const std::string &message) const;
     void printError(const std::string &message) const;

@@ -20,22 +20,21 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class GridComponent; }
 QT_END_NAMESPACE
 
-class GridComponent : public QWidget, public Subject<Position>, public Observer<Grid<Token>> {
+class GridComponent : public QWidget, public Subject<Position> {
     Q_OBJECT
 
 public:
     explicit GridComponent(QWidget *parent = nullptr);
-
-    void createGrid(const std::shared_ptr<Grid<Token>> &grid);
-    void updateGrid(const Grid<Token> &grid);
-
-    void update(const Grid<Token> &value) override;
+    void setGrid(const Grid<Token> &value);
 
     QGridLayout* getGridLayout() { return this->gridLayout; };
 
     ~GridComponent() override;
 
 private:
+
+    void createGrid(const Grid<Token> &grid);
+    void updateGrid(const Grid<Token> &grid);
 
     Ui::GridComponent *ui;
     QGridLayout *gridLayout{};

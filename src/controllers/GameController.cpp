@@ -10,3 +10,7 @@ void GameController::start() {
     qDebug() << "GameController::start()";
     this->game->setMessage("Game started");
 }
+
+void GameController::update(const Position &position) {
+    qDebug() << "GameController::update() with position " << position.x << " " << position.y << "\n";
+}

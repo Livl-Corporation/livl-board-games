@@ -18,15 +18,15 @@ GridComponent::~GridComponent() {
     delete gridLayout;
 }
 
-void GridComponent::createGrid(const std::shared_ptr<Grid<Token>> &grid) {
+void GridComponent::createGrid(const Grid<Token> &grid) {
 
     gridLayout = new QGridLayout(this);
 
      // Display the game board
      QString styleSheet = "QPushButton { background-color: white; border: none; color: black; font: bold 14px; } QPushButton:hover { background-color: #6699CC; } QPushButton:pressed { background-color: #003366; }";
-     for (int row = 0; row < grid->getYSize(); row++)
+     for (int row = 0; row < grid.getYSize(); row++)
      {
-         for (int col = 0; col < grid->getXSize(); col++)
+         for (int col = 0; col < grid.getXSize(); col++)
          {
              auto *button = new QPushButton;
              connect(button, &QPushButton::clicked, this, [row, col, this]{
@@ -54,9 +54,9 @@ void GridComponent::updateGrid(const Grid<Token> &grid) {
     }
 }
 
-void GridComponent::update(const Grid<Token> &value) {
+void GridComponent::setGrid(const Grid<Token> &value) {
     if (!gridCreated) {
-        //createGrid(value);
+        createGrid(value);
         gridCreated = true;
     } else {
         updateGrid(value);

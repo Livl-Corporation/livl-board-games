@@ -18,7 +18,7 @@
 
 typedef unsigned int Round;
 
-class Game : public Subject<std::shared_ptr<Game>> {
+class Game : public Subject<Game> {
 public:
     [[nodiscard]] inline PlayerId getPlayerId(unsigned int roundNumber) const {
         return (roundNumber - 1) % players.size();
@@ -32,7 +32,7 @@ public:
 
     void setMessage(const std::string &newMessage) {
         this->message = newMessage;
-        this->notify(std::make_shared<Game>(*this));
+        this->notify(*this);
     }
 
     [[nodiscard]] std::shared_ptr<Grid<Token>> getGrid() const {return this->grid; }

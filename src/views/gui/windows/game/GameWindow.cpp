@@ -56,36 +56,39 @@ void GameWindow::setInfoTextColor(const std::string &color) {
     ui->infoLabel->setStyleSheet("QLabel { color : "+QString::fromStdString(color)+"; }");
 }
 
-void GameWindow::createGrid(const std::shared_ptr<Grid<Token>> &grid) {
+void GameWindow::createGrid(const Grid<Token> &grid) {
     gridComponent = std::make_shared<GridComponent>(this);
     gridComponent->setObjectName("gridComponent");
-    gridComponent->createGrid(grid);
+    gridComponent->setGrid(grid);
     auto* container = new QWidget(this);
     container->setLayout(gridComponent->getGridLayout());
     ui->gridContainer->addWidget(container);
     ui->centralwidget->repaint();
 }
 
-void GameWindow::attachToObserver()
+void GameWindow::attachObserver()
 {
     this->controller->getGame()->attach(shared_from_this());
 }
 
-void GameWindow::update(const std::shared_ptr<Game> &value) {
-    setGameName(value->getName());
-    setRound(value->getRound());
-    setInfoText(value->getMessage());
+void GameWindow::update(const Game &value) {
+    setGameName(value.getName());
+    setRound(value.getRound());
+    setInfoText(value.getMessage());
 
-    // Grid
     if (gridComponent == nullptr) {
-        createGrid(value->getGrid());
-        value->getGrid()->attach(gridComponent);
+        // Create grid if it doesn't exist already
+        createGrid(*value.getGrid());
+    } else {
+        // Update grid
+        gridComponent->setGrid(*value.getGrid());
     }
 
-    if (playerLabels.size() != value->getPlayers().size()) {
+    // Update players
+    if (playerLabels.size() != value.getPlayers().size()) {
         QObjectList children = ui->playerListContainer->children();
         children.clear();
-        createPlayers(value->getPlayers());
+        createPlayers(value.getPlayers());
     }
 
 }

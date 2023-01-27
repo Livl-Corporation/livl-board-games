@@ -8,14 +8,17 @@
 
 #include <memory>
 #include "models/Game.h"
+#include "../models/interfaces/Observer.h"
 
-class GameController {
+class GameController : public Observer<Position> {
 
 public:
 
     explicit GameController(const std::shared_ptr<Game> &game) : game(game) {};
     [[nodiscard]] std::shared_ptr<Game> getGame() const { return game; };
     void start();
+
+    void update(const Position &position) override;
 
 protected:
 
