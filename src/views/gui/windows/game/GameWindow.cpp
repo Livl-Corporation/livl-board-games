@@ -64,37 +64,37 @@ void GameWindow::createGrid(const Grid<Token> &grid) {
     ui->centralwidget->repaint();
 }
 
-void GameWindow::attachObserver()
-{
-    this->controller->getGame()->attach(shared_from_this());
-}
+//void GameWindow::attachObserver()
+//{
+//    this->controller->getGame()->attach(shared_from_this());
+//}
 
-void GameWindow::update(const Game &value) {
-    setGameName(value.getName());
-    setRound(value.getRound());
-    setInfoText(value.getMessage());
-
-    if (gridComponent == nullptr) {
-        // Create grid if it doesn't exist already
-        createGrid(*value.getGrid());
-    } else {
-        // Update grid
-        gridComponent->setGrid(*value.getGrid());
-    }
-
-    // Update players
-    if (playerLabels.size() != value.getPlayers().size()) {
-        QObjectList children = ui->playerListContainer->children();
-        children.clear();
-        createPlayers(value.getPlayers());
-    }
-
-}
+//void GameWindow::update(const Game &value) {
+//    setGameName(value.getName());
+//    setRound(value.getRound());
+//    setInfoText(value.getMessage());
+//
+//    if (gridComponent == nullptr) {
+//        // Create grid if it doesn't exist already
+//        createGrid(*value.getGrid());
+//    } else {
+//        // Update grid
+//        gridComponent->setGrid(*value.getGrid());
+//    }
+//
+//    // Update players
+//    if (playerLabels.size() != value.getPlayers().size()) {
+//        QObjectList children = ui->playerListContainer->children();
+//        children.clear();
+//        createPlayers(value.getPlayers());
+//    }
+//
+//}
 
 void GameWindow::show() {
     QWidget::show();
 }
 
-std::shared_ptr<Subject<Position>> GameWindow::getPositionSubject() {
-    return {};
-}
+//std::shared_ptr<Subject<Position>> GameWindow::getPositionSubject() {
+//    return {};
+//}

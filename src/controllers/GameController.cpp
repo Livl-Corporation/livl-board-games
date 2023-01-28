@@ -11,6 +11,6 @@ void GameController::start() {
     this->game->setMessage("Game started");
 }
 
-void GameController::update(const Position &position) {
-    qDebug() << "GameController::update() with position " << position.x << " " << position.y << "\n";
-}
+//void GameController::update(const Position &position) {
+//    qDebug() << "GameController::update() with position " << position.x << " " << position.y << "\n";
+//}

@@ -5,7 +5,7 @@
 // You may need to build the project (run Qt uic code generator) to get "ui_GridComponent.h" resolved
 
 #include "GridComponent.h"
-#include "../../../models/Subject.cpp"
+//#include "../../../models/Subject.cpp"
 #include "../../../models/Grid.cpp"
 
 GridComponent::GridComponent(QWidget *parent) :
@@ -30,7 +30,7 @@ void GridComponent::createGrid(const Grid<Token> &grid) {
          {
              auto *button = new QPushButton;
              connect(button, &QPushButton::clicked, this, [row, col, this]{
-                this->notify({row, col});
+                //this->notify({row, col});
              });
              button->setStyleSheet(styleSheet);
              button->setFixedSize(50, 50);

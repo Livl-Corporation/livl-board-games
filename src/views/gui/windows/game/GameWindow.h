@@ -17,7 +17,7 @@ namespace Ui {
 class GameWindow;
 }
 
-class GameWindow : public QMainWindow, public GameView, public Observer<Game>, public std::enable_shared_from_this<GameWindow>
+class GameWindow : public QMainWindow, public GameView
 {
     Q_OBJECT
 
@@ -46,11 +46,11 @@ public:
     void createGrid(const Grid<Token> &grid);
 
     // As an observer, the game windows react to game change
-    void update(const Game &value) override;
-    void attachObserver() override;
+    //void update(const Game &value) override;
+    //void attachObserver() override;
 
     // The game window should provide access to the position subject
-    std::shared_ptr<Subject<Position>> getPositionSubject() override;
+    //std::shared_ptr<Subject<Position>> getPositionSubject() override;
 
     GameWindow* getGameWindow() { return this;}
 

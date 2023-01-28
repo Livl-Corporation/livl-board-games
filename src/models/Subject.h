@@ -1,3 +1,4 @@
+/*
 //
 // Created by Franck GUTMANN on 18/01/2023.
 //
@@ -23,3 +24,4 @@ private:
 };
 
 #endif //LIVL_SUBJECT_H
+*/

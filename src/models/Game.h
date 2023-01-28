@@ -13,11 +13,11 @@
 #include "models/interfaces/Token.h"
 #include "models/Grid.h"
 #include "models/enums/GameMode.h"
-#include "Subject.h"
+//#include "Subject.h"
 
 typedef unsigned int Round;
 
-class Game : public Subject<Game> {
+class Game {
 public:
     [[nodiscard]] inline PlayerId getPlayerId(unsigned int roundNumber) const {
         return (roundNumber - 1) % players.size();

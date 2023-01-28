@@ -15,14 +15,14 @@
 #include "views/interfaces/GameView.h"
 #include "controllers/GameController.h"
 #include "views/cli/ConsoleHandler.h"
-#include "models/Subject.cpp"
+//#include "models/Subject.cpp"
 
-class GameConsole : public GameView, public Observer<Game>, public std::enable_shared_from_this<GameConsole> {
+class GameConsole : public GameView {
 public:
     void show() override;
-    void attachObserver() override;
-    void update(const Game &game) override;
-    std::shared_ptr<Subject<Position>> getPositionSubject() override;
+    //void attachObserver() override;
+    //void update(const Game &game) override;
+    //std::shared_ptr<Subject<Position>> getPositionSubject() override;
     GameConsole* getGameConsole() { return this;}
 
     void printGameInfos(const std::string &gameName, const std::vector<Player> &players) const;

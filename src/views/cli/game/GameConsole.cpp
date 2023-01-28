@@ -93,14 +93,14 @@ void GameConsole::show() {
     ConsoleHandler::printLine("Welcome !");
 }
 
-void GameConsole::attachObserver() {
-    this->controller->getGame()->Subject::attach(shared_from_this());
-}
-
-void GameConsole::update(const Game &game) {
-
-}
-
-std::shared_ptr<Subject<Position>> GameConsole::getPositionSubject() {
-    return {};
-}
+//void GameConsole::attachObserver() {
+//    this->controller->getGame()->Subject::attach(shared_from_this());
+//}
+//
+//void GameConsole::update(const Game &game) {
+//
+//}
+//
+//std::shared_ptr<Subject<Position>> GameConsole::getPositionSubject() {
+//    return {};
+//}

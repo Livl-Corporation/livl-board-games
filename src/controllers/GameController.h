@@ -8,9 +8,9 @@
 
 #include <memory>
 #include "models/Game.h"
-#include "../models/interfaces/Observer.h"
+//#include "../models/interfaces/Observer.h"
 
-class GameController : public Observer<Position> {
+class GameController {
 
 public:
 
@@ -18,7 +18,7 @@ public:
     [[nodiscard]] std::shared_ptr<Game> getGame() const { return game; };
     void start();
 
-    void update(const Position &position) override;
+    //void update(const Position &position) override;
 
 protected:
 

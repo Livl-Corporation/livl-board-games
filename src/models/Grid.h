@@ -4,12 +4,12 @@
 #include "Position.h"
 #include "models/exceptions/OutOfBoundsException.h"
 #include "models/exceptions/OccupiedPositionException.h"
-#include "Subject.h"
+//#include "Subject.h"
 
 typedef unsigned int GridSize;
 
 template <typename T>
-class Grid : public Subject<Grid<T>> {
+class Grid {
 
 public:
 

@@ -12,7 +12,7 @@ void MenuController::onGameChoose(GameMode gameSelection, PlayMode playerSelecti
     //gameController.setGameView(gameView);
     gameView->setController(std::make_shared<GameController>(gameController));
     gameView->show();
-    gameView->attachObserver();
+    //gameView->attachObserver();
     gameController.start();
 }
 

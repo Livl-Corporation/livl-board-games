@@ -11,7 +11,7 @@
 #include <QPushButton>
 #include <memory>
 #include "ui_GridComponent.h"
-#include "models/Subject.h"
+//#include "models/Subject.h"
 #include "models/interfaces/Player.h"
 #include "models/Grid.h"
 #include "models/interfaces/Token.h"
@@ -20,7 +20,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class GridComponent; }
 QT_END_NAMESPACE
 
-class GridComponent : public QWidget, public Subject<Position> {
+class GridComponent : public QWidget {
     Q_OBJECT
 
 public:
