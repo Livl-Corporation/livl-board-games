@@ -8,8 +8,9 @@
 
 #include <memory>
 #include "models/Game.h"
+#include "views/interfaces/GameInteraction.h"
 
-class GameController : public Observer<Position> {
+class GameController : public Observer<Position>, public GameInteraction {
 
 public:
 
@@ -19,6 +20,9 @@ public:
 
     // As an observer, the controller is notified when a position is selected
     void update(const Position &value) override;
+
+    // Game interaction
+    void onPositionSelected(const Position &position) override;
 
 protected:
 

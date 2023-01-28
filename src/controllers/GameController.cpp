@@ -13,3 +13,7 @@ void GameController::start() {
 void GameController::update(const Position &value) {
     qDebug() << "GameController::update() with position " << value.x << " " << value.y << "\n";
 }
+
+void GameController::onPositionSelected(const Position &position) {
+    qDebug() << "GameController::onPositionSelected() with position " << position.x << " " << position.y << "\n";
+}
