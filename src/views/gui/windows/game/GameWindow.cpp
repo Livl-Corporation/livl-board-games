@@ -23,7 +23,7 @@ void GameWindow::createPlayers(const std::vector<std::shared_ptr<Player>>& playe
     for (auto &player : players) {
         auto *label = new QLabel();
         label->setObjectName("playerLabel"+QString::number(player->getId()));
-        label->setText(QString::number(player->getId()));
+        label->setText(QString::number(player->getId()) + " - " + QString::fromStdString(player->getName()));
         layout->addWidget(label);
         this->playerLabels.append(label);
     }

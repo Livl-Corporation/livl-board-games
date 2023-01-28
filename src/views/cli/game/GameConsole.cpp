@@ -6,13 +6,18 @@
 #include <QDebug>
 
 
-void GameConsole::printGameInfos(const std::string &gameName, const std::vector<Player> &players) const {
+void GameConsole::printGameInfos(const std::string &gameName, const std::vector<std::shared_ptr<Player>> &players) const {
     ConsoleHandler::printTitle(gameName);
+    ConsoleHandler::printLine("Players :");
+    for (const auto &player : players) {
+        ConsoleHandler::printLine(" - " + player->getName() + " (" + std::to_string(player->getId()) + ")");
+    }
 }
 
-void GameConsole::printNextRound(const PlayerId &playerId, unsigned int round) const {
+void GameConsole::printNextRound(const Player &player, unsigned int round) const {
     ConsoleHandler::printLine("");
     ConsoleHandler::printHeader("Round N° " + std::to_string(round));
+    ConsoleHandler::printLine("Player's turn : " + player.getName() + " (" + std::to_string(player.getId()) + ")");
 }
 
 void GameConsole::printInfo(const std::string &message) const {
@@ -61,7 +66,8 @@ void GameConsole::printGrid(const Grid<Token> &grid) const {
         for (int col = 0; col < grid.getXSize(); col++)
         {
             //std::string characterAsString(1, Player::getPlayerChar(grid->getElementAt({.x =  col, .y =  row})));
-            //ConsoleHandler::print(characterAsString);
+            std::string characterAsString(1, grid.getElementAt({.x =  col, .y =  row}).getPlayerId());
+            ConsoleHandler::print(characterAsString);
 
             if (col < grid.getXSize() - 1)
             {
@@ -95,7 +101,9 @@ void GameConsole::show() {
 }
 
 void GameConsole::update(const Game &value) {
-    qDebug() << "GameConsole::update";
+    printGameInfos(value.getName(), value.getPlayers());
+    printGrid(*value.getGrid());
+    printNextRound(*value.getCurrentPlayer(), value.getRound());
 }
 
 void GameConsole::updateError(const std::string &message) {

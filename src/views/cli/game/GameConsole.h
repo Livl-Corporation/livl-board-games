@@ -25,9 +25,9 @@ public:
     void update(const Game &value) override;
     void updateError(const std::string &message) override;
 
-    void printGameInfos(const std::string &gameName, const std::vector<Player> &players) const;
+    void printGameInfos(const std::string &gameName, const std::vector<std::shared_ptr<Player>> &players) const;
     void printGrid(const Grid<Token> &grid) const ;
-    void printNextRound(const PlayerId &playerId, unsigned int round) const;
+    void printNextRound(const Player &player, unsigned int round) const;
     void printInfo(const std::string &message) const;
     void printError(const std::string &message) const;
     void printWinner(const PlayerId &playerId) const;

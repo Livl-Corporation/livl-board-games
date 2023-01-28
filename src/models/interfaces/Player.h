@@ -20,6 +20,8 @@ public:
 
     [[nodiscard]] PlayerId getId() const { return this->id; };
 
+    [[nodiscard]] std::string getName() const { return this->name; };
+
     // On round start, start thuiking about playign ...... to meditate ...
     virtual void play(const std::shared_ptr<Grid<Token>> &grid) = 0;
 

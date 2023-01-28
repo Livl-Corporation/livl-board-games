@@ -9,11 +9,11 @@
 
 TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE) {
     std::function<void(Position)> callback = [this](auto && PH1) { onPositionSelected(std::forward<decltype(PH1)>(PH1)); };
-    TicTacToeHumanPlayer p1(1, "OnVerraPlusTard", callback);
+    TicTacToeHumanPlayer p1(1, "Joueur 1", callback);
     this->addPlayer(std::make_shared<TicTacToeHumanPlayer>(p1));
 
     if(playMode == PlayMode::HUMAN_VS_HUMAN) {
-        TicTacToeHumanPlayer p2(2, "OnVerraPlusTard2", callback);
+        TicTacToeHumanPlayer p2(2, "Joueur 2", callback);
         this->addPlayer(std::make_shared<TicTacToeHumanPlayer>(p2));
     } else if (playMode == PlayMode::HUMAN_VS_AI) {
         TicTacToeComputerPlayer p2(2, "BOT", callback);
@@ -28,5 +28,5 @@ TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE)
 }
 
 void TicTacToe::onPositionSelected(Position position) {
-    this->notifyError("Not implemented yet" + std::to_string(position.x) + " " + std::to_string(position.y));
+    this->notifyError("Not implemented yet " + std::to_string(position.x) + " " + std::to_string(position.y));
 }
