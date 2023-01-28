@@ -14,5 +14,4 @@ void TicTacToeComputerPlayer::play(const std::shared_ptr<Grid<Token>> &grid) {
 
 void TicTacToeComputerPlayer::onPositionSelected(Position position) {
     qDebug() << "TicTacToeComputerPlayer::onPositionSelected() with position " << position.x << " " << position.y << "\n";
-
 }

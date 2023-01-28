@@ -57,7 +57,7 @@ private:
     std::string name;
     std::string message;
     std::shared_ptr<Grid<Token>> grid;
-    Round round = 0;
+    Round round = 1;
     std::shared_ptr<Observer<Game>> observer;
 
 };

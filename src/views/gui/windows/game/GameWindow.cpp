@@ -35,6 +35,11 @@ void GameWindow::setRound(unsigned int round) {
 }
 
 void GameWindow::setActivePlayer(const PlayerId &playerId) {
+
+    // Update player label
+    ui->currentPlayerLabel->setText("It's player " + QString::number(playerId) + " turn");
+
+    // Update in player list
     for(QLabel* label : this->playerLabels) {
         if (label != nullptr ) {
             if (label->objectName() == "playerLabel"+QString::number(playerId)) {
@@ -91,6 +96,9 @@ void GameWindow::update(const Game &value) {
         children.clear();
         createPlayers(value.getPlayers());
     }
+
+    // Update active player
+    setActivePlayer(value.getCurrentPlayer()->getId());
 }
 
 void GameWindow::onGridClicked(const Position &value) {
