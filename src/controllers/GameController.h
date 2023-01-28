@@ -10,7 +10,7 @@
 #include "models/Game.h"
 #include "views/interfaces/GameInteraction.h"
 
-class GameController : public Observer<Position>, public GameInteraction {
+class GameController : public GameInteraction {
 
 public:
 
@@ -18,14 +18,10 @@ public:
     [[nodiscard]] std::shared_ptr<Game> getGame() const { return game; };
     void start();
 
-    // As an observer, the controller is notified when a position is selected
-    void update(const Position &value) override;
-
     // Game interaction
     void onPositionSelected(const Position &position) override;
 
 protected:
-
     std::shared_ptr<Game> game;
 };
 
