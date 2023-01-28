@@ -15,9 +15,6 @@ find_package(Qt6 COMPONENTS
 
 add_executable(Livl
         src/main.cpp
-        src/models/interfaces/Observer.h
-        src/models/Subject.h
-        src/models/Subject.cpp
         src/controllers/GameController.cpp
         src/controllers/GameController.h
         src/models/Game.cpp
@@ -50,7 +47,7 @@ add_executable(Livl
         src/models/games/ticTacToe/players/TicTacToeComputerPlayer.h
         src/models/exceptions/UnimplementedPlayMode.h
         src/views/cli/menu/MenuConsole.h
-        src/views/cli/menu/MenuConsole.cpp src/views/interfaces/MenuInteraction.h src/views/cli/game/GameConsole.cpp src/views/cli/game/GameConsole.h src/views/cli/game/GameConsole.h src/views/interfaces/GameView.h)
+        src/views/cli/menu/MenuConsole.cpp src/views/interfaces/MenuInteraction.h src/views/cli/game/GameConsole.cpp src/views/cli/game/GameConsole.h src/views/cli/game/GameConsole.h src/views/interfaces/GameView.h src/models/interfaces/Observable.h src/models/interfaces/Observable.h src/models/interfaces/Observer.h)
 
 target_link_libraries(Livl
         Qt::Core
