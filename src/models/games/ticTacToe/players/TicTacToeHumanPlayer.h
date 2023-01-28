@@ -13,6 +13,7 @@ public :
     TicTacToeHumanPlayer(PlayerId id, std::string name) : Player(id, std::move(name)) {};
     void play() override;
     void onPositionSelected (Position position) override;
+    bool canInteract() override { return true; };
 };
 
 

@@ -22,6 +22,8 @@ public:
     // Event when a position was selected
     virtual void onPositionSelected (Position position) = 0;
 
+    virtual bool canInteract() = 0;
+
 protected:
     Player(PlayerId id, std::string name) : id(id), name(std::move(name)) {};
 
