@@ -55,7 +55,8 @@ void GameWindow::setInfoTextColor(const std::string &color) {
 }
 
 void GameWindow::createGrid(const Grid<Token> &grid) {
-    gridComponent = std::make_shared<GridComponent>(this);
+    std::function<void(Position)> callback = [this](Position pos){this->onGridClicked(pos);};
+    gridComponent = std::make_shared<GridComponent>(this, callback);
     gridComponent->setObjectName("gridComponent");
     gridComponent->setGrid(grid);
     auto* container = new QWidget(this);
