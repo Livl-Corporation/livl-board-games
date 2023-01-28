@@ -34,3 +34,12 @@ void Game::notify(const Game &value) {
 std::shared_ptr<Player> Game::getCurrentPlayer() const {
     return this->players[getPlayerId(this->round)];
 }
+
+void Game::notifyError(const std::string &message) {
+    if (this->observer != nullptr) {
+        this->observer->updateError(message);
+    } else {
+        qDebug() << "No observer attached to the game";
+    }
+
+}

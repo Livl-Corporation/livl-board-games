@@ -19,6 +19,7 @@ public:
 
     // As an observer, the view is notified when the game is updated
     void update(const Game &value) override = 0;
+    void updateError(const std::string &message) override = 0;
 
 protected:
     std::shared_ptr<GameInteraction> controller;

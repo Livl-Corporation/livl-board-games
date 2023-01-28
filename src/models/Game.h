@@ -43,6 +43,7 @@ public:
     void attach(std::shared_ptr<GameObserver<Game>> &_observer) override;
 
     void notify(const Game &value) override;
+    void notifyError(const std::string &message) override;
 
 protected:
     Game(std::string  name, const GameMode gameMode) : name(std::move((name))), gameMode(gameMode) {};

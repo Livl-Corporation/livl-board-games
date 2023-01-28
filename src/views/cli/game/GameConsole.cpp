@@ -97,3 +97,7 @@ void GameConsole::show() {
 void GameConsole::update(const Game &value) {
     qDebug() << "GameConsole::update";
 }
+
+void GameConsole::updateError(const std::string &message) {
+    ConsoleHandler::printLine(message);
+}

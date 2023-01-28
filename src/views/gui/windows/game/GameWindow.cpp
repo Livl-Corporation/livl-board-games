@@ -109,3 +109,8 @@ void GameWindow::onGridClicked(const Position &value) {
         qDebug() << "GameWindow::onGridClicked() - controller is null";
     }
 }
+
+void GameWindow::updateError(const std::string &message) {
+    setInfoText(message);
+    setInfoTextColor("red");
+}

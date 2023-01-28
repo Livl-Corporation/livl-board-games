@@ -9,6 +9,7 @@ template <typename T>
 class GameObserver {
 public:
     virtual void update(const T &value) = 0;
+    virtual void updateError(const std::string &message) = 0;
 };
 
 #endif //LIVL_GAMEOBSERVER_H

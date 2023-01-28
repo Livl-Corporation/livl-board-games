@@ -27,5 +27,5 @@ TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE)
 }
 
 void TicTacToe::onPositionSelected(Position position) {
-
+    this->notifyError("Not implemented yet");
 }
