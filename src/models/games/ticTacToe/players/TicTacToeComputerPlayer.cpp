@@ -11,7 +11,3 @@ void TicTacToeComputerPlayer::play(const std::shared_ptr<Grid<Token>> &grid) {
     int positionSelected = Shared::randomInt(0, static_cast<int>(freePositions.size()));
     onPositionSelected(freePositions[positionSelected]) ;
 }
-
-void TicTacToeComputerPlayer::onPositionSelected(Position position) {
-    qDebug() << "TicTacToeComputerPlayer::onPositionSelected() with position " << position.x << " " << position.y << "\n";
-}

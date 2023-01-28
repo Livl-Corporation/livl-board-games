@@ -8,6 +8,7 @@
 #include <string>
 #include <utility>
 #include <memory>
+#include <functional>
 #include "models/Position.h"
 #include "models/interfaces/Token.h"
 #include "models/Grid.h"
@@ -23,12 +24,15 @@ public:
     virtual void play(const std::shared_ptr<Grid<Token>> &grid) = 0;
 
     // Event when a position was selected
-    virtual void onPositionSelected (Position position) = 0;
+    void onPositionSelected (Position position) {
+        this->onPositionSelectedCallback(position);
+    }
 
     virtual bool canInteract() = 0;
 
 protected:
-    Player(PlayerId id, std::string name) : id(id), name(std::move(name)) {};
+    Player(PlayerId id, std::string name, std::function<void(Position)> &_callback) : id(id), name(std::move(name)), onPositionSelectedCallback(_callback) {};
+    std::function<void(Position)> onPositionSelectedCallback;
 
 private:
     PlayerId id;
