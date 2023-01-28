@@ -6,13 +6,22 @@
 
 void MenuController::onGameChoose(GameMode gameSelection, PlayMode playerSelection, const std::shared_ptr<GameView>& gameView) {
 
+    // View instanciated in menuview & passed in parameters as gameView
+
+    // Instanciate game
     auto game = createGame(gameSelection, playerSelection);
 
+    // Instanciate controller
     GameController gameController(game);
-    //gameController.setGameView(gameView);
+
+    // View observes game model
+    game->attach((std::shared_ptr<Observer<Game>> &) gameView);
+
+    // View interact with controller
     gameView->setController(std::make_shared<GameController>(gameController));
+
+    // Display & start game
     gameView->show();
-    //gameView->attachObserver();
     gameController.start();
 }
 
