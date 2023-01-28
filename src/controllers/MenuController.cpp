@@ -15,7 +15,7 @@ void MenuController::onGameChoose(GameMode gameSelection, PlayMode playerSelecti
     GameController gameController(game);
 
     // View observes game model
-    game->attach((std::shared_ptr<Observer<Game>> &) gameView);
+    game->attach((std::shared_ptr<GameObserver<Game>> &) gameView);
 
     // View interact with controller
     gameView->setController(std::make_shared<GameController>(gameController));

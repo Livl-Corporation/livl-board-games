@@ -7,7 +7,7 @@
 
 #include "controllers/GameController.h"
 
-class GameView : public Observer<Game> {
+class GameView : public GameObserver<Game> {
 public:
     GameView() = default;
 

@@ -47,7 +47,7 @@ add_executable(Livl
         src/models/games/ticTacToe/players/TicTacToeComputerPlayer.h
         src/models/exceptions/UnimplementedPlayMode.h
         src/views/cli/menu/MenuConsole.h
-        src/views/cli/menu/MenuConsole.cpp src/views/interfaces/MenuInteraction.h src/views/cli/game/GameConsole.cpp src/views/cli/game/GameConsole.h src/views/cli/game/GameConsole.h src/views/interfaces/GameView.h src/models/interfaces/Observable.h src/models/interfaces/Observable.h src/models/interfaces/Observer.h src/views/interfaces/GameInteraction.h src/views/interfaces/GameInteraction.h src/shared/Shared.cpp src/models/PlayerId.h)
+        src/views/cli/menu/MenuConsole.cpp src/views/interfaces/MenuInteraction.h src/views/cli/game/GameConsole.cpp src/views/cli/game/GameConsole.h src/views/cli/game/GameConsole.h src/views/interfaces/GameView.h src/models/interfaces/GameObservable.h src/models/interfaces/GameObservable.h src/models/interfaces/GameObserver.h src/views/interfaces/GameInteraction.h src/views/interfaces/GameInteraction.h src/shared/Shared.cpp src/models/PlayerId.h)
 
 target_link_libraries(Livl
         Qt::Core

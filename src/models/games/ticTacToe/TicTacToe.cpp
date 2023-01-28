@@ -25,3 +25,7 @@ TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE)
     Grid<Token> grid1(xSize, ySize, emptyToken);
     this->setGrid(std::make_shared<Grid<Token>>(grid1));
 }
+
+void TicTacToe::onPositionSelected(Position position) {
+
+}

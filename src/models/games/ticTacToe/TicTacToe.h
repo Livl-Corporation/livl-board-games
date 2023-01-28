@@ -13,6 +13,10 @@
 class TicTacToe : public Game {
 public:
     explicit TicTacToe(PlayMode playMode);
+
+protected:
+    void onPositionSelected(Position position) override;
+
 private:
     static constexpr GridSize xSize = 3;
     static constexpr GridSize ySize = 3;

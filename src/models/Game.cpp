@@ -19,7 +19,7 @@ void Game::setMessage(const std::string &newMessage) {
     notify(*this);
 }
 
-void Game::attach(std::shared_ptr<Observer<Game>> &_observer) {
+void Game::attach(std::shared_ptr<GameObserver<Game>> &_observer) {
     this->observer = _observer;
 }
 
