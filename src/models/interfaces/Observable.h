@@ -11,7 +11,7 @@
 template <typename T>
 class Observable {
 public:
-    virtual void attach(std::shared_ptr<Observer<T>> &observer) = 0;
+    virtual void attach(std::shared_ptr<Observer<T>> &_observer) = 0;
     virtual void notify(const T &value) = 0;
 
 };
