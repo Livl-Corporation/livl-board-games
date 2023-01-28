@@ -47,6 +47,10 @@ public:
     GameWindow* getGameWindow() { return this;}
 
     void show() override;
+
+    // As on observer, the view is notified when the game is updated
+    void update(const Game &value) override;
+
 private:
     Ui::GameWindow *ui;
     QVector<QLabel*> playerLabels;

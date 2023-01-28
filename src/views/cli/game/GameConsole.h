@@ -21,6 +21,9 @@ public:
     void show() override;
     GameConsole* getGameConsole() { return this;}
 
+    // As an observer, the view is notified when the game is updated
+    void update(const Game &value) override;
+
     void printGameInfos(const std::string &gameName, const std::vector<Player> &players) const;
     void printGrid(const Grid<Token> &grid) const ;
     void printNextRound(const PlayerId &playerId, unsigned int round) const;

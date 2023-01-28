@@ -3,6 +3,8 @@
 //
 
 #include "GameConsole.h"
+#include <QDebug>
+
 
 void GameConsole::printGameInfos(const std::string &gameName, const std::vector<Player> &players) const {
     ConsoleHandler::printTitle(gameName);
@@ -93,14 +95,6 @@ void GameConsole::show() {
     ConsoleHandler::printLine("Welcome !");
 }
 
-//void GameConsole::attachObserver() {
-//    this->controller->getGame()->Subject::attach(shared_from_this());
-//}
-//
-//void GameConsole::update(const Game &game) {
-//
-//}
-//
-//std::shared_ptr<Subject<Position>> GameConsole::getPositionSubject() {
-//    return {};
-//}
+void GameConsole::update(const Game &value) {
+    qDebug() << "GameConsole::update";
+}
