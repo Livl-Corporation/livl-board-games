@@ -12,7 +12,7 @@
 
 class TicTacToe : public Game {
 public:
-    TicTacToe(PlayMode playMode);
+    explicit TicTacToe(PlayMode playMode);
 private:
     static constexpr GridSize xSize = 3;
     static constexpr GridSize ySize = 3;

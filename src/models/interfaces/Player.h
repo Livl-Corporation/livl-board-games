@@ -7,17 +7,20 @@
 
 #include <string>
 #include <utility>
+#include <memory>
 #include "models/Position.h"
-
-typedef unsigned int PlayerId;
+#include "models/interfaces/Token.h"
+#include "models/Grid.h"
+#include "models/PlayerId.h"
 
 class Player {
 
 public:
+
     [[nodiscard]] PlayerId getId() const { return this->id; };
 
     // On round start, start thuiking about playign ...... to meditate ...
-    virtual void play() = 0;
+    virtual void play(const std::shared_ptr<Grid<Token>> &grid) = 0;
 
     // Event when a position was selected
     virtual void onPositionSelected (Position position) = 0;
@@ -30,7 +33,6 @@ protected:
 private:
     PlayerId id;
     std::string name;
-
 };
 
 #endif //LIVL_PLAYER_H

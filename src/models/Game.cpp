@@ -30,3 +30,7 @@ void Game::notify(const Game &value) {
         qDebug() << "No observer attached to the game";
     }
 }
+
+std::shared_ptr<Player> Game::getCurrentPlayer() const {
+    return this->players[getPlayerId(this->round)];
+}

@@ -12,4 +12,8 @@ void GameController::start() {
 
 void GameController::onPositionSelected(const Position &position) {
     qDebug() << "GameController::onPositionSelected() with position " << position.x << " " << position.y << "\n";
+    std::shared_ptr<Player> currentPlayer = this->game->getCurrentPlayer();
+    if (currentPlayer->canInteract()) {
+        currentPlayer->onPositionSelected(position);
+    }
 }

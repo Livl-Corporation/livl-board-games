@@ -14,7 +14,9 @@ class Grid {
 public:
 
     Grid(GridSize x, GridSize y, T &defaultValue)
-    : xSize(x), ySize(y), grid(y, std::vector<T>(x, defaultValue)) {}
+    : xSize(x), ySize(y), grid(y, std::vector<T>(x, defaultValue)) {
+        this->defaultValue = defaultValue;
+    }
 
     [[nodiscard]] inline GridSize getXSize() const { return this->xSize; };
 
@@ -40,4 +42,5 @@ private:
     GridSize xSize;
     GridSize ySize;
     std::vector<std::vector<T>> grid;
+    T defaultValue;
 };

@@ -35,6 +35,8 @@ public:
 
     [[nodiscard]] std::vector<std::shared_ptr<Player>> getPlayers() const { return this->players; }
 
+    [[nodiscard]] std::shared_ptr<Player> getCurrentPlayer() const;
+
     [[nodiscard]] GameMode getGameMode() const { return this->gameMode; }
 
     // As an observable, we need to notify observers when the game is updated
@@ -46,6 +48,8 @@ protected:
     Game(std::string  name, const GameMode gameMode) : name(std::move((name))), gameMode(gameMode) {};
     void addPlayer(const std::shared_ptr<Player> &player);
     void setGrid(std::shared_ptr<Grid<Token>> grid);
+
+    //virtual void onPositionSelected(Position position) = 0;
 
 private:
     std::vector<std::shared_ptr<Player>> players;

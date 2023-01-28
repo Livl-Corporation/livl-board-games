@@ -5,8 +5,7 @@
 #ifndef LIVL_TOKEN_H
 #define LIVL_TOKEN_H
 
-
-#include "models/interfaces/Player.h"
+#include "models/PlayerId.h"
 
 typedef unsigned int TokenType;
 
@@ -20,6 +19,11 @@ public:
     [[nodiscard]] PlayerId getPlayerId() const { return this->playerId; } ;
     [[nodiscard]] TokenType getType() const { return this->type; } ;
     void setType(TokenType _type) { this->type = _type; };
+
+    bool operator == (const Token &other) const
+    {
+        return this->playerId == other.playerId && this->type == other.type;
+    }
 
 private:
 
