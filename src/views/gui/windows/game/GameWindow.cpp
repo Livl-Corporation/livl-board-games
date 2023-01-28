@@ -114,3 +114,12 @@ void GameWindow::updateError(const std::string &message) {
     setInfoText(message);
     setInfoTextColor("red");
 }
+
+void GameWindow::updateMessage(const std::string &message) {
+    setInfoText(message);
+    setInfoTextColor("black");
+}
+
+void GameWindow::updateRound(Round round) {
+    setRound(round);
+}

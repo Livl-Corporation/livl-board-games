@@ -14,8 +14,7 @@
 #include "models/Grid.h"
 #include "models/enums/GameMode.h"
 #include "models/interfaces/GameObservable.h"
-
-typedef unsigned int Round;
+#include "Round.h"
 
 class Game : public GameObservable<Game> {
 public:
@@ -44,11 +43,20 @@ public:
 
     void notify(const Game &value) override;
     void notifyError(const std::string &message) override;
+    void notifyRound(Round round) override;
+    void notifyMessage(const std::string &message) override;
+
+    virtual void nextRound() = 0;
 
 protected:
     Game(std::string  name, const GameMode gameMode) : name(std::move((name))), gameMode(gameMode) {};
     void addPlayer(const std::shared_ptr<Player> &player);
     void setGrid(std::shared_ptr<Grid<Token>> grid);
+
+    void incrementRound() {
+        this->round++;
+        notifyRound(this->round);
+    }
 
     virtual void onPositionSelected(Position position) = 0;
 
@@ -58,7 +66,7 @@ private:
     std::string name;
     std::string message;
     std::shared_ptr<Grid<Token>> grid;
-    Round round = 1;
+    Round round = 0;
     std::shared_ptr<GameObserver<Game>> observer;
 
 };

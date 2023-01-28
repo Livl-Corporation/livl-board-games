@@ -30,3 +30,9 @@ TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE)
 void TicTacToe::onPositionSelected(Position position) {
     this->notifyError("Not implemented yet " + std::to_string(position.x) + " " + std::to_string(position.y));
 }
+
+void TicTacToe::nextRound() {
+    incrementRound();
+
+    notifyMessage("Veuillez jouer svp");
+}

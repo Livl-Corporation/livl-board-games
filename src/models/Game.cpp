@@ -43,3 +43,21 @@ void Game::notifyError(const std::string &message) {
     }
 
 }
+
+void Game::notifyRound(Round round) {
+    if (this->observer != nullptr) {
+        this->observer->updateRound(round);
+    } else {
+        qDebug() << "No observer attached to the game";
+    }
+
+}
+
+void Game::notifyMessage(const std::string &message) {
+    if (this->observer != nullptr) {
+        this->observer->updateMessage(message);
+    } else {
+        qDebug() << "No observer attached to the game";
+    }
+
+}

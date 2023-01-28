@@ -8,6 +8,7 @@
 void GameController::start() {
     qDebug() << "GameController::start()";
     this->game->setMessage("Game started");
+    this->game->nextRound();
 }
 
 void GameController::onPositionSelected(const Position &position) {

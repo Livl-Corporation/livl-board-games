@@ -24,6 +24,8 @@ public:
     // As an observer, the view is notified when the game is updated
     void update(const Game &value) override;
     void updateError(const std::string &message) override;
+    void updateMessage(const std::string &message) override;
+    void updateRound(Round round) override;
 
     void printGameInfos(const std::string &gameName, const std::vector<std::shared_ptr<Player>> &players) const;
     void printGrid(const Grid<Token> &grid) const ;

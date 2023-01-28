@@ -17,6 +17,8 @@ public:
 protected:
     void onPositionSelected(Position position) override;
 
+    void nextRound() override;
+
 private:
     static constexpr GridSize xSize = 3;
     static constexpr GridSize ySize = 3;

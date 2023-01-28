@@ -109,3 +109,15 @@ void GameConsole::update(const Game &value) {
 void GameConsole::updateError(const std::string &message) {
     ConsoleHandler::printLine(message);
 }
+
+void GameConsole::updateMessage(const std::string &message) {
+    ConsoleHandler::printLine(message);
+}
+
+void GameConsole::updateRound(Round round) {
+    ConsoleHandler::printLine("Round : " + std::to_string(round));
+}
+
+
+
+

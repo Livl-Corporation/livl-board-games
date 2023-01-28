@@ -51,6 +51,8 @@ public:
     // As on observer, the view is notified when the game is updated
     void update(const Game &value) override;
     void updateError(const std::string &message) override;
+    void updateMessage(const std::string &message) override;
+    void updateRound(Round round) override;
 
     void onGridClicked(const Position &value);
 
