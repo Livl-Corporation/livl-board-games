@@ -8,9 +8,8 @@
 
 #include <memory>
 #include "models/Game.h"
-//#include "../models/interfaces/Observer.h"
 
-class GameController {
+class GameController : public Observer<Position> {
 
 public:
 
@@ -18,7 +17,8 @@ public:
     [[nodiscard]] std::shared_ptr<Game> getGame() const { return game; };
     void start();
 
-    //void update(const Position &position) override;
+    // As an observer, the controller is notified when a position is selected
+    void update(const Position &value) override;
 
 protected:
 
