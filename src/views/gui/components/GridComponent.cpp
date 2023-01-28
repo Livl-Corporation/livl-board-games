@@ -5,7 +5,6 @@
 // You may need to build the project (run Qt uic code generator) to get "ui_GridComponent.h" resolved
 
 #include "GridComponent.h"
-//#include "../../../models/Subject.cpp"
 #include "../../../models/Grid.cpp"
 
 GridComponent::GridComponent(QWidget *parent) :

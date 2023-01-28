@@ -8,7 +8,7 @@
 template <typename T>
 class Observer {
 public:
-    virtual void onChange(const T &value) = 0;
+    virtual void update(const T &value) = 0;
 };
 
 #endif //LIVL_OBSERVER_H

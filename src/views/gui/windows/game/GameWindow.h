@@ -10,7 +10,6 @@
 #include "models/interfaces/Player.h"
 #include "models/interfaces/Token.h"
 #include "controllers/GameController.h"
-//#include "../../../../models/Subject.h"
 #include "views/interfaces/GameView.h"
 
 namespace Ui {
@@ -44,13 +43,6 @@ public:
     void setInfoTextColor(const std::string &color);
 
     void createGrid(const Grid<Token> &grid);
-
-    // As an observer, the game windows react to game change
-    //void update(const Game &value) override;
-    //void attachObserver() override;
-
-    // The game window should provide access to the position subject
-    //std::shared_ptr<Subject<Position>> getPositionSubject() override;
 
     GameWindow* getGameWindow() { return this;}
 

@@ -13,11 +13,11 @@
 #include "models/interfaces/Token.h"
 #include "models/Grid.h"
 #include "models/enums/GameMode.h"
-//#include "Subject.h"
+#include "models/interfaces/Observable.h"
 
 typedef unsigned int Round;
 
-class Game {
+class Game : public Observable<Game> {
 public:
     [[nodiscard]] inline PlayerId getPlayerId(unsigned int roundNumber) const {
         return (roundNumber - 1) % players.size();
@@ -37,6 +37,11 @@ public:
 
     [[nodiscard]] GameMode getGameMode() const { return this->gameMode; }
 
+    // As an observable, we need to notify observers when the game is updated
+    void attach(std::shared_ptr<Observer<Game>> &_observer) override;
+
+    void notify(const Game &value) override;
+
 protected:
     Game(std::string  name, const GameMode gameMode) : name(std::move((name))), gameMode(gameMode) {};
     void addPlayer(const std::shared_ptr<Player> &player);
@@ -49,6 +54,7 @@ private:
     std::string message;
     std::shared_ptr<Grid<Token>> grid;
     Round round = 0;
+    std::shared_ptr<Observer<Game>> observer;
 
 };
 
