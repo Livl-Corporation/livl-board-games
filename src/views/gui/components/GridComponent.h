@@ -11,7 +11,6 @@
 #include <QPushButton>
 #include <memory>
 #include "ui_GridComponent.h"
-//#include "models/Subject.h"
 #include "models/interfaces/Player.h"
 #include "models/Grid.h"
 #include "models/interfaces/Token.h"
@@ -24,7 +23,7 @@ class GridComponent : public QWidget {
     Q_OBJECT
 
 public:
-    explicit GridComponent(QWidget *parent = nullptr);
+    explicit GridComponent(QWidget *parent = nullptr, const std::function<void(Position)> &_onPositionSelected = nullptr);
     void setGrid(const Grid<Token> &value);
 
     QGridLayout* getGridLayout() { return this->gridLayout; };
@@ -39,6 +38,8 @@ private:
     Ui::GridComponent *ui;
     QGridLayout *gridLayout{};
     bool gridCreated = false;
+
+    std::function<void(Position)> onPositionSelected;
 
 };
 

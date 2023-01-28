@@ -88,7 +88,6 @@ void GameConsole::printGrid(const Grid<Token> &grid) const {
 
 void GameConsole::printComputerPlay() const {
     ConsoleHandler::printLine("Computer is playing...");
-
 }
 
 void GameConsole::show() {

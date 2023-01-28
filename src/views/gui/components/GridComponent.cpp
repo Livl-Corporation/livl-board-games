@@ -7,9 +7,10 @@
 #include "GridComponent.h"
 #include "../../../models/Grid.cpp"
 
-GridComponent::GridComponent(QWidget *parent) :
+GridComponent::GridComponent(QWidget *parent, const std::function<void(Position)> &_onPositionSelected) :
         QWidget(parent), ui(new Ui::GridComponent) {
     ui->setupUi(this);
+    this->onPositionSelected = _onPositionSelected;
 }
 
 GridComponent::~GridComponent() {
@@ -29,7 +30,11 @@ void GridComponent::createGrid(const Grid<Token> &grid) {
          {
              auto *button = new QPushButton;
              connect(button, &QPushButton::clicked, this, [row, col, this]{
-                //this->notify({row, col});
+                    if (this->onPositionSelected != nullptr) {
+                        this->onPositionSelected({row, col});
+                    } else {
+                        qDebug() << "No callback for position selected";
+                    }
              });
              button->setStyleSheet(styleSheet);
              button->setFixedSize(50, 50);

@@ -91,3 +91,12 @@ void GameWindow::update(const Game &value) {
         createPlayers(value.getPlayers());
     }
 }
+
+void GameWindow::onGridClicked(const Position &value) {
+    qDebug() << "GameWindow::onGridClicked()";
+    if (controller != nullptr) {
+        controller->onPositionSelected(value);
+    } else {
+        qDebug() << "GameWindow::onGridClicked() - controller is null";
+    }
+}

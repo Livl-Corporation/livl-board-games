@@ -51,6 +51,8 @@ public:
     // As on observer, the view is notified when the game is updated
     void update(const Game &value) override;
 
+    void onGridClicked(const Position &value);
+
 private:
     Ui::GameWindow *ui;
     QVector<QLabel*> playerLabels;

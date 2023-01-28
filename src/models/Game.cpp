@@ -2,6 +2,7 @@
 // Created by Franck GUTMANN on 18/01/2023.
 //
 
+#include <QDebug>
 #include "Game.h"
 
 void Game::addPlayer(const std::shared_ptr<Player> &player) {
@@ -23,5 +24,9 @@ void Game::attach(std::shared_ptr<Observer<Game>> &_observer) {
 }
 
 void Game::notify(const Game &value) {
-    this->observer->update(value);
+    if (this->observer != nullptr) {
+        this->observer->update(value);
+    } else {
+        qDebug() << "No observer attached to the game";
+    }
 }
