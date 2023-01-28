@@ -14,6 +14,8 @@
 #include "models/Grid.h"
 #include "views/interfaces/GameView.h"
 #include "controllers/GameController.h"
+#include "views/cli/ConsoleHandler.h"
+#include "models/Subject.cpp"
 
 class GameConsole : public GameView, public Observer<Game>, public std::enable_shared_from_this<GameConsole> {
 public:

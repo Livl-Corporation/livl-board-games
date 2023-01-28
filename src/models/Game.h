@@ -5,7 +5,6 @@
 #ifndef LIVL_GAME_H
 #define LIVL_GAME_H
 
-
 #include <string>
 #include <utility>
 #include <vector>
@@ -30,10 +29,7 @@ public:
 
     [[nodiscard]] std::string getMessage() const { return this->message; };
 
-    void setMessage(const std::string &newMessage) {
-        this->message = newMessage;
-        this->notify(*this);
-    }
+    void setMessage(const std::string &newMessage);
 
     [[nodiscard]] std::shared_ptr<Grid<Token>> getGrid() const {return this->grid; }
 

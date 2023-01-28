@@ -11,14 +11,11 @@
 #include "models/interfaces/Observer.h"
 #include <algorithm>
 
-
 template <typename T>
 class Subject {
 public:
     void attach(const std::shared_ptr<Observer<T>> &observer);
     void detach(const std::shared_ptr<Observer<T>> &observer);
-
-protected:
     void notify(const T &value);
 
 private:

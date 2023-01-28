@@ -1,6 +1,4 @@
-#include <iostream>
 #include "GameWindow.h"
-#include "models/Subject.cpp"
 
 GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),

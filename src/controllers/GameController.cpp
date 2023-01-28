@@ -4,7 +4,7 @@
 
 #include <QDebug>
 #include "GameController.h"
-#include "../models/Subject.cpp"
+//#include "../models/Subject.cpp"
 
 void GameController::start() {
     qDebug() << "GameController::start()";

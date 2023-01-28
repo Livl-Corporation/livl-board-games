@@ -3,8 +3,6 @@
 //
 
 #include "GameConsole.h"
-#include "views/cli/ConsoleHandler.h"
-
 
 void GameConsole::printGameInfos(const std::string &gameName, const std::vector<Player> &players) const {
     ConsoleHandler::printTitle(gameName);
@@ -96,7 +94,7 @@ void GameConsole::show() {
 }
 
 void GameConsole::attachObserver() {
-    this->controller->getGame()->attach(shared_from_this());
+    this->controller->getGame()->Subject::attach(shared_from_this());
 }
 
 void GameConsole::update(const Game &game) {
