@@ -15,6 +15,7 @@
 #include "models/enums/GameMode.h"
 #include "models/interfaces/GameObservable.h"
 #include "Round.h"
+#include "models/interfaces/GameEvaluator.h"
 
 class Game : public GameObservable {
 public:
@@ -38,6 +39,9 @@ public:
 
     virtual void nextRound() = 0;
 
+    void setEvaluator(std::shared_ptr<GameEvaluator> evaluator) { this->evaluator = std::move(evaluator); }
+
+    [[nodiscard]] std::shared_ptr<GameEvaluator> getEvaluator() const { return this->evaluator; }
 
     // As an observable, we need to notify observers when the game is updated
     void attach(std::shared_ptr<GameObserver> &_observer) override;
@@ -68,11 +72,13 @@ private:
     std::vector<std::shared_ptr<Player>> players;
     GameMode gameMode;
     std::string name;
-    std::shared_ptr<Grid<Token>> grid;
     Round round = 0;
-    std::shared_ptr<GameObserver> observer;
     unsigned int numberOfInputValues;
     std::string askForPositionMessage;
+
+    std::shared_ptr<Grid<Token>> grid;
+    std::shared_ptr<GameObserver> observer;
+    std::shared_ptr<GameEvaluator> evaluator;
 
 };
 

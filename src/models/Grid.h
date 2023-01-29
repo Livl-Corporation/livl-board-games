@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LIVL_GRID_H
+#define LIVL_GRID_H
 
 #include <vector>
 #include "Position.h"
@@ -43,3 +44,5 @@ private:
     std::vector<std::vector<T>> grid;
     T defaultValue;
 };
+
+#endif //LIVL_GRID_H
