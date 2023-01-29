@@ -8,7 +8,9 @@
 #include "models/enums/GameMode.h"
 #include "models/enums/PlayMode.h"
 #include "models/Game.h"
-
+#include "models/games/ticTacToe/players/TicTacToeComputerPlayer.h"
+#include "models/games/ticTacToe/players/TicTacToeHumanPlayer.h"
+#include "models/exceptions/UnimplementedPlayMode.h"
 
 class TicTacToe : public Game {
 public:

@@ -35,9 +35,9 @@ void GameWindow::setActivePlayer(const PlayerId &playerId) {
     for(QLabel* label : this->playerLabels) {
         if (label != nullptr ) {
             if (label->objectName() == "playerLabel"+QString::number(playerId)) {
-                label->setStyleSheet("QLabel { background-color : red; color : white; font-weight: bold; }");
+                label->setStyleSheet("QLabel { background-color : blue; color : white; font-weight: bold; }");
             } else {
-                label->setStyleSheet("QLabel { background-color : white; color : black; font-weight: normal; }");
+                label->setStyleSheet("QLabel { background-color : transparent; color : black; font-weight: normal; }");
             }
         }
     }

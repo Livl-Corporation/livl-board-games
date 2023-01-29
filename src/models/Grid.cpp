@@ -37,7 +37,7 @@ bool Grid<T>::isFull() const
 }
 
 template <typename T>
-bool Grid<T>::place(const Position &position, const T &element)
+void Grid<T>::place(const Position &position, const T &element)
 {
     if (!this->isPositionInBounds(position))
     {
@@ -51,7 +51,6 @@ bool Grid<T>::place(const Position &position, const T &element)
 
     this->grid[position.y][position.x] = element;
 
-    return true;
 }
 
 template <typename T>

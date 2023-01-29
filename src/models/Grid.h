@@ -4,7 +4,6 @@
 #include "Position.h"
 #include "models/exceptions/OutOfBoundsException.h"
 #include "models/exceptions/OccupiedPositionException.h"
-//#include "Subject.h"
 
 typedef unsigned int GridSize;
 
@@ -30,7 +29,7 @@ public:
 
     [[nodiscard]] bool isFull() const;
 
-    bool place(const Position &position, const T &element);
+    void place(const Position &position, const T &element);
 
     bool replaceAt(const Position &position, const T &element);
 

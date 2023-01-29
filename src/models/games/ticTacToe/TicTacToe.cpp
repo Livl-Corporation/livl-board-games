@@ -3,17 +3,15 @@
 //
 
 #include "TicTacToe.h"
-#include "models/games/ticTacToe/players/TicTacToeComputerPlayer.h"
-#include "models/exceptions/UnimplementedPlayMode.h"
-#include "models/games/ticTacToe/players/TicTacToeHumanPlayer.h"
+#include "models/Grid.cpp"
 
 TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE) {
     std::function<void(Position)> callback = [this](auto && PH1) { onPositionSelected(std::forward<decltype(PH1)>(PH1)); };
-    TicTacToeHumanPlayer p1(1, "Joueur 1", callback);
+    TicTacToeHumanPlayer p1(1, "Player 1", callback);
     this->addPlayer(std::make_shared<TicTacToeHumanPlayer>(p1));
 
     if(playMode == PlayMode::HUMAN_VS_HUMAN) {
-        TicTacToeHumanPlayer p2(2, "Joueur 2", callback);
+        TicTacToeHumanPlayer p2(2, "Player 2", callback);
         this->addPlayer(std::make_shared<TicTacToeHumanPlayer>(p2));
     } else if (playMode == PlayMode::HUMAN_VS_AI) {
         TicTacToeComputerPlayer p2(2, "BOT", callback);
@@ -28,11 +26,21 @@ TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE)
 }
 
 void TicTacToe::onPositionSelected(Position position) {
-    this->notifyError("Not implemented yet " + std::to_string(position.x) + " " + std::to_string(position.y));
+    Token token(this->getCurrentPlayer()->getId());
+
+    try {
+        this->getGrid()->place(position, token);
+
+        this->notifyGrid();
+        // TODO : implement win condition
+        this->nextRound();
+    } catch (std::exception &e) {
+        Game::notifyError(e.what());
+    }
+
 }
 
 void TicTacToe::nextRound() {
     incrementRound();
-
-    notifyMessage("Veuillez jouer svp");
+    Game::notifyMessage("Place your token between (1,1 to " + std::to_string(this->getGrid()->getYSize()) + "," + std::to_string(this->getGrid()->getXSize()) + ") : ");
 }
