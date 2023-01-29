@@ -8,7 +8,7 @@
 #include "ui_GameWindow.h"
 #include "../../components/GridComponent.h"
 #include "models/interfaces/Player.h"
-#include "models/interfaces/Token.h"
+#include "models/Token.h"
 #include "controllers/GameController.h"
 #include "views/interfaces/GameView.h"
 

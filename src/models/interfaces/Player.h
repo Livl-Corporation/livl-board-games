@@ -10,7 +10,7 @@
 #include <memory>
 #include <functional>
 #include "models/Position.h"
-#include "models/interfaces/Token.h"
+#include "models/Token.h"
 #include "models/Grid.h"
 #include "models/PlayerId.h"
 

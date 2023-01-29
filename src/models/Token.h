@@ -5,6 +5,7 @@
 #ifndef LIVL_TOKEN_H
 #define LIVL_TOKEN_H
 
+#include <string>
 #include "models/PlayerId.h"
 
 typedef unsigned int TokenType;
@@ -25,12 +26,14 @@ public:
         return this->playerId == other.playerId && this->type == other.type;
     }
 
+    [[nodiscard]] virtual char getDisplayChar() const;
+    virtual std::string getDisplayColor() const;
+
 private:
 
     unsigned int type;
     PlayerId playerId;
 
 };
-
 
 #endif //LIVL_TOKEN_H

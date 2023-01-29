@@ -10,7 +10,7 @@
 #include <vector>
 #include <memory>
 #include "models/interfaces/Player.h"
-#include "models/interfaces/Token.h"
+#include "Token.h"
 #include "models/Grid.h"
 #include "models/enums/GameMode.h"
 #include "models/interfaces/GameObservable.h"

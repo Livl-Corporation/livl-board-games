@@ -13,7 +13,7 @@
 #include "ui_GridComponent.h"
 #include "models/interfaces/Player.h"
 #include "models/Grid.h"
-#include "models/interfaces/Token.h"
+#include "models/Token.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GridComponent; }

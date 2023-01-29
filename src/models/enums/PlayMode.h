@@ -6,8 +6,8 @@
 #define LIVL_PLAYMODE_H
 
 enum PlayMode {
-    HUMAN_VS_HUMAN = 0,
-    HUMAN_VS_AI = 1
+    HUMAN_VS_HUMAN = 1,
+    HUMAN_VS_AI = 2
 };
 
 #endif //LIVL_PLAYMODE_H

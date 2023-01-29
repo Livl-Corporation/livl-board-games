@@ -8,7 +8,7 @@
 #include "models/interfaces/Player.h"
 #include "shared/Shared.hpp"
 #include "models/Grid.h"
-#include "models/interfaces/Token.h"
+#include "models/Token.h"
 
 class TicTacToeComputerPlayer : public Player {
 public :
