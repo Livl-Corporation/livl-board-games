@@ -16,7 +16,7 @@
 #include "models/interfaces/GameObservable.h"
 #include "Round.h"
 
-class Game : public GameObservable<Game> {
+class Game : public GameObservable {
 public:
     [[nodiscard]] inline PlayerId getPlayerId(unsigned int roundNumber) const {
         return (roundNumber - 1) % players.size();
@@ -25,10 +25,6 @@ public:
     [[nodiscard]] std::string getName() const { return this->name; };
 
     [[nodiscard]] Round getRound() const { return this->round; };
-
-    [[nodiscard]] std::string getMessage() const { return this->message; };
-
-    void setMessage(const std::string &newMessage);
 
     [[nodiscard]] std::shared_ptr<Grid<Token>> getGrid() const {return this->grid; }
 
@@ -39,9 +35,8 @@ public:
     [[nodiscard]] GameMode getGameMode() const { return this->gameMode; }
 
     // As an observable, we need to notify observers when the game is updated
-    void attach(std::shared_ptr<GameObserver<Game>> &_observer) override;
+    void attach(std::shared_ptr<GameObserver> &_observer) override;
 
-    void notify(const Game &value) override;
     void notifyError(const std::string &message) override;
     void notifyRound(Round round) override;
     void notifyMessage(const std::string &message) override;
@@ -64,10 +59,9 @@ private:
     std::vector<std::shared_ptr<Player>> players;
     GameMode gameMode;
     std::string name;
-    std::string message;
     std::shared_ptr<Grid<Token>> grid;
     Round round = 0;
-    std::shared_ptr<GameObserver<Game>> observer;
+    std::shared_ptr<GameObserver> observer;
 
 };
 

@@ -100,11 +100,11 @@ void GameConsole::show() {
     ConsoleHandler::printLine("Welcome !");
 }
 
-void GameConsole::update(const Game &value) {
-    printGameInfos(value.getName(), value.getPlayers());
-    printGrid(*value.getGrid());
-    printNextRound(*value.getCurrentPlayer(), value.getRound());
-}
+//void GameConsole::update(const Game &value) {
+//    printGameInfos(value.getName(), value.getPlayers());
+//    printGrid(*value.getGrid());
+//    printNextRound(*value.getCurrentPlayer(), value.getRound());
+//}
 
 void GameConsole::updateError(const std::string &message) {
     ConsoleHandler::printLine(message);

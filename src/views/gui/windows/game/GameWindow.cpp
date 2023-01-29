@@ -74,32 +74,32 @@ void GameWindow::show() {
     QWidget::show();
 }
 
-void GameWindow::update(const Game &value) {
-
-    qDebug() << "GameWindow::update()";
-
-    setGameName(value.getName());
-    setRound(value.getRound());
-    setInfoText(value.getMessage());
-
-    if (gridComponent == nullptr) {
-        // Create grid if it doesn't exist already
-        createGrid(*value.getGrid());
-    } else {
-        // Update grid
-        gridComponent->setGrid(*value.getGrid());
-    }
-
-    // Update players
-    if (playerLabels.size() != value.getPlayers().size()) {
-        QObjectList children = ui->playerListContainer->children();
-        children.clear();
-        createPlayers(value.getPlayers());
-    }
-
-    // Update active player
-    setActivePlayer(value.getCurrentPlayer()->getId());
-}
+//void GameWindow::update(const Game &value) {
+//
+//    qDebug() << "GameWindow::update()";
+//
+//    setGameName(value.getName());
+//    setRound(value.getRound());
+//    setInfoText(value.getMessage());
+//
+//    if (gridComponent == nullptr) {
+//        // Create grid if it doesn't exist already
+//        createGrid(*value.getGrid());
+//    } else {
+//        // Update grid
+//        gridComponent->setGrid(*value.getGrid());
+//    }
+//
+//    // Update players
+//    if (playerLabels.size() != value.getPlayers().size()) {
+//        QObjectList children = ui->playerListContainer->children();
+//        children.clear();
+//        createPlayers(value.getPlayers());
+//    }
+//
+//    // Update active player
+//    setActivePlayer(value.getCurrentPlayer()->getId());
+//}
 
 void GameWindow::onGridClicked(const Position &value) {
     qDebug() << "GameWindow::onGridClicked()";

@@ -7,10 +7,9 @@
 
 #include "models/Round.h"
 
-template <typename T>
 class GameObserver {
 public:
-    virtual void update(const T &value) = 0; // Will disappear
+    //virtual void update(const T &value) = 0; // Will disappear
     virtual void updateError(const std::string &message) = 0;
     virtual void updateRound(Round round) = 0;
     virtual void updateMessage(const std::string &message) = 0;
