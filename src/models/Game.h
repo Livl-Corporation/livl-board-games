@@ -34,6 +34,8 @@ public:
 
     [[nodiscard]] GameMode getGameMode() const { return this->gameMode; }
 
+    [[nodiscard]] unsigned int getNumberOfInputValues() const { return this->numberOfInputValues; }
+
     virtual void nextRound() = 0;
 
 
@@ -42,6 +44,8 @@ public:
 
     void notifyError(const std::string &message) override;
     void notifyMessage(const std::string &message) override;
+    void notifyAskForPosition() override;
+    void notifyAskForPosition(const std::string &message) override;
 
     void notifyGameName() override;
     void notifyRound() override;
@@ -49,7 +53,9 @@ public:
     void notifyPlayers() override;
 
 protected:
-    Game(std::string  name, const GameMode gameMode) : name(std::move((name))), gameMode(gameMode) {};
+    Game(std::string name, const GameMode gameMode, unsigned int numberOfInputValues, std::string askForPositionMessage)
+        : name(std::move((name))), gameMode(gameMode), numberOfInputValues(numberOfInputValues), askForPositionMessage(std::move(askForPositionMessage)) {};
+
     void addPlayer(const std::shared_ptr<Player> &player);
     void setGrid(std::shared_ptr<Grid<Token>> grid);
 
@@ -64,6 +70,8 @@ private:
     std::shared_ptr<Grid<Token>> grid;
     Round round = 0;
     std::shared_ptr<GameObserver> observer;
+    unsigned int numberOfInputValues;
+    std::string askForPositionMessage;
 
 };
 

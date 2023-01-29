@@ -20,6 +20,7 @@ public:
     // As an observer, the view is notified when the game is updated
     void updateError(const std::string &message) override = 0;
     void updateMessage(const std::string &message) override = 0;
+    void updateAskForPosition(const std::string &message, unsigned int numberOfValues) override = 0;
 
     void updateGameName(const std::string &gameName) override = 0;
     void updateRound(Round round, const std::shared_ptr<Player> &player) override = 0;

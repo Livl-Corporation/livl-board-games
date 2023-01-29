@@ -88,6 +88,17 @@ void GameConsole::updateGameName(const std::string &gameName) {
     ConsoleHandler::printTitle(gameName);
 }
 
+void GameConsole::updateAskForPosition(const std::string &message, unsigned int numberOfValues) {
+    ConsoleHandler::printLine(message);
+
+    std::vector<int> values = ConsoleHandler::readValues(numberOfValues);
+
+    int y = values[0];
+    int x = values[1];
+
+    controller->onPositionSelected({(x - 1), (y - 1)});
+}
+
 
 
 

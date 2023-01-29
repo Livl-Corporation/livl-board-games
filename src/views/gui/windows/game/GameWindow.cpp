@@ -111,3 +111,8 @@ void GameWindow::updatePlayers(const std::vector<std::shared_ptr<Player>> &playe
 void GameWindow::updateGameName(const std::string &gameName) {
     ui->gameTitle->setText(QString::fromStdString(gameName));
 }
+
+void GameWindow::updateAskForPosition(const std::string &message, unsigned int numberOfValues) {
+    setInfoText(message);
+    setInfoTextColor("blue");
+}

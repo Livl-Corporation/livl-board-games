@@ -14,6 +14,8 @@ public:
 
     virtual void notifyError(const std::string &message) = 0;
     virtual void notifyMessage(const std::string &message) = 0;
+    virtual void notifyAskForPosition() = 0;
+    virtual void notifyAskForPosition(const std::string &message) = 0;
 
     virtual void notifyGameName() = 0;
     virtual void notifyRound() = 0;

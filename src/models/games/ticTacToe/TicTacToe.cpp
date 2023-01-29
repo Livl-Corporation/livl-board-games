@@ -5,7 +5,7 @@
 #include "TicTacToe.h"
 #include "models/Grid.cpp"
 
-TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE) {
+TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE, 2, "Place your token between (1,1) to (3,3) : ") {
     std::function<void(Position)> callback = [this](auto && PH1) { onPositionSelected(std::forward<decltype(PH1)>(PH1)); };
     TicTacToeHumanPlayer p1(1, "Player 1", callback);
     this->addPlayer(std::make_shared<TicTacToeHumanPlayer>(p1));
@@ -30,17 +30,17 @@ void TicTacToe::onPositionSelected(Position position) {
 
     try {
         this->getGrid()->place(position, token);
-
         this->notifyGrid();
         // TODO : implement win condition
         this->nextRound();
     } catch (std::exception &e) {
         Game::notifyError(e.what());
+        Game::notifyAskForPosition();
     }
 
 }
 
 void TicTacToe::nextRound() {
     incrementRound();
-    Game::notifyMessage("Place your token between (1,1 to " + std::to_string(this->getGrid()->getYSize()) + "," + std::to_string(this->getGrid()->getXSize()) + ") : ");
+    Game::notifyAskForPosition();
 }

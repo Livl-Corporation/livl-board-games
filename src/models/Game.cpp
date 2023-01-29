@@ -68,3 +68,15 @@ void Game::notifyGameName() {
         qDebug() << "No observer attached to the game";
     }
 }
+
+void Game::notifyAskForPosition(const std::string &message) {
+    if (this->observer != nullptr) {
+        this->observer->updateAskForPosition(message, getNumberOfInputValues());
+    } else {
+        qDebug() << "No observer attached to the game";
+    }
+}
+
+void Game::notifyAskForPosition() {
+    notifyAskForPosition(askForPositionMessage);
+}

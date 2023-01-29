@@ -41,7 +41,7 @@ namespace ConsoleHandler
         return input;
     }
 
-    std::vector<int> readValues(int numValues)
+    std::vector<int> readValues(unsigned int numValues)
     {
         std::vector<int> values;
         do

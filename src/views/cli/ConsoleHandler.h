@@ -11,7 +11,7 @@ namespace ConsoleHandler
     void printLine(const std::string &output);
     void print(const std::string &output);
     int readInt();
-    std::vector<int> readValues(int numValues);
+    std::vector<int> readValues(unsigned int numValues);
     void printTitle(const std::string &string);
     void printHeader(const std::string &string);
 }
