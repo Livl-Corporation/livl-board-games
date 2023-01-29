@@ -99,6 +99,11 @@ void GameConsole::updateAskForPosition(const std::string &message, unsigned int 
     controller->onPositionSelected({(x - 1), (y - 1)});
 }
 
+void GameConsole::updateGameEnd(const std::string &message) {
+    ConsoleHandler::printTitle("Game End");
+    ConsoleHandler::printLine(message);
+}
+
 
 
 

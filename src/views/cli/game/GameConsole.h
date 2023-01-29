@@ -24,6 +24,7 @@ public:
     void updateError(const std::string &message) override;
     void updateMessage(const std::string &message) override;
     void updateAskForPosition(const std::string &message, unsigned int numberOfValues) override;
+    void updateGameEnd(const std::string &message) override;
 
     void updateGameName(const std::string &gameName) override;
     void updateRound(Round round, const std::shared_ptr<Player> &player) override;

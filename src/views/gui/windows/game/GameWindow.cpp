@@ -114,3 +114,7 @@ void GameWindow::updateAskForPosition(const std::string &message, unsigned int n
 void GameWindow::setErrorText(const std::string &message) {
     ui->errorLabel->setText(QString::fromStdString(message));
 }
+
+void GameWindow::updateGameEnd(const std::string &message) {
+    setInfoText(message);
+}

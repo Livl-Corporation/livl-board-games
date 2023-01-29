@@ -46,6 +46,7 @@ public:
     void notifyMessage(const std::string &message) override;
     void notifyAskForPosition() override;
     void notifyAskForPosition(const std::string &message) override;
+    void notifyGameEnd(const std::string &message) override;
 
     void notifyGameName() override;
     void notifyRound() override;
