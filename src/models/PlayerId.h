@@ -7,4 +7,6 @@
 
 typedef unsigned int PlayerId;
 
+const int NO_PLAYER = 0;
+
 #endif //LIVL_PLAYERID_H
