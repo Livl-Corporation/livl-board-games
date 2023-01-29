@@ -36,7 +36,7 @@ public:
 
     void setInfoText(const std::string &message);
 
-    void setInfoTextColor(const std::string &color);
+    void setErrorText(const std::string &message);
 
     void createGrid(const Grid<Token> &grid);
 

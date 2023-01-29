@@ -14,6 +14,9 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
@@ -23,9 +26,21 @@
       <height>551</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0">
      <property name="spacing">
       <number>19</number>
+     </property>
+     <property name="leftMargin">
+      <number>15</number>
+     </property>
+     <property name="topMargin">
+      <number>15</number>
+     </property>
+     <property name="rightMargin">
+      <number>15</number>
+     </property>
+     <property name="bottomMargin">
+      <number>15</number>
      </property>
      <item>
       <widget class="QLabel" name="gameTitle">
@@ -92,8 +107,35 @@
          <pointsize>18</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color: blue;</string>
+       </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>InfoLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="errorLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>18</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-weight: bold;
+color: red;</string>
+       </property>
+       <property name="text">
+        <string>ErrorLabel</string>
        </property>
       </widget>
      </item>
@@ -129,7 +171,7 @@
      <x>0</x>
      <y>0</y>
      <width>943</width>
-     <height>25</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>

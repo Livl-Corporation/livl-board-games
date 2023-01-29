@@ -47,10 +47,6 @@ void GameWindow::setInfoText(const std::string &message) {
     ui->infoLabel->setText(QString::fromStdString(message));
 }
 
-void GameWindow::setInfoTextColor(const std::string &color) {
-    ui->infoLabel->setStyleSheet("QLabel { color : "+QString::fromStdString(color)+"; }");
-}
-
 void GameWindow::createGrid(const Grid<Token> &grid) {
     std::function<void(Position)> callback = [this](Position pos){this->onGridClicked(pos);};
     gridComponent = std::make_shared<GridComponent>(this, callback);
@@ -76,18 +72,17 @@ void GameWindow::onGridClicked(const Position &value) {
 }
 
 void GameWindow::updateError(const std::string &message) {
-    setInfoText(message);
-    setInfoTextColor("red");
+    setErrorText(message);
 }
 
 void GameWindow::updateMessage(const std::string &message) {
     setInfoText(message);
-    setInfoTextColor("black");
 }
 
 void GameWindow::updateRound(Round round, const std::shared_ptr<Player> &player) {
     ui->statusbar->showMessage("Round "+QString::number(round));
     setActivePlayer(player->getId());
+    setErrorText("");
 }
 
 void GameWindow::updateGrid(const Grid<Token> &grid) {
@@ -114,5 +109,8 @@ void GameWindow::updateGameName(const std::string &gameName) {
 
 void GameWindow::updateAskForPosition(const std::string &message, unsigned int numberOfValues) {
     setInfoText(message);
-    setInfoTextColor("blue");
+}
+
+void GameWindow::setErrorText(const std::string &message) {
+    ui->errorLabel->setText(QString::fromStdString(message));
 }
