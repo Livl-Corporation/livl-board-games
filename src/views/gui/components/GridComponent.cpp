@@ -52,7 +52,7 @@ void GridComponent::updateGrid(const Grid<Token> &grid) {
         for (int col = 0; col < grid.getXSize(); col++)
         {
             auto *button = (QPushButton*) this->gridLayout->itemAtPosition(row, col)->widget();
-            QString playerString(QChar(grid.getElementAt({row, col}).getPlayerId()));
+            QString playerString(QChar(grid.getElementAt({row, col}).getDisplayChar()));
             button->setText(playerString);
         }
     }
