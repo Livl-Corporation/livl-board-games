@@ -27,15 +27,6 @@ void Game::notifyError(const std::string &message) {
     } else {
         qDebug() << "No observer attached to the game";
     }
-
-}
-
-void Game::notifyRound(Round round) {
-    if (this->observer != nullptr) {
-        this->observer->updateRound(round);
-    } else {
-        qDebug() << "No observer attached to the game";
-    }
 }
 
 void Game::notifyMessage(const std::string &message) {
@@ -44,5 +35,36 @@ void Game::notifyMessage(const std::string &message) {
     } else {
         qDebug() << "No observer attached to the game";
     }
+}
 
+void Game::notifyRound() {
+    if (this->observer != nullptr) {
+        this->observer->updateRound(round, getCurrentPlayer());
+    } else {
+        qDebug() << "No observer attached to the game";
+    }
+}
+
+void Game::notifyGrid() {
+    if (this->observer != nullptr) {
+        this->observer->updateGrid(*grid);
+    } else {
+        qDebug() << "No observer attached to the game";
+    }
+}
+
+void Game::notifyPlayers() {
+    if (this->observer != nullptr) {
+        this->observer->updatePlayers(players);
+    } else {
+        qDebug() << "No observer attached to the game";
+    }
+}
+
+void Game::notifyGameName() {
+    if (this->observer != nullptr) {
+        this->observer->updateGameName(name);
+    } else {
+        qDebug() << "No observer attached to the game";
+    }
 }

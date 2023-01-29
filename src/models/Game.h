@@ -34,24 +34,26 @@ public:
 
     [[nodiscard]] GameMode getGameMode() const { return this->gameMode; }
 
+    virtual void nextRound() = 0;
+
+
     // As an observable, we need to notify observers when the game is updated
     void attach(std::shared_ptr<GameObserver> &_observer) override;
 
     void notifyError(const std::string &message) override;
-    void notifyRound(Round round) override;
     void notifyMessage(const std::string &message) override;
 
-    virtual void nextRound() = 0;
+    void notifyGameName() override;
+    void notifyRound() override;
+    void notifyGrid() override;
+    void notifyPlayers() override;
 
 protected:
     Game(std::string  name, const GameMode gameMode) : name(std::move((name))), gameMode(gameMode) {};
     void addPlayer(const std::shared_ptr<Player> &player);
     void setGrid(std::shared_ptr<Grid<Token>> grid);
 
-    void incrementRound() {
-        this->round++;
-        notifyRound(this->round);
-    }
+    void incrementRound() { this->round++; notifyRound(); }
 
     virtual void onPositionSelected(Position position) = 0;
 

@@ -7,6 +7,9 @@
 
 void GameController::start() {
     qDebug() << "GameController::start()";
+    this->game->notifyGameName();
+    this->game->notifyPlayers();
+    this->game->notifyGrid();
     this->game->nextRound();
 }
 

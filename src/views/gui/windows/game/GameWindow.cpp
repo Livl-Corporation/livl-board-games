@@ -14,10 +14,6 @@ GameWindow::~GameWindow()
     free(playerLabels.data());
 }
 
-void GameWindow::setGameName(const std::string &gameName) {
-    ui->gameTitle->setText(QString::fromStdString(gameName));
-}
-
 void GameWindow::createPlayers(const std::vector<std::shared_ptr<Player>>& players) {
     auto *layout = new QVBoxLayout();
     for (auto &player : players) {
@@ -28,10 +24,6 @@ void GameWindow::createPlayers(const std::vector<std::shared_ptr<Player>>& playe
         this->playerLabels.append(label);
     }
     ui->playerListContainer->addLayout(layout);
-}
-
-void GameWindow::setRound(unsigned int round) {
-    ui->statusbar->showMessage("Round "+QString::number(round));
 }
 
 void GameWindow::setActivePlayer(const PlayerId &playerId) {
@@ -74,33 +66,6 @@ void GameWindow::show() {
     QWidget::show();
 }
 
-//void GameWindow::update(const Game &value) {
-//
-//    qDebug() << "GameWindow::update()";
-//
-//    setGameName(value.getName());
-//    setRound(value.getRound());
-//    setInfoText(value.getMessage());
-//
-//    if (gridComponent == nullptr) {
-//        // Create grid if it doesn't exist already
-//        createGrid(*value.getGrid());
-//    } else {
-//        // Update grid
-//        gridComponent->setGrid(*value.getGrid());
-//    }
-//
-//    // Update players
-//    if (playerLabels.size() != value.getPlayers().size()) {
-//        QObjectList children = ui->playerListContainer->children();
-//        children.clear();
-//        createPlayers(value.getPlayers());
-//    }
-//
-//    // Update active player
-//    setActivePlayer(value.getCurrentPlayer()->getId());
-//}
-
 void GameWindow::onGridClicked(const Position &value) {
     qDebug() << "GameWindow::onGridClicked()";
     if (controller != nullptr) {
@@ -120,6 +85,29 @@ void GameWindow::updateMessage(const std::string &message) {
     setInfoTextColor("black");
 }
 
-void GameWindow::updateRound(Round round) {
-    setRound(round);
+void GameWindow::updateRound(Round round, const std::shared_ptr<Player> &player) {
+    ui->statusbar->showMessage("Round "+QString::number(round));
+    setActivePlayer(player->getId());
+}
+
+void GameWindow::updateGrid(const Grid<Token> &grid) {
+    if (gridComponent == nullptr) {
+        // Create grid if it doesn't exist already
+        createGrid(grid);
+    } else {
+        // Update grid
+        gridComponent->setGrid(grid);
+    }
+}
+
+void GameWindow::updatePlayers(const std::vector<std::shared_ptr<Player>> &players) {
+    if (playerLabels.size() != players.size()) {
+        QObjectList children = ui->playerListContainer->children();
+        children.clear();
+        createPlayers(players);
+    }
+}
+
+void GameWindow::updateGameName(const std::string &gameName) {
+    ui->gameTitle->setText(QString::fromStdString(gameName));
 }

@@ -30,11 +30,7 @@ public:
 
     ~GameWindow() override;
 
-    void setGameName(const std::string &gameName);
-
     void createPlayers(const std::vector<std::shared_ptr<Player>>& players);
-
-    void setRound(unsigned int round);
 
     void setActivePlayer(const PlayerId &playerId);
 
@@ -44,15 +40,16 @@ public:
 
     void createGrid(const Grid<Token> &grid);
 
-    GameWindow* getGameWindow() { return this;}
-
     void show() override;
 
     // As on observer, the view is notified when the game is updated
-    //void update(const Game &value) override;
     void updateError(const std::string &message) override;
     void updateMessage(const std::string &message) override;
-    void updateRound(Round round) override;
+
+    void updateGameName(const std::string &gameName) override;
+    void updateRound(Round round, const std::shared_ptr<Player> &player) override;
+    void updateGrid(const Grid<Token> &grid) override;
+    void updatePlayers(const std::vector<std::shared_ptr<Player>> &players) override;
 
     void onGridClicked(const Position &value);
 

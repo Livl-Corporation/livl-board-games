@@ -9,10 +9,13 @@
 
 class GameObserver {
 public:
-    //virtual void update(const T &value) = 0; // Will disappear
     virtual void updateError(const std::string &message) = 0;
-    virtual void updateRound(Round round) = 0;
     virtual void updateMessage(const std::string &message) = 0;
+
+    virtual void updateGameName(const std::string &gameName) = 0;
+    virtual void updateRound(Round round, const std::shared_ptr<Player> &player) = 0;
+    virtual void updateGrid(const Grid<Token> &grid) = 0;
+    virtual void updatePlayers(const std::vector<std::shared_ptr<Player>> &players) = 0;
 };
 
 #endif //LIVL_GAMEOBSERVER_H

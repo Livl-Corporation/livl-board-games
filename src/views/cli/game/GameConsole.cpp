@@ -3,41 +3,26 @@
 //
 
 #include "GameConsole.h"
-#include <QDebug>
 
-
-void GameConsole::printGameInfos(const std::string &gameName, const std::vector<std::shared_ptr<Player>> &players) const {
-    ConsoleHandler::printTitle(gameName);
-    ConsoleHandler::printLine("Players :");
-    for (const auto &player : players) {
-        ConsoleHandler::printLine(" - " + player->getName() + " (" + std::to_string(player->getId()) + ")");
-    }
+void GameConsole::show() {
+    ConsoleHandler::printLine("Welcome !");
 }
 
-void GameConsole::printNextRound(const Player &player, unsigned int round) const {
+void GameConsole::updateError(const std::string &message) {
+    ConsoleHandler::printLine(message);
+}
+
+void GameConsole::updateMessage(const std::string &message) {
+    ConsoleHandler::printLine(message);
+}
+
+void GameConsole::updateRound(Round round, const std::shared_ptr<Player> &player) {
     ConsoleHandler::printLine("");
     ConsoleHandler::printHeader("Round N° " + std::to_string(round));
-    ConsoleHandler::printLine("Player's turn : " + player.getName() + " (" + std::to_string(player.getId()) + ")");
+    ConsoleHandler::printLine("Player's turn : " + player->getName() + " (" + std::to_string(player->getId()) + ")");
 }
 
-void GameConsole::printInfo(const std::string &message) const {
-    ConsoleHandler::printLine(message);
-}
-
-void GameConsole::printError(const std::string &message) const {
-    ConsoleHandler::printLine(message);
-}
-
-void GameConsole::printWinner(const PlayerId &playerId) const {
-    //ConsoleHandler::printTitle("Player's victory " + std::to_string(playerId
-    //) + " (" + Player::getPlayerChar(playerId) + ")");
-}
-
-void GameConsole::printDraw() const {
-    ConsoleHandler::printTitle(std::string("Tie Game"));
-}
-
-void GameConsole::printGrid(const Grid<Token> &grid) const {
+void GameConsole::updateGrid(const Grid<Token> &grid) {
     ConsoleHandler::print("\n   ");
     for (int col = 0; col < grid.getXSize(); col++)
     {
@@ -92,30 +77,15 @@ void GameConsole::printGrid(const Grid<Token> &grid) const {
     ConsoleHandler::printLine("┘");
 }
 
-void GameConsole::printComputerPlay() const {
-    ConsoleHandler::printLine("Computer is playing...");
+void GameConsole::updatePlayers(const std::vector<std::shared_ptr<Player>> &players) {
+    ConsoleHandler::printLine("Players :");
+    for (const auto &player : players) {
+        ConsoleHandler::printLine(" - " + player->getName() + " (" + std::to_string(player->getId()) + ")");
+    }
 }
 
-void GameConsole::show() {
-    ConsoleHandler::printLine("Welcome !");
-}
-
-//void GameConsole::update(const Game &value) {
-//    printGameInfos(value.getName(), value.getPlayers());
-//    printGrid(*value.getGrid());
-//    printNextRound(*value.getCurrentPlayer(), value.getRound());
-//}
-
-void GameConsole::updateError(const std::string &message) {
-    ConsoleHandler::printLine(message);
-}
-
-void GameConsole::updateMessage(const std::string &message) {
-    ConsoleHandler::printLine(message);
-}
-
-void GameConsole::updateRound(Round round) {
-    ConsoleHandler::printLine("Round : " + std::to_string(round));
+void GameConsole::updateGameName(const std::string &gameName) {
+    ConsoleHandler::printTitle(gameName);
 }
 
 

@@ -18,10 +18,13 @@ public:
     virtual void show() = 0;
 
     // As an observer, the view is notified when the game is updated
-    //void update(const Game &value) override = 0;
     void updateError(const std::string &message) override = 0;
     void updateMessage(const std::string &message) override = 0;
-    void updateRound(Round round) override = 0;
+
+    void updateGameName(const std::string &gameName) override = 0;
+    void updateRound(Round round, const std::shared_ptr<Player> &player) override = 0;
+    void updateGrid(const Grid<Token> &grid) override = 0;
+    void updatePlayers(const std::vector<std::shared_ptr<Player>> &players) override = 0;
 
 protected:
     std::shared_ptr<GameInteraction> controller;
