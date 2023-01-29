@@ -5,13 +5,10 @@
 #include "MenuController.h"
 
 void MenuController::onGameChoose(GameMode gameSelection, PlayMode playerSelection, const std::shared_ptr<GameView>& gameView) {
+    // View instanced in MenuView & passed in parameters as gameView
 
-    // View instanciated in menuview & passed in parameters as gameView
-
-    // Instanciate game
     auto game = createGame(gameSelection, playerSelection);
 
-    // Instanciate controller
     GameController gameController(game);
 
     // View observes game model
@@ -25,6 +22,14 @@ void MenuController::onGameChoose(GameMode gameSelection, PlayMode playerSelecti
     gameController.start();
 }
 
-std::shared_ptr<Game> MenuController::createGame(GameMode gameId, PlayMode playerSelection) {
-    return std::make_shared<TicTacToe>(playerSelection);
+std::shared_ptr<Game> MenuController::createGame(GameMode gameMode, PlayMode playerSelection) {
+    switch (gameMode) {
+        case GameMode::TICTACTOE:
+            return std::make_shared<TicTacToe>(playerSelection);
+        case GameMode::CONNECT4:
+            return std::make_shared<ConnectFour>(playerSelection);
+        default:
+            return nullptr;
+    }
+
 }

@@ -15,6 +15,7 @@
 #include "models/enums/GameMode.h"
 #include "models/games/ticTacToe/TicTacToe.h"
 #include "views/gui/windows/game/GameWindow.h"
+#include "models/games/connectFour/ConnectFour.h"
 
 class MenuController {
 
@@ -24,7 +25,7 @@ public:
     void onGameChoose(GameMode gameSelection, PlayMode playerSelection, const std::shared_ptr<GameView>& gameView);
 
 protected:
-    static std::shared_ptr<Game> createGame(GameMode gameId, PlayMode playerSelection);
+    static std::shared_ptr<Game> createGame(GameMode gameMode, PlayMode playerSelection);
 
 };
 

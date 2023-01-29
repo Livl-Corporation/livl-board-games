@@ -96,6 +96,11 @@ void GameConsole::updateAskForPosition(const std::string &message, unsigned int 
     int y = values[0];
     int x = values[1];
 
+    if(numberOfValues == 1)
+    {
+        x = y;
+    }
+
     controller->onPositionSelected({(x - 1), (y - 1)});
 }
 

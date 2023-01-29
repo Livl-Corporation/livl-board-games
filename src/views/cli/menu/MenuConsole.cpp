@@ -18,7 +18,7 @@ void MenuConsole::displayGameList(const std::vector<std::string> &gameList) {
     ConsoleHandler::printLine("Enter any other number to exit.\n");
     ConsoleHandler::print("Choice : n°");
 
-    gameSelection = static_cast<GameMode>(ConsoleHandler::readInt());
+    playerSelection = static_cast<PlayMode>(ConsoleHandler::readInt());
 }
 
 void MenuConsole::displayPlayerList(const std::vector<std::string> &playerList) {
@@ -31,7 +31,7 @@ void MenuConsole::displayPlayerList(const std::vector<std::string> &playerList) 
     ConsoleHandler::printLine("Enter any other number to exit.\n");
     ConsoleHandler::print("Choice : n°");
 
-    playerSelection = static_cast<PlayMode>(ConsoleHandler::readInt());
+    gameSelection = static_cast<GameMode>(ConsoleHandler::readInt());
 }
 
 void MenuConsole::show() {

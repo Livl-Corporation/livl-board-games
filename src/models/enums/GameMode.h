@@ -6,10 +6,10 @@
 #define LIVL_GAMEMODE_H
 
 enum GameMode {
-    TICTACTOE,
-    CONNECT4,
-    OTHELLO,
-    CHECKERS
+    TICTACTOE = 1,
+    CONNECT4 = 2,
+    OTHELLO = 3,
+    CHECKERS = 4,
 };
 
 #endif //LIVL_GAMEMODE_H
