@@ -7,6 +7,7 @@
 
 
 #include "models/interfaces/Player.h"
+#include "models/evaluators/OthelloGameEvaluator.h"
 
 class OthelloComputerPlayer : public Player {
 
