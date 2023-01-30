@@ -7,7 +7,7 @@
 void ConnectFourComputerPlayer::play(const std::shared_ptr<Grid<Token>> &grid) {
     int col, row = 0;
 
-    col = Shared::randomInt(0, static_cast<int>(grid->getXSize() - 1));
+    col = Shared::randomInt(0, static_cast<int>(grid->getColCount() - 1));
 
     try
     {
@@ -17,5 +17,5 @@ void ConnectFourComputerPlayer::play(const std::shared_ptr<Grid<Token>> &grid) {
     {
     }
 
-    this->onPositionSelected({col, row});
+    this->onPositionSelected({row, col});
 }

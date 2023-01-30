@@ -7,8 +7,8 @@
 
 struct Position
 {
-    int x;
-    int y;
+    int row;
+    int col;
 };
 
 #endif //LIVL_POSITION_H

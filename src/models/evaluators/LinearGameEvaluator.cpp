@@ -44,7 +44,7 @@ bool LinearGameEvaluator::hasPlayerWon(const Grid<Token> &grid, const PlayerId &
 
 void LinearGameEvaluator::checkRows(const Grid<Token> &grid, const PlayerId &id, unsigned int &maxConsecutive) const
 {
-    for (int row = 0; row < grid.getYSize(); row++)
+    for (int row = 0; row < grid.getRowCount(); row++)
     {
         checkMaxConsecutive(grid, id, row, 0, 0, 1, maxConsecutive);
     }
@@ -52,7 +52,7 @@ void LinearGameEvaluator::checkRows(const Grid<Token> &grid, const PlayerId &id,
 
 void LinearGameEvaluator::checkColumns(const Grid<Token> &grid, const PlayerId &id, unsigned int &maxConsecutive) const
 {
-    for (int col = 0; col < grid.getXSize(); col++)
+    for (int col = 0; col < grid.getColCount(); col++)
     {
         checkMaxConsecutive(grid, id, 0, col, 1, 0, maxConsecutive);
     }
@@ -60,22 +60,22 @@ void LinearGameEvaluator::checkColumns(const Grid<Token> &grid, const PlayerId &
 
 void LinearGameEvaluator::checkDiagonals(const Grid<Token> &grid, const PlayerId &id, unsigned int &maxConsecutive) const
 {
-    unsigned int maxCol = grid.getXSize() - grid.getYSize();
+    unsigned int maxCol = grid.getColCount() - grid.getRowCount();
     for (int startCol = 0; startCol <= maxCol; startCol++)
     {
         checkMaxConsecutive(grid, id, 0, startCol, 1, 1, maxConsecutive);
         checkMaxConsecutive(grid, id, 0, startCol, 1, -1, maxConsecutive);
-        checkMaxConsecutive(grid, id, grid.getYSize() - 1, startCol, -1, 1, maxConsecutive);
-        checkMaxConsecutive(grid, id, grid.getYSize() - 1, startCol, -1, -1, maxConsecutive);
+        checkMaxConsecutive(grid, id, grid.getRowCount() - 1, startCol, -1, 1, maxConsecutive);
+        checkMaxConsecutive(grid, id, grid.getRowCount() - 1, startCol, -1, -1, maxConsecutive);
     }
 }
 
 void LinearGameEvaluator::checkMaxConsecutive(const Grid<Token> &grid, const PlayerId &id, int startRow, int startCol, int rowStep, int colStep, unsigned int &maxConsecutive) const
 {
     unsigned int curMaxConsecutive = 0;
-    for (int row = startRow, col = startCol; row < grid.getYSize() && col < grid.getXSize() && row >= 0 && col >= 0; row += rowStep, col += colStep)
+    for (int row = startRow, col = startCol; row < grid.getRowCount() && col < grid.getColCount() && row >= 0 && col >= 0; row += rowStep, col += colStep)
     {
-        if (grid.getElementAt({col, row}).getPlayerId() == id)
+        if (grid.getElementAt({row, col}).getPlayerId() == id)
         {
             curMaxConsecutive++;
         }

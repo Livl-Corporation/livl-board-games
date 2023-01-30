@@ -2,7 +2,7 @@
 // Created by Julien on 29/01/2023.
 //
 
-#include <iostream>
+#include <QDebug>
 #include "ConnectFour.h"
 
 ConnectFour::ConnectFour(PlayMode playMode)
@@ -29,24 +29,18 @@ ConnectFour::ConnectFour(PlayMode playMode)
     this->setGrid(std::make_shared<Grid<Token>>(grid1));
 }
 
-
-void ConnectFour::nextRound() {
-    nextRound();
-    Game::notifyAskForPosition();
-}
-
 void ConnectFour::onPositionSelected(Position position) {
     Token token(this->getCurrentPlayer()->getId());
 
     try {
+
         // Check if the column is valid
-        if (position.x < 0 || position.x > this->getGrid()->getXSize())
+        if (position.col < 0 || position.col > this->getGrid()->getColCount())
         {
             throw OutOfBoundsException();
         }
 
-        position.y = firstRowAvailableInCol(this->getGrid(), position.y);
-        std::cout << "Position x: " << position.x << "Position y " << position.y << std::endl;
+        position.row = firstRowAvailableInCol(this->getGrid(), position.col);
         this->getGrid()->place(position, token);
 
         Game::notifyGrid();
@@ -72,21 +66,23 @@ void ConnectFour::onPositionSelected(Position position) {
 
 int ConnectFour::firstRowAvailableInCol(const std::shared_ptr<Grid<Token>> &grid, int col)
 {
-    Position position{col, static_cast<int>((grid->getYSize()-1))};
+    Position position{col, static_cast<int>((grid->getRowCount() - 1))};
 
     while (!grid->isPositionEmpty(position))
     {
 
-        if (position.y == 0)
+        if (position.row == 0)
         {
             // If there is no row available in this col, throw an exception & exit function
             throw ColumnFullException();
         }
         else
         {
-            position.y--;
+            position.row--;
         }
     }
 
-    return position.y;
+    qDebug() << "firstRowAvailableInCol" << position.col << position.row;
+
+    return position.row;
 }

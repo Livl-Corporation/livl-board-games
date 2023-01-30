@@ -8,7 +8,7 @@ T Grid<T>::getElementAt(const Position &position) const
         throw OutOfBoundsException();
     }
 
-    return this->grid.at(position.y).at(position.x);
+    return this->grid.at(position.row).at(position.col);
 }
 
 template <typename T>
@@ -21,13 +21,13 @@ bool Grid<T>::isPositionEmpty(const Position &position) const
 template <typename T>
 bool Grid<T>::isPositionInBounds(const Position &position) const
 {
-    return (position.x >= 0 && position.x < this->xSize) && (position.y >= 0 && position.y < this->ySize);
+    return (position.col >= 0 && position.col < this->colCount) && (position.row >= 0 && position.row < this->rowCount);
 }
 
 template <typename T>
 bool Grid<T>::isPositionOnBorder(const Position &position) const
 {
-    return (position.x == 0 || position.x == this->xSize - 1) || (position.y == 0 || position.y == this->ySize - 1);
+    return (position.col == 0 || position.col == this->colCount - 1) || (position.row == 0 || position.row == this->rowCount - 1);
 }
 
 template <typename T>
@@ -49,7 +49,7 @@ void Grid<T>::place(const Position &position, const T &element)
         throw OccupiedPositionException();
     }
 
-    this->grid[position.y][position.x] = element;
+    this->grid[position.row][position.col] = element;
 
 }
 
@@ -61,7 +61,7 @@ bool Grid<T>::replaceAt(const Position &position, const T &element)
         throw OutOfBoundsException();
     }
 
-    this->grid[position.y][position.x] = element;
+    this->grid[position.row][position.col] = element;
 
     return true;
 }
@@ -71,11 +71,11 @@ std::vector<Position> Grid<T>::getEmptyPositions() const
 {
     std::vector<Position> freePositions;
 
-    for (int row = 0; row < this->ySize; row++)
+    for (int row = 0; row < this->rowCount; row++)
     {
-        for (int col = 0; col < this->xSize; col++)
+        for (int col = 0; col < this->colCount; col++)
         {
-            Position position = {.x =  col, .y =  row};
+            Position position = {row, col};
             if (this->isPositionEmpty(position))
             {
                 freePositions.push_back(position);
