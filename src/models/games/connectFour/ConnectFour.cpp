@@ -30,7 +30,6 @@ ConnectFour::ConnectFour(PlayMode playMode)
 }
 
 void ConnectFour::onPositionSelected(Position position) {
-    Token token(this->getCurrentPlayer()->getId());
 
     try {
 
@@ -42,22 +41,8 @@ void ConnectFour::onPositionSelected(Position position) {
 
         int row = firstRowAvailableInCol(this->getGrid(), position.col);
         qDebug() << "ConnectFour::onPositionSelected() with position row : " << position.row << " , col : " << position.col << "\n";
-        this->getGrid()->place({row, position.col}, token);
 
-        Game::notifyGrid();
-
-        if (this->getEvaluator()->hasGameEnded(*getGrid(), getPlayerId(getRound()+1))) {
-
-            PlayerId winner = this->getEvaluator()->getWinner(*getGrid());
-            if (winner == 0) {
-                Game::notifyGameEnd("Draw");
-            } else {
-                Game::notifyGameEnd("Player " + std::to_string(winner) + " wins");
-            }
-
-        } else {
-            nextRound();
-        }
+        Game::onPositionSelected({row, position.col});
 
     } catch (std::exception &e) {
         Game::notifyError(e.what());

@@ -3,17 +3,11 @@
 //
 
 #include "Othello.h"
-#include "models/games/othello/players/OthelloHumanPlayer.h"
-#include "models/games/othello/players/OthelloComputerPlayer.h"
-#include "models/exceptions/UnimplementedPlayMode.h"
-
-void Othello::onPositionSelected(Position position) {
-
-}
+#include "models/Grid.cpp"
 
 Othello::Othello(PlayMode playMode) : Game("Othello", GameMode::OTHELLO, 2, "Place your token next to an opponent token to flip it.") {
 
-    //Game::setEvaluator() TODO: Implement OthelloGameEvaluator
+    Game::setEvaluator(std::make_shared<OthelloGameEvaluator>());
 
     std::function<void(Position)> callback = [this](auto && PH1) { onPositionSelected(std::forward<decltype(PH1)>(PH1)); };
     OthelloHumanPlayer p1(1, "Player 1", callback);
@@ -47,4 +41,40 @@ Grid<Token> Othello::initGrid() {
     grid1.place({4, 3}, blackToken);
 
     return grid1;
+}
+
+
+void Othello::onPositionSelected(Position position) {
+
+    if (OthelloGameEvaluator::canPlaceToken(position, getCurrentPlayer()->getId(), *getGrid())) {
+        Game::onPositionSelected(position);
+    } else {
+        Game::notifyError("This position doesn't let you flip any token.");
+        Game::notifyAskForPosition();
+    }
+
+}
+
+void Othello::afterPlacementAction(const PlayerId &playerId, const Position &position) {
+    // Check the eight possible directions from the position that the player choose to place their token
+    // (left-up, up, right-up, right, right-down, down, left-down, left)
+    static const std::vector<Position> directions{
+            {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
+
+    for (auto direction : directions)
+    {
+        // Check if there are any opponent's tokens that can be flipped in this direction
+        std::vector<Position> piecesToFlip = OthelloGameEvaluator::getFlippablePieces(position, playerId, direction, *getGrid());
+        if (piecesToFlip.empty())
+        {
+            continue;
+        }
+
+        // Flip the opponent's tokens in this direction
+        for (const Position &p : piecesToFlip)
+        {
+            Token token{playerId};
+            getGrid()->replaceAt(p, token);
+        }
+    }
 }

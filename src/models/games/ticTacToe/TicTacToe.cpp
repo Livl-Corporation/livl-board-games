@@ -28,30 +28,3 @@ TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE,
     Grid<Token> grid1(rowCount, colCount,emptyToken);
     this->setGrid(std::make_shared<Grid<Token>>(grid1));
 }
-
-void TicTacToe::onPositionSelected(Position position) {
-    Token token(this->getCurrentPlayer()->getId());
-
-    try {
-        this->getGrid()->place(position, token);
-        Game::notifyGrid();
-
-        if (this->getEvaluator()->hasGameEnded(*getGrid(), getPlayerId(getRound()+1))) {
-
-            PlayerId winner = this->getEvaluator()->getWinner(*getGrid());
-            if (winner == 0) {
-                Game::notifyGameEnd("Draw");
-            } else {
-                Game::notifyGameEnd("Player " + std::to_string(winner) + " wins");
-            }
-
-        } else {
-            nextRound();
-        }
-
-    } catch (std::exception &e) {
-        Game::notifyError(e.what());
-        Game::notifyAskForPosition();
-    }
-
-}

@@ -64,7 +64,8 @@ protected:
     void addPlayer(const std::shared_ptr<Player> &player);
     void setGrid(std::shared_ptr<Grid<Token>> grid);
 
-    virtual void onPositionSelected(Position position) = 0;
+    virtual void onPositionSelected(Position position);
+    virtual void afterPlacementAction(const PlayerId &playerId, const Position &position){};
 
 private:
     std::vector<std::shared_ptr<Player>> players;

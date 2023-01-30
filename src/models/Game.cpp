@@ -96,3 +96,31 @@ void Game::nextRound() {
 
     this->notifyAskForPosition();
 }
+
+void Game::onPositionSelected(Position position) {
+    Token token(this->getCurrentPlayer()->getId());
+
+    try {
+        this->getGrid()->place(position, token);
+
+        if (this->getEvaluator()->hasGameEnded(*getGrid(), getPlayerId(getRound()+1))) {
+
+            PlayerId winner = this->getEvaluator()->getWinner(*getGrid());
+            if (winner == 0) {
+                Game::notifyGameEnd("Draw");
+            } else {
+                Game::notifyGameEnd("Player " + std::to_string(winner) + " wins");
+            }
+
+        } else {
+            afterPlacementAction(getCurrentPlayer()->getId(), position);
+            nextRound();
+        }
+
+        Game::notifyGrid();
+
+    } catch (std::exception &e) {
+        Game::notifyError(e.what());
+        Game::notifyAskForPosition();
+    }
+}

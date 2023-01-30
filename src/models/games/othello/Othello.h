@@ -8,6 +8,10 @@
 
 #include "models/Game.h"
 #include "models/enums/PlayMode.h"
+#include "models/games/othello/players/OthelloHumanPlayer.h"
+#include "models/games/othello/players/OthelloComputerPlayer.h"
+#include "models/exceptions/UnimplementedPlayMode.h"
+#include "models/evaluators/OthelloGameEvaluator.h"
 
 class Othello : public Game {
 
@@ -16,6 +20,7 @@ public:
 
 protected:
     void onPositionSelected(Position position) override;
+    void afterPlacementAction(const PlayerId &playerId, const Position &position) override;
 
 private:
 
@@ -25,6 +30,5 @@ private:
     static constexpr GridSize rowCount = 8;
 
 };
-
 
 #endif //LIVL_OTHELLO_H
