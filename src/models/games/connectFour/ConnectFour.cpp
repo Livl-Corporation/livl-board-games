@@ -31,7 +31,7 @@ ConnectFour::ConnectFour(PlayMode playMode)
 
 
 void ConnectFour::nextRound() {
-    incrementRound();
+    nextRound();
     Game::notifyAskForPosition();
 }
 

@@ -70,6 +70,7 @@ void Game::notifyGameName() {
 }
 
 void Game::notifyAskForPosition(const std::string &message) {
+    this->getCurrentPlayer()->play(getGrid());
     if (this->observer != nullptr) {
         this->observer->updateAskForPosition(message, getNumberOfInputValues());
     } else {
@@ -87,4 +88,11 @@ void Game::notifyGameEnd(const std::string &message) {
     } else {
         qDebug() << "No observer attached to the game";
     }
+}
+
+void Game::nextRound() {
+    this->round++;
+    notifyRound();
+
+    this->notifyAskForPosition();
 }

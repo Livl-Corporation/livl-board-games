@@ -55,8 +55,3 @@ void TicTacToe::onPositionSelected(Position position) {
     }
 
 }
-
-void TicTacToe::nextRound() {
-    incrementRound();
-    Game::notifyAskForPosition();
-}
