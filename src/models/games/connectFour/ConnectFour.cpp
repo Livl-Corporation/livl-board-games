@@ -40,8 +40,9 @@ void ConnectFour::onPositionSelected(Position position) {
             throw OutOfBoundsException();
         }
 
-        position.row = firstRowAvailableInCol(this->getGrid(), position.col);
-        this->getGrid()->place(position, token);
+        int row = firstRowAvailableInCol(this->getGrid(), position.col);
+        qDebug() << "ConnectFour::onPositionSelected() with position row : " << position.row << " , col : " << position.col << "\n";
+        this->getGrid()->place({row, position.col}, token);
 
         Game::notifyGrid();
 
@@ -66,23 +67,13 @@ void ConnectFour::onPositionSelected(Position position) {
 
 int ConnectFour::firstRowAvailableInCol(const std::shared_ptr<Grid<Token>> &grid, int col)
 {
-    Position position{col, static_cast<int>((grid->getRowCount() - 1))};
-
-    while (!grid->isPositionEmpty(position))
+    // Get the first available row in given colomn
+    for (int row = grid->getRowCount()-1; row >= 0; row--)
     {
-
-        if (position.row == 0)
+        if (grid->isPositionEmpty({row, col}))
         {
-            // If there is no row available in this col, throw an exception & exit function
-            throw ColumnFullException();
-        }
-        else
-        {
-            position.row--;
+            qDebug() << "ConnectFour::firstRowAvailableInCol() with position row : " << row << " , col : " << col << "\n";
+            return row;
         }
     }
-
-    qDebug() << "firstRowAvailableInCol" << position.col << position.row;
-
-    return position.row;
 }
