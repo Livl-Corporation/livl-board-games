@@ -21,9 +21,9 @@ GridComponent::~GridComponent() {
 void GridComponent::createGrid(const Grid<Token> &grid) {
 
     gridLayout = new QGridLayout(this);
-
+    gridLayout->setAlignment(Qt::AlignCenter);
+    gridLayout->setSpacing(0);
      // Display the game board
-     QString styleSheet = "QPushButton { background-color: white; border: none; color: black; font: bold 14px; } QPushButton:hover { background-color: #6699CC; } QPushButton:pressed { background-color: #003366; }";
      for (int row = 0; row < grid.getRowCount(); row++)
      {
          for (int col = 0; col < grid.getColCount(); col++)
@@ -37,7 +37,6 @@ void GridComponent::createGrid(const Grid<Token> &grid) {
                         qDebug() << "No callback for position selected";
                     }
              });
-             button->setStyleSheet(styleSheet);
              button->setFixedSize(50, 50);
              gridLayout->addWidget(button, row, col, 1, 1);
          }
@@ -55,8 +54,13 @@ void GridComponent::updateGrid(const Grid<Token> &grid) {
         for (int col = 0; col < grid.getColCount(); col++)
         {
             auto *button = (QPushButton*) this->gridLayout->itemAtPosition(row, col)->widget();
-            QString playerString(QChar(grid.getElementAt({row, col}).getDisplayChar()));
+            Token token = grid.getElementAt({row, col});
+            QString playerString(QChar(token.getDisplayChar()));
             button->setText(playerString);
+
+            // set the color of the button
+            std::string color = token.getDisplayColor();
+            button->setStyleSheet("QPushButton { background-color: " + QString::fromStdString(color) + "; border: 1px solid #777; color: " + (color == "black" ? "white" : "black") + "; font: bold 14px; } QPushButton:hover { background-color: #6699CC; } QPushButton:pressed { background-color: #003366; }");
         }
     }
 }
