@@ -23,7 +23,7 @@ public:
     [[nodiscard]] std::string getName() const { return this->name; };
 
     // On round start, start thuiking about playign ...... to meditate ...
-    virtual void play(const std::shared_ptr<Grid<Token>> &grid) = 0;
+    virtual void play(const std::shared_ptr<Grid<Token>> &grid) {};
 
     // Event when a position was selected
     void onPositionSelected (Position position) {

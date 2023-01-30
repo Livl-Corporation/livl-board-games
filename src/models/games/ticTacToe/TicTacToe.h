@@ -19,8 +19,8 @@ public:
 protected:
     void onPositionSelected(Position position) override;
 private:
-    static constexpr GridSize xSize = 3;
-    static constexpr GridSize ySize = 3;
+    static constexpr GridSize colCount = 3;
+    static constexpr GridSize rowCount = 3;
 };
 
 

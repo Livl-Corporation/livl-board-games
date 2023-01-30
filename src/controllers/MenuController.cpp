@@ -3,6 +3,7 @@
 //
 
 #include "MenuController.h"
+#include "models/games/othello/Othello.h"
 
 void MenuController::onGameChoose(GameMode gameSelection, PlayMode playerSelection, const std::shared_ptr<GameView>& gameView) {
     // View instanced in MenuView & passed in parameters as gameView
@@ -28,6 +29,8 @@ std::shared_ptr<Game> MenuController::createGame(GameMode gameMode, PlayMode pla
             return std::make_shared<TicTacToe>(playerSelection);
         case GameMode::CONNECT4:
             return std::make_shared<ConnectFour>(playerSelection);
+            case GameMode::OTHELLO:
+            return std::make_shared<Othello>(playerSelection);
         default:
             return nullptr;
     }

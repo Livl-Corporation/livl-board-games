@@ -25,7 +25,7 @@ ConnectFour::ConnectFour(PlayMode playMode)
     }
 
     Token emptyToken{};
-    Grid<Token> grid1(xSize, ySize, emptyToken);
+    Grid<Token> grid1(rowCount, colCount, emptyToken);
     this->setGrid(std::make_shared<Grid<Token>>(grid1));
 }
 
@@ -76,4 +76,5 @@ int ConnectFour::firstRowAvailableInCol(const std::shared_ptr<Grid<Token>> &grid
             return row;
         }
     }
+    return 0;
 }

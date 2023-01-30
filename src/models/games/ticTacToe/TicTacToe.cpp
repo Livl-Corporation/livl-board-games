@@ -25,7 +25,7 @@ TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE,
     }
 
     Token emptyToken{};
-    Grid<Token> grid1(xSize, ySize, emptyToken);
+    Grid<Token> grid1(rowCount, colCount,emptyToken);
     this->setGrid(std::make_shared<Grid<Token>>(grid1));
 }
 

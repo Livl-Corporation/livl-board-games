@@ -44,6 +44,8 @@ void GridComponent::createGrid(const Grid<Token> &grid) {
 
      }
 
+     this->updateGrid(grid);
+
      setLayout(gridLayout);
 }
 

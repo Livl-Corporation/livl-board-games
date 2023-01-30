@@ -13,7 +13,7 @@ class Grid {
 
 public:
 
-    Grid(GridSize cols, GridSize rows, T &defaultValue)
+    Grid(GridSize rows, GridSize cols, T &defaultValue)
     : colCount(cols), rowCount(rows), grid(rows, std::vector<T>(cols, defaultValue)) {
         this->defaultValue = defaultValue;
     }

@@ -11,7 +11,6 @@
 class TicTacToeHumanPlayer : public Player {
 public :
     TicTacToeHumanPlayer(PlayerId id, std::string name, std::function<void(Position)> &_callback) : Player(id, std::move(name), _callback) {};
-    void play(const std::shared_ptr<Grid<Token>> &grid) override;
     bool canInteract() override { return true; };
 };
 

@@ -41,13 +41,12 @@ add_executable(Livl
         src/models/enums/GameMode.h
         src/models/games/ticTacToe/TicTacToe.cpp
         src/models/games/ticTacToe/TicTacToe.h
-        src/models/games/ticTacToe/players/TicTacToeHumanPlayer.cpp
         src/models/games/ticTacToe/players/TicTacToeHumanPlayer.h
         src/models/games/ticTacToe/players/TicTacToeComputerPlayer.cpp
         src/models/games/ticTacToe/players/TicTacToeComputerPlayer.h
         src/models/exceptions/UnimplementedPlayMode.h
         src/views/cli/menu/MenuConsole.h
-        src/views/cli/menu/MenuConsole.cpp src/views/interfaces/MenuInteraction.h src/views/cli/game/GameConsole.cpp src/views/cli/game/GameConsole.h src/views/cli/game/GameConsole.h src/views/interfaces/GameView.h src/models/interfaces/GameObservable.h src/models/interfaces/GameObservable.h src/models/interfaces/GameObserver.h src/views/interfaces/GameInteraction.h src/views/interfaces/GameInteraction.h src/shared/Shared.cpp src/models/PlayerId.h src/models/Round.h src/models/Token.cpp src/models/Token.cpp src/models/interfaces/GameEvaluator.h src/models/evaluators/LinearGameEvaluator.cpp src/models/evaluators/LinearGameEvaluator.h src/models/games/connectFour/ConnectFour.cpp src/models/games/connectFour/ConnectFour.h src/models/games/connectFour/players/ConnectFourComputerPlayer.cpp src/models/games/connectFour/players/ConnectFourComputerPlayer.h src/models/games/connectFour/players/ConnectFourHumanPlayer.cpp src/models/games/connectFour/players/ConnectFourHumanPlayer.h)
+        src/views/cli/menu/MenuConsole.cpp src/views/interfaces/MenuInteraction.h src/views/cli/game/GameConsole.cpp src/views/cli/game/GameConsole.h src/views/cli/game/GameConsole.h src/views/interfaces/GameView.h src/models/interfaces/GameObservable.h src/models/interfaces/GameObservable.h src/models/interfaces/GameObserver.h src/views/interfaces/GameInteraction.h src/views/interfaces/GameInteraction.h src/shared/Shared.cpp src/models/PlayerId.h src/models/Round.h src/models/Token.cpp src/models/Token.cpp src/models/interfaces/GameEvaluator.h src/models/evaluators/LinearGameEvaluator.cpp src/models/evaluators/LinearGameEvaluator.h src/models/games/connectFour/ConnectFour.cpp src/models/games/connectFour/ConnectFour.h src/models/games/connectFour/players/ConnectFourComputerPlayer.cpp src/models/games/connectFour/players/ConnectFourComputerPlayer.h src/models/games/connectFour/players/ConnectFourHumanPlayer.h src/models/games/othello/Othello.cpp src/models/games/othello/Othello.h src/models/games/othello/players/OthelloComputerPlayer.cpp src/models/games/othello/players/OthelloComputerPlayer.h src/models/games/othello/players/OthelloHumanPlayer.h)
 
 target_link_libraries(Livl
         Qt::Core
