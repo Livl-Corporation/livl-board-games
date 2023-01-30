@@ -103,7 +103,7 @@ void Game::onPositionSelected(Position position) {
     try {
         this->getGrid()->place(position, token);
 
-        if (this->getEvaluator()->hasGameEnded(*getGrid(), getPlayerId(getRound()+1))) {
+        if (this->getEvaluator()->hasGameEnded(*getGrid(), getPlayerId(getRound()-1)+1)) {
 
             PlayerId winner = this->getEvaluator()->getWinner(*getGrid());
             if (winner == 0) {
