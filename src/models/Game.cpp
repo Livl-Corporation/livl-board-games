@@ -111,6 +111,9 @@ void Game::onPositionSelected(const Position &position) {
 }
 
 void Game::roundEnd() {
+
+    Game::notifyGrid();
+
     if (this->getEvaluator()->hasGameEnded(*getGrid(), getPlayerId(getRound()-1)+1)) {
 
         PlayerId winner = this->getEvaluator()->getWinner(*getGrid());
@@ -124,7 +127,6 @@ void Game::roundEnd() {
         nextRound();
     }
 
-    Game::notifyGrid();
 }
 
 void Game::serialize(std::ostream &stream) {

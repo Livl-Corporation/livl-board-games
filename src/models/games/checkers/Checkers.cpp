@@ -97,9 +97,9 @@ void Checkers::performMove(const Position &position) {
     try {
 
         // Check if validPosition contains position
-//        if (std::find(validMoves.begin(), validMoves.end(), position) == validMoves.end()) {
-//            throw std::invalid_argument("You must select a valid destination position.");
-//        }
+        if (!isPositionValid(position)) {
+            throw std::invalid_argument("You must select a valid destination position.");
+        }
 
         // Move is valid, we move the token
         moveOriginToPosition(position);
@@ -108,7 +108,7 @@ void Checkers::performMove(const Position &position) {
         afterPlacementAction(getCurrentPlayer()->getId(), position);
 
         // Change player turn
-        roundEnd();
+        Game::roundEnd();
 
     } catch (std::exception &e) {
         Game::notifyError("You must select a valid destination position.");
@@ -134,6 +134,17 @@ void Checkers::afterPlacementAction(const PlayerId &playerId, const Position &po
 
     // Reset origin position
     originPosition.reset();
+}
+
+bool Checkers::isPositionValid(const Position &position) const {
+    bool found = false;
+    for (auto &validPosition : validMoves) {
+        if (validPosition.col == position.col && validPosition.row == position.row) {
+            found = true;
+            break;
+        }
+    }
+    return found;
 }
 
 

@@ -22,6 +22,7 @@ public:
     static unsigned int getDialognalDistance(const Position &from, const Position &to);
 
     static std::vector<Position> getValidTokenMoves(const Grid<Token> &grid, Position position);
+
 };
 
 

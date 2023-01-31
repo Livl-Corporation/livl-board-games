@@ -37,6 +37,8 @@ private:
     std::optional<Position> originPosition;
     std::vector<Position> validMoves;
 
+    bool isPositionValid(const Position &position) const;
+
     static constexpr GridSize colCount = 8;
     static constexpr GridSize rowCount = 8;
 };
