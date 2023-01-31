@@ -92,6 +92,7 @@ void Game::notifyGameEnd(const std::string &message) {
 
 void Game::nextRound() {
     incrementRound();
+    saveGame();
     notifyRound();
 
     this->notifyAskForPosition();
@@ -108,6 +109,15 @@ void Game::onPositionSelected(const Position &position) {
         Game::notifyError(e.what());
         Game::notifyAskForPosition();
     }
+}
+
+void Game::saveGame() {
+    std::ofstream stream;
+    stream.open("save.livl");
+
+    this->serialize(stream);
+
+    stream.close();
 }
 
 void Game::roundEnd() {

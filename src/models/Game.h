@@ -8,6 +8,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <fstream>
 #include <memory>
 #include "models/interfaces/Player.h"
 #include "Token.h"
@@ -73,6 +74,8 @@ protected:
     void addPlayer(const std::shared_ptr<Player> &player);
     void setGrid(std::shared_ptr<Grid<Token>> grid);
     void incrementRound() { this->round++; }
+
+    void saveGame();
 
     virtual void onPositionSelected(const Position &position);
     virtual void afterPlacementAction(const PlayerId &playerId, const Position &position){};
