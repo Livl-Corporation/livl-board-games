@@ -23,6 +23,7 @@
 class Checkers : public Game {
 public:
     explicit Checkers(PlayMode playMode);
+    explicit Checkers(std::istream &stream);
     void nextRound() override;
 
 protected:
@@ -35,7 +36,12 @@ private:
     void performMove(const Position &position);
     void moveOriginToPosition(const Position &position);
     void captureEnemyToken(const Position &capturableEnemyPos);
-    bool isPositionValid(const Position &position) const;
+
+protected:
+    void initPlayers() override;
+    void initPlayers(std::istream &stream) override;
+private:
+    [[nodiscard]] bool isPositionValid(const Position &position) const;
     bool forceCaptureIfPossible();
     bool forceCaptureIfPossible(const Position &position);
     bool shouldBecomeKing(const Position &position);

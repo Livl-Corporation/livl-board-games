@@ -25,6 +25,8 @@ public:
     Token(const PlayerId playerId, const TokenType _type) : playerId(playerId), type(_type) {
         qDebug() << "Token created";
     }
+    explicit Token(std::istream &stream) { this->deserialize(stream); }
+
     ~Token() = default;
     [[nodiscard]] PlayerId getPlayerId() const { return this->playerId; } ;
     void setPlayerId(PlayerId _playerId) {

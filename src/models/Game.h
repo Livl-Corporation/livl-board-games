@@ -8,6 +8,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <fstream>
 #include <memory>
 #include "models/interfaces/Player.h"
 #include "Token.h"
@@ -15,6 +16,7 @@
 #include "models/enums/GameMode.h"
 #include "models/interfaces/GameObservable.h"
 #include "Round.h"
+#include "models/enums/PlayMode.h"
 #include "models/interfaces/GameEvaluator.h"
 
 class Game : public GameObservable, Serializable {
@@ -62,17 +64,25 @@ public:
     void deserialize(std::istream &stream) override;
 
 protected:
-    Game(std::string name, const GameMode gameMode, unsigned int numberOfInputValues, std::string askForPositionMessage)
-        : name(std::move((name))), gameMode(gameMode), numberOfInputValues(numberOfInputValues), askForPositionMessage(std::move(askForPositionMessage)) {};
+    PlayMode playMode;
+
+    Game(std::string name, const GameMode gameMode, PlayMode playMode, unsigned int numberOfInputValues, std::string askForPositionMessage)
+        : name(std::move((name))), gameMode(gameMode), playMode(playMode), numberOfInputValues(numberOfInputValues), askForPositionMessage(std::move(askForPositionMessage)) {};
+
+    Game(std::istream &stream) { this->deserialize(stream); }
 
     void addPlayer(const std::shared_ptr<Player> &player);
     void setGrid(std::shared_ptr<Grid<Token>> &grid);
     void incrementRound() { this->round++; }
 
+    void saveGame();
+
     virtual void onPositionSelected(const Position &position);
     virtual void afterPlacementAction(const PlayerId &playerId, const Position &position){};
 
     void roundEnd();
+    virtual void initPlayers() = 0;
+    virtual void initPlayers(std::istream &stream) = 0;
 
 private:
     std::vector<std::shared_ptr<Player>> players;

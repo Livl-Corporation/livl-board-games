@@ -5,20 +5,48 @@
 #include "Checkers.h"
 #include <QDebug>
 
-Checkers::Checkers(PlayMode playMode) : Game("Checkers", GameMode::OTHELLO, 2, "Select a token you want to move.") {
+Checkers::Checkers(PlayMode playMode) : Game("Checkers", GameMode::OTHELLO, playMode, 2, "Select a token you want to move.") {
 
     Game::setEvaluator(std::make_shared<CheckersEvaluator>());
+    this->initPlayers();
 
+    Grid<Token> grid = initGrid();
+    std::shared_ptr<Grid<Token>> gridcp = std::make_shared<Grid<Token>>(grid);
+    this->setGrid(gridcp);
+}
+
+Checkers::Checkers(std::istream &stream): Game(stream) {
+    Game::setEvaluator(std::make_shared<CheckersEvaluator>());
+    this->initPlayers();
+}
+
+void Checkers::initPlayers(std::istream &stream) {
+    std::function<void(Position)> callback = [this](auto &&PH1) {
+        onPositionSelected(std::forward<decltype(PH1)>(PH1));
+    };
+
+    this->addPlayer(std::make_shared<CheckersHumanPlayer>(stream, callback));
+
+    if (this->playMode == PlayMode::HUMAN_VS_HUMAN) {
+        this->addPlayer(std::make_shared<CheckersHumanPlayer>(stream, callback));
+    } else if (this->playMode == PlayMode::HUMAN_VS_AI) {
+        this->addPlayer(std::make_shared<CheckersComputerPlayer>(stream, callback));
+    } else {
+        throw UnimplementedPlayMode();
+    }
+}
+
+void Checkers::initPlayers() {
     std::function<void(Position)> callback = [this](auto &&PH1) {
         onPositionSelected(std::forward<decltype(PH1)>(PH1));
     };
     CheckersHumanPlayer p1(1, "Player 1", callback);
     this->addPlayer(std::make_shared<CheckersHumanPlayer>(p1));
 
-    if (playMode == PlayMode::HUMAN_VS_HUMAN) {
+    if (this->playMode == PlayMode::HUMAN_VS_HUMAN) {
         CheckersHumanPlayer p2(2, "Player 2", callback);
         this->addPlayer(std::make_shared<CheckersHumanPlayer>(p2));
-    } else if (playMode == PlayMode::HUMAN_VS_AI) {
+    } else if (this->playMode == PlayMode::HUMAN_VS_AI) {
         CheckersComputerPlayer p2(2, "BOT", callback);
         this->addPlayer(std::make_shared<CheckersComputerPlayer>(p2));
     } else {

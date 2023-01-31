@@ -1,3 +1,4 @@
+#include <QMessageBox>
 #include "MenuWindow.h"
 
 MenuWindow::MenuWindow(QWidget *parent)
@@ -8,6 +9,7 @@ MenuWindow::MenuWindow(QWidget *parent)
     ui->setupUi(this);
 
     connect(ui->playButton, &QPushButton::clicked, this, &MenuWindow::onPlayClicked);
+    connect(ui->openSaveFileButton, &QPushButton::clicked, this, &MenuWindow::onSaveSelected);
 
     setPlayerList(MenuData::players);
     setGameList(MenuData::games);
@@ -39,4 +41,25 @@ void MenuWindow::onPlayClicked() {
 
     std::shared_ptr<GameView> gameView = std::make_shared<GameWindow>(this);
     controller->onGameChoose(gameSelection, playerSelection, gameView);
+}
+
+void MenuWindow::onSaveSelected() {
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                            tr("Open Livl-board-game save file - <3"),
+                                            "./",
+                                            tr("livl-board-game save file (*.livl)")
+    );
+
+    std::string path = fileName.toStdString();
+    std::shared_ptr<GameView> gameView = std::make_shared<GameWindow>();
+
+    try {
+        controller->onSaveFileChoose(path, gameView);
+    }
+    catch(std::exception &exception) {
+        QMessageBox msgErrorBox;
+        msgErrorBox.setText(exception.what());
+        msgErrorBox.setIcon(QMessageBox::Warning);
+        msgErrorBox.exec();
+    }
 }

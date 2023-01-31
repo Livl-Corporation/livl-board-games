@@ -17,7 +17,9 @@ class Othello : public Game {
 
 public:
     explicit Othello(PlayMode playMode);
-
+    explicit Othello(std::istream &stream);
+    void initPlayers() override;
+    void initPlayers(std::istream &stream) override;
 protected:
     void onPositionSelected(const Position &position) override;
     void afterPlacementAction(const PlayerId &playerId, const Position &position) override;

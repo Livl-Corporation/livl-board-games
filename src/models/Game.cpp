@@ -92,6 +92,7 @@ void Game::notifyGameEnd(const std::string &message) {
 
 void Game::nextRound() {
     incrementRound();
+    saveGame();
     notifyRound();
 
     this->notifyAskForPosition();
@@ -108,6 +109,15 @@ void Game::onPositionSelected(const Position &position) {
         Game::notifyError(e.what());
         Game::notifyAskForPosition();
     }
+}
+
+void Game::saveGame() {
+    std::ofstream stream;
+    stream.open("save.livl");
+
+    this->serialize(stream);
+
+    stream.close();
 }
 
 void Game::roundEnd() {
@@ -135,10 +145,33 @@ void Game::serialize(std::ostream &stream) {
     stream << this->round << std::endl;
     stream << this->numberOfInputValues << std::endl;
     stream << this->askForPositionMessage << std::endl;
+    stream << this->playMode << std::endl;
 
     this->grid->serialize(stream);
+
+    for(const std::shared_ptr<Player> &p : this->players) {
+        p->serialize(stream);
+    }
 }
 
 void Game::deserialize(std::istream &stream) {
+    int tmp;
 
+    stream >> tmp;
+    this->gameMode = static_cast<GameMode>(tmp);
+
+    stream >> this->name;
+    stream >> this->round;
+    stream >> this->numberOfInputValues;
+
+    // ignores a '\n' from the beginning of the string
+    // (no idea where it comes from or why it doesn't cause problems earlier with the name)
+    stream.ignore();
+
+    std::getline(stream, this->askForPositionMessage, '\n');
+
+    stream >> tmp;
+    this->playMode = static_cast<PlayMode>(tmp);
+
+    this->grid = std::make_shared<Grid<Token>>(stream);
 }

@@ -51,6 +51,11 @@ PlayerId OthelloGameEvaluator::getWinner(const Grid<Token> &grid) const
 
 bool OthelloGameEvaluator::canPlaceToken(const Position &pos, PlayerId playerId, const Grid<Token> &grid)
 {
+    if(!grid.isPositionEmpty(pos))
+    {
+        return false;
+    }
+
     // Check the eight possible directions from the position that the player choose to place his token
     // (left-up, up, right-up, right, right-down, down, left-down, left)
     static const std::vector<Position> directions{
@@ -89,6 +94,7 @@ bool OthelloGameEvaluator::canPlaceToken(const Position &pos, PlayerId playerId,
     }
     return false;
 }
+
 
 std::vector<Position> OthelloGameEvaluator::getValidPositions(const PlayerId &playerId, const Grid<Token> &grid)
 {

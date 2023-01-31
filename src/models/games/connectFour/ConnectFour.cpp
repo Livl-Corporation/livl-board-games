@@ -6,10 +6,23 @@
 #include "ConnectFour.h"
 
 ConnectFour::ConnectFour(PlayMode playMode)
-: Game("Connect Four", GameMode::CONNECT4, 1, "Place your token between column (1) to (7) : ")
+: Game("Connect Four", GameMode::CONNECT4, playMode, 1, "Place your token between column (1) to (7) : ")
 {
     Game::setEvaluator(std::make_shared<LinearGameEvaluator>(4));
 
+    this->initPlayers();
+
+    std::shared_ptr<Token> emptyToken = std::make_shared<Token>(0);
+    std::shared_ptr<Grid<Token>> grid1 = std::make_shared<Grid<Token>>(rowCount, colCount, emptyToken);
+    this->setGrid(grid1);
+}
+
+ConnectFour::ConnectFour(std::istream &stream): Game(stream) {
+    Game::setEvaluator(std::make_shared<LinearGameEvaluator>(4));
+    this->initPlayers(stream);
+}
+
+void ConnectFour::initPlayers() {
     std::function<void(Position)> callback = [this](auto && PH1) { onPositionSelected(std::forward<decltype(PH1)>(PH1)); };
     ConnectFourHumanPlayer p1(1, "Player 1", callback);
     this->addPlayer(std::make_shared<ConnectFourHumanPlayer>(p1));
@@ -23,10 +36,20 @@ ConnectFour::ConnectFour(PlayMode playMode)
     } else {
         throw UnimplementedPlayMode();
     }
+}
 
-    std::shared_ptr<Token> emptyToken = std::make_shared<Token>(0);
-    std::shared_ptr<Grid<Token>> grid1 = std::make_shared<Grid<Token>>(rowCount, colCount, emptyToken);
-    this->setGrid(grid1);
+void ConnectFour::initPlayers(std::istream &stream) {
+    std::function<void(Position)> callback = [this](auto && PH1) { onPositionSelected(std::forward<decltype(PH1)>(PH1)); };
+
+    this->addPlayer(std::make_shared<ConnectFourHumanPlayer>(stream, callback));
+
+    if(playMode == PlayMode::HUMAN_VS_HUMAN) {
+        this->addPlayer(std::make_shared<ConnectFourHumanPlayer>(stream, callback));
+    } else if (playMode == PlayMode::HUMAN_VS_AI) {
+        this->addPlayer(std::make_shared<ConnectFourComputerPlayer>(stream, callback));
+    } else {
+        throw UnimplementedPlayMode();
+    }
 }
 
 void ConnectFour::onPositionSelected(const Position &position) {
