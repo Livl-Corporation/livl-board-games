@@ -49,5 +49,8 @@ void MenuWindow::onSaveSelected() {
                                             tr("livl-board-game save file (*.livl)")
     );
 
-    std::cout << fileName.toStdString() << std::endl;
+    std::string path = fileName.toStdString();
+    std::shared_ptr<GameView> gameView = std::make_shared<GameWindow>();
+
+    controller->onSaveFileChoose(path, gameView);
 }

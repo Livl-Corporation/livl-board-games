@@ -26,11 +26,15 @@ class MenuController {
 public:
     MenuController() = default;
 
-    void onGameChoose(GameMode gameSelection, PlayMode playerSelection, const std::shared_ptr<GameView>& gameView);
-
+    static void onGameChoose(GameMode gameSelection, PlayMode playerSelection, const std::shared_ptr<GameView>& gameView);
+    static void onSaveFileChoose(const std::string &saveFilePath, const std::shared_ptr<GameView>& gameView);
+    static void startGame(std::shared_ptr<Game> &game, const std::shared_ptr<GameView> &gameView);
 protected:
     static std::shared_ptr<Game> createGame(GameMode gameMode, PlayMode playerSelection);
+    static std::shared_ptr<Game> createGame(GameMode gameMode, std::ifstream &stream);
 
+private:
+    static GameMode getGameModeFromStream(std::ifstream &stream);
 };
 
 #endif //LIVL_MENUCONTROLLER_H
