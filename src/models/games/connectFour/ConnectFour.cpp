@@ -25,8 +25,8 @@ ConnectFour::ConnectFour(PlayMode playMode)
     }
 
     std::shared_ptr<Token> emptyToken = std::make_shared<Token>(0);
-    Grid<Token> grid1(rowCount, colCount, emptyToken);
-    this->setGrid(std::make_shared<Grid<Token>>(grid1));
+    std::shared_ptr<Grid<Token>> grid1 = std::make_shared<Grid<Token>>(rowCount, colCount, emptyToken);
+    this->setGrid(grid1);
 }
 
 void ConnectFour::onPositionSelected(const Position &position) {

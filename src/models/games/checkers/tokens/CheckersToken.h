@@ -11,8 +11,12 @@
 class CheckersToken : public Token {
 
 public:
-    CheckersToken() : Token(0) {};
-    explicit CheckersToken(const PlayerId playerId) : Token(playerId) {};
+    CheckersToken() : Token(0) {
+        qDebug() << "CheckersToken created";
+    };
+    explicit CheckersToken(const PlayerId playerId) : Token(playerId) {
+        qDebug() << "CheckersToken created";
+    };
 
     std::string getDisplayString() const override;
 

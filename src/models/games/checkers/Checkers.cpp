@@ -25,8 +25,8 @@ Checkers::Checkers(PlayMode playMode) : Game("Checkers", GameMode::OTHELLO, 2, "
         throw UnimplementedPlayMode();
     }
 
-    Grid<Token> grid1 = initGrid();
-    this->setGrid(std::make_shared<Grid<Token>>(grid1));
+    std::shared_ptr<Grid<Token>> grid1 = std::make_shared<Grid<Token>>( initGrid());
+    this->setGrid(grid1);
 }
 
 Grid<Token> Checkers::initGrid()
@@ -34,21 +34,21 @@ Grid<Token> Checkers::initGrid()
     std::shared_ptr<Token> emptyToken = std::make_shared<CheckersToken>(0);
     Grid<Token> grid1(rowCount, colCount, emptyToken);
 
-    std::shared_ptr<Token> whiteToken = std::make_shared<CheckersToken>(1);
-    std::shared_ptr<Token> blackToken = std::make_shared<CheckersToken>(2);
+    PlayerId whiteToken = 1;
+    PlayerId blackToken = 2;
 
     // place default token on the board for a checkers game for element 1 and 2 in horizontal direction :
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < colCount; j++) {
             if ((i + j) % 2 == 1) {
-                grid1.place({i, j}, whiteToken);
+                grid1.getElementAt({i, j})->setPlayerId(whiteToken);
             }
         }
     }
     for (int i = rowCount - 1; i > rowCount - 4; i--) {
         for (int j = 0; j < colCount; j++) {
             if ((i + j) % 2 == 1) {
-                grid1.place({i, j}, blackToken);
+                grid1.getElementAt({i, j})->setPlayerId(blackToken);
             }
         }
     }
@@ -118,13 +118,14 @@ void Checkers::performMove(const Position &position) {
 }
 
 void Checkers::moveOriginToPosition(const Position &position) {
-    std::shared_ptr<Token> token = this->getGrid()->getElementAt(originPosition.value());
-    this->getGrid()->place(position, std::make_shared<CheckersToken>());
-    this->getGrid()->replaceAt(originPosition.value(), token);
+
+    PlayerId newId = this->getGrid()->getElementAt(originPosition.value())->getPlayerId();
+    this->getGrid()->getElementAt(position)->setPlayerId(newId);
+    this->getGrid()->getElementAt(originPosition.value())->setPlayerId(NO_PLAYER);
 }
 
 void Checkers::captureEnemyToken(const Position &capturableEnemyPos) {
-    getGrid()->replaceAt(capturableEnemyPos, std::shared_ptr<CheckersToken>());
+    getGrid()->getElementAt(capturableEnemyPos)->setPlayerId(NO_PLAYER);
 }
 
 void Checkers::afterPlacementAction(const PlayerId &playerId, const Position &position) {
@@ -208,7 +209,7 @@ void Checkers::nextRound() {
     }
 }
 
-bool Checkers::shouldBecomeKing(const Position &position) const {
+bool Checkers::shouldBecomeKing(const Position &position) {
     std::shared_ptr<Token> token = getGrid()->getElementAt(position);
     unsigned int rowToBecomeKing = token->getPlayerId() == 1 ? getGrid()->getRowCount() - 1 : 0;
     return position.row == rowToBecomeKing;

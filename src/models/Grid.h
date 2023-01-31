@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory>
+#include <algorithm>
 
 #include "Position.h"
 #include "models/exceptions/OutOfBoundsException.h"
@@ -16,8 +17,20 @@ class Grid: Serializable {
 public:
 
     Grid(GridSize rows, GridSize cols, std::shared_ptr<T> &defaultValue)
-    : colCount(cols), rowCount(rows), grid(rows, std::vector<std::shared_ptr<T>>(cols, defaultValue)) {
+    : colCount(cols), rowCount(rows) {
         this->defaultValue = defaultValue;
+
+        // Create a new pointer with value = default value for each cell
+        for (int row = 0; row < this->rowCount; row++)
+        {
+            std::vector<std::shared_ptr<T>> rowVector;
+            for (int col = 0; col < this->colCount; col++)
+            {
+                rowVector.push_back(std::make_shared<T>(*defaultValue));
+            }
+            this->grid.push_back(rowVector);
+        }
+
     }
 
     [[nodiscard]] inline GridSize getColCount() const { return this->colCount; };
@@ -31,10 +44,6 @@ public:
     [[nodiscard]] bool isPositionOnBorder(const Position &position) const;
 
     [[nodiscard]] bool isFull() const;
-
-    void place(const Position &position, const std::shared_ptr<T> &element);
-
-    bool replaceAt(const Position &position, const std::shared_ptr<T> &element);
 
     std::shared_ptr<T> getElementAt(const Position &position) const;
 

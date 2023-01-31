@@ -38,7 +38,7 @@ private:
     bool isPositionValid(const Position &position) const;
     bool forceCaptureIfPossible();
     bool forceCaptureIfPossible(const Position &position);
-    bool shouldBecomeKing(const Position &position) const;
+    bool shouldBecomeKing(const Position &position);
 
     std::optional<Position> originPosition;
     std::vector<Position> validMoves;

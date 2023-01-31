@@ -9,7 +9,7 @@ void Game::addPlayer(const std::shared_ptr<Player> &player) {
     this->players.push_back(player);
 }
 
-void Game::setGrid(std::shared_ptr<Grid<Token>> _grid) {
+void Game::setGrid(std::shared_ptr<Grid<Token>> &_grid) {
     this->grid = std::move(_grid);
 }
 
@@ -47,7 +47,6 @@ void Game::notifyRound() {
 
 void Game::notifyGrid() {
     if (this->observer != nullptr) {
-        
         this->observer->updateGrid(*grid);
     } else {
         qDebug() << "No observer attached to the game";
@@ -99,10 +98,10 @@ void Game::nextRound() {
 }
 
 void Game::onPositionSelected(const Position &position) {
-    Token token(this->getCurrentPlayer()->getId());
+    PlayerId playerId = this->getCurrentPlayer()->getId();
 
     try {
-        this->getGrid()->place(position, std::make_shared<Token>(token));
+        this->getGrid()->getElementAt(position)->setPlayerId(playerId);
         afterPlacementAction(getCurrentPlayer()->getId(), position);
         roundEnd();
     } catch (std::exception &e) {
