@@ -14,8 +14,10 @@ void MenuController::onGameChoose(GameMode gameSelection, PlayMode playerSelecti
 
 void MenuController::onSaveFileChoose(const std::string &saveFilePath, const std::shared_ptr<GameView> &gameView) {
 
+    if(saveFilePath.empty()) return;
+
     if(!std::filesystem::exists(saveFilePath)) {
-        return;
+        throw FileNotExistException();
     }
 
     std::ifstream stream;

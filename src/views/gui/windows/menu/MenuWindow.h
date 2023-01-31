@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <iostream>
 #include "models/MenuData.h"
 #include "./ui_MenuWindow.h"

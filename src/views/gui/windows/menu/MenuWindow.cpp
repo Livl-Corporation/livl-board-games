@@ -1,3 +1,4 @@
+#include <QMessageBox>
 #include "MenuWindow.h"
 
 MenuWindow::MenuWindow(QWidget *parent)
@@ -52,5 +53,13 @@ void MenuWindow::onSaveSelected() {
     std::string path = fileName.toStdString();
     std::shared_ptr<GameView> gameView = std::make_shared<GameWindow>();
 
-    controller->onSaveFileChoose(path, gameView);
+    try {
+        controller->onSaveFileChoose(path, gameView);
+    }
+    catch(std::exception &exception) {
+        QMessageBox msgErrorBox;
+        msgErrorBox.setText(exception.what());
+        msgErrorBox.setIcon(QMessageBox::Warning);
+        msgErrorBox.exec();
+    }
 }
