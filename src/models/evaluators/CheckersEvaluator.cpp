@@ -81,16 +81,16 @@ std::vector<Position> CheckersEvaluator::getValidTokenMoves(const Grid<Token> &g
 
         if(grid.isPositionInBounds(nextPosition)) {
 
-            // Check if adjacent position is free
-            if(grid.getElementAt(nextPosition).getPlayerId() == NO_PLAYER) {
-                validMoves.push_back(nextPosition);
-            } else if (grid.getElementAt(nextPosition).getPlayerId() != grid.getElementAt(position).getPlayerId()) {
+            if (grid.getElementAt(nextPosition).getPlayerId() != grid.getElementAt(position).getPlayerId()) {
                 // Check if the token can capture an enemy token
                 Position nextNextPosition = {nextPosition.row + direction.row*multiplier, nextPosition.col + direction.col*multiplier};
 
                 if(grid.isPositionInBounds(nextNextPosition) && grid.getElementAt(nextNextPosition).getPlayerId() == NO_PLAYER) {
                     validMoves.push_back(nextNextPosition);
                 }
+            } // Check if adjacent position is free
+            else (grid.getElementAt(nextPosition).getPlayerId() == NO_PLAYER); {
+                validMoves.push_back(nextPosition);
             }
 
         }
