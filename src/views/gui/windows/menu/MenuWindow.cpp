@@ -37,6 +37,6 @@ void MenuWindow::onPlayClicked() {
 
     this->close();
 
-    std::shared_ptr<GameView> gameView = std::make_shared<GameWindow>();
+    std::shared_ptr<GameView> gameView = std::make_shared<GameWindow>(this);
     controller->onGameChoose(gameSelection, playerSelection, gameView);
 }
