@@ -47,6 +47,7 @@ void Game::notifyRound() {
 
 void Game::notifyGrid() {
     if (this->observer != nullptr) {
+        
         this->observer->updateGrid(*grid);
     } else {
         qDebug() << "No observer attached to the game";

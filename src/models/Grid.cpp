@@ -88,7 +88,7 @@ std::vector<Position> Grid<T>::getEmptyPositions() const
 
 template <typename T> requires std::is_base_of<Serializable, T>::value
 void Grid<T>::serialize(std::ostream &stream) {
-    (*defaultValue).serialize(stream);
+    defaultValue->serialize(stream);
 
     stream << this->colCount << std::endl;
     stream << this->rowCount << std::endl;
@@ -97,7 +97,7 @@ void Grid<T>::serialize(std::ostream &stream) {
     {
         for (int col = 0; col < this->colCount; col++)
         {
-            (*this->grid[row][col]).serialize(stream);
+            this->grid[row][col]->serialize(stream);
         }
     }
 

@@ -4,8 +4,12 @@ GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameWindow)
 {
+    this->parent = parent;
     ui->setupUi(this);
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+
+    connect(ui->returnBackButton, &QPushButton::clicked, this, &GameWindow::onReturnBackButtonClicked);
+
 }
 
 GameWindow::~GameWindow()
@@ -114,9 +118,27 @@ void GameWindow::updateAskForPosition(const std::string &message, unsigned int n
 }
 
 void GameWindow::setErrorText(const std::string &message) {
+
     ui->errorLabel->setText(QString::fromStdString(message));
 }
 
 void GameWindow::updateGameEnd(const std::string &message) {
     setInfoText(message);
 }
+
+void GameWindow::onReturnBackButtonClicked()
+{
+    int res = QMessageBox::warning(
+            this,
+            tr("Do you really want to leave your party ?"),
+            tr("All your party will be automatically saved."),
+            QMessageBox::Yes | QMessageBox::No
+    );
+
+    if (res == QMessageBox::Yes) {
+        this->parent->show();
+        this->close();
+    }
+
+}
+

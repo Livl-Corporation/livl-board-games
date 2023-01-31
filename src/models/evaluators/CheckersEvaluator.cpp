@@ -2,50 +2,49 @@
 // Created by Julien on 30/01/2023.
 //
 
-#include <optional>
 #include "CheckersEvaluator.h"
 #include "models/games/checkers/tokens/CheckersTokenType.h"
 
 bool CheckersEvaluator::hasGameEnded(const Grid<Token> &grid, const PlayerId &nextPlayerId) {
-    return false;
+    return allEnemyTokensAreCaptured(grid, nextPlayerId) || noValidMoves(grid, nextPlayerId);
 }
 
 PlayerId CheckersEvaluator::getWinner(const Grid<Token> &grid) const {
-    return 0;
+    return winner.value();
 }
 
-//bool CheckersEvaluator::forceEnemyToCaptureEnemy(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, Position &capturableEnemyPos) {
-//    PlayerId enemyPlayerId = (playerId == 1) ? 2 : 1;
-//
-//    Position diag1{}, diag2{};
-//    bool positionHasEnemyTokenDiag1;
-//    bool positionHasEnemyTokenDiag2;
-//
-//    // check only two diagonals because a player can only move forward and not backwards
-//    if(enemyPlayerId == 1) {
-//        diag1 = {from.row + 2, from.col - 2};
-//        diag2 = {from.row - 2, from.col - 2};
-//        positionHasEnemyTokenDiag1 = grid->getElementAt({diag1.row-1,diag1.col+1}).getPlayerId() == enemyPlayerId;
-//        positionHasEnemyTokenDiag2 = grid->getElementAt({diag2.row+1,diag2.col+1}).getPlayerId() == enemyPlayerId;
-//    } else {
-//        diag1 = {from.row + 2, from.col + 2};
-//        diag2 = {from.row - 2, from.col + 2};
-//        positionHasEnemyTokenDiag1 = grid->getElementAt({diag1.row-1,diag1.col-1}).getPlayerId() == enemyPlayerId;
-//        positionHasEnemyTokenDiag2 = grid->getElementAt({diag1.row+1,diag1.col-1}).getPlayerId() == enemyPlayerId;
-//    }
-//
-//    if(grid->isPositionInBounds(diag1) && grid->getElementAt(diag1).getPlayerId() == NO_PLAYER && positionHasEnemyTokenDiag1) {
-//        capturableEnemyPos = diag1;
-//        return true;
-//    }
-//
-//    if(grid->isPositionInBounds(diag2) && grid->getElementAt(diag2).getPlayerId() == NO_PLAYER && positionHasEnemyTokenDiag2) {
-//        capturableEnemyPos = diag2;
-//        return true;
-//    }
-//
-//    return false;
-//}
+bool CheckersEvaluator::allEnemyTokensAreCaptured(const Grid<Token> &grid, const PlayerId &nextPlayerId)  {
+    PlayerId actualPlayerId = (nextPlayerId == 1) ? 2 : 1;
+    for (int row = 0; row < grid.getRowCount(); row++) {
+        for (int col = 0; col < grid.getColCount(); col++) {
+            std::shared_ptr<Token> token = grid.getElementAt({row, col});
+            if (token->getPlayerId() == actualPlayerId) {
+                return false;
+            }
+        }
+    }
+
+    winner = nextPlayerId;
+    return true;
+}
+
+bool CheckersEvaluator::noValidMoves(const Grid<Token> &grid, const PlayerId &nextPlayerId) {
+    // check if no valid moves are available for the nextPlayerId
+    for (int row = 0; row < grid.getRowCount(); row++) {
+        for (int col = 0; col < grid.getColCount(); col++) {
+            std::shared_ptr<Token> token = grid.getElementAt({row, col});
+            if (token->getPlayerId() == nextPlayerId) {
+                std::vector<Position> validMoves = getValidTokenMoves(grid, {row, col});
+                if (!validMoves.empty()) {
+                    return false;
+                }
+            }
+        }
+    }
+
+    winner = (nextPlayerId == 1) ? 2 : 1;
+    return true;
+}
 
 std::optional<Position> CheckersEvaluator::getCapturableEnemyTokenPosition(const Grid<Token> &grid, const PlayerId &playerId, const Position &from, const Position &to) {
 
@@ -89,16 +88,16 @@ std::vector<Position> CheckersEvaluator::getValidTokenMoves(const Grid<Token> &g
 
         if(grid.isPositionInBounds(nextPosition)) {
 
-            // Check if adjacent position is free
-            if(grid.getElementAt(nextPosition)->getPlayerId() == NO_PLAYER) {
-                validMoves.push_back(nextPosition);
-            } else if (grid.getElementAt(nextPosition)->getPlayerId() != grid.getElementAt(position)->getPlayerId()) {
+            if (grid.getElementAt(nextPosition)->getPlayerId() != grid.getElementAt(position)->getPlayerId()) {
                 // Check if the token can capture an enemy token
                 Position nextNextPosition = {nextPosition.row + direction.row*multiplier, nextPosition.col + direction.col*multiplier};
 
                 if(grid.isPositionInBounds(nextNextPosition) && grid.getElementAt(nextNextPosition)->getPlayerId() == NO_PLAYER) {
                     validMoves.push_back(nextNextPosition);
                 }
+            } // Check if adjacent position is free
+            else (grid.getElementAt(nextPosition)->getPlayerId() == NO_PLAYER); {
+                validMoves.push_back(nextPosition);
             }
 
         }
@@ -118,5 +117,3 @@ unsigned int CheckersEvaluator::getDialognalDistance(const Position &from, const
 
     return rowDistance;
 }
-
-
