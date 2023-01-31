@@ -4,6 +4,7 @@
 
 #include <optional>
 #include "CheckersEvaluator.h"
+#include "models/games/checkers/tokens/CheckersTokenType.h"
 
 bool CheckersEvaluator::hasGameEnded(const Grid<Token> &grid, const PlayerId &nextPlayerId) {
     return false;
@@ -69,13 +70,19 @@ std::vector<Position> CheckersEvaluator::getValidTokenMoves(const Grid<Token> &g
 
     std::vector<Position> validMoves;
 
+    Token token = grid.getElementAt(position);
+
     // check if the token can move forward
     std::vector<Position> directions = {{1,1}, {1,-1}};
 
     // invert direction if the token is owned by player 2
-    int multiplier = (grid.getElementAt(position).getPlayerId() == 2) ? -1 : 1;
+    int multiplier = (token.getPlayerId() == 2) ? -1 : 1;
 
-    // TODO : If king, check if the token can move backwards
+    // Add backwards direction if token is king
+    if(token.getType() == CheckersTokenType::KING) {
+        directions.emplace_back(-1,1);
+        directions.emplace_back(-1,-1);
+    }
 
     for(auto direction : directions) {
         Position nextPosition = {position.row + direction.row*multiplier, position.col + direction.col*multiplier};

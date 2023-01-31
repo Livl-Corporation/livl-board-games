@@ -69,7 +69,7 @@ add_executable(Livl
         src/models/interfaces/Serializable.h
         src/models/Position.cpp
         src/models/games/checkers/Checkers.cpp
-        src/models/games/othello/Othello.cpp src/models/games/othello/players/OthelloComputerPlayer.cpp src/models/games/checkers/players/CheckersComputerPlayer.cpp src/models/evaluators/CheckersEvaluator.cpp src/models/evaluators/OthelloGameEvaluator.cpp src/shared/Shared.h)
+        src/models/games/othello/Othello.cpp src/models/games/othello/players/OthelloComputerPlayer.cpp src/models/games/checkers/players/CheckersComputerPlayer.cpp src/models/evaluators/CheckersEvaluator.cpp src/models/evaluators/OthelloGameEvaluator.cpp src/shared/Shared.h src/models/games/checkers/tokens/CheckersTokenType.h src/models/games/checkers/tokens/CheckersToken.cpp src/models/games/checkers/tokens/CheckersToken.h)
 
 target_link_libraries(Livl
         Qt::Core

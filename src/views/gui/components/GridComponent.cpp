@@ -54,12 +54,11 @@ void GridComponent::updateGrid(const Grid<Token> &grid) {
         for (int col = 0; col < grid.getColCount(); col++)
         {
             auto *button = (QPushButton*) this->gridLayout->itemAtPosition(row, col)->widget();
-            Token token = grid.getElementAt({row, col});
-            QString playerString(QChar(token.getDisplayChar()));
-            button->setText(playerString);
+            std::string playerString = grid.getElementAt({row, col}).getDisplayString();
+            button->setText(QString::fromStdString(playerString));
 
             // set the color of the button
-            std::string color = token.getDisplayColor();
+            std::string color = grid.getElementAt({row, col}).getDisplayColor();
             button->setStyleSheet("QPushButton { background-color: " + QString::fromStdString(color) + "; border: 1px solid #777; color: " + (color == "black" ? "white" : "black") + "; font: bold 14px; } QPushButton:hover { background-color: #6699CC; } QPushButton:pressed { background-color: #003366; }");
         }
     }

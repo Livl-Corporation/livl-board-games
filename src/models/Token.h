@@ -28,7 +28,7 @@ public:
         return this->playerId == other.playerId && this->type == other.type;
     }
 
-    [[nodiscard]] virtual char getDisplayChar() const;
+    virtual std::string getDisplayString() const;
     virtual std::string getDisplayColor() const;
 
     void serialize(std::ostream &stream) override;
