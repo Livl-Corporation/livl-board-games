@@ -84,5 +84,6 @@ int ConnectFour::firstRowAvailableInCol(const std::shared_ptr<Grid<Token>> &grid
             return row;
         }
     }
-    return 0;
+
+    throw ColumnFullException();
 }
