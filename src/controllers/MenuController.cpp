@@ -7,7 +7,7 @@
 void MenuController::onGameChoose(GameMode gameSelection, PlayMode playerSelection, const std::shared_ptr<GameView>& gameView) {
     // View instanced in MenuView & passed in parameters as gameView
 
-    auto game = createGame(gameSelection, playerSelection);
+    std::shared_ptr<Game> game = createGame(gameSelection, playerSelection);
 
     GameController gameController(game);
 

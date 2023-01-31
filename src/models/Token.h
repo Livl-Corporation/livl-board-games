@@ -7,10 +7,11 @@
 
 #include <string>
 #include "models/PlayerId.h"
+#include "interfaces/Serializable.h"
 
 typedef unsigned int TokenType;
 
-class Token {
+class Token: Serializable {
 
 public:
 
@@ -30,6 +31,8 @@ public:
     [[nodiscard]] virtual char getDisplayChar() const;
     virtual std::string getDisplayColor() const;
 
+    void serialize(std::ostream &stream) override;
+    void deserialize(std::istream &stream) override;
 private:
 
     unsigned int type;

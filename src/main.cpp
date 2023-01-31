@@ -1,8 +1,9 @@
 #include <QApplication>
 #include <QPushButton>
 #include <memory>
-#include "controllers/MenuController.h"
+#include <fstream>
 #include "views/gui/windows/menu/MenuWindow.h"
+#include "controllers/MenuController.h"
 #include "views/cli/menu/MenuConsole.h"
 
 int setupConsole() {
@@ -33,7 +34,6 @@ int setupGui() {
 
 
 int main(int argc, char *argv[]) {
-
     // Run with param -console use the cli
     bool useConsole = argc > 1 && std::string(argv[1]) == "-console";
     if (useConsole) {

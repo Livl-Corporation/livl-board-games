@@ -50,7 +50,8 @@ void GameConsole::updateGrid(const Grid<Token> &grid) {
 
         for (int col = 0; col < grid.getColCount(); col++)
         {
-            std::string characterAsString(1, grid.getElementAt({row, col}).getDisplayChar());
+            //std::string characterAsString(1, Player::getPlayerChar(grid->getElementAt({.x =  col, .y =  row})));
+            std::string characterAsString(1, grid.getElementAt(Position(row, col)).getDisplayChar());
             ConsoleHandler::print(characterAsString);
 
             if (col < grid.getColCount() - 1)

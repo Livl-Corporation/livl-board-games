@@ -8,7 +8,8 @@
 
 #include <memory>
 #include "models/interfaces/GameEvaluator.h"
-
+#include <optional>
+#include <stdexcept>
 
 class CheckersEvaluator  : public GameEvaluator {
 public:
@@ -16,13 +17,11 @@ public:
 
     [[nodiscard]] PlayerId getWinner(const Grid<Token> &grid) const override;
 
-    static bool isMoveValid(const Grid<Token> &grid, const PlayerId &playerId, const Position &from, const Position &to);
+    static std::optional<Position> getCapturableEnemyTokenPosition(const Grid<Token> &grid, const PlayerId &playerId, const Position &from, const Position &to);
 
-    static bool captureEnemyToken(std::shared_ptr<Grid<Token>> &grid, const Position &from, const Position &to);
+    static unsigned int getDialognalDistance(const Position &from, const Position &to);
 
-    static bool isCaptureMove(const Grid<Token> &grid, const PlayerId &playerId, const Position &from, const Position &to);
-
-    static bool forceEnemyToCaptureEnemy(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, Position &capturableEnemyPos);
+    static std::vector<Position> getValidTokenMoves(const Grid<Token> &grid, Position position);
 
 };
 
