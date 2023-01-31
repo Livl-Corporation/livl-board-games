@@ -123,6 +123,7 @@ void GameWindow::setErrorText(const std::string &message) {
 
 void GameWindow::updateGameEnd(const std::string &message) {
     setInfoText(message);
+    gridComponent->disableGridButtons();
 }
 
 void GameWindow::onReturnBackButtonClicked()
