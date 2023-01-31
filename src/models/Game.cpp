@@ -88,3 +88,17 @@ void Game::notifyGameEnd(const std::string &message) {
         qDebug() << "No observer attached to the game";
     }
 }
+
+void Game::serialize(std::ostream &stream) {
+    stream << this->gameMode << std::endl;
+    stream << this->name << std::endl;
+    stream << this->round << std::endl;
+    stream << this->numberOfInputValues << std::endl;
+    stream << this->askForPositionMessage << std::endl;
+
+    this->grid->serialize(stream);
+}
+
+void Game::deserialize(std::istream &stream) {
+
+}

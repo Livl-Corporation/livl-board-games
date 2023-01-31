@@ -17,7 +17,7 @@
 #include "Round.h"
 #include "models/interfaces/GameEvaluator.h"
 
-class Game : public GameObservable {
+class Game : public GameObservable, Serializable {
 public:
     [[nodiscard]] inline PlayerId getPlayerId(unsigned int roundNumber) const {
         return (roundNumber - 1) % players.size();
@@ -54,8 +54,12 @@ public:
 
     void notifyGameName() override;
     void notifyRound() override;
+
     void notifyGrid() override;
     void notifyPlayers() override;
+
+    void serialize(std::ostream &stream) override;
+    void deserialize(std::istream &stream) override;
 
 protected:
     Game(std::string name, const GameMode gameMode, unsigned int numberOfInputValues, std::string askForPositionMessage)

@@ -51,7 +51,7 @@ void GameConsole::updateGrid(const Grid<Token> &grid) {
         for (int col = 0; col < grid.getXSize(); col++)
         {
             //std::string characterAsString(1, Player::getPlayerChar(grid->getElementAt({.x =  col, .y =  row})));
-            std::string characterAsString(1, grid.getElementAt({.x =  col, .y =  row}).getDisplayChar());
+            std::string characterAsString(1, grid.getElementAt(Position(col, row)).getDisplayChar());
             ConsoleHandler::print(characterAsString);
 
             if (col < grid.getXSize() - 1)

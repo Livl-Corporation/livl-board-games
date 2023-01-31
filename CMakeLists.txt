@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.24)
 project(Livl)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -47,7 +47,29 @@ add_executable(Livl
         src/models/games/ticTacToe/players/TicTacToeComputerPlayer.h
         src/models/exceptions/UnimplementedPlayMode.h
         src/views/cli/menu/MenuConsole.h
-        src/views/cli/menu/MenuConsole.cpp src/views/interfaces/MenuInteraction.h src/views/cli/game/GameConsole.cpp src/views/cli/game/GameConsole.h src/views/cli/game/GameConsole.h src/views/interfaces/GameView.h src/models/interfaces/GameObservable.h src/models/interfaces/GameObservable.h src/models/interfaces/GameObserver.h src/views/interfaces/GameInteraction.h src/views/interfaces/GameInteraction.h src/shared/Shared.cpp src/models/PlayerId.h src/models/Round.h src/models/Token.cpp src/models/Token.cpp src/models/interfaces/GameEvaluator.h src/models/evaluators/LinearGameEvaluator.cpp src/models/evaluators/LinearGameEvaluator.h src/models/games/connectFour/ConnectFour.cpp src/models/games/connectFour/ConnectFour.h src/models/games/connectFour/players/ConnectFourComputerPlayer.cpp src/models/games/connectFour/players/ConnectFourComputerPlayer.h src/models/games/connectFour/players/ConnectFourHumanPlayer.cpp src/models/games/connectFour/players/ConnectFourHumanPlayer.h)
+        src/views/cli/menu/MenuConsole.cpp
+        src/views/interfaces/MenuInteraction.h
+        src/views/cli/game/GameConsole.cpp
+        src/views/cli/game/GameConsole.h
+        src/views/interfaces/GameView.h
+        src/models/interfaces/GameObservable.h
+        src/models/interfaces/GameObserver.h
+        src/views/interfaces/GameInteraction.h
+        src/shared/Shared.cpp
+        src/models/PlayerId.h
+        src/models/Round.h
+        src/models/Token.cpp
+        src/models/interfaces/GameEvaluator.h
+        src/models/evaluators/LinearGameEvaluator.cpp
+        src/models/evaluators/LinearGameEvaluator.h
+        src/models/games/connectFour/ConnectFour.cpp
+        src/models/games/connectFour/ConnectFour.h
+        src/models/games/connectFour/players/ConnectFourComputerPlayer.cpp
+        src/models/games/connectFour/players/ConnectFourComputerPlayer.h
+        src/models/games/connectFour/players/ConnectFourHumanPlayer.cpp
+        src/models/games/connectFour/players/ConnectFourHumanPlayer.h
+        src/models/interfaces/Serializable.h
+        src/models/Position.cpp)
 
 target_link_libraries(Livl
         Qt::Core

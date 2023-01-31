@@ -8,8 +8,8 @@
 
 typedef unsigned int GridSize;
 
-template <typename T>
-class Grid {
+template <typename T> requires std::is_base_of<Serializable, T>::value
+class Grid: Serializable {
 
 public:
 
@@ -37,6 +37,10 @@ public:
     T getElementAt(const Position &position) const;
 
     [[nodiscard]] std::vector<Position> getEmptyPositions() const;
+
+    void serialize(std::ostream &stream) override;
+
+    void deserialize(std::istream &stream) override;
 
 private:
     GridSize xSize;
