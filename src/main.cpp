@@ -6,8 +6,8 @@
 #include "views/cli/menu/MenuConsole.h"
 
 int setupConsole() {
-    auto menuConsole = std::make_shared<MenuConsole>();
-    auto menuController = std::make_shared<MenuController>();
+    std::shared_ptr<MenuConsole> menuConsole = std::make_shared<MenuConsole>();
+    std::shared_ptr<MenuController> menuController = std::make_shared<MenuController>();
 
     menuConsole->setController(menuController);
     menuConsole->show();
@@ -21,8 +21,8 @@ int setupGui() {
     QApplication::setWindowIcon(QIcon(":/img/logo.png"));
     std::cout << "Starting GUI" << std::endl;
 
-    auto menuWindow = std::make_shared<MenuWindow>();
-    auto menuController = std::make_shared<MenuController>();
+    std::shared_ptr<MenuWindow> menuWindow = std::make_shared<MenuWindow>();
+    std::shared_ptr<MenuController> menuController = std::make_shared<MenuController>();
 
     menuWindow->setController(menuController);
     menuWindow->show();
