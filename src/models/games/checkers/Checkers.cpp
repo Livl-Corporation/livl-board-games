@@ -71,11 +71,20 @@ void Checkers::selectOriginPosition(Position position) {
     // Check if selected position is a player token
     try {
         if (this->getGrid()->getElementAt(position).getPlayerId() == this->getCurrentPlayer()->getId()) {
+
+            // Check if the token can move
+            if(!CheckersEvaluator::canTokenMove(*getGrid(), position)) {
+                throw std::invalid_argument("This token cannot move.");
+            }
+
             originPosition = position;
+            Game::notifyError("");
             Game::notifyAskForPosition("Select a destination position.");
+        } else {
+            throw std::invalid_argument("You must select one of your token.");
         }
     } catch (std::exception &e) {
-        Game::notifyError("You must select one of your token.");
+        Game::notifyError(e.what());
         Game::notifyAskForPosition();
     }
 }
@@ -84,18 +93,22 @@ void Checkers::selectOriginPosition(Position position) {
 
 void Checkers::performMove(Position position) {
     try {
-        if (CheckersEvaluator::isMoveValid(originPosition.value(), position)) {
-            // Move is valid, we move the token
-            moveOriginToPosition(position);
 
-            // After placement action
-            afterPlacementAction(getCurrentPlayer()->getId(), position);
+        unsigned int diagonalDistance = CheckersEvaluator::getDialognalDistance(originPosition.value(), position);
 
-            // Change player turn
-            roundEnd();
-        } else {
+        if(diagonalDistance == 0 || diagonalDistance > 2) {
             throw std::invalid_argument("Invalid move.");
         }
+
+        // Move is valid, we move the token
+        moveOriginToPosition(position);
+
+        // After placement action
+        afterPlacementAction(getCurrentPlayer()->getId(), position);
+
+        // Change player turn
+        roundEnd();
+
     } catch (std::exception &e) {
         Game::notifyError("You must select a valid destination position.");
         Game::notifyAskForPosition("Select a destination position.");

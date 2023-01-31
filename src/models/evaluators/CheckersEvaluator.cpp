@@ -2,7 +2,6 @@
 // Created by Julien on 30/01/2023.
 //
 
-#include <optional>
 #include "CheckersEvaluator.h"
 
 bool CheckersEvaluator::hasGameEnded(const Grid<Token> &grid, const PlayerId &nextPlayerId) {
@@ -48,6 +47,10 @@ PlayerId CheckersEvaluator::getWinner(const Grid<Token> &grid) const {
 
 std::optional<Position> CheckersEvaluator::getCapturableEnemyTokenPosition(const Grid<Token> &grid, const PlayerId &playerId, const Position &from, const Position &to) {
 
+    if (getDialognalDistance(from, to) != 2) {
+        return std::nullopt;
+    }
+
     // check if the position in between the from and to positions is occupied by the enemy player
     int enemyPlayerId = (playerId == 1) ? 2 : 1;
     int enemyTokenRow = (from.row + to.row) / 2;
@@ -61,7 +64,51 @@ std::optional<Position> CheckersEvaluator::getCapturableEnemyTokenPosition(const
     return std::nullopt;
 }
 
-bool CheckersEvaluator::isMoveValid(const Position &from, const Position &to) {
-    // check if the move is a capture move (difference in x and y positions is 2 (2 = the move is 2 positions diagonally))
-    return std::abs(to.row - from.row) == 2 && std::abs(to.row - from.col) == 2;
+unsigned int CheckersEvaluator::getDialognalDistance(const Position &from, const Position &to) {
+
+    unsigned int rowDistance = std::abs(to.row - from.row);
+    unsigned int colDistance = std::abs(to.col - from.col);
+
+    if(rowDistance != colDistance) {
+        throw std::invalid_argument("The positions are not diagonal");
+    }
+
+    return rowDistance;
 }
+
+bool CheckersEvaluator::canTokenMove(const Grid<Token> &grid, Position position) {
+    // check if the token can move forward
+    std::vector<Position> directions = {{1,1}, {1,-1}};
+
+    // invert direction if the token is owned by player 2
+    int multiplier = (grid.getElementAt(position).getPlayerId() == 2) ? -1 : 1;
+
+    // TODO : If king, check if the token can move backwards
+
+
+    // check if position is free
+    for(auto direction : directions) {
+        Position nextPosition = {position.row + direction.row*multiplier, position.col + direction.col*multiplier};
+
+        if(grid.isPositionInBounds(nextPosition)) {
+
+            // Check if adjacent position is free
+            if(grid.getElementAt(nextPosition).getPlayerId() == NO_PLAYER) {
+                return true;
+            } else if (grid.getElementAt(nextPosition).getPlayerId() != grid.getElementAt(position).getPlayerId()) {
+                // Check if the token can capture an enemy token
+                Position nextNextPosition = {nextPosition.row + direction.row*multiplier, nextPosition.col + direction.col*multiplier};
+
+                if(grid.isPositionInBounds(nextNextPosition) && grid.getElementAt(nextNextPosition).getPlayerId() == NO_PLAYER) {
+                    return true;
+                }
+            }
+
+
+        }
+    }
+
+
+}
+
+

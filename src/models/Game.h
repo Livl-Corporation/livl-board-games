@@ -39,7 +39,7 @@ public:
 
     virtual void nextRound();
 
-    void setEvaluator(std::shared_ptr<GameEvaluator> evaluator) { this->evaluator = std::move(evaluator); }
+    void setEvaluator(std::shared_ptr<GameEvaluator> _evaluator) { this->evaluator = std::move(_evaluator); }
 
     [[nodiscard]] std::shared_ptr<GameEvaluator> getEvaluator() const { return this->evaluator; }
 
