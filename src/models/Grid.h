@@ -18,6 +18,8 @@ public:
         this->defaultValue = defaultValue;
     }
 
+    explicit Grid(std::istream &stream) { this->deserialize(stream); }
+
     [[nodiscard]] inline GridSize getColCount() const { return this->colCount; };
 
     [[nodiscard]] inline GridSize getRowCount() const { return this->rowCount; };

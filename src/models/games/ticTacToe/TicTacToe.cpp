@@ -6,25 +6,48 @@
 #include "models/Grid.cpp"
 #include "models/evaluators/LinearGameEvaluator.h"
 
-TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE, 2, "Place your token between (1,1) to (3,3) : ") {
+TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE, playMode, 2, "Place your token between (1,1) to (3,3) : ") {
 
     Game::setEvaluator(std::make_shared<LinearGameEvaluator>(3));
 
+    this->initPlayers();
+
+    Token emptyToken{};
+    Grid<Token> grid1(rowCount, colCount,emptyToken);
+    this->setGrid(std::make_shared<Grid<Token>>(grid1));
+}
+
+TicTacToe::TicTacToe(std::istream &stream): Game(stream) {
+    Game::setEvaluator(std::make_shared<LinearGameEvaluator>(3));
+    this->initPlayers(stream);
+}
+
+void TicTacToe::initPlayers(std::istream &stream) {
+    std::function<void(Position)> callback = [this](auto && PH1) { onPositionSelected(std::forward<decltype(PH1)>(PH1)); };
+
+    this->addPlayer(std::make_shared<TicTacToeHumanPlayer>(stream, callback));
+
+    if(this->playMode == PlayMode::HUMAN_VS_HUMAN) {
+        this->addPlayer(std::make_shared<TicTacToeHumanPlayer>(stream, callback));
+    } else if (this->playMode == PlayMode::HUMAN_VS_AI) {
+        this->addPlayer(std::make_shared<TicTacToeComputerPlayer>(stream, callback));
+    } else {
+        throw UnimplementedPlayMode();
+    }
+}
+
+void TicTacToe::initPlayers() {
     std::function<void(Position)> callback = [this](auto && PH1) { onPositionSelected(std::forward<decltype(PH1)>(PH1)); };
     TicTacToeHumanPlayer p1(1, "Player 1", callback);
     this->addPlayer(std::make_shared<TicTacToeHumanPlayer>(p1));
 
-    if(playMode == PlayMode::HUMAN_VS_HUMAN) {
+    if(this->playMode == PlayMode::HUMAN_VS_HUMAN) {
         TicTacToeHumanPlayer p2(2, "Player 2", callback);
         this->addPlayer(std::make_shared<TicTacToeHumanPlayer>(p2));
-    } else if (playMode == PlayMode::HUMAN_VS_AI) {
+    } else if (this->playMode == PlayMode::HUMAN_VS_AI) {
         TicTacToeComputerPlayer p2(2, "BOT", callback);
         this->addPlayer(std::make_shared<TicTacToeComputerPlayer>(p2));
     } else {
         throw UnimplementedPlayMode();
     }
-
-    Token emptyToken{};
-    Grid<Token> grid1(rowCount, colCount,emptyToken);
-    this->setGrid(std::make_shared<Grid<Token>>(grid1));
 }

@@ -11,6 +11,7 @@
 class ConnectFourHumanPlayer : public Player {
 public:
     ConnectFourHumanPlayer(PlayerId id, std::string name, std::function<void(Position)> &_callback) : Player(id, std::move(name), _callback) {};
+    ConnectFourHumanPlayer(std::istream &stream, std::function<void(Position)> &_callback) : Player(stream, _callback) {};
 
     bool canInteract() override { return true; };
 };

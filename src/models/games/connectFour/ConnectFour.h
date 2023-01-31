@@ -15,8 +15,10 @@
 class ConnectFour : public Game {
 public:
     explicit ConnectFour(PlayMode playMode);
+    explicit ConnectFour(std::istream &stream);
     [[nodiscard]] static int firstRowAvailableInCol(const std::shared_ptr<Grid<Token>> &grid, int col) ;
-
+    void initPlayers() override;
+    void initPlayers(std::istream &stream) override;
 protected:
     void onPositionSelected(const Position &position) override;
 

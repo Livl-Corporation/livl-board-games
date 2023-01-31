@@ -106,4 +106,24 @@ void Grid<T>::serialize(std::ostream &stream) {
 template <typename T> requires std::is_base_of<Serializable, T>::value
 void Grid<T>::deserialize(std::istream &stream) {
 
+    T tmpDefaultValue;
+    tmpDefaultValue.deserialize(stream);
+    this->defaultValue = tmpDefaultValue;
+
+    stream >> this->colCount;
+    stream >> this->rowCount;
+
+    std::vector<std::vector<T>> tmpGrid(rowCount, std::vector<T>(colCount, defaultValue));
+
+    for (int row = 0; row < this->rowCount; row++)
+    {
+        for (int col = 0; col < this->colCount; col++)
+        {
+            T tmpCase;
+            tmpCase.deserialize(stream);
+            tmpGrid[row][col] = tmpCase;
+        }
+    }
+
+    this->grid = tmpGrid;
 }

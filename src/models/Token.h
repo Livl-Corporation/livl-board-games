@@ -17,6 +17,7 @@ public:
 
     Token() = default;
     explicit Token(const PlayerId playerId) : playerId(playerId), type(0) {}
+    explicit Token(std::istream &stream) { this->deserialize(stream); }
     Token(const PlayerId playerId, const TokenType _type) : playerId(playerId), type(_type) {}
     ~Token() = default;
     [[nodiscard]] PlayerId getPlayerId() const { return this->playerId; } ;
