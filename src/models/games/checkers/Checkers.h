@@ -7,6 +7,7 @@
 
 
 #include <optional>
+#include <stdexcept>
 #include "models/Game.h"
 #include "models/enums/PlayMode.h"
 #include "models/evaluators/LinearGameEvaluator.h"
@@ -19,12 +20,19 @@ class Checkers : public Game {
 public:
     explicit Checkers(PlayMode playMode);
 
-protected:
-    void onPositionSelected(Position position) override;
 private:
     static Grid<Token> initGrid();
     void selectOriginPosition(Position position);
+    void performMove(Position position);
     void moveOriginToPosition(Position position);
+
+    void captureEnemyToken(const Position &capturableEnemyPos);
+
+protected:
+    void onPositionSelected(Position position) override;
+    void afterPlacementAction(const PlayerId &playerId, const Position &position) override;
+
+private:
 
     std::optional<Position> originPosition;
     static constexpr GridSize colCount = 8;

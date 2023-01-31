@@ -3,6 +3,7 @@
 //
 
 #include "Checkers.h"
+#include <QDebug>
 
 Checkers::Checkers(PlayMode playMode) : Game("Checkers", GameMode::OTHELLO, 2, "Select a token you want to move.") {
 
@@ -31,7 +32,6 @@ Checkers::Checkers(PlayMode playMode) : Game("Checkers", GameMode::OTHELLO, 2, "
 Grid<Token> Checkers::initGrid()
 {
     Token emptyToken{};
-
     Grid<Token> grid1(rowCount, colCount, emptyToken);
 
     Token whiteToken{1};
@@ -57,9 +57,10 @@ Grid<Token> Checkers::initGrid()
 }
 
 void Checkers::onPositionSelected(Position position) {
+    qDebug() << "Checkers::Position selected: " << position.row << ", " << position.col;
     if (originPosition.has_value()) {
         // A position was selected, we can move the token from to originPosition to position
-        moveOriginToPosition(position);
+        performMove(position);
     } else {
         // No position was selected, we select the position
         selectOriginPosition(position);
@@ -79,11 +80,50 @@ void Checkers::selectOriginPosition(Position position) {
     }
 }
 
-void Checkers::moveOriginToPosition(Position position) {
-    if (CheckersEvaluator::isMoveValid(*getGrid(), getCurrentPlayer()->getId(), originPosition.value(), position)) {
 
+
+void Checkers::performMove(Position position) {
+    try {
+        if (CheckersEvaluator::isMoveValid(originPosition.value(), position)) {
+            // Move is valid, we move the token
+            moveOriginToPosition(position);
+
+            // After placement action
+            afterPlacementAction(getCurrentPlayer()->getId(), position);
+
+            // Change player turn
+            roundEnd();
+        } else {
+            throw std::invalid_argument("Invalid move.");
+        }
+    } catch (std::exception &e) {
+        Game::notifyError("You must select a valid destination position.");
+        Game::notifyAskForPosition("Select a destination position.");
     }
 }
+
+void Checkers::moveOriginToPosition(Position position) {
+    Token token = this->getGrid()->getElementAt(originPosition.value());
+    this->getGrid()->place(position, token);
+    this->getGrid()->replaceAt(originPosition.value(), Token {});
+}
+
+void Checkers::captureEnemyToken(const Position &capturableEnemyPos) {
+    getGrid()->replaceAt(capturableEnemyPos, Token{});
+}
+
+void Checkers::afterPlacementAction(const PlayerId &playerId, const Position &position) {
+    // Capture ennemy token if needed
+    std::optional<Position> capturableEnemyPos = CheckersEvaluator::getCapturableEnemyTokenPosition(*getGrid(), getCurrentPlayer()->getId(), originPosition.value(), position);
+    if (capturableEnemyPos.has_value()) {
+        captureEnemyToken(capturableEnemyPos.value());
+    }
+
+    // Reset origin position
+    originPosition.reset();
+}
+
+
 
 
 
