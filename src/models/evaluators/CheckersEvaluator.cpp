@@ -76,7 +76,10 @@ unsigned int CheckersEvaluator::getDialognalDistance(const Position &from, const
     return rowDistance;
 }
 
-bool CheckersEvaluator::canTokenMove(const Grid<Token> &grid, Position position) {
+std::vector<Position> CheckersEvaluator::getValidTokenMoves(const Grid<Token> &grid, Position position) {
+
+    std::vector<Position> validMoves;
+
     // check if the token can move forward
     std::vector<Position> directions = {{1,1}, {1,-1}};
 
@@ -85,8 +88,6 @@ bool CheckersEvaluator::canTokenMove(const Grid<Token> &grid, Position position)
 
     // TODO : If king, check if the token can move backwards
 
-
-    // check if position is free
     for(auto direction : directions) {
         Position nextPosition = {position.row + direction.row*multiplier, position.col + direction.col*multiplier};
 
@@ -94,20 +95,20 @@ bool CheckersEvaluator::canTokenMove(const Grid<Token> &grid, Position position)
 
             // Check if adjacent position is free
             if(grid.getElementAt(nextPosition).getPlayerId() == NO_PLAYER) {
-                return true;
+                validMoves.push_back(nextPosition);
             } else if (grid.getElementAt(nextPosition).getPlayerId() != grid.getElementAt(position).getPlayerId()) {
                 // Check if the token can capture an enemy token
                 Position nextNextPosition = {nextPosition.row + direction.row*multiplier, nextPosition.col + direction.col*multiplier};
 
                 if(grid.isPositionInBounds(nextNextPosition) && grid.getElementAt(nextNextPosition).getPlayerId() == NO_PLAYER) {
-                    return true;
+                    validMoves.push_back(nextNextPosition);
                 }
             }
-
 
         }
     }
 
+    return validMoves;
 
 }
 

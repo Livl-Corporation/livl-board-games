@@ -70,10 +70,13 @@ void Checkers::onPositionSelected(Position position) {
 void Checkers::selectOriginPosition(Position position) {
     // Check if selected position is a player token
     try {
+
         if (this->getGrid()->getElementAt(position).getPlayerId() == this->getCurrentPlayer()->getId()) {
 
+            validMoves = CheckersEvaluator::getValidTokenMoves(*getGrid(), position);
+
             // Check if the token can move
-            if(!CheckersEvaluator::canTokenMove(*getGrid(), position)) {
+            if(validMoves.empty()) {
                 throw std::invalid_argument("This token cannot move.");
             }
 
@@ -83,6 +86,7 @@ void Checkers::selectOriginPosition(Position position) {
         } else {
             throw std::invalid_argument("You must select one of your token.");
         }
+
     } catch (std::exception &e) {
         Game::notifyError(e.what());
         Game::notifyAskForPosition();
@@ -94,10 +98,9 @@ void Checkers::selectOriginPosition(Position position) {
 void Checkers::performMove(Position position) {
     try {
 
-        unsigned int diagonalDistance = CheckersEvaluator::getDialognalDistance(originPosition.value(), position);
-
-        if(diagonalDistance == 0 || diagonalDistance > 2) {
-            throw std::invalid_argument("Invalid move.");
+        // Check if validPosition contains position
+        if (std::find(validMoves.begin(), validMoves.end(), position) == validMoves.end()) {
+            throw std::invalid_argument("You must select a valid destination position.");
         }
 
         // Move is valid, we move the token

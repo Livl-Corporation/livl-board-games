@@ -8,6 +8,7 @@
 
 #include <optional>
 #include <stdexcept>
+#include <algorithm>
 #include "models/Game.h"
 #include "models/enums/PlayMode.h"
 #include "models/evaluators/LinearGameEvaluator.h"
@@ -35,6 +36,8 @@ protected:
 private:
 
     std::optional<Position> originPosition;
+    std::vector<Position> validMoves;
+
     static constexpr GridSize colCount = 8;
     static constexpr GridSize rowCount = 8;
 };
