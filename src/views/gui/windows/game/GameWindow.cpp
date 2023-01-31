@@ -20,14 +20,26 @@ GameWindow::~GameWindow()
 void GameWindow::createPlayers(const std::vector<std::shared_ptr<Player>>& players) {
     auto *layout = new QVBoxLayout();
     for (auto &player : players) {
+        auto *playerLayout = new QHBoxLayout();
+        Token *token = new Token(player->getId());
+
         auto *label = new QLabel();
         label->setAlignment(Qt::AlignCenter);
         label->setContentsMargins(10, 10, 10, 10);
         label->setObjectName("playerLabel"+QString::number(player->getId()));
         label->setText(QString::number(player->getId()) + " - " + QString::fromStdString(player->getName()));
-        layout->addWidget(label);
-        this->playerLabels.append(label);
-    }
+        playerLayout->addWidget(label);
+
+        auto *button = new QPushButton;
+        button->setFixedSize(50, 50);
+        button->setEnabled(false);
+        button->setText(QString::fromStdString(token->getDisplayString()));
+        std::string color = token->getDisplayColor();
+        button->setStyleSheet("QPushButton { background-color: " + QString::fromStdString(color) + "; border: 1px solid #777; color: " + (color == "black" ? "white" : "black") + "; font: bold 14px; }");
+        playerLayout->addWidget(button);
+
+        layout->addLayout(playerLayout);
+        this->playerLabels.append(label);}
     ui->playerListContainer->addLayout(layout);
 }
 
@@ -37,7 +49,7 @@ void GameWindow::setActivePlayer(const PlayerId &playerId) {
     ui->currentPlayerLabel->setText("It's player " + QString::number(playerId) + " turn");
 
     // Update in player list
-    for(QLabel* label : this->playerLabels) {
+   for(QLabel* label : this->playerLabels) {
         if (label != nullptr ) {
             if (label->objectName() == "playerLabel"+QString::number(playerId)) {
                 label->setStyleSheet("QLabel { background-color : blue; color : white; font-weight: bold; }");
@@ -45,7 +57,7 @@ void GameWindow::setActivePlayer(const PlayerId &playerId) {
                 label->setStyleSheet("QLabel { background-color : transparent; color : black; font-weight: normal; }");
             }
         }
-    }
+   }
 }
 
 void GameWindow::setInfoText(const std::string &message) {
@@ -131,7 +143,7 @@ void GameWindow::onReturnBackButtonClicked()
     int res = QMessageBox::warning(
             this,
             tr("Do you really want to leave your party ?"),
-            tr("All your party will be automatically saved."),
+            tr("Your party will be automatically saved !"),
             QMessageBox::Yes | QMessageBox::No
     );
 

@@ -6,36 +6,47 @@
 #define LIVL_TOKEN_H
 
 #include <string>
+#include <QDebug>
 #include "models/PlayerId.h"
 #include "interfaces/Serializable.h"
 
 typedef unsigned int TokenType;
 
-class Token: Serializable {
+class Token : Serializable {
 
 public:
 
-    Token() = default;
-    explicit Token(const PlayerId playerId) : playerId(playerId), type(0) {}
-    Token(const PlayerId playerId, const TokenType _type) : playerId(playerId), type(_type) {}
+    Token() : playerId(0), type(0) {
+        qDebug() << "Token created";
+    }
+    explicit Token(const PlayerId playerId) : playerId(playerId), type(0) {
+        qDebug() << "Token created";
+    }
+    Token(const PlayerId playerId, const TokenType _type) : playerId(playerId), type(_type) {
+        qDebug() << "Token created";
+    }
     ~Token() = default;
     [[nodiscard]] PlayerId getPlayerId() const { return this->playerId; } ;
+    void setPlayerId(PlayerId _playerId) {
+        this->playerId = _playerId;
+    };
+
     [[nodiscard]] TokenType getType() const { return this->type; } ;
-    void setType(TokenType _type) { this->type = _type; };
+    void setType(TokenType _type) { this->type = _type;};
 
     bool operator == (const Token &other) const
     {
         return this->playerId == other.playerId && this->type == other.type;
     }
 
-    [[nodiscard]] virtual char getDisplayChar() const;
+    virtual std::string getDisplayString() const;
     virtual std::string getDisplayColor() const;
 
     void serialize(std::ostream &stream) override;
     void deserialize(std::istream &stream) override;
 private:
 
-    unsigned int type;
+    TokenType type;
     PlayerId playerId;
 
 };

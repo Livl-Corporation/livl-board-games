@@ -23,22 +23,22 @@ Othello::Othello(PlayMode playMode) : Game("Othello", GameMode::OTHELLO, 2, "Pla
         throw UnimplementedPlayMode();
     }
 
-    Grid<Token> grid1 = initGrid();
-    this->setGrid(std::make_shared<Grid<Token>>(grid1));
+    std::shared_ptr<Grid<Token>> grid1 = std::make_shared<Grid<Token>>( initGrid());
+    this->setGrid(grid1);
 }
 
 Grid<Token> Othello::initGrid() {
-    Token emptyToken{};
+    std::shared_ptr<Token> emptyToken = std::make_shared<Token>(0);
 
     Grid<Token> grid1(rowCount, colCount, emptyToken);
 
-    Token whiteToken{1};
-    Token blackToken{2};
+    PlayerId whiteToken = 1;
+    PlayerId blackToken = 2;
 
-    grid1.place({3, 3}, whiteToken);
-    grid1.place({4, 4}, whiteToken);
-    grid1.place({3, 4}, blackToken);
-    grid1.place({4, 3}, blackToken);
+    grid1.getElementAt({3, 3})->setPlayerId(whiteToken);
+    grid1.getElementAt({4, 4})->setPlayerId(whiteToken);
+    grid1.getElementAt({3, 4})->setPlayerId(blackToken);
+    grid1.getElementAt({4, 3})->setPlayerId(blackToken);
 
     return grid1;
 }
@@ -73,8 +73,7 @@ void Othello::afterPlacementAction(const PlayerId &playerId, const Position &pos
         // Flip the opponent's tokens in this direction
         for (const Position &p : piecesToFlip)
         {
-            Token token{playerId};
-            getGrid()->replaceAt(p, token);
+            getGrid()->getElementAt(p)->setPlayerId(playerId);
         }
     }
 }

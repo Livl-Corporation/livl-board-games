@@ -1,7 +1,7 @@
 #include "Grid.h"
 
 template <typename T> requires std::is_base_of<Serializable, T>::value
-T Grid<T>::getElementAt(const Position &position) const
+std::shared_ptr<T> Grid<T>::getElementAt(const Position &position) const
 {
     if (!this->isPositionInBounds(position))
     {
@@ -14,7 +14,7 @@ T Grid<T>::getElementAt(const Position &position) const
 template <typename T> requires std::is_base_of<Serializable, T>::value
 bool Grid<T>::isPositionEmpty(const Position &position) const
 {
-    return this->getElementAt(position) == defaultValue;
+    return (*this->getElementAt(position)) == *defaultValue;
 }
 
 
@@ -34,36 +34,6 @@ template <typename T> requires std::is_base_of<Serializable, T>::value
 bool Grid<T>::isFull() const
 {
     return getEmptyPositions().size() == 0;
-}
-
-template <typename T> requires std::is_base_of<Serializable, T>::value
-void Grid<T>::place(const Position &position, const T &element)
-{
-    if (!this->isPositionInBounds(position))
-    {
-        throw OutOfBoundsException();
-    }
-
-    if (!this->isPositionEmpty(position))
-    {
-        throw OccupiedPositionException();
-    }
-
-    this->grid[position.row][position.col] = element;
-
-}
-
-template <typename T> requires std::is_base_of<Serializable, T>::value
-bool Grid<T>::replaceAt(const Position &position, const T &element)
-{
-    if (!this->isPositionInBounds(position))
-    {
-        throw OutOfBoundsException();
-    }
-
-    this->grid[position.row][position.col] = element;
-
-    return true;
 }
 
 template <typename T> requires std::is_base_of<Serializable, T>::value
@@ -88,7 +58,7 @@ std::vector<Position> Grid<T>::getEmptyPositions() const
 
 template <typename T> requires std::is_base_of<Serializable, T>::value
 void Grid<T>::serialize(std::ostream &stream) {
-    defaultValue.serialize(stream);
+    defaultValue->serialize(stream);
 
     stream << this->colCount << std::endl;
     stream << this->rowCount << std::endl;
@@ -97,7 +67,7 @@ void Grid<T>::serialize(std::ostream &stream) {
     {
         for (int col = 0; col < this->colCount; col++)
         {
-            this->grid[row][col].serialize(stream);
+            this->grid[row][col]->serialize(stream);
         }
     }
 
