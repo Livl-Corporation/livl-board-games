@@ -10,7 +10,9 @@
 #include "controllers/MenuController.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MenuWindow; }
+namespace Ui {
+    class MenuWindow;
+}
 QT_END_NAMESPACE
 
 class MenuWindow : public QMainWindow

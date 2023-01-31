@@ -30,6 +30,8 @@ int setupGui() {
     return QApplication::exec();
 }
 
+
+
 int main(int argc, char *argv[]) {
     // Run with param -console use the cli
     bool useConsole = argc > 1 && std::string(argv[1]) == "-console";

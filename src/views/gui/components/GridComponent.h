@@ -29,7 +29,7 @@ public:
     QGridLayout* getGridLayout() { return this->gridLayout; };
 
     ~GridComponent() override;
-
+    void disableGridButtons();
 private:
 
     void createGrid(const Grid<Token> &grid);

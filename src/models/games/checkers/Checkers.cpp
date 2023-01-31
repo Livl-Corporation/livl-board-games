@@ -85,6 +85,7 @@ void Checkers::onPositionSelected(const Position &position) {
     if (originPosition.has_value()) {
         // A position was selected, we can move the token from to originPosition to position
         performMove(position);
+        originPosition.reset();
     } else {
         // No position was selected, we select the position
         selectOriginPosition(position);

@@ -20,3 +20,4 @@ void GameController::onPositionSelected(const Position &position) {
         currentPlayer->onPositionSelected(position);
     }
 }
+
