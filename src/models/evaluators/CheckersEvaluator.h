@@ -16,13 +16,13 @@ public:
 
     [[nodiscard]] PlayerId getWinner(const Grid<Token> &grid) const override;
 
-    bool isMoveValid(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, const Position &to) const;
+    static bool isMoveValid(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, const Position &to) const;
 
-    bool captureEnemyToken(std::shared_ptr<Grid<Token>> &grid, const Position &from, const Position &to) const;
+    static bool captureEnemyToken(std::shared_ptr<Grid<Token>> &grid, const Position &from, const Position &to) const;
 
-    bool isCaptureMove(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, const Position &to) const;
+    static bool isCaptureMove(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, const Position &to) const;
 
-    bool forceEnemyToCaptureEnemy(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, Position &capturableEnemyPos) const;
+    static bool forceEnemyToCaptureEnemy(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, Position &capturableEnemyPos) const;
 
 };
 
