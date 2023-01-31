@@ -10,8 +10,9 @@ Checkers::Checkers(PlayMode playMode) : Game("Checkers", GameMode::OTHELLO, play
     Game::setEvaluator(std::make_shared<CheckersEvaluator>());
     this->initPlayers();
 
-    Grid<Token> grid1 = initGrid();
-    this->setGrid(std::make_shared<Grid<Token>>(grid1));
+    Grid<Token> grid = initGrid();
+    std::shared_ptr<Grid<Token>> gridcp = std::make_shared<Grid<Token>>(grid);
+    this->setGrid(gridcp);
 }
 
 Checkers::Checkers(std::istream &stream): Game(stream) {

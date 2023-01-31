@@ -88,7 +88,8 @@ std::vector<Position> CheckersEvaluator::getValidTokenMoves(const Grid<Token> &g
 
         if(grid.isPositionInBounds(nextPosition)) {
 
-            if (grid.getElementAt(nextPosition)->getPlayerId() != grid.getElementAt(position)->getPlayerId()) {
+            PlayerId nextPositionId = grid.getElementAt(nextPosition)->getPlayerId();
+            if (nextPositionId != grid.getElementAt(position)->getPlayerId() && nextPositionId != NO_PLAYER) {
                 // Check if the token can capture an enemy token
                 Position nextNextPosition = {nextPosition.row + direction.row*multiplier, nextPosition.col + direction.col*multiplier};
 
