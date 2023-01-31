@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QMessageBox>
 #include <QCoreApplication>
 #include <QAbstractButton>
 #include "ui_GameWindow.h"

@@ -128,7 +128,17 @@ void GameWindow::updateGameEnd(const std::string &message) {
 
 void GameWindow::onReturnBackButtonClicked()
 {
-    this->parent->show();
-    this->close();
+    int res = QMessageBox::warning(
+this,
+ tr("Voulez-vous vraiment quitter la partie en cours ?"),
+ tr("Votre partie est automatiquement sauvegardée."),
+ QMessageBox::Yes | QMessageBox::No
+     );
+
+    if (res == QMessageBox::Yes) {
+        this->parent->show();
+        this->close();
+    }
+
 }
 
