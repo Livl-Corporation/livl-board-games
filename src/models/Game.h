@@ -29,7 +29,7 @@ public:
 
     [[nodiscard]] Round getRound() const { return this->round; };
 
-    [[nodiscard]] std::shared_ptr<Grid<Token>> getGrid() const {return this->grid; }
+    [[nodiscard]] std::shared_ptr<Grid<Token>> getGrid() {return this->grid; }
 
     [[nodiscard]] std::vector<std::shared_ptr<Player>> getPlayers() const { return this->players; }
 
@@ -72,7 +72,7 @@ protected:
     Game(std::istream &stream) { this->deserialize(stream); }
 
     void addPlayer(const std::shared_ptr<Player> &player);
-    void setGrid(std::shared_ptr<Grid<Token>> grid);
+    void setGrid(std::shared_ptr<Grid<Token>> &grid);
     void incrementRound() { this->round++; }
 
     void saveGame();

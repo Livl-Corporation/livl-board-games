@@ -17,6 +17,8 @@
 #include "models/games/checkers/players/CheckersComputerPlayer.h"
 #include "models/exceptions/UnimplementedPlayMode.h"
 #include "models/evaluators/CheckersEvaluator.h"
+#include "models/games/checkers/tokens/CheckersTokenType.h"
+#include "models/games/checkers/tokens/CheckersToken.h"
 
 class Checkers : public Game {
 public:
@@ -42,6 +44,7 @@ private:
     [[nodiscard]] bool isPositionValid(const Position &position) const;
     bool forceCaptureIfPossible();
     bool forceCaptureIfPossible(const Position &position);
+    bool shouldBecomeKing(const Position &position);
 
     std::optional<Position> originPosition;
     std::vector<Position> validMoves;

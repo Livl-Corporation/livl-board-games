@@ -4,9 +4,9 @@
 
 #include "Token.h"
 
-char Token::getDisplayChar() const {
+std::string Token::getDisplayString() const {
     // Return X for player 1, O for player 2, and space for empty
-    return this->playerId == 1 ? 'X' : this->playerId == 2 ? 'O' : ' ';
+    return std::string { this->playerId == 1 ? "X" : this->playerId == 2 ? "O" : " " };
 }
 
 std::string Token::getDisplayColor() const {

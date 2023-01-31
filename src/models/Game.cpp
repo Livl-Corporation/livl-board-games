@@ -9,7 +9,7 @@ void Game::addPlayer(const std::shared_ptr<Player> &player) {
     this->players.push_back(player);
 }
 
-void Game::setGrid(std::shared_ptr<Grid<Token>> _grid) {
+void Game::setGrid(std::shared_ptr<Grid<Token>> &_grid) {
     this->grid = std::move(_grid);
 }
 
@@ -99,10 +99,10 @@ void Game::nextRound() {
 }
 
 void Game::onPositionSelected(const Position &position) {
-    Token token(this->getCurrentPlayer()->getId());
+    PlayerId playerId = this->getCurrentPlayer()->getId();
 
     try {
-        this->getGrid()->place(position, token);
+        this->getGrid()->getElementAt(position)->setPlayerId(playerId);
         afterPlacementAction(getCurrentPlayer()->getId(), position);
         roundEnd();
     } catch (std::exception &e) {
@@ -173,5 +173,5 @@ void Game::deserialize(std::istream &stream) {
     stream >> tmp;
     this->playMode = static_cast<PlayMode>(tmp);
 
-    this->setGrid(std::make_shared<Grid<Token>>(stream));
+    this->grid = std::make_shared<Grid<Token>>(stream);
 }

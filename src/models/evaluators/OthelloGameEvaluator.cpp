@@ -21,7 +21,7 @@ PlayerId OthelloGameEvaluator::getWinner(const Grid<Token> &grid) const
     {
         for (int j = 0; j < grid.getColCount(); j++)
         {
-            PlayerId idInCell = grid.getElementAt({i, j}).getPlayerId();
+            PlayerId idInCell = grid.getElementAt({i, j})->getPlayerId();
             if (idInCell == 1)
             {
                 player1Tokens++;
@@ -63,7 +63,7 @@ bool OthelloGameEvaluator::canPlaceToken(const Position &pos, PlayerId playerId,
         bool foundOpponent = false;
         while (grid.isPositionInBounds({row, col}))
         {
-            PlayerId idInCell = grid.getElementAt({row, col}).getPlayerId();
+            PlayerId idInCell = grid.getElementAt({row, col})->getPlayerId();
             if (idInCell == NO_PLAYER)
             {
                 break;
@@ -102,7 +102,7 @@ std::vector<Position> OthelloGameEvaluator::getValidPositions(const PlayerId &pl
             Position pos{i, j};
             // If the cell is empty and there are flippable pieces in at least one direction,
             // add the position to the list of valid positions
-            if (grid.getElementAt(pos).getPlayerId() == NO_PLAYER && OthelloGameEvaluator::canPlaceToken(pos, playerId, grid))
+            if (grid.getElementAt(pos)->getPlayerId() == NO_PLAYER && OthelloGameEvaluator::canPlaceToken(pos, playerId, grid))
             {
                 validPositions.push_back(pos);
             }
@@ -148,7 +148,7 @@ std::vector<Position> OthelloGameEvaluator::getFlippablePieces(const Position &p
 
     while (grid.isPositionInBounds({row, col}))
     {
-        PlayerId idInCell = grid.getElementAt({row, col}).getPlayerId();
+        PlayerId idInCell = grid.getElementAt({row, col})->getPlayerId();
 
         // We reached a sequence of our own tokens, so we can stop searching in this direction
         if (idInCell == playerId)
