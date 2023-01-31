@@ -1,8 +1,8 @@
 #include <QApplication>
 #include <QPushButton>
 #include <memory>
-#include "views/gui/windows/menu/MenuWindow.h"
 #include "controllers/MenuController.h"
+#include "views/gui/windows/menu/MenuWindow.h"
 #include "views/cli/menu/MenuConsole.h"
 
 int setupConsole() {
@@ -29,6 +29,8 @@ int setupGui() {
 
     return QApplication::exec();
 }
+
+
 
 int main(int argc, char *argv[]) {
 

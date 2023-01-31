@@ -9,12 +9,15 @@
 #include "../../components/GridComponent.h"
 #include "models/interfaces/Player.h"
 #include "models/Token.h"
-#include "controllers/GameController.h"
-#include "views/interfaces/GameView.h"
 
+#include "views/interfaces/GameView.h"
+#include <iostream>
+
+QT_BEGIN_NAMESPACE
 namespace Ui {
-class GameWindow;
+    class GameWindow;
 }
+QT_END_NAMESPACE
 
 class GameWindow : public QMainWindow, public GameView
 {
@@ -58,5 +61,7 @@ public:
 private:
     Ui::GameWindow *ui;
     QVector<QLabel*> playerLabels;
+    QWidget* parent;
     std::shared_ptr<GridComponent> gridComponent;
+    void onReturnBackButtonClicked();
 };
