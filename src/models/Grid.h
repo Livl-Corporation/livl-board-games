@@ -2,6 +2,8 @@
 #define LIVL_GRID_H
 
 #include <vector>
+#include <memory>
+
 #include "Position.h"
 #include "models/exceptions/OutOfBoundsException.h"
 #include "models/exceptions/OccupiedPositionException.h"
@@ -13,8 +15,8 @@ class Grid: Serializable {
 
 public:
 
-    Grid(GridSize rows, GridSize cols, T &defaultValue)
-    : colCount(cols), rowCount(rows), grid(rows, std::vector<T>(cols, defaultValue)) {
+    Grid(GridSize rows, GridSize cols, std::shared_ptr<T> &defaultValue)
+    : colCount(cols), rowCount(rows), grid(rows, std::vector<std::shared_ptr<T>>(cols, defaultValue)) {
         this->defaultValue = defaultValue;
     }
 
@@ -30,11 +32,11 @@ public:
 
     [[nodiscard]] bool isFull() const;
 
-    void place(const Position &position, const T &element);
+    void place(const Position &position, const std::shared_ptr<T> &element);
 
-    bool replaceAt(const Position &position, const T &element);
+    bool replaceAt(const Position &position, const std::shared_ptr<T> &element);
 
-    T getElementAt(const Position &position) const;
+    std::shared_ptr<T> getElementAt(const Position &position) const;
 
     [[nodiscard]] std::vector<Position> getEmptyPositions() const;
 
@@ -45,8 +47,8 @@ public:
 private:
     GridSize colCount;
     GridSize rowCount;
-    std::vector<std::vector<T>> grid;
-    T defaultValue;
+    std::vector<std::vector<std::shared_ptr<T>>> grid;
+    std::shared_ptr<T> defaultValue;
 };
 
 #endif //LIVL_GRID_H

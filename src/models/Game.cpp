@@ -101,7 +101,7 @@ void Game::onPositionSelected(const Position &position) {
     Token token(this->getCurrentPlayer()->getId());
 
     try {
-        this->getGrid()->place(position, token);
+        this->getGrid()->place(position, std::make_shared<Token>(token));
         afterPlacementAction(getCurrentPlayer()->getId(), position);
         roundEnd();
     } catch (std::exception &e) {

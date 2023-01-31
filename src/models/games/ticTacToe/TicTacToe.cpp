@@ -24,7 +24,7 @@ TicTacToe::TicTacToe(PlayMode playMode) : Game("TicTacToe", GameMode::TICTACTOE,
         throw UnimplementedPlayMode();
     }
 
-    Token emptyToken{};
-    Grid<Token> grid1(rowCount, colCount,emptyToken);
+    std::shared_ptr<Token> emptyToken = std::make_shared<Token>(0);
+    Grid<Token> grid1(rowCount, colCount, emptyToken);
     this->setGrid(std::make_shared<Grid<Token>>(grid1));
 }

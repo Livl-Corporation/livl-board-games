@@ -28,12 +28,12 @@ Othello::Othello(PlayMode playMode) : Game("Othello", GameMode::OTHELLO, 2, "Pla
 }
 
 Grid<Token> Othello::initGrid() {
-    Token emptyToken{};
+    std::shared_ptr<Token> emptyToken = std::make_shared<Token>(0);
 
     Grid<Token> grid1(rowCount, colCount, emptyToken);
 
-    Token whiteToken{1};
-    Token blackToken{2};
+    std::shared_ptr<Token> whiteToken = std::make_shared<Token>(1);
+    std::shared_ptr<Token> blackToken = std::make_shared<Token>(2);
 
     grid1.place({3, 3}, whiteToken);
     grid1.place({4, 4}, whiteToken);
@@ -73,8 +73,7 @@ void Othello::afterPlacementAction(const PlayerId &playerId, const Position &pos
         // Flip the opponent's tokens in this direction
         for (const Position &p : piecesToFlip)
         {
-            Token token{playerId};
-            getGrid()->replaceAt(p, token);
+            getGrid()->replaceAt(p, std::make_shared<Token>(playerId));
         }
     }
 }

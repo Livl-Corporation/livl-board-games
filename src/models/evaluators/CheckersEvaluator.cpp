@@ -57,7 +57,7 @@ std::optional<Position> CheckersEvaluator::getCapturableEnemyTokenPosition(const
     int enemyTokenRow = (from.row + to.row) / 2;
     int enemyTokenCol = (from.col + to.col) / 2;
 
-    PlayerId middleTokenPlayerId = grid.getElementAt({enemyTokenRow, enemyTokenCol}).getPlayerId();
+    PlayerId middleTokenPlayerId = grid.getElementAt({enemyTokenRow, enemyTokenCol})->getPlayerId();
     if (middleTokenPlayerId != NO_PLAYER && middleTokenPlayerId != playerId) {
         Position enemyTokenPos = {enemyTokenRow, enemyTokenCol};
         return enemyTokenPos;
@@ -70,7 +70,7 @@ std::vector<Position> CheckersEvaluator::getValidTokenMoves(const Grid<Token> &g
 
     std::vector<Position> validMoves;
 
-    Token token = grid.getElementAt(position);
+    Token token = *grid.getElementAt(position);
 
     // check if the token can move forward
     std::vector<Position> directions = {{1,1}, {1,-1}};
@@ -90,13 +90,13 @@ std::vector<Position> CheckersEvaluator::getValidTokenMoves(const Grid<Token> &g
         if(grid.isPositionInBounds(nextPosition)) {
 
             // Check if adjacent position is free
-            if(grid.getElementAt(nextPosition).getPlayerId() == NO_PLAYER) {
+            if(grid.getElementAt(nextPosition)->getPlayerId() == NO_PLAYER) {
                 validMoves.push_back(nextPosition);
-            } else if (grid.getElementAt(nextPosition).getPlayerId() != grid.getElementAt(position).getPlayerId()) {
+            } else if (grid.getElementAt(nextPosition)->getPlayerId() != grid.getElementAt(position)->getPlayerId()) {
                 // Check if the token can capture an enemy token
                 Position nextNextPosition = {nextPosition.row + direction.row*multiplier, nextPosition.col + direction.col*multiplier};
 
-                if(grid.isPositionInBounds(nextNextPosition) && grid.getElementAt(nextNextPosition).getPlayerId() == NO_PLAYER) {
+                if(grid.isPositionInBounds(nextNextPosition) && grid.getElementAt(nextNextPosition)->getPlayerId() == NO_PLAYER) {
                     validMoves.push_back(nextNextPosition);
                 }
             }
