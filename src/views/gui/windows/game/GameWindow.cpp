@@ -33,7 +33,7 @@ void GameWindow::createPlayers(const std::vector<std::shared_ptr<Player>>& playe
         auto *button = new QPushButton;
         button->setFixedSize(50, 50);
         button->setEnabled(false);
-        button->setText(QChar(token->getDisplayChar()));
+        button->setText(QString::fromStdString(token->getDisplayString()));
         std::string color = token->getDisplayColor();
         button->setStyleSheet("QPushButton { background-color: " + QString::fromStdString(color) + "; border: 1px solid #777; color: " + (color == "black" ? "white" : "black") + "; font: bold 14px; }");
         playerLayout->addWidget(button);
