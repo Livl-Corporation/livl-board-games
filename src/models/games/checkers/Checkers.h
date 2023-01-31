@@ -19,7 +19,7 @@
 class Checkers : public Game {
 public:
     explicit Checkers(PlayMode playMode);
-
+    explicit Checkers(std::istream &stream);
 private:
     static Grid<Token> initGrid();
     void selectOriginPosition(const Position &position);
@@ -30,7 +30,8 @@ private:
 protected:
     void onPositionSelected(const Position &position) override;
     void afterPlacementAction(const PlayerId &playerId, const Position &position) override;
-
+    void initPlayers() override;
+    void initPlayers(std::istream &stream) override;
 private:
 
     std::optional<Position> originPosition;

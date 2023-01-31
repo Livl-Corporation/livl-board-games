@@ -12,6 +12,7 @@ class OthelloHumanPlayer : public Player {
 
 public:
     OthelloHumanPlayer(PlayerId id, std::string name, std::function<void(Position)> &_callback) : Player(id, std::move(name), _callback) {};
+    OthelloHumanPlayer(std::istream &stream, std::function<void(Position)> &_callback): Player(stream, _callback) {};
     bool canInteract() override { return true; }
 
 };

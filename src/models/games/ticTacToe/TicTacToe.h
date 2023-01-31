@@ -15,6 +15,9 @@
 class TicTacToe : public Game {
 public:
     explicit TicTacToe(PlayMode playMode);
+    explicit TicTacToe(std::istream &stream);
+    void initPlayers() override;
+    void initPlayers(std::istream &stream) override;
 
 private:
     static constexpr GridSize colCount = 3;

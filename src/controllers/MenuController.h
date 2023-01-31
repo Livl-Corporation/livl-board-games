@@ -8,6 +8,8 @@
 
 #include <utility>
 #include <memory>
+#include <filesystem>
+#include <fstream>
 
 #include "models/Game.h"
 #include "GameController.h"

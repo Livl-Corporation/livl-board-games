@@ -1,7 +1,6 @@
 #include <QApplication>
 #include <QPushButton>
 #include <memory>
-#include <fstream>
 #include "views/gui/windows/menu/MenuWindow.h"
 #include "controllers/MenuController.h"
 #include "views/cli/menu/MenuConsole.h"

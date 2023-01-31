@@ -23,6 +23,7 @@ void MenuController::onGameChoose(GameMode gameSelection, PlayMode playerSelecti
 }
 
 std::shared_ptr<Game> MenuController::createGame(GameMode gameMode, PlayMode playerSelection) {
+
     switch (gameMode) {
         case GameMode::TICTACTOE:
             return std::make_shared<TicTacToe>(playerSelection);

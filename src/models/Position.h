@@ -14,6 +14,7 @@ public:
     int col;
 
     Position() = default;
+    explicit Position(std::istream &stream) { this->deserialize(stream); }
     Position(int row, int col): row(row), col(col) {};
 
     void serialize(std::ostream &stream) override;

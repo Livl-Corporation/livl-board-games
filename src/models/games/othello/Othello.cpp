@@ -5,10 +5,21 @@
 #include "Othello.h"
 #include "models/Grid.cpp"
 
-Othello::Othello(PlayMode playMode) : Game("Othello", GameMode::OTHELLO, 2, "Place your token next to an opponent token to flip it.") {
+Othello::Othello(std::istream &stream): Game(stream) {
+    Game::setEvaluator(std::make_shared<OthelloGameEvaluator>());
+    this->initPlayers(stream);
+}
+
+Othello::Othello(PlayMode playMode) : Game("Othello", GameMode::OTHELLO, playMode, 2, "Place your token next to an opponent token to flip it.") {
 
     Game::setEvaluator(std::make_shared<OthelloGameEvaluator>());
+    this->initPlayers();
 
+    Grid<Token> grid1 = initGrid();
+    this->setGrid(std::make_shared<Grid<Token>>(grid1));
+}
+
+void Othello::initPlayers() {
     std::function<void(Position)> callback = [this](auto && PH1) { onPositionSelected(std::forward<decltype(PH1)>(PH1)); };
     OthelloHumanPlayer p1(1, "Player 1", callback);
     this->addPlayer(std::make_shared<OthelloHumanPlayer>(p1));
@@ -22,9 +33,20 @@ Othello::Othello(PlayMode playMode) : Game("Othello", GameMode::OTHELLO, 2, "Pla
     } else {
         throw UnimplementedPlayMode();
     }
+}
 
-    Grid<Token> grid1 = initGrid();
-    this->setGrid(std::make_shared<Grid<Token>>(grid1));
+void Othello::initPlayers(std::istream &stream) {
+    std::function<void(Position)> callback = [this](auto && PH1) { onPositionSelected(std::forward<decltype(PH1)>(PH1)); };
+
+    this->addPlayer(std::make_shared<OthelloHumanPlayer>(stream, callback));
+
+    if(this->playMode == PlayMode::HUMAN_VS_HUMAN) {
+        this->addPlayer(std::make_shared<OthelloHumanPlayer>(stream, callback));
+    } else if (this->playMode == PlayMode::HUMAN_VS_AI) {
+        this->addPlayer(std::make_shared<OthelloComputerPlayer>(stream, callback));
+    } else {
+        throw UnimplementedPlayMode();
+    }
 }
 
 Grid<Token> Othello::initGrid() {

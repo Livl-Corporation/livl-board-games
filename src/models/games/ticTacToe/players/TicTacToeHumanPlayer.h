@@ -10,6 +10,7 @@
 
 class TicTacToeHumanPlayer : public Player {
 public :
+    TicTacToeHumanPlayer(std::istream &stream, std::function<void(Position)> &_callback): Player(stream, _callback) {};
     TicTacToeHumanPlayer(PlayerId id, std::string name, std::function<void(Position)> &_callback) : Player(id, std::move(name), _callback) {};
     bool canInteract() override { return true; };
 };

@@ -10,6 +10,7 @@
 class CheckersHumanPlayer : public Player {
 public:
     CheckersHumanPlayer(PlayerId id, std::string name, std::function<void(Position)> &_callback) : Player(id, std::move(name), _callback) {};
+    CheckersHumanPlayer(std::istream &stream, std::function<void(Position)> &_callback): Player(stream, _callback) {};
     bool canInteract() override { return true; };
 };
 

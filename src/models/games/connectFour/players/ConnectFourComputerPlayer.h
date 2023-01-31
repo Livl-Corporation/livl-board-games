@@ -14,6 +14,7 @@
 class ConnectFourComputerPlayer : public Player {
 public:
     ConnectFourComputerPlayer(PlayerId id, std::string name, std::function<void(Position)> &_callback) : Player(id, std::move(name), _callback) {};
+    ConnectFourComputerPlayer(std::istream &stream, std::function<void(Position)> &_callback) : Player(stream, _callback) {};
     void play(const std::shared_ptr<Grid<Token>> &grid) override;
     bool canInteract() override { return false; };
 };
