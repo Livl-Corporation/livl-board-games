@@ -5,7 +5,6 @@
 #ifndef LIVL_CONNECTFOUR_H
 #define LIVL_CONNECTFOUR_H
 
-
 #include "models/Game.h"
 #include "models/enums/PlayMode.h"
 #include "models/evaluators/LinearGameEvaluator.h"
@@ -21,11 +20,9 @@ public:
 protected:
     void onPositionSelected(Position position) override;
 
-    void nextRound() override;
-
 private:
-    static constexpr GridSize xSize = 7;
-    static constexpr GridSize ySize = 6;
+    static constexpr GridSize colCount = 7;
+    static constexpr GridSize rowCount = 6;
 };
 
 

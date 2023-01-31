@@ -10,10 +10,10 @@
 class Position: Serializable
 {
 public:
-    int x;
-    int y;
+    int row;
+    int col;
 
-    Position(int x, int y): x(x), y(y) {};
+    Position(int row, int col): row(row), col(col) {};
 
     void serialize(std::ostream &stream) override;
     void deserialize(std::istream &stream) override;

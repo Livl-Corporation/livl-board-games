@@ -2,7 +2,7 @@
 // Created by Julien on 29/01/2023.
 //
 
-#include <iostream>
+#include <QDebug>
 #include "ConnectFour.h"
 
 ConnectFour::ConnectFour(PlayMode playMode)
@@ -25,44 +25,24 @@ ConnectFour::ConnectFour(PlayMode playMode)
     }
 
     Token emptyToken{};
-    Grid<Token> grid1(xSize, ySize, emptyToken);
+    Grid<Token> grid1(rowCount, colCount, emptyToken);
     this->setGrid(std::make_shared<Grid<Token>>(grid1));
 }
 
-
-void ConnectFour::nextRound() {
-    incrementRound();
-    Game::notifyAskForPosition();
-}
-
 void ConnectFour::onPositionSelected(Position position) {
-    Token token(this->getCurrentPlayer()->getId());
 
     try {
+
         // Check if the column is valid
-        if (position.x < 0 || position.x > this->getGrid()->getXSize())
+        if (position.col < 0 || position.col > this->getGrid()->getColCount())
         {
             throw OutOfBoundsException();
         }
 
-        position.y = firstRowAvailableInCol(this->getGrid(), position.y);
-        std::cout << "Position x: " << position.x << "Position y " << position.y << std::endl;
-        this->getGrid()->place(position, token);
+        int row = firstRowAvailableInCol(this->getGrid(), position.col);
+        qDebug() << "ConnectFour::onPositionSelected() with position row : " << position.row << " , col : " << position.col << "\n";
 
-        Game::notifyGrid();
-
-        if (this->getEvaluator()->hasGameEnded(*getGrid(), getPlayerId(getRound()+1))) {
-
-            PlayerId winner = this->getEvaluator()->getWinner(*getGrid());
-            if (winner == 0) {
-                Game::notifyGameEnd("Draw");
-            } else {
-                Game::notifyGameEnd("Player " + std::to_string(winner) + " wins");
-            }
-
-        } else {
-            nextRound();
-        }
+        Game::onPositionSelected({row, position.col});
 
     } catch (std::exception &e) {
         Game::notifyError(e.what());
@@ -72,21 +52,14 @@ void ConnectFour::onPositionSelected(Position position) {
 
 int ConnectFour::firstRowAvailableInCol(const std::shared_ptr<Grid<Token>> &grid, int col)
 {
-    Position position{col, static_cast<int>((grid->getYSize()-1))};
-
-    while (!grid->isPositionEmpty(position))
+    // Get the first available row in given colomn
+    for (int row = grid->getRowCount()-1; row >= 0; row--)
     {
-
-        if (position.y == 0)
+        if (grid->isPositionEmpty({row, col}))
         {
-            // If there is no row available in this col, throw an exception & exit function
-            throw ColumnFullException();
-        }
-        else
-        {
-            position.y--;
+            qDebug() << "ConnectFour::firstRowAvailableInCol() with position row : " << row << " , col : " << col << "\n";
+            return row;
         }
     }
-
-    return position.y;
+    return 0;
 }

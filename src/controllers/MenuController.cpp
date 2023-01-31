@@ -28,6 +28,10 @@ std::shared_ptr<Game> MenuController::createGame(GameMode gameMode, PlayMode pla
             return std::make_shared<TicTacToe>(playerSelection);
         case GameMode::CONNECT4:
             return std::make_shared<ConnectFour>(playerSelection);
+        case GameMode::OTHELLO:
+            return std::make_shared<Othello>(playerSelection);
+        case GameMode::CHECKERS:
+            return std::make_shared<Checkers>(playerSelection);
         default:
             return nullptr;
     }

@@ -41,7 +41,6 @@ add_executable(Livl
         src/models/enums/GameMode.h
         src/models/games/ticTacToe/TicTacToe.cpp
         src/models/games/ticTacToe/TicTacToe.h
-        src/models/games/ticTacToe/players/TicTacToeHumanPlayer.cpp
         src/models/games/ticTacToe/players/TicTacToeHumanPlayer.h
         src/models/games/ticTacToe/players/TicTacToeComputerPlayer.cpp
         src/models/games/ticTacToe/players/TicTacToeComputerPlayer.h
@@ -66,7 +65,6 @@ add_executable(Livl
         src/models/games/connectFour/ConnectFour.h
         src/models/games/connectFour/players/ConnectFourComputerPlayer.cpp
         src/models/games/connectFour/players/ConnectFourComputerPlayer.h
-        src/models/games/connectFour/players/ConnectFourHumanPlayer.cpp
         src/models/games/connectFour/players/ConnectFourHumanPlayer.h
         src/models/interfaces/Serializable.h
         src/models/Position.cpp)

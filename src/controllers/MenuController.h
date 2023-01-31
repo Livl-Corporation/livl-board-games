@@ -16,6 +16,8 @@
 #include "models/games/ticTacToe/TicTacToe.h"
 #include "views/gui/windows/game/GameWindow.h"
 #include "models/games/connectFour/ConnectFour.h"
+#include "models/games/othello/Othello.h"
+#include "models/games/checkers/Checkers.h"
 
 class MenuController {
 

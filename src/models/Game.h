@@ -37,7 +37,7 @@ public:
 
     [[nodiscard]] unsigned int getNumberOfInputValues() const { return this->numberOfInputValues; }
 
-    virtual void nextRound() = 0;
+    virtual void nextRound();
 
     void setEvaluator(std::shared_ptr<GameEvaluator> evaluator) { this->evaluator = std::move(evaluator); }
 
@@ -68,9 +68,8 @@ protected:
     void addPlayer(const std::shared_ptr<Player> &player);
     void setGrid(std::shared_ptr<Grid<Token>> grid);
 
-    void incrementRound() { this->round++; notifyRound(); }
-
-    virtual void onPositionSelected(Position position) = 0;
+    virtual void onPositionSelected(Position position);
+    virtual void afterPlacementAction(const PlayerId &playerId, const Position &position){};
 
 private:
     std::vector<std::shared_ptr<Player>> players;

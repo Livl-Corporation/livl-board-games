@@ -13,14 +13,14 @@ class Grid: Serializable {
 
 public:
 
-    Grid(GridSize x, GridSize y, T &defaultValue)
-    : xSize(x), ySize(y), grid(y, std::vector<T>(x, defaultValue)) {
+    Grid(GridSize rows, GridSize cols, T &defaultValue)
+    : colCount(cols), rowCount(rows), grid(rows, std::vector<T>(cols, defaultValue)) {
         this->defaultValue = defaultValue;
     }
 
-    [[nodiscard]] inline GridSize getXSize() const { return this->xSize; };
+    [[nodiscard]] inline GridSize getColCount() const { return this->colCount; };
 
-    [[nodiscard]] inline GridSize getYSize() const { return this->ySize; };
+    [[nodiscard]] inline GridSize getRowCount() const { return this->rowCount; };
 
     [[nodiscard]] bool isPositionEmpty(const Position &position) const;
 
@@ -43,8 +43,8 @@ public:
     void deserialize(std::istream &stream) override;
 
 private:
-    GridSize xSize;
-    GridSize ySize;
+    GridSize colCount;
+    GridSize rowCount;
     std::vector<std::vector<T>> grid;
     T defaultValue;
 };

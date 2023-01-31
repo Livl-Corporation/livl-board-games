@@ -18,6 +18,8 @@ void GameWindow::createPlayers(const std::vector<std::shared_ptr<Player>>& playe
     auto *layout = new QVBoxLayout();
     for (auto &player : players) {
         auto *label = new QLabel();
+        label->setAlignment(Qt::AlignCenter);
+        label->setContentsMargins(10, 10, 10, 10);
         label->setObjectName("playerLabel"+QString::number(player->getId()));
         label->setText(QString::number(player->getId()) + " - " + QString::fromStdString(player->getName()));
         layout->addWidget(label);

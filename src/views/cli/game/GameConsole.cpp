@@ -24,13 +24,13 @@ void GameConsole::updateRound(Round round, const std::shared_ptr<Player> &player
 
 void GameConsole::updateGrid(const Grid<Token> &grid) {
     ConsoleHandler::print("\n   ");
-    for (int col = 0; col < grid.getXSize(); col++)
+    for (int col = 0; col < grid.getColCount(); col++)
     {
         ConsoleHandler::print(std::to_string(col + 1) + " ");
     }
 
     ConsoleHandler::print("\n  ┌");
-    for (int col = 0; col < (grid.getXSize() * 2) - 1; col++)
+    for (int col = 0; col < (grid.getColCount() * 2) - 1; col++)
     {
         if (col % 2 == 0)
         {
@@ -43,18 +43,18 @@ void GameConsole::updateGrid(const Grid<Token> &grid) {
     }
     ConsoleHandler::printLine("┐");
 
-    for (int row = 0; row < grid.getYSize(); row++)
+    for (int row = 0; row < grid.getRowCount(); row++)
     {
 
         ConsoleHandler::print(std::to_string(row + 1) + " │");
 
-        for (int col = 0; col < grid.getXSize(); col++)
+        for (int col = 0; col < grid.getColCount(); col++)
         {
             //std::string characterAsString(1, Player::getPlayerChar(grid->getElementAt({.x =  col, .y =  row})));
-            std::string characterAsString(1, grid.getElementAt(Position(col, row)).getDisplayChar());
+            std::string characterAsString(1, grid.getElementAt(Position(row, col)).getDisplayChar());
             ConsoleHandler::print(characterAsString);
 
-            if (col < grid.getXSize() - 1)
+            if (col < grid.getColCount() - 1)
             {
                 ConsoleHandler::print("│");
             }
@@ -63,7 +63,7 @@ void GameConsole::updateGrid(const Grid<Token> &grid) {
     }
 
     ConsoleHandler::print("  └");
-    for (int col = 0; col < (grid.getXSize() * 2) - 1; col++)
+    for (int col = 0; col < (grid.getColCount() * 2) - 1; col++)
     {
         if (col % 2 == 0)
         {
@@ -93,15 +93,10 @@ void GameConsole::updateAskForPosition(const std::string &message, unsigned int 
 
     std::vector<int> values = ConsoleHandler::readValues(numberOfValues);
 
-    int y = values[0];
-    int x = values[1];
+    int row = values[0]-1;
+    int col = numberOfValues == 1 ? row : values[1]-1;
 
-    if(numberOfValues == 1)
-    {
-        x = y;
-    }
-
-    controller->onPositionSelected({(x - 1), (y - 1)});
+    controller->onPositionSelected({row, col});
 }
 
 void GameConsole::updateGameEnd(const std::string &message) {
