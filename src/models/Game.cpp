@@ -102,27 +102,29 @@ void Game::onPositionSelected(const Position &position) {
 
     try {
         this->getGrid()->place(position, token);
-
-        if (this->getEvaluator()->hasGameEnded(*getGrid(), getPlayerId(getRound()-1)+1)) {
-
-            PlayerId winner = this->getEvaluator()->getWinner(*getGrid());
-            if (winner == 0) {
-                Game::notifyGameEnd("Draw");
-            } else {
-                Game::notifyGameEnd("Player " + std::to_string(winner) + " wins");
-            }
-
-        } else {
-            afterPlacementAction(getCurrentPlayer()->getId(), position);
-            nextRound();
-        }
-
-        Game::notifyGrid();
-
+        afterPlacementAction(getCurrentPlayer()->getId(), position);
+        roundEnd();
     } catch (std::exception &e) {
         Game::notifyError(e.what());
         Game::notifyAskForPosition();
     }
+}
+
+void Game::roundEnd() {
+    if (this->getEvaluator()->hasGameEnded(*getGrid(), getPlayerId(getRound()-1)+1)) {
+
+        PlayerId winner = this->getEvaluator()->getWinner(*getGrid());
+        if (winner == 0) {
+            Game::notifyGameEnd("Draw");
+        } else {
+            Game::notifyGameEnd("Player " + std::to_string(winner) + " wins");
+        }
+
+    } else {
+        nextRound();
+    }
+
+    Game::notifyGrid();
 }
 
 void Game::serialize(std::ostream &stream) {

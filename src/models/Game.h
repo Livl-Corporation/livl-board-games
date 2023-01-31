@@ -71,6 +71,8 @@ protected:
     virtual void onPositionSelected(const Position &position);
     virtual void afterPlacementAction(const PlayerId &playerId, const Position &position){};
 
+    virtual void roundEnd();
+
 private:
     std::vector<std::shared_ptr<Player>> players;
     GameMode gameMode;
