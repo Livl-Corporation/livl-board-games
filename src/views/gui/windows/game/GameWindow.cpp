@@ -131,7 +131,7 @@ void GameWindow::onReturnBackButtonClicked()
     int res = QMessageBox::warning(
             this,
             tr("Do you really want to leave your party ?"),
-            tr("All your party will be automatically saved."),
+            tr("Your party will be automatically saved !"),
             QMessageBox::Yes | QMessageBox::No
     );
 
