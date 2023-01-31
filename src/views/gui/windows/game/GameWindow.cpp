@@ -1,7 +1,6 @@
 #include "GameWindow.h"
 
 GameWindow::GameWindow(QWidget *parent) :
-    QMainWindow(parent),
     ui(new Ui::GameWindow)
 {
     this->parent = parent;
