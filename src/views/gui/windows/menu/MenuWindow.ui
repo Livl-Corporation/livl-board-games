@@ -124,6 +124,16 @@
        <property name="text">
         <string>Play</string>
        </property>
+       <property name="icon">
+        <iconset resource="../../../../../img/img.qrc">
+         <normaloff>:/img/play-icon.png</normaloff>:/img/play-icon.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
       </widget>
      </item>
     </layout>

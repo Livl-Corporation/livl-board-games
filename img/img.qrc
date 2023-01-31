@@ -2,6 +2,7 @@
     <qresource prefix="/img">
         <file>logo.png</file>
         <file>open-save-icon.png</file>
+        <file>play-icon.png</file>
         <file>return-btn.png</file>
     </qresource>
 </RCC>
