@@ -4,7 +4,7 @@
 
 #include "Checkers.h"
 
-Checkers::Checkers(PlayMode playMode) : Game("Othello", GameMode::OTHELLO, 2, "Place your token next to an opponent token to flip it.") {
+Checkers::Checkers(PlayMode playMode) : Game("Checkers", GameMode::OTHELLO, 2, "Place your token next to an opponent token to flip it.") {
 
     Game::setEvaluator(std::make_shared<CheckersEvaluator>());
 
