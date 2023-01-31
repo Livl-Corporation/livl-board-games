@@ -14,3 +14,15 @@ std::string Token::getDisplayColor() const {
     return this->playerId == 1 ? "black" : this->playerId == 2 ? "white" : "";
 }
 
+void Token::serialize(std::ostream &stream) {
+    stream << type << std::endl;
+    stream << playerId << std::endl;
+}
+
+void Token::deserialize(std::istream &stream) {
+    stream >> type;
+    stream >> playerId;
+}
+
+
+

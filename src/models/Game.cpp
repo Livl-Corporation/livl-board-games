@@ -97,7 +97,7 @@ void Game::nextRound() {
     this->notifyAskForPosition();
 }
 
-void Game::onPositionSelected(Position position) {
+void Game::onPositionSelected(const Position &position) {
     Token token(this->getCurrentPlayer()->getId());
 
     try {
@@ -125,4 +125,18 @@ void Game::roundEnd() {
     }
 
     Game::notifyGrid();
+}
+
+void Game::serialize(std::ostream &stream) {
+    stream << this->gameMode << std::endl;
+    stream << this->name << std::endl;
+    stream << this->round << std::endl;
+    stream << this->numberOfInputValues << std::endl;
+    stream << this->askForPositionMessage << std::endl;
+
+    this->grid->serialize(stream);
+}
+
+void Game::deserialize(std::istream &stream) {
+
 }

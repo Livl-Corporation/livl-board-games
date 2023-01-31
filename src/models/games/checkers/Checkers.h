@@ -23,14 +23,13 @@ public:
 
 private:
     static Grid<Token> initGrid();
-    void selectOriginPosition(Position position);
-    void performMove(Position position);
-    void moveOriginToPosition(Position position);
-
+    void selectOriginPosition(const Position &position);
+    void performMove(const Position &position);
+    void moveOriginToPosition(const Position &position);
     void captureEnemyToken(const Position &capturableEnemyPos);
 
 protected:
-    void onPositionSelected(Position position) override;
+    void onPositionSelected(const Position &position) override;
     void afterPlacementAction(const PlayerId &playerId, const Position &position) override;
 
 private:

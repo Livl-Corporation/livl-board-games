@@ -29,7 +29,7 @@ ConnectFour::ConnectFour(PlayMode playMode)
     this->setGrid(std::make_shared<Grid<Token>>(grid1));
 }
 
-void ConnectFour::onPositionSelected(Position position) {
+void ConnectFour::onPositionSelected(const Position &position) {
 
     try {
 

@@ -2,6 +2,7 @@
 // Created by Julien on 30/01/2023.
 //
 
+#include <optional>
 #include "CheckersEvaluator.h"
 
 bool CheckersEvaluator::hasGameEnded(const Grid<Token> &grid, const PlayerId &nextPlayerId) {
@@ -64,18 +65,6 @@ std::optional<Position> CheckersEvaluator::getCapturableEnemyTokenPosition(const
     return std::nullopt;
 }
 
-unsigned int CheckersEvaluator::getDialognalDistance(const Position &from, const Position &to) {
-
-    unsigned int rowDistance = std::abs(to.row - from.row);
-    unsigned int colDistance = std::abs(to.col - from.col);
-
-    if(rowDistance != colDistance) {
-        throw std::invalid_argument("The positions are not diagonal");
-    }
-
-    return rowDistance;
-}
-
 std::vector<Position> CheckersEvaluator::getValidTokenMoves(const Grid<Token> &grid, Position position) {
 
     std::vector<Position> validMoves;
@@ -110,6 +99,17 @@ std::vector<Position> CheckersEvaluator::getValidTokenMoves(const Grid<Token> &g
 
     return validMoves;
 
+}
+
+unsigned int CheckersEvaluator::getDialognalDistance(const Position &from, const Position &to) {
+    unsigned int rowDistance = abs(from.row - to.row);
+    unsigned int colDistance = abs(from.col - to.col);
+
+    if(rowDistance != colDistance) {
+        throw std::invalid_argument("The two positions are not diagonal");
+    }
+
+    return rowDistance;
 }
 
 

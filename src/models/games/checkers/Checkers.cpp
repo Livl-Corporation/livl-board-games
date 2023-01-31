@@ -56,7 +56,7 @@ Grid<Token> Checkers::initGrid()
     return grid1;
 }
 
-void Checkers::onPositionSelected(Position position) {
+void Checkers::onPositionSelected(const Position &position) {
     qDebug() << "Checkers::Position selected: " << position.row << ", " << position.col;
     if (originPosition.has_value()) {
         // A position was selected, we can move the token from to originPosition to position
@@ -67,7 +67,7 @@ void Checkers::onPositionSelected(Position position) {
     }
 }
 
-void Checkers::selectOriginPosition(Position position) {
+void Checkers::selectOriginPosition(const Position &position) {
     // Check if selected position is a player token
     try {
 
@@ -93,15 +93,13 @@ void Checkers::selectOriginPosition(Position position) {
     }
 }
 
-
-
-void Checkers::performMove(Position position) {
+void Checkers::performMove(const Position &position) {
     try {
 
         // Check if validPosition contains position
-        if (std::find(validMoves.begin(), validMoves.end(), position) == validMoves.end()) {
-            throw std::invalid_argument("You must select a valid destination position.");
-        }
+//        if (std::find(validMoves.begin(), validMoves.end(), position) == validMoves.end()) {
+//            throw std::invalid_argument("You must select a valid destination position.");
+//        }
 
         // Move is valid, we move the token
         moveOriginToPosition(position);
@@ -118,8 +116,7 @@ void Checkers::performMove(Position position) {
     }
 }
 
-void Checkers::moveOriginToPosition(Position position) {
-    Token token = this->getGrid()->getElementAt(originPosition.value());
+void Checkers::moveOriginToPosition(const Position &position) {    Token token = this->getGrid()->getElementAt(originPosition.value());
     this->getGrid()->place(position, token);
     this->getGrid()->replaceAt(originPosition.value(), Token {});
 }

@@ -5,10 +5,19 @@
 #ifndef LIVL_POSITION_H
 #define LIVL_POSITION_H
 
-struct Position
+#include "interfaces/Serializable.h"
+
+class Position: Serializable
 {
+public:
     int row;
     int col;
+
+    Position() = default;
+    Position(int row, int col): row(row), col(col) {};
+
+    void serialize(std::ostream &stream) override;
+    void deserialize(std::istream &stream) override;
 };
 
 #endif //LIVL_POSITION_H
