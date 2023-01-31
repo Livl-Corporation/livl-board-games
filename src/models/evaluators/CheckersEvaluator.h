@@ -17,6 +17,10 @@ public:
 
     [[nodiscard]] PlayerId getWinner(const Grid<Token> &grid) const override;
 
+    bool allEnemyTokensAreCaptured(const Grid<Token> &grid, const PlayerId &playerId);
+    bool noValidMoves(const Grid<Token> &grid, const PlayerId &playerId);
+    std::optional<PlayerId> winner;
+
     static std::optional<Position> getCapturableEnemyTokenPosition(const Grid<Token> &grid, const PlayerId &playerId, const Position &from, const Position &to);
 
     static unsigned int getDialognalDistance(const Position &from, const Position &to);
