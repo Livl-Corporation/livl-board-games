@@ -19,7 +19,7 @@ public:
     explicit Othello(PlayMode playMode);
 
 protected:
-    void onPositionSelected(Position position) override;
+    void onPositionSelected(const Position &position) override;
     void afterPlacementAction(const PlayerId &playerId, const Position &position) override;
 
 private:

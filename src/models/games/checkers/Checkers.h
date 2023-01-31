@@ -20,11 +20,11 @@ public:
     explicit Checkers(PlayMode playMode);
 
 protected:
-    void onPositionSelected(Position position) override;
+    void onPositionSelected(const Position &position) override;
 private:
     static Grid<Token> initGrid();
-    void selectOriginPosition(Position position);
-    void moveOriginToPosition(Position position);
+    void selectOriginPosition(const Position &position);
+    void moveOriginToPosition(const Position &position);
 
     std::optional<Position> originPosition;
     static constexpr GridSize colCount = 8;

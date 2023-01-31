@@ -44,7 +44,7 @@ Grid<Token> Othello::initGrid() {
 }
 
 
-void Othello::onPositionSelected(Position position) {
+void Othello::onPositionSelected(const Position &position) {
 
     if (OthelloGameEvaluator::canPlaceToken(position, getCurrentPlayer()->getId(), *getGrid())) {
         Game::onPositionSelected(position);

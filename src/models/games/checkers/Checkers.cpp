@@ -56,7 +56,7 @@ Grid<Token> Checkers::initGrid()
     return grid1;
 }
 
-void Checkers::onPositionSelected(Position position) {
+void Checkers::onPositionSelected(const Position &position) {
     if (originPosition.has_value()) {
         // A position was selected, we can move the token from to originPosition to position
         moveOriginToPosition(position);
@@ -66,7 +66,7 @@ void Checkers::onPositionSelected(Position position) {
     }
 }
 
-void Checkers::selectOriginPosition(Position position) {
+void Checkers::selectOriginPosition(const Position &position) {
     // Check if selected position is a player token
     try {
         if (this->getGrid()->getElementAt(position).getPlayerId() == this->getCurrentPlayer()->getId()) {
@@ -79,7 +79,7 @@ void Checkers::selectOriginPosition(Position position) {
     }
 }
 
-void Checkers::moveOriginToPosition(Position position) {
+void Checkers::moveOriginToPosition(const Position &position) {
     if (CheckersEvaluator::isMoveValid(*getGrid(), getCurrentPlayer()->getId(), originPosition.value(), position)) {
 
     }

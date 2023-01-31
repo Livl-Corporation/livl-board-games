@@ -15,21 +15,21 @@ PlayerId CheckersEvaluator::getWinner(const Grid<Token> &grid) const {
 bool CheckersEvaluator::forceEnemyToCaptureEnemy(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, Position &capturableEnemyPos) {
     PlayerId enemyPlayerId = (playerId == 1) ? 2 : 1;
 
-    Position diag1{}, diag2{};
+    Position diag1, diag2;
     bool positionHasEnemyTokenDiag1;
     bool positionHasEnemyTokenDiag2;
 
     // check only two diagonals because a player can only move forward and not backwards
     if(enemyPlayerId == 1) {
-        diag1 = {from.row + 2, from.col - 2};
-        diag2 = {from.row - 2, from.col - 2};
-        positionHasEnemyTokenDiag1 = grid->getElementAt({diag1.row-1,diag1.col+1}).getPlayerId() == enemyPlayerId;
-        positionHasEnemyTokenDiag2 = grid->getElementAt({diag2.row+1,diag2.col+1}).getPlayerId() == enemyPlayerId;
+        diag1 = Position(from.row + 2, from.col - 2);
+        diag2 = Position(from.row - 2, from.col - 2);
+        positionHasEnemyTokenDiag1 = grid->getElementAt(Position(diag1.row-1,diag1.col+1)).getPlayerId() == enemyPlayerId;
+        positionHasEnemyTokenDiag2 = grid->getElementAt(Position(diag2.row+1,diag2.col+1)).getPlayerId() == enemyPlayerId;
     } else {
-        diag1 = {from.row + 2, from.col + 2};
-        diag2 = {from.row - 2, from.col + 2};
-        positionHasEnemyTokenDiag1 = grid->getElementAt({diag1.row-1,diag1.col-1}).getPlayerId() == enemyPlayerId;
-        positionHasEnemyTokenDiag2 = grid->getElementAt({diag1.row+1,diag1.col-1}).getPlayerId() == enemyPlayerId;
+        diag1 = Position(from.row + 2, from.col + 2);
+        diag2 = Position(from.row - 2, from.col + 2);
+        positionHasEnemyTokenDiag1 = grid->getElementAt(Position(diag1.row-1,diag1.col-1)).getPlayerId() == enemyPlayerId;
+        positionHasEnemyTokenDiag2 = grid->getElementAt(Position(diag1.row+1,diag1.col-1)).getPlayerId() == enemyPlayerId;
     }
 
     if(grid->isPositionInBounds(diag1) && grid->getElementAt(diag1).getPlayerId() == NO_PLAYER && positionHasEnemyTokenDiag1) {

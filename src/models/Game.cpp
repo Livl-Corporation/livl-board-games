@@ -97,7 +97,7 @@ void Game::nextRound() {
     this->notifyAskForPosition();
 }
 
-void Game::onPositionSelected(Position position) {
+void Game::onPositionSelected(const Position &position) {
     Token token(this->getCurrentPlayer()->getId());
 
     try {

@@ -18,7 +18,7 @@ public:
     [[nodiscard]] static int firstRowAvailableInCol(const std::shared_ptr<Grid<Token>> &grid, int col) ;
 
 protected:
-    void onPositionSelected(Position position) override;
+    void onPositionSelected(const Position &position) override;
 
 private:
     static constexpr GridSize colCount = 7;

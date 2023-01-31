@@ -13,6 +13,7 @@ public:
     int row;
     int col;
 
+    Position() = default;
     Position(int row, int col): row(row), col(col) {};
 
     void serialize(std::ostream &stream) override;

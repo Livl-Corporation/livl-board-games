@@ -67,7 +67,9 @@ add_executable(Livl
         src/models/games/connectFour/players/ConnectFourComputerPlayer.h
         src/models/games/connectFour/players/ConnectFourHumanPlayer.h
         src/models/interfaces/Serializable.h
-        src/models/Position.cpp)
+        src/models/Position.cpp
+        src/models/games/checkers/Checkers.cpp
+        src/models/games/othello/Othello.cpp src/models/games/othello/players/OthelloComputerPlayer.cpp src/models/games/checkers/players/CheckersComputerPlayer.cpp src/models/evaluators/CheckersEvaluator.cpp src/models/evaluators/OthelloGameEvaluator.cpp)
 
 target_link_libraries(Livl
         Qt::Core
