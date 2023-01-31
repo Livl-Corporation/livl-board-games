@@ -7,7 +7,7 @@
 
 
 #include "models/interfaces/Player.h"
-#include "shared/Shared.hpp"
+#include "shared/Shared.h"
 #include "models/exceptions/ColumnFullException.h"
 #include "models/games/connectFour/ConnectFour.h"
 

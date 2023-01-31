@@ -40,7 +40,7 @@ public:
 
     virtual void nextRound();
 
-    void setEvaluator(std::shared_ptr<GameEvaluator> evaluator) { this->evaluator = std::move(evaluator); }
+    void setEvaluator(std::shared_ptr<GameEvaluator> _evaluator) { this->evaluator = std::move(_evaluator); }
 
     [[nodiscard]] std::shared_ptr<GameEvaluator> getEvaluator() const { return this->evaluator; }
 
@@ -72,11 +72,12 @@ protected:
 
     void addPlayer(const std::shared_ptr<Player> &player);
     void setGrid(std::shared_ptr<Grid<Token>> grid);
+    void incrementRound() { this->round++; }
 
     virtual void onPositionSelected(const Position &position);
     virtual void afterPlacementAction(const PlayerId &playerId, const Position &position){};
 
-    virtual void roundEnd();
+    void roundEnd();
     virtual void initPlayers() = 0;
     virtual void initPlayers(std::istream &stream) = 0;
 

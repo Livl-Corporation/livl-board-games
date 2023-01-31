@@ -6,7 +6,7 @@
 #define LIVL_TICTACTOECOMPUTERPLAYER_H
 
 #include "models/interfaces/Player.h"
-#include "shared/Shared.hpp"
+#include "shared/Shared.h"
 #include "models/Grid.h"
 #include "models/Token.h"
 
