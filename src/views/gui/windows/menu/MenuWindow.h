@@ -2,6 +2,8 @@
 #define MENU_H
 
 #include <QMainWindow>
+#include <QFileDialog>
+#include <iostream>
 #include "models/MenuData.h"
 #include "./ui_MenuWindow.h"
 #include "controllers/MenuController.h"
@@ -28,8 +30,9 @@ protected:
 
 private:
     Ui::MenuWindow *ui;
-
     std::shared_ptr<MenuController> controller;
+    void onSaveSelected();
+
 
 public slots:
     void onPlayClicked();

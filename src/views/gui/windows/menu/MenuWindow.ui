@@ -29,7 +29,7 @@
       <x>120</x>
       <y>20</y>
       <width>571</width>
-      <height>362</height>
+      <height>375</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -128,6 +128,35 @@
      </item>
     </layout>
    </widget>
+   <widget class="QPushButton" name="openSaveFileButton">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>490</y>
+      <width>60</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>60</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="../../../../../img/img.qrc">
+      <normaloff>:/img/open-save-icon.png</normaloff>:/img/open-save-icon.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -135,12 +164,14 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../../../img/img.qrc"/>
+ </resources>
  <connections/>
 </ui>

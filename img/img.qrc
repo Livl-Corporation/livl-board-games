@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/img">
         <file>logo.png</file>
+        <file>open-save-icon.png</file>
     </qresource>
 </RCC>

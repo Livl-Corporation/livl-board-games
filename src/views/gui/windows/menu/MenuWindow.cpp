@@ -8,6 +8,7 @@ MenuWindow::MenuWindow(QWidget *parent)
     ui->setupUi(this);
 
     connect(ui->playButton, &QPushButton::clicked, this, &MenuWindow::onPlayClicked);
+    connect(ui->openSaveFileButton, &QPushButton::clicked, this, &MenuWindow::onSaveSelected);
 
     setPlayerList(MenuData::players);
     setGameList(MenuData::games);
@@ -39,4 +40,14 @@ void MenuWindow::onPlayClicked() {
 
     std::shared_ptr<GameView> gameView = std::make_shared<GameWindow>();
     controller->onGameChoose(gameSelection, playerSelection, gameView);
+}
+
+void MenuWindow::onSaveSelected() {
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                            tr("Open Livl-board-game save file - <3"),
+                                            "./",
+                                            tr("livl-board-game save file (*.livl)")
+    );
+
+    std::cout << fileName.toStdString() << std::endl;
 }
