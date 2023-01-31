@@ -4,7 +4,7 @@
 
 #include "Checkers.h"
 
-Checkers::Checkers(PlayMode playMode) : Game("Checkers", GameMode::OTHELLO, 2, "Place your token next to an opponent token to flip it.") {
+Checkers::Checkers(PlayMode playMode) : Game("Checkers", GameMode::OTHELLO, 2, "Select a token you want to move.") {
 
     Game::setEvaluator(std::make_shared<CheckersEvaluator>());
 
@@ -57,7 +57,34 @@ Grid<Token> Checkers::initGrid()
 }
 
 void Checkers::onPositionSelected(Position position) {
-    Game::onPositionSelected(position);
+    if (originPosition.has_value()) {
+        // A position was selected, we can move the token from to originPosition to position
+        moveOriginToPosition(position);
+    } else {
+        // No position was selected, we select the position
+        selectOriginPosition(position);
+    }
 }
+
+void Checkers::selectOriginPosition(Position position) {
+    // Check if selected position is a player token
+    try {
+        if (this->getGrid()->getElementAt(position).getPlayerId() == this->getCurrentPlayer()->getId()) {
+            originPosition = position;
+            Game::notifyAskForPosition("Select a destination position.");
+        }
+    } catch (std::exception &e) {
+        Game::notifyError("You must select one of your token.");
+        Game::notifyAskForPosition();
+    }
+}
+
+void Checkers::moveOriginToPosition(Position position) {
+    if (CheckersEvaluator::isMoveValid(*getGrid(), getCurrentPlayer()->getId(), originPosition.value(), position)) {
+
+    }
+}
+
+
 
 

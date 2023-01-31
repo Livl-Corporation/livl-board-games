@@ -12,7 +12,7 @@ PlayerId CheckersEvaluator::getWinner(const Grid<Token> &grid) const {
     return 0;
 }
 
-bool CheckersEvaluator::forceEnemyToCaptureEnemy(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, Position &capturableEnemyPos) const {
+bool CheckersEvaluator::forceEnemyToCaptureEnemy(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, Position &capturableEnemyPos) {
     PlayerId enemyPlayerId = (playerId == 1) ? 2 : 1;
 
     Position diag1{}, diag2{};
@@ -45,7 +45,7 @@ bool CheckersEvaluator::forceEnemyToCaptureEnemy(std::shared_ptr<Grid<Token>> &g
     return false;
 }
 
-bool CheckersEvaluator::captureEnemyToken(std::shared_ptr<Grid<Token>> &grid, const Position &from, const Position &to) const {
+bool CheckersEvaluator::captureEnemyToken(std::shared_ptr<Grid<Token>> &grid, const Position &from, const Position &to) {
     if(!grid->isPositionInBounds(from) || !grid->isPositionInBounds(to))
         return false;
 
@@ -67,7 +67,7 @@ bool CheckersEvaluator::captureEnemyToken(std::shared_ptr<Grid<Token>> &grid, co
     return true;
 }
 
-bool CheckersEvaluator::isCaptureMove(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, const Position &to) const {
+bool CheckersEvaluator::isCaptureMove(const Grid<Token> &grid, const PlayerId &playerId, const Position &from, const Position &to) {
     // check if the move is a capture move (difference in x and y positions is 2 (2 = the move is 2 positions diagonally))
     if (std::abs(to.row - from.row) != 2 || std::abs(to.row - from.col) != 2) {
         return false;
@@ -78,16 +78,16 @@ bool CheckersEvaluator::isCaptureMove(std::shared_ptr<Grid<Token>> &grid, const 
     int enemyTokenX = (from.row + to.row) / 2;
     int enemyTokenY = (from.col + to.col) / 2;
 
-    if (grid->getElementAt({enemyTokenX, enemyTokenY}).getPlayerId() == enemyPlayerId) {
+    if (grid.getElementAt({enemyTokenX, enemyTokenY}).getPlayerId() == enemyPlayerId) {
         return true;
     }
 
     return false;
 }
 
-bool CheckersEvaluator::isMoveValid(std::shared_ptr<Grid<Token>> &grid, const PlayerId &playerId, const Position &from, const Position &to) const {
-    if (this->isCaptureMove(grid, playerId, from, to)) {
-        this->captureEnemyToken(grid, from, to);
+bool CheckersEvaluator::isMoveValid(const Grid<Token> &grid, const PlayerId &playerId, const Position &from, const Position &to) {
+    if (isCaptureMove(grid, playerId, from, to)) {
+        //this->captureEnemyToken(grid, from, to);
         return true;
     }
 

@@ -6,6 +6,7 @@
 #define LIVL_CHECKERS_H
 
 
+#include <optional>
 #include "models/Game.h"
 #include "models/enums/PlayMode.h"
 #include "models/evaluators/LinearGameEvaluator.h"
@@ -22,6 +23,10 @@ protected:
     void onPositionSelected(Position position) override;
 private:
     static Grid<Token> initGrid();
+    void selectOriginPosition(Position position);
+    void moveOriginToPosition(Position position);
+
+    std::optional<Position> originPosition;
     static constexpr GridSize colCount = 8;
     static constexpr GridSize rowCount = 8;
 };
