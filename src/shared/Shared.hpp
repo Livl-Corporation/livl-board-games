@@ -5,4 +5,5 @@
 namespace Shared
 {
     int randomInt(int min, int max);
+    void playSound();
 }

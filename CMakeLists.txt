@@ -11,6 +11,7 @@ find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
+        Multimedia
         REQUIRED)
 
 add_executable(Livl
@@ -47,12 +48,13 @@ add_executable(Livl
         src/models/games/ticTacToe/players/TicTacToeComputerPlayer.h
         src/models/exceptions/UnimplementedPlayMode.h
         src/views/cli/menu/MenuConsole.h
-        src/views/cli/menu/MenuConsole.cpp src/views/interfaces/MenuInteraction.h src/views/cli/game/GameConsole.cpp src/views/cli/game/GameConsole.h src/views/cli/game/GameConsole.h src/views/interfaces/GameView.h src/models/interfaces/GameObservable.h src/models/interfaces/GameObservable.h src/models/interfaces/GameObserver.h src/views/interfaces/GameInteraction.h src/views/interfaces/GameInteraction.h src/shared/Shared.cpp src/models/PlayerId.h src/models/Round.h)
+        src/views/cli/menu/MenuConsole.cpp src/views/interfaces/MenuInteraction.h src/views/cli/game/GameConsole.cpp src/views/cli/game/GameConsole.h src/views/cli/game/GameConsole.h src/views/interfaces/GameView.h src/models/interfaces/GameObservable.h src/models/interfaces/GameObservable.h src/models/interfaces/GameObserver.h src/views/interfaces/GameInteraction.h src/views/interfaces/GameInteraction.h src/shared/Shared.cpp src/models/PlayerId.h src/models/Round.h src/shared/SoundPlayer.cpp src/shared/SoundPlayer.h)
 
 target_link_libraries(Livl
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Qt6::Multimedia
         )
 
 target_include_directories(Livl PRIVATE src)
