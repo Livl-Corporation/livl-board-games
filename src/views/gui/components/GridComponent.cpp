@@ -64,6 +64,14 @@ void GridComponent::updateGrid(const Grid<Token> &grid) {
     }
 }
 
+void GridComponent::disableGridButtons()
+{
+    for (int i = 0; i < this->gridLayout->count(); ++i) {
+        auto item = this->gridLayout->itemAt(i);
+        item->widget()->setEnabled(false);
+    }
+}
+
 void GridComponent::setGrid(const Grid<Token> &value) {
     if (!gridCreated) {
         createGrid(value);
