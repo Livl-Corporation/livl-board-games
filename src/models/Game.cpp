@@ -91,7 +91,7 @@ void Game::notifyGameEnd(const std::string &message) {
 }
 
 void Game::nextRound() {
-    this->round++;
+    incrementRound();
     notifyRound();
 
     this->notifyAskForPosition();

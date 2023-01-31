@@ -67,11 +67,12 @@ protected:
 
     void addPlayer(const std::shared_ptr<Player> &player);
     void setGrid(std::shared_ptr<Grid<Token>> grid);
+    void incrementRound() { this->round++; }
 
     virtual void onPositionSelected(const Position &position);
     virtual void afterPlacementAction(const PlayerId &playerId, const Position &position){};
 
-    virtual void roundEnd();
+    void roundEnd();
 
 private:
     std::vector<std::shared_ptr<Player>> players;

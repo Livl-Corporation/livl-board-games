@@ -9,6 +9,7 @@
 #include <optional>
 #include <stdexcept>
 #include <algorithm>
+#include <cstdlib>
 #include "models/Game.h"
 #include "models/enums/PlayMode.h"
 #include "models/evaluators/LinearGameEvaluator.h"
@@ -20,6 +21,11 @@
 class Checkers : public Game {
 public:
     explicit Checkers(PlayMode playMode);
+    void nextRound() override;
+
+protected:
+    void onPositionSelected(const Position &position) override;
+    void afterPlacementAction(const PlayerId &playerId, const Position &position) override;
 
 private:
     static Grid<Token> initGrid();
@@ -27,17 +33,12 @@ private:
     void performMove(const Position &position);
     void moveOriginToPosition(const Position &position);
     void captureEnemyToken(const Position &capturableEnemyPos);
-
-protected:
-    void onPositionSelected(const Position &position) override;
-    void afterPlacementAction(const PlayerId &playerId, const Position &position) override;
-
-private:
+    bool isPositionValid(const Position &position) const;
+    bool forceCaptureIfPossible();
+    bool forceCaptureIfPossible(const Position &position);
 
     std::optional<Position> originPosition;
     std::vector<Position> validMoves;
-
-    bool isPositionValid(const Position &position) const;
 
     static constexpr GridSize colCount = 8;
     static constexpr GridSize rowCount = 8;

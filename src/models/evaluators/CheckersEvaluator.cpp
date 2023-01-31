@@ -53,11 +53,11 @@ std::optional<Position> CheckersEvaluator::getCapturableEnemyTokenPosition(const
     }
 
     // check if the position in between the from and to positions is occupied by the enemy player
-    int enemyPlayerId = (playerId == 1) ? 2 : 1;
     int enemyTokenRow = (from.row + to.row) / 2;
     int enemyTokenCol = (from.col + to.col) / 2;
 
-    if (grid.getElementAt({enemyTokenRow, enemyTokenCol}).getPlayerId() == enemyPlayerId) {
+    PlayerId middleTokenPlayerId = grid.getElementAt({enemyTokenRow, enemyTokenCol}).getPlayerId();
+    if (middleTokenPlayerId != NO_PLAYER && middleTokenPlayerId != playerId) {
         Position enemyTokenPos = {enemyTokenRow, enemyTokenCol};
         return enemyTokenPos;
     }

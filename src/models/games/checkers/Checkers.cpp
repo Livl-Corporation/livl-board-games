@@ -108,7 +108,7 @@ void Checkers::performMove(const Position &position) {
         afterPlacementAction(getCurrentPlayer()->getId(), position);
 
         // Change player turn
-        Game::roundEnd();
+        roundEnd();
 
     } catch (std::exception &e) {
         Game::notifyError("You must select a valid destination position.");
@@ -147,8 +147,55 @@ bool Checkers::isPositionValid(const Position &position) const {
     return found;
 }
 
+bool Checkers::forceCaptureIfPossible() {
+    // For each token in the grid, check if it can capture an enemy token
+    for (int i = 0; i < getGrid()->getRowCount(); i++) {
+        for (int j = 0; j < getGrid()->getColCount(); j++) {
+            Position currentPosition{i, j};
+            Token currentToken = getGrid()->getElementAt(currentPosition);
+            if (currentToken.getPlayerId() == getCurrentPlayer()->getId()) {
+                if (forceCaptureIfPossible(currentPosition)) {
+                    return true;
+                }
+            }
+        }
+    }
 
+    return false;
+}
 
+bool Checkers::forceCaptureIfPossible(const Position &position) {
+    // If no token is provided, we check for all tokens
+    std::vector<Position> tokenValidMoves = CheckersEvaluator::getValidTokenMoves(*getGrid(), position);
+    for (auto &validMove : tokenValidMoves) {
+        std::optional<Position> capturableEnemyPos = CheckersEvaluator::getCapturableEnemyTokenPosition(*getGrid(), getCurrentPlayer()->getId(), position, validMove);
+        if (capturableEnemyPos.has_value()) {
+            // We can capture an enemy token, we move the token to the valid move position
+            originPosition = position;
+            moveOriginToPosition(validMove);
+            // We capture the enemy token
+            captureEnemyToken(capturableEnemyPos.value());
+            // Notify player that he has captured an enemy token
+            Game::notifyMessage("You have captured an enemy token at position " + std::to_string(capturableEnemyPos.value().row) + ", " + std::to_string(capturableEnemyPos.value().col));
+            // We check if we can capture another enemy token
+            forceCaptureIfPossible(validMove);
+            return true;
+        }
+    }
 
+    return false;
 
+}
 
+void Checkers::nextRound() {
+    incrementRound();
+    notifyRound();
+
+    // Check if the current player can capture an enemy token
+    if (forceCaptureIfPossible()) {
+        notifyGrid();
+        roundEnd();
+    } else {
+        this->notifyAskForPosition();
+    }
+}
