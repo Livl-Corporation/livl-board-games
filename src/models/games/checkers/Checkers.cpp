@@ -227,6 +227,7 @@ bool Checkers::forceCaptureIfPossible(const Position &position) {
 void Checkers::nextRound() {
     incrementRound();
     notifyRound();
+    saveGame();
 
     // Check if the current player can capture an enemy token
     if (forceCaptureIfPossible()) {

@@ -92,7 +92,6 @@ void Game::notifyGameEnd(const std::string &message) {
 
 void Game::nextRound() {
     incrementRound();
-    saveGame();
     notifyRound();
 
     this->notifyAskForPosition();
@@ -123,6 +122,8 @@ void Game::saveGame() {
 void Game::roundEnd() {
 
     Game::notifyGrid();
+
+    saveGame();
 
     if (this->getEvaluator()->hasGameEnded(*getGrid(), getPlayerId(getRound()-1)+1)) {
 
