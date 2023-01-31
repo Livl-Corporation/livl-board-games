@@ -75,7 +75,7 @@ std::vector<Position> CheckersEvaluator::getValidTokenMoves(const Grid<Token> &g
     std::vector<Position> directions = {{1,1}, {1,-1}};
 
     // invert direction if the token is owned by player 2
-    int multiplier = (token.getPlayerId() == 2) ? -1 : 1;
+    int multiplier = (token.getType() != CheckersTokenType::KING && token.getPlayerId() == 2) ? -1 : 1;
 
     // Add backwards direction if token is king
     if(token.getType() == CheckersTokenType::KING) {
